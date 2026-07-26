@@ -14,6 +14,12 @@ config/name="Coral Memory"
 config/features=PackedStringArray("4.7", "Forward Plus")
 config/icon="res://icon.svg"
 
+[autoload]
+
+GameManager="*uid://cya7fkmu2xlv0"
+SceneManager="*uid://b5kv8s1mmiyok"
+Constants="*uid://b0sbuiudqcd1n"
+
 [display]
 
 window/stretch/mode="canvas_items"
