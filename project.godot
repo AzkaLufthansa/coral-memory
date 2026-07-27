@@ -11,6 +11,7 @@ config_version=5
 [application]
 
 config/name="Coral Memory"
+run/main_scene="uid://dtlbhpr462ehh"
 config/features=PackedStringArray("4.7", "Forward Plus")
 config/icon="res://icon.svg"
 
@@ -24,6 +25,10 @@ Constants="*uid://b0sbuiudqcd1n"
 
 window/stretch/mode="canvas_items"
 window/stretch/aspect="expand"
+
+[global_group]
+
+Titik=""
 
 [physics]
 
