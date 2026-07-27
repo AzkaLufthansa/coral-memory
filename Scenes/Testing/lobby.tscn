@@ -1,0 +1,28 @@
+[gd_scene format=3 uid="uid://dtlbhpr462ehh"]
+
+[ext_resource type="Texture2D" uid="uid://26876meghs4w" path="res://Assets/Background/background_front_1.png" id="1_0tr0a"]
+[ext_resource type="Texture2D" uid="uid://dgu2sq2tcmvno" path="res://Assets/Background/background_back_1.png" id="2_sa736"]
+[ext_resource type="PackedScene" uid="uid://be5fv78grkofx" path="res://Scenes/NPC/npc.tscn" id="3_gyrgo"]
+
+[node name="Lobby" type="Node2D" unique_id=1616093097]
+
+[node name="sprite" type="Node2D" parent="." unique_id=1056924847]
+
+[node name="Front" type="Sprite2D" parent="sprite" unique_id=950287462]
+z_index = 5
+texture = ExtResource("1_0tr0a")
+
+[node name="Back" type="Sprite2D" parent="sprite" unique_id=72064547]
+texture = ExtResource("2_sa736")
+
+[node name="entities" type="Node2D" parent="." unique_id=1404771378]
+
+[node name="CharacterBody2D" parent="entities" unique_id=775532866 instance=ExtResource("3_gyrgo")]
+position = Vector2(298, -1)
+move_speed = 120.0
+
+[node name="Titik" type="Marker2D" parent="entities" unique_id=317510714 groups=["Titik"]]
+metadata/Titik = false
+
+[node name="Camera2D" type="Camera2D" parent="." unique_id=439636361]
+zoom = Vector2(4.5, 4.5)
