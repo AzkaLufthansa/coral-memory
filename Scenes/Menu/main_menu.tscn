@@ -1,0 +1,226 @@
+[gd_scene format=3 uid="uid://6ca6npc3mk41"]
+
+[ext_resource type="Script" uid="uid://c3n1vx54gf03u" path="res://Scripts/Menu/main_menu.gd" id="1_pn3xf"]
+[ext_resource type="Texture2D" uid="uid://c6jhnmgwogfvb" path="res://Assets/Background/background_1.jpg" id="1_tself"]
+[ext_resource type="Texture2D" uid="uid://by1ruhxr731ed" path="res://Assets/Sprites/FirstPerson/padlock.png" id="3_ab7fb"]
+[ext_resource type="Texture2D" uid="uid://6cfh4t43hfi" path="res://Assets/Images/judul.png" id="3_w1xia"]
+[ext_resource type="Texture2D" uid="uid://d5yqqpm8vit3" path="res://Assets/Sprites/Item/jam.png" id="4_gpijq"]
+[ext_resource type="Texture2D" uid="uid://mkycgawcv7vp" path="res://Assets/Sprites/sampah5.png" id="5_pn3xf"]
+[ext_resource type="Texture2D" uid="uid://dnjdour47lnud" path="res://Assets/Sprites/karpet.png" id="6_gpijq"]
+[ext_resource type="AudioStream" uid="uid://d0e6fipuhdgoc" path="res://Assets/Audio/BGM/BGM Menu.mp3" id="8_w1xia"]
+[ext_resource type="AudioStream" uid="uid://dl3it4uvj78yk" path="res://Assets/Audio/SFX  menu click.mp3" id="9_nbh3q"]
+[ext_resource type="AudioStream" uid="uid://cvek2de4uwe7p" path="res://Assets/Audio/SFX start the game~.mp3" id="10_4qbh4"]
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_tself"]
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_w1xia"]
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_1di0l"]
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_7jtkx"]
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_gpijq"]
+modulate_color = Color(0, 0, 0, 0.72156864)
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_pn3xf"]
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_vmek6"]
+
+[node name="MainMenu" type="CanvasLayer" unique_id=1162107157]
+script = ExtResource("1_pn3xf")
+
+[node name="Background" type="TextureRect" parent="." unique_id=380183767]
+offset_right = 1153.0
+offset_bottom = 649.0
+texture = ExtResource("1_tself")
+
+[node name="Title" type="TextureRect" parent="Background" unique_id=2099952824]
+layout_mode = 0
+offset_left = 248.0
+offset_top = 193.0
+offset_right = 951.0
+offset_bottom = 474.0
+texture = ExtResource("3_w1xia")
+expand_mode = 1
+
+[node name="Button" type="Control" parent="." unique_id=1486649792]
+layout_mode = 3
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="Start" type="Button" parent="Button" unique_id=1640541135]
+layout_mode = 0
+offset_left = 937.0
+offset_top = 467.0
+offset_right = 1110.0
+offset_bottom = 618.0
+theme_override_font_sizes/font_size = 32
+theme_override_styles/normal = SubResource("StyleBoxTexture_tself")
+theme_override_styles/pressed = SubResource("StyleBoxTexture_w1xia")
+theme_override_styles/hover = SubResource("StyleBoxTexture_1di0l")
+text = "
+"
+icon = ExtResource("3_ab7fb")
+
+[node name="Settings" type="Button" parent="Button" unique_id=195410061]
+layout_mode = 0
+offset_left = 928.0
+offset_top = 44.0
+offset_right = 1141.0
+offset_bottom = 245.0
+theme_override_font_sizes/font_size = 32
+theme_override_styles/normal = SubResource("StyleBoxTexture_7jtkx")
+theme_override_styles/pressed = SubResource("StyleBoxTexture_gpijq")
+theme_override_styles/hover = SubResource("StyleBoxTexture_pn3xf")
+icon = ExtResource("4_gpijq")
+
+[node name="Exit" type="Button" parent="Button" unique_id=1128903568]
+layout_mode = 0
+offset_left = 51.0
+offset_top = 512.0
+offset_right = 193.0
+offset_bottom = 627.0
+theme_override_font_sizes/font_size = 32
+theme_override_styles/normal = SubResource("StyleBoxTexture_vmek6")
+text = "
+
+"
+icon = ExtResource("5_pn3xf")
+
+[node name="Settings" type="Control" parent="." unique_id=826233170]
+visible = false
+layout_mode = 3
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="TextureRect" type="TextureRect" parent="Settings" unique_id=1196510589]
+layout_mode = 0
+offset_left = 225.0
+offset_top = 12.0
+offset_right = 922.0
+offset_bottom = 836.0
+texture = ExtResource("6_gpijq")
+
+[node name="Sound" type="Label" parent="Settings" unique_id=417618106]
+layout_mode = 1
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = 318.0
+offset_top = 101.0
+offset_right = 461.0
+offset_bottom = 146.0
+grow_horizontal = 2
+grow_vertical = 0
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_font_sizes/font_size = 32
+text = "Sound"
+
+[node name="Decrease" type="Button" parent="Settings/Sound" unique_id=1802620713]
+layout_mode = 0
+offset_left = 126.0
+offset_top = 10.0
+offset_right = 144.0
+offset_bottom = 41.0
+text = "<"
+
+[node name="Value" type="Label" parent="Settings/Sound" unique_id=409853908]
+layout_mode = 0
+offset_left = 164.0
+offset_top = 15.0
+offset_right = 204.0
+offset_bottom = 38.0
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+text = "10"
+horizontal_alignment = 1
+
+[node name="Increase" type="Button" parent="Settings/Sound" unique_id=1672505878]
+layout_mode = 0
+offset_left = 217.0
+offset_top = 11.0
+offset_right = 235.0
+offset_bottom = 42.0
+text = ">"
+
+[node name="Music" type="Label" parent="Settings" unique_id=1275309198]
+layout_mode = 0
+offset_left = 338.0
+offset_top = 189.0
+offset_right = 478.0
+offset_bottom = 234.0
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_font_sizes/font_size = 32
+text = "Music"
+
+[node name="Decrease" type="Button" parent="Settings/Music" unique_id=926698561]
+layout_mode = 1
+anchors_preset = 6
+anchor_left = 1.0
+anchor_top = 0.5
+anchor_right = 1.0
+anchor_bottom = 0.5
+offset_left = -18.0
+offset_top = -15.5
+offset_bottom = 15.5
+grow_horizontal = 0
+grow_vertical = 2
+text = "<"
+
+[node name="Value" type="Label" parent="Settings/Music" unique_id=440025491]
+layout_mode = 1
+anchors_preset = 6
+anchor_left = 1.0
+anchor_top = 0.5
+anchor_right = 1.0
+anchor_bottom = 0.5
+offset_left = 24.0
+offset_top = -9.5
+offset_right = 64.0
+offset_bottom = 13.5
+grow_horizontal = 0
+grow_vertical = 2
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+text = "10"
+horizontal_alignment = 1
+
+[node name="Increase" type="Button" parent="Settings/Music" unique_id=609899345]
+layout_mode = 0
+offset_left = 219.0
+offset_top = 5.0
+offset_right = 237.0
+offset_bottom = 36.0
+text = ">"
+
+[node name="Confirm" type="Button" parent="Settings" unique_id=451481474]
+layout_mode = 0
+offset_left = 510.0
+offset_top = 582.0
+offset_right = 649.0
+offset_bottom = 613.0
+theme_override_font_sizes/font_size = 32
+text = "Confirm
+"
+
+[node name="BGM" type="AudioStreamPlayer" parent="." unique_id=1411902224]
+stream = ExtResource("8_w1xia")
+bus = &"Music"
+
+[node name="SFX_Click" type="AudioStreamPlayer" parent="." unique_id=155721996]
+stream = ExtResource("9_nbh3q")
+
+[node name="Start_SFX_Click" type="AudioStreamPlayer" parent="." unique_id=140925451]
+stream = ExtResource("10_4qbh4")
+bus = &"Music"
+
+[connection signal="pressed" from="Button/Start" to="." method="_on_start_pressed"]
+[connection signal="pressed" from="Button/Settings" to="." method="_on_settings_pressed"]
+[connection signal="pressed" from="Button/Exit" to="." method="_on_exit_pressed"]
+[connection signal="pressed" from="Settings/Sound/Decrease" to="." method="_on_decrease_pressed"]
+[connection signal="pressed" from="Settings/Sound/Increase" to="." method="_on_increase_pressed"]
+[connection signal="pressed" from="Settings/Music/Decrease" to="." method="_on_decrease2_pressed"]
+[connection signal="pressed" from="Settings/Music/Increase" to="." method="_on_increase2_pressed"]
+[connection signal="pressed" from="Settings/Confirm" to="." method="_on_confirm_pressed"]
