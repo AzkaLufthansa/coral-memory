@@ -61,11 +61,11 @@ func hide_monodialog(duration):
 	await tween.finished
 	Constants.player["can_move"] = true
 	
-func show_ending(which):
-	if which == 1:
-		FadeToBlack_Transition.fade_to_scene("url", 5)
-	elif which == 2:
-		FadeToBlack_Transition.fade_to_scene("url", 5)
+#func show_ending(which):
+	#if which == 1:
+		#FadeToBlack_Transition.fade_to_scene("url", 5)
+	#elif which == 2:
+		#FadeToBlack_Transition.fade_to_scene("url", 5)
 
 #func _on_texture_button_pressed() -> void:
 	#hide_monodialog(hide_duration)

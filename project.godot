@@ -29,6 +29,10 @@ AudioFade="*uid://clrmvkfujs4n0"
 window/stretch/mode="canvas_items"
 window/stretch/aspect="expand"
 
+[filesystem]
+
+import/blender/enabled=false
+
 [global_group]
 
 Titik=""

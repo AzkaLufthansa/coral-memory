@@ -1,14 +1,4 @@
 extends Node
 
+signal start_monodialog(character_id: String, target_branch_id: String)
 signal monodialog_finished(branch_type)
-
-signal cangkir_interaction_requested
-signal drawer_interaction_requested
-signal padlock_interaction_requested
-signal bathtub_interaction_requested
-signal foto_interaction_requested
-signal painting_interaction_requested
-signal eddie_drawer_interaction_requested
-
-signal highlight_closed
-signal highlight_closed_2(item_id: String)

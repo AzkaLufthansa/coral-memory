@@ -1,4 +1,4 @@
-extends Area2D
+extends Node2D
 
 @onready var monodialog_manager = $MonodialogManager
 @onready var monodialog_resource: Monodialog = Monodialog.new()
@@ -16,6 +16,7 @@ var active_branch_data: Dictionary
 @export var button_sfx: AudioStreamMP3
 
 func _ready() -> void:
+	SignalManager.start_monodialog.connect(_on_start_monodialog)
 	monodialog_resource.read_from_json("res://Scripts/Monodialog/monodialog_data.json")
 
 func start_monodialog(target_branch_id: String = ""):
@@ -66,3 +67,7 @@ func set_monodialog_tree(branch_index):
 
 func set_monodialog_state(state):
 	current_state = state
+
+func _on_start_monodialog(character_id_signal, target_branch_id) -> void:
+	character_id = character_id_signal
+	start_monodialog(target_branch_id)
