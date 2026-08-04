@@ -1,0 +1,19 @@
+[remap]
+
+importer="mp3"
+type="AudioStreamMP3"
+uid="uid://sjsd4jwaht3c"
+path="res://.godot/imported/SFX tutup tas.mp3-d3d45dc64a85162eaa08256aa1bc52dd.mp3str"
+
+[deps]
+
+source_file="res://Assets/Audio/BGM/SFX tutup tas.mp3"
+dest_files=["res://.godot/imported/SFX tutup tas.mp3-d3d45dc64a85162eaa08256aa1bc52dd.mp3str"]
+
+[params]
+
+loop=false
+loop_offset=0
+bpm=0
+beat_count=0
+bar_beats=4

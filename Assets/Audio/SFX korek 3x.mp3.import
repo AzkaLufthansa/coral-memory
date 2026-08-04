@@ -1,0 +1,19 @@
+[remap]
+
+importer="mp3"
+type="AudioStreamMP3"
+uid="uid://ds7v1xkpyhahd"
+path="res://.godot/imported/SFX korek 3x.mp3-4770f51f40ea7b39d7b5ef0b21705d28.mp3str"
+
+[deps]
+
+source_file="res://Assets/Audio/SFX korek 3x.mp3"
+dest_files=["res://.godot/imported/SFX korek 3x.mp3-4770f51f40ea7b39d7b5ef0b21705d28.mp3str"]
+
+[params]
+
+loop=false
+loop_offset=0
+bpm=0
+beat_count=0
+bar_beats=4

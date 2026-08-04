@@ -1,0 +1,19 @@
+[remap]
+
+importer="mp3"
+type="AudioStreamMP3"
+uid="uid://oa0uh0uaj4bm"
+path="res://.godot/imported/SFX nyoba buka padlock.mp3-202624374284d7c49667e186d7ad1832.mp3str"
+
+[deps]
+
+source_file="res://Assets/Audio/SFX nyoba buka padlock.mp3"
+dest_files=["res://.godot/imported/SFX nyoba buka padlock.mp3-202624374284d7c49667e186d7ad1832.mp3str"]
+
+[params]
+
+loop=false
+loop_offset=0
+bpm=0
+beat_count=0
+bar_beats=4

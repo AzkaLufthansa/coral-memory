@@ -20,6 +20,9 @@ config/icon="res://icon.svg"
 GameManager="*uid://cya7fkmu2xlv0"
 SceneManager="*uid://b5kv8s1mmiyok"
 Constants="*uid://b0sbuiudqcd1n"
+SignalManager="*uid://drlia311vsyk8"
+FadeToBlack="*uid://en06v6ovc2rl"
+AudioFade="*uid://clrmvkfujs4n0"
 
 [display]
 

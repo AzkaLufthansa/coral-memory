@@ -1,0 +1,19 @@
+[remap]
+
+importer="mp3"
+type="AudioStreamMP3"
+uid="uid://bauga5oqlj30b"
+path="res://.godot/imported/SFX gangguan waterdroplet.mp3-ed73b7245c8ad520b61bb2950da2ad8e.mp3str"
+
+[deps]
+
+source_file="res://Assets/Audio/SFX gangguan waterdroplet.mp3"
+dest_files=["res://.godot/imported/SFX gangguan waterdroplet.mp3-ed73b7245c8ad520b61bb2950da2ad8e.mp3str"]
+
+[params]
+
+loop=false
+loop_offset=0
+bpm=0
+beat_count=0
+bar_beats=4

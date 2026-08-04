@@ -1,0 +1,19 @@
+[remap]
+
+importer="mp3"
+type="AudioStreamMP3"
+uid="uid://bqqn0x3qyc4c6"
+path="res://.godot/imported/BGM Map suasana gelap.mp3-05975f4decd97768b1544e1f21be97ee.mp3str"
+
+[deps]
+
+source_file="res://Assets/Audio/BGM/BGM Map suasana gelap.mp3"
+dest_files=["res://.godot/imported/BGM Map suasana gelap.mp3-05975f4decd97768b1544e1f21be97ee.mp3str"]
+
+[params]
+
+loop=false
+loop_offset=0
+bpm=0
+beat_count=0
+bar_beats=4
