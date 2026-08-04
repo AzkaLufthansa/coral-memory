@@ -1,0 +1,19 @@
+[remap]
+
+importer="mp3"
+type="AudioStreamMP3"
+uid="uid://b54l5gme8fuaq"
+path="res://.godot/imported/SFX MC loop 5sc.mp3-9f08c772a5815b1c6e088b55446c9449.mp3str"
+
+[deps]
+
+source_file="res://Assets/Audio/Voice/SFX MC loop 5sc.mp3"
+dest_files=["res://.godot/imported/SFX MC loop 5sc.mp3-9f08c772a5815b1c6e088b55446c9449.mp3str"]
+
+[params]
+
+loop=false
+loop_offset=0
+bpm=0
+beat_count=0
+bar_beats=4

@@ -1,0 +1,19 @@
+[remap]
+
+importer="mp3"
+type="AudioStreamMP3"
+uid="uid://cfh5g6yg0ugrr"
+path="res://.godot/imported/SFX drop item or jatuhin item.mp3-9b961e55d7d9bf5ac083e30ede2de150.mp3str"
+
+[deps]
+
+source_file="res://Assets/Audio/SFX drop item or jatuhin item.mp3"
+dest_files=["res://.godot/imported/SFX drop item or jatuhin item.mp3-9b961e55d7d9bf5ac083e30ede2de150.mp3str"]
+
+[params]
+
+loop=false
+loop_offset=0
+bpm=0
+beat_count=0
+bar_beats=4

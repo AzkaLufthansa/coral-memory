@@ -1,0 +1,19 @@
+[remap]
+
+importer="mp3"
+type="AudioStreamMP3"
+uid="uid://dal6youm1nisb"
+path="res://.godot/imported/BGM tegang.mp3-db3f3006945a0c68c9c301a607d8fef7.mp3str"
+
+[deps]
+
+source_file="res://Assets/Audio/BGM/BGM tegang.mp3"
+dest_files=["res://.godot/imported/BGM tegang.mp3-db3f3006945a0c68c9c301a607d8fef7.mp3str"]
+
+[params]
+
+loop=false
+loop_offset=0
+bpm=0
+beat_count=0
+bar_beats=4

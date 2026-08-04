@@ -1,6 +1,9 @@
 [gd_scene format=3 uid="uid://b1xwk5jhrgjkd"]
 
 [ext_resource type="Script" uid="uid://bgjaa0e3wqec7" path="res://Scripts/Monodialog/monodialog_scene.gd" id="1_lc3tw"]
+[ext_resource type="Texture2D" uid="uid://bqxihjqcb0pin" path="res://Assets/Sprites/Monodialog/empty_box.png" id="2_0r460"]
+[ext_resource type="Texture2D" uid="uid://dvsn3f13fpb3b" path="res://Assets/Sprites/Monodialog/eddie.png" id="3_ty046"]
+[ext_resource type="Texture2D" uid="uid://pg174il3vwja" path="res://Assets/Textures/Buttons/x.png" id="4_07pmr"]
 
 [sub_resource type="LabelSettings" id="LabelSettings_lc3tw"]
 font_color = Color(0, 0, 0, 1)
@@ -33,6 +36,7 @@ scale = Vector2(4, 4)
 layout_mode = 0
 offset_right = 196.0
 offset_bottom = 48.0
+texture = ExtResource("2_0r460")
 region_rect = Rect2(0, 0, 48, 48)
 patch_margin_left = 16
 patch_margin_top = 24
@@ -50,6 +54,7 @@ offset_left = -61.0
 offset_top = -62.0
 grow_horizontal = 0
 grow_vertical = 0
+texture = ExtResource("3_ty046")
 expand_mode = 1
 stretch_mode = 5
 
@@ -115,6 +120,7 @@ offset_left = 13.0
 offset_top = -20.0
 offset_right = 27.0
 offset_bottom = -6.0
+texture_normal = ExtResource("4_07pmr")
 ignore_texture_size = true
 stretch_mode = 0
 

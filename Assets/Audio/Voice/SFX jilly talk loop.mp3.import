@@ -1,0 +1,19 @@
+[remap]
+
+importer="mp3"
+type="AudioStreamMP3"
+uid="uid://cc8fbsmcy4ofo"
+path="res://.godot/imported/SFX jilly talk loop.mp3-845c5b95ddf4206b1ccc4fe99a2e012d.mp3str"
+
+[deps]
+
+source_file="res://Assets/Audio/Voice/SFX jilly talk loop.mp3"
+dest_files=["res://.godot/imported/SFX jilly talk loop.mp3-845c5b95ddf4206b1ccc4fe99a2e012d.mp3str"]
+
+[params]
+
+loop=false
+loop_offset=0
+bpm=0
+beat_count=0
+bar_beats=4
