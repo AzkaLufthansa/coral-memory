@@ -25,7 +25,7 @@ func show_monodialog(duration, speaker, sprite, text = "", options = {}, voice =
 		button.pressed.connect(_on_option_selected.bind(option))
 		$Control/Panel/Options.add_child(button)
 	
-	Constants.player["can_move"] = false
+	#Constants.player["can_move"] = false
 	if reappearance:
 		$Control/Panel.size = Vector2(50, 48)
 		var tween := create_tween()
@@ -59,7 +59,7 @@ func hide_monodialog(duration):
 	$Control/Panel/Options.visible = false
 	$Timer.start()
 	await tween.finished
-	Constants.player["can_move"] = true
+	#Constants.player["can_move"] = true
 	
 #func show_ending(which):
 	#if which == 1:

@@ -29,3 +29,4 @@ func _physics_process(_delta: float) -> void:
 
 func _on_reached_window() -> void:
 	print("NPC sampai di jendela!")
+	SignalManager.start_monodialog.emit.call_deferred("mc", "1")

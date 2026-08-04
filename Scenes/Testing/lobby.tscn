@@ -1,10 +1,13 @@
 [gd_scene format=3 uid="uid://dtlbhpr462ehh"]
 
 [ext_resource type="Texture2D" uid="uid://26876meghs4w" path="res://Assets/Background/background_front_1.png" id="1_0tr0a"]
+[ext_resource type="Script" uid="uid://s5eca12ftlt" path="res://Scripts/lobby.gd" id="1_sa736"]
 [ext_resource type="Texture2D" uid="uid://dgu2sq2tcmvno" path="res://Assets/Background/background_back_1.png" id="2_sa736"]
 [ext_resource type="PackedScene" uid="uid://be5fv78grkofx" path="res://Scenes/NPC/npc.tscn" id="3_gyrgo"]
+[ext_resource type="PackedScene" uid="uid://dfgiutyjmm0ra" path="res://Scenes/Monodialog/md_event_trigger.tscn" id="5_gyrgo"]
 
 [node name="Lobby" type="Node2D" unique_id=1616093097]
+script = ExtResource("1_sa736")
 
 [node name="sprite" type="Node2D" parent="." unique_id=1056924847]
 
@@ -26,3 +29,5 @@ metadata/Titik = false
 
 [node name="Camera2D" type="Camera2D" parent="." unique_id=439636361]
 zoom = Vector2(4.5, 4.5)
+
+[node name="MonodialogEventTrigger" parent="." unique_id=1064047786 instance=ExtResource("5_gyrgo")]

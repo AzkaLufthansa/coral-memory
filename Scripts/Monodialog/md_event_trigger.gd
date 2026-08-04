@@ -68,6 +68,7 @@ func set_monodialog_tree(branch_index):
 func set_monodialog_state(state):
 	current_state = state
 
-func _on_start_monodialog(character_id_signal, target_branch_id) -> void:
+func _on_start_monodialog(character_id_signal: String, target_branch_id_signal: String) -> void:
 	character_id = character_id_signal
-	start_monodialog(target_branch_id)
+	start_monodialog(target_branch_id_signal)
+	print("Signal received for character: ", character_id_signal, " branch: ", target_branch_id_signal)
