@@ -19,23 +19,23 @@ script = ExtResource("1_lc3tw")
 
 [node name="Control" type="Control" parent="." unique_id=1060045149]
 layout_mode = 3
-anchors_preset = 7
-anchor_left = 0.5
-anchor_top = 1.0
-anchor_right = 0.5
+anchor_left = -0.00086805556
+anchor_top = 0.66049385
+anchor_right = 0.9982639
 anchor_bottom = 1.0
-offset_left = -395.0
-offset_top = -220.0
-offset_right = -197.0
-offset_bottom = -173.0
+offset_right = -863.25
+offset_bottom = -165.0
 grow_horizontal = 2
-grow_vertical = 0
+grow_vertical = 2
 scale = Vector2(4, 4)
 
 [node name="Panel" type="NinePatchRect" parent="Control" unique_id=1467200034]
-layout_mode = 0
-offset_right = 196.0
-offset_bottom = 48.0
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
 texture = ExtResource("2_0r460")
 region_rect = Rect2(0, 0, 48, 48)
 patch_margin_left = 16
@@ -91,7 +91,7 @@ text = "apaain aisndiaosdi asidhasd as dioahsdiohais asih daisdh ioaha"
 label_settings = SubResource("LabelSettings_01nol")
 autowrap_mode = 3
 
-[node name="Options" type="HBoxContainer" parent="Control/Panel" unique_id=1951944921]
+[node name="Options" type="HBoxContainer" parent="Control/Panel" unique_id=780532202]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -111,6 +111,10 @@ layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
+offset_left = 44.0
+offset_top = 6.0
+offset_right = 44.0
+offset_bottom = 6.0
 grow_horizontal = 2
 grow_vertical = 2
 

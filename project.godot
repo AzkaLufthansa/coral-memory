@@ -23,6 +23,8 @@ Constants="*uid://b0sbuiudqcd1n"
 SignalManager="*uid://drlia311vsyk8"
 FadeToBlack="*uid://en06v6ovc2rl"
 AudioFade="*uid://clrmvkfujs4n0"
+PauseGameController="*uid://cghtwncnh7ab4"
+UserSettings="*uid://ckb2kfv3ene2d"
 
 [display]
 
