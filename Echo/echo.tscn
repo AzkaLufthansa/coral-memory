@@ -1,0 +1,37 @@
+[gd_scene load_steps=8 format=3]
+
+[ext_resource type="Script" path="res://Echo/echo.gd" id="1_echo"]
+[ext_resource type="Script" path="res://Echo/echo_element.gd" id="2_element"]
+
+[node name="Echo" type="Node2D"]
+script = ExtResource("1_echo")
+
+[node name="ElementFear" type="Node2D" parent="."]
+position = Vector2(0, -18)
+script = ExtResource("2_element")
+emotion = 0
+
+[node name="ElementAnger" type="Node2D" parent="."]
+position = Vector2(0, -6)
+script = ExtResource("2_element")
+emotion = 1
+
+[node name="ElementSadness" type="Node2D" parent="."]
+position = Vector2(0, -8)
+script = ExtResource("2_element")
+emotion = 2
+
+[node name="ElementGuilt" type="Node2D" parent="."]
+position = Vector2(0, -16)
+script = ExtResource("2_element")
+emotion = 3
+
+[node name="ElementShame" type="Node2D" parent="."]
+position = Vector2(0, -12)
+script = ExtResource("2_element")
+emotion = 4
+
+[node name="ElementEnvy" type="Node2D" parent="."]
+position = Vector2(0, -14)
+script = ExtResource("2_element")
+emotion = 5
