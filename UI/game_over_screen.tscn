@@ -1,49 +1,70 @@
-[gd_scene load_steps=2 format=3]
+[gd_scene format=3 uid="uid://b0bsens7ighrm"]
 
-[ext_resource type="Script" path="res://UI/game_over_screen.gd" id="1_gos"]
+[ext_resource type="Script" uid="uid://coeler8jwj2l1" path="res://UI/game_over_screen.gd" id="1_gos"]
+[ext_resource type="Texture2D" uid="uid://bm8pssr3quxlp" path="res://Assets/UI/button.png" id="2_ftyas"]
 
-[node name="GameOverScreen" type="Control"]
-script = ExtResource("1_gos")
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_ro3mb"]
+texture = ExtResource("2_ftyas")
+region_rect = Rect2(47.5, 142, 181, 83)
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_njjo1"]
+texture = ExtResource("2_ftyas")
+region_rect = Rect2(449.5, 142, 183, 83)
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_mts6h"]
+texture = ExtResource("2_ftyas")
+region_rect = Rect2(248.5, 143, 181, 82)
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_ai2hp"]
+texture = ExtResource("2_ftyas")
+region_rect = Rect2(449.5, 143, 183, 83)
+
+[node name="GameOverScreen" type="Control" unique_id=1631883928]
+layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 mouse_filter = 2
+script = ExtResource("1_gos")
 
-[node name="Overlay" type="ColorRect" parent="."]
-anchors_preset = 15
+[node name="Overlay" type="ColorRect" parent="." unique_id=1899526129]
+layout_mode = 0
 anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 color = Color(0.05, 0.02, 0.02, 0.93)
 
-[node name="Center" type="CenterContainer" parent="."]
-anchors_preset = 15
+[node name="Center" type="CenterContainer" parent="." unique_id=905099272]
+layout_mode = 0
 anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 
-[node name="VBox" type="VBoxContainer" parent="Center"]
+[node name="VBox" type="VBoxContainer" parent="Center" unique_id=1694917211]
 layout_mode = 2
 theme_override_constants/separation = 16
 
-[node name="TitleLabel" type="Label" parent="Center/VBox"]
+[node name="TitleLabel" type="Label" parent="Center/VBox" unique_id=29006354]
 unique_name_in_owner = true
 layout_mode = 2
 text = "ECHO BURST"
 horizontal_alignment = 1
 
-[node name="DetailLabel" type="Label" parent="Center/VBox"]
+[node name="DetailLabel" type="Label" parent="Center/VBox" unique_id=373075308]
 unique_name_in_owner = true
 layout_mode = 2
-text = ""
 horizontal_alignment = 1
 
-[node name="RestartButton" type="Button" parent="Center/VBox"]
+[node name="RestartButton" type="Button" parent="Center/VBox" unique_id=137152341]
 unique_name_in_owner = true
 custom_minimum_size = Vector2(220, 48)
 layout_mode = 2
+theme_override_styles/normal = SubResource("StyleBoxTexture_ro3mb")
+theme_override_styles/pressed = SubResource("StyleBoxTexture_njjo1")
+theme_override_styles/hover = SubResource("StyleBoxTexture_mts6h")
+theme_override_styles/hover_pressed = SubResource("StyleBoxTexture_ai2hp")
 text = "Mulai Ulang"

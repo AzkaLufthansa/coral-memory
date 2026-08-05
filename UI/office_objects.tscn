@@ -1,46 +1,70 @@
-[gd_scene load_steps=2 format=3]
+[gd_scene format=3 uid="uid://dj536rmd55yu1"]
 
-[ext_resource type="Script" path="res://UI/office_objects.gd" id="1_office"]
+[ext_resource type="Script" uid="uid://bsvrtlh5slx0s" path="res://UI/office_objects.gd" id="1_office"]
+[ext_resource type="StyleBox" uid="uid://bmsl2ivdeekss" path="res://Button_Effect/normal.tres" id="2_nfp11"]
+[ext_resource type="StyleBox" uid="uid://dsacgsdrhpcyg" path="res://Button_Effect/pressed.tres" id="3_r4dh2"]
+[ext_resource type="StyleBox" uid="uid://b0l5doruddxuo" path="res://Button_Effect/hover.tres" id="4_l2lbq"]
+[ext_resource type="StyleBox" uid="uid://bcgsfsibr84mj" path="res://Button_Effect/hover_pressed.tres" id="5_px13u"]
 
-[node name="OfficeObjects" type="CanvasLayer"]
+[node name="OfficeObjects" type="CanvasLayer" unique_id=1786024609]
 script = ExtResource("1_office")
 
-[node name="PatientFileButton" type="Button" parent="."]
+[node name="PatientFileButton" type="Button" parent="." unique_id=713099942]
 unique_name_in_owner = true
 offset_left = 220.0
 offset_top = 540.0
 offset_right = 360.0
 offset_bottom = 600.0
+theme_override_styles/normal = ExtResource("2_nfp11")
+theme_override_styles/pressed = ExtResource("3_r4dh2")
+theme_override_styles/hover = ExtResource("4_l2lbq")
+theme_override_styles/hover_pressed = ExtResource("5_px13u")
 text = "Berkas Pasien"
 
-[node name="NotebookButton" type="Button" parent="."]
+[node name="NotebookButton" type="Button" parent="." unique_id=1227294797]
 unique_name_in_owner = true
 offset_left = 390.0
 offset_top = 540.0
 offset_right = 530.0
 offset_bottom = 600.0
+theme_override_styles/normal = ExtResource("2_nfp11")
+theme_override_styles/pressed = ExtResource("3_r4dh2")
+theme_override_styles/hover = ExtResource("4_l2lbq")
+theme_override_styles/hover_pressed = ExtResource("5_px13u")
 text = "Notebook"
 
-[node name="MonitorButton" type="Button" parent="."]
+[node name="MonitorButton" type="Button" parent="." unique_id=1289849380]
 unique_name_in_owner = true
 offset_left = 560.0
 offset_top = 540.0
 offset_right = 700.0
 offset_bottom = 600.0
+theme_override_styles/normal = ExtResource("2_nfp11")
+theme_override_styles/pressed = ExtResource("3_r4dh2")
+theme_override_styles/hover = ExtResource("4_l2lbq")
+theme_override_styles/hover_pressed = ExtResource("5_px13u")
 text = "Monitor"
 
-[node name="BellButton" type="Button" parent="."]
+[node name="BellButton" type="Button" parent="." unique_id=1183430241]
 unique_name_in_owner = true
 offset_left = 730.0
 offset_top = 540.0
 offset_right = 890.0
 offset_bottom = 600.0
+theme_override_styles/normal = ExtResource("2_nfp11")
+theme_override_styles/pressed = ExtResource("3_r4dh2")
+theme_override_styles/hover = ExtResource("4_l2lbq")
+theme_override_styles/hover_pressed = ExtResource("5_px13u")
 text = "Bel (Panggil Pasien)"
 
-[node name="CallNextButton" type="Button" parent="."]
+[node name="CallNextButton" type="Button" parent="." unique_id=1868204755]
 unique_name_in_owner = true
 offset_left = 730.0
 offset_top = 540.0
 offset_right = 920.0
 offset_bottom = 600.0
+theme_override_styles/normal = ExtResource("2_nfp11")
+theme_override_styles/pressed = ExtResource("3_r4dh2")
+theme_override_styles/hover = ExtResource("4_l2lbq")
+theme_override_styles/hover_pressed = ExtResource("5_px13u")
 text = "Panggil Pasien Berikutnya"

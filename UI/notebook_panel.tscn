@@ -1,9 +1,17 @@
-[gd_scene load_steps=2 format=3]
+[gd_scene format=3 uid="uid://dhhxcbgm5msdf"]
 
-[ext_resource type="Script" path="res://UI/notebook_panel.gd" id="1_notebook"]
+[ext_resource type="Script" uid="uid://dv5huaktn55gt" path="res://UI/notebook_panel.gd" id="1_notebook"]
+[ext_resource type="StyleBox" uid="uid://bmsl2ivdeekss" path="res://Button_Effect/normal.tres" id="2_bojbp"]
+[ext_resource type="Texture2D" uid="uid://bm8pssr3quxlp" path="res://Assets/UI/button.png" id="2_ro3mb"]
+[ext_resource type="StyleBox" uid="uid://dsacgsdrhpcyg" path="res://Button_Effect/pressed.tres" id="3_nvygb"]
+[ext_resource type="StyleBox" uid="uid://b0l5doruddxuo" path="res://Button_Effect/hover.tres" id="4_6x4qj"]
+[ext_resource type="StyleBox" uid="uid://bcgsfsibr84mj" path="res://Button_Effect/hover_pressed.tres" id="5_b546f"]
 
-[node name="NotebookPanel" type="PanelContainer"]
-script = ExtResource("1_notebook")
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_ai2hp"]
+texture = ExtResource("2_ro3mb")
+region_rect = Rect2(247.99194, 143.905, 181.01599, 82.522)
+
+[node name="NotebookPanel" type="PanelContainer" unique_id=1066886992]
 anchors_preset = 8
 anchor_left = 0.5
 anchor_top = 0.5
@@ -15,57 +23,69 @@ offset_right = 260.0
 offset_bottom = 220.0
 grow_horizontal = 2
 grow_vertical = 2
+script = ExtResource("1_notebook")
 
-[node name="Margin" type="MarginContainer" parent="."]
+[node name="Margin" type="MarginContainer" parent="." unique_id=1870147096]
 layout_mode = 2
 theme_override_constants/margin_left = 16
 theme_override_constants/margin_top = 12
 theme_override_constants/margin_right = 16
 theme_override_constants/margin_bottom = 12
 
-[node name="VBox" type="VBoxContainer" parent="Margin"]
+[node name="VBox" type="VBoxContainer" parent="Margin" unique_id=1292229147]
 layout_mode = 2
+size_flags_vertical = 4
 
-[node name="Title" type="Label" parent="Margin/VBox"]
+[node name="Title" type="Label" parent="Margin/VBox" unique_id=233895360]
 layout_mode = 2
 text = "NOTES PEMERIKSAAN"
 
-[node name="EmotionLabel" type="Label" parent="Margin/VBox"]
+[node name="EmotionLabel" type="Label" parent="Margin/VBox" unique_id=1376438832]
 unique_name_in_owner = true
 layout_mode = 2
 text = "Core Echo: -"
 
-[node name="EmotionGrid" type="GridContainer" parent="Margin/VBox"]
+[node name="EmotionGrid" type="GridContainer" parent="Margin/VBox" unique_id=337974320]
 layout_mode = 2
 columns = 2
 
-[node name="ScheduleLabel" type="Label" parent="Margin/VBox"]
+[node name="ScheduleLabel" type="Label" parent="Margin/VBox" unique_id=368164579]
 unique_name_in_owner = true
 layout_mode = 2
 text = "Jadwal Kontrol: -"
 
-[node name="ScheduleBox" type="HBoxContainer" parent="Margin/VBox"]
+[node name="ScheduleBox" type="HBoxContainer" parent="Margin/VBox" unique_id=85984703]
 layout_mode = 2
 
-[node name="NotesLabel" type="Label" parent="Margin/VBox"]
+[node name="NotesLabel" type="Label" parent="Margin/VBox" unique_id=1120204565]
 layout_mode = 2
 text = "Catatan:"
 
-[node name="NotesInput" type="TextEdit" parent="Margin/VBox"]
+[node name="NotesInput" type="TextEdit" parent="Margin/VBox" unique_id=1849106305]
 unique_name_in_owner = true
 custom_minimum_size = Vector2(0, 60)
 layout_mode = 2
 placeholder_text = "Tulis catatan pemeriksaan..."
 
-[node name="HBox" type="HBoxContainer" parent="Margin/VBox"]
+[node name="HBox" type="HBoxContainer" parent="Margin/VBox" unique_id=2018589011]
 layout_mode = 2
 
-[node name="CloseButton" type="Button" parent="Margin/VBox/HBox"]
+[node name="CloseButton" type="Button" parent="Margin/VBox/HBox" unique_id=1281961795]
 unique_name_in_owner = true
 layout_mode = 2
+theme_override_styles/normal = ExtResource("2_bojbp")
+theme_override_styles/pressed = ExtResource("3_nvygb")
+theme_override_styles/hover = ExtResource("4_6x4qj")
+theme_override_styles/hover_pressed = ExtResource("5_b546f")
 text = "Tutup"
+icon_alignment = 1
 
-[node name="SubmitButton" type="Button" parent="Margin/VBox/HBox"]
+[node name="SubmitButton" type="Button" parent="Margin/VBox/HBox" unique_id=314982947]
 unique_name_in_owner = true
 layout_mode = 2
+theme_override_styles/normal = ExtResource("2_bojbp")
+theme_override_styles/pressed = ExtResource("3_nvygb")
+theme_override_styles/hover = ExtResource("4_6x4qj")
+theme_override_styles/hover_pressed = ExtResource("5_b546f")
+theme_override_styles/disabled = SubResource("StyleBoxTexture_ai2hp")
 text = "Submit Report"
