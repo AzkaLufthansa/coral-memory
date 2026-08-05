@@ -2,17 +2,20 @@ extends Node2D
 
 const PatientScene := preload("res://NPC/patient.tscn")
 const RoomScene := preload("res://Scenes/examination_room.tscn")
-const BookScene := preload("res://UI/examination_book.tscn")
-const MonitorScene := preload("res://UI/patient_monitor.tscn")
+const OfficeScene := preload("res://UI/office_objects.tscn")
+const FileScene := preload("res://UI/patient_file.tscn")
+const NotebookScene := preload("res://UI/notebook_panel.tscn")
+const MonitorScene := preload("res://UI/facility_monitor.tscn")
 const TopicScene := preload("res://UI/topic_panel.tscn")
 const EchoInspectScene := preload("res://UI/echo_inspect.tscn")
 const DayTransitionScene := preload("res://UI/day_transition.tscn")
 const GameOverScene := preload("res://UI/game_over_screen.tscn")
 
-var room: Node2D
 var patient_node: Patient2D
-var book: Control
-var monitor: Control
+var office: CanvasLayer
+var file_panel: PanelContainer
+var notebook_panel: PanelContainer
+var monitor_panel: PanelContainer
 var topic_panel: PanelContainer
 var echo_inspect: Control
 var day_transition: Control
@@ -30,7 +33,7 @@ func _ready() -> void:
 
 
 func _build_room() -> void:
-	room = RoomScene.instantiate()
+	var room := RoomScene.instantiate()
 	room.name = "Room"
 	add_child(room)
 
@@ -40,13 +43,20 @@ func _build_ui() -> void:
 	ui_layer.name = "UI"
 	add_child(ui_layer)
 
-	book = BookScene.instantiate()
-	book.visible = false
-	ui_layer.add_child(book)
+	office = OfficeScene.instantiate()
+	ui_layer.add_child(office)
 
-	monitor = MonitorScene.instantiate()
-	monitor.visible = false
-	ui_layer.add_child(monitor)
+	file_panel = FileScene.instantiate()
+	file_panel.visible = false
+	ui_layer.add_child(file_panel)
+
+	notebook_panel = NotebookScene.instantiate()
+	notebook_panel.visible = false
+	ui_layer.add_child(notebook_panel)
+
+	monitor_panel = MonitorScene.instantiate()
+	monitor_panel.visible = false
+	ui_layer.add_child(monitor_panel)
 
 	topic_panel = TopicScene.instantiate()
 	topic_panel.visible = false
@@ -72,13 +82,16 @@ func _setup_signals() -> void:
 	EchoManager.echo_burst.connect(_on_echo_burst)
 	EchoManager.game_ended.connect(_on_game_ended)
 
-	room.bell_clicked.connect(_on_bell_clicked)
-	room.book_clicked.connect(_on_book_clicked)
-	room.monitor_clicked.connect(_on_monitor_clicked)
+	office.patient_file_pressed.connect(_on_patient_file_pressed)
+	office.notebook_pressed.connect(_on_notebook_pressed)
+	office.monitor_pressed.connect(_on_monitor_pressed)
+	office.call_next_pressed.connect(_on_call_next_pressed)
+	office.bell_pressed.connect(_on_bell_pressed)
 
-	book.book_closed.connect(_on_close_panel)
-	book.report_submitted.connect(_on_report_submitted)
-	monitor.monitor_closed.connect(_on_close_panel)
+	file_panel.file_closed.connect(_on_close_panel)
+	notebook_panel.notebook_closed.connect(_on_close_panel)
+	notebook_panel.report_submitted.connect(_on_report_submitted)
+	monitor_panel.monitor_closed.connect(_on_close_panel)
 	topic_panel.topic_selected.connect(_on_topic_selected)
 	topic_panel.dialogue_finished.connect(_on_dialogue_finished)
 	echo_inspect.inspect_closed.connect(_on_close_panel)
@@ -97,6 +110,8 @@ func _on_session_started(patient: PatientData, session_index: int, total_session
 	_report_submitted = false
 	_spawn_patient(patient)
 	_close_all_panels()
+	office.show_office()
+	office.set_next_enabled(false)
 
 
 func _spawn_patient(patient: PatientData) -> void:
@@ -127,24 +142,23 @@ func _on_echo_clicked() -> void:
 	echo_inspect.show_for(current_patient, patient_node.echo)
 
 
-func _on_bell_clicked() -> void:
-	# Bel: panggil pasien berikutnya (hanya aktif setelah submit)
-	if _report_submitted:
-		EchoManager.call_next_patient()
-
-
-func _on_book_clicked() -> void:
+func _on_patient_file_pressed() -> void:
 	if current_patient == null:
 		return
 	_close_all_panels()
-	book.show_book()
+	file_panel.show_patient(current_patient)
 
 
-func _on_monitor_clicked() -> void:
+func _on_notebook_pressed() -> void:
 	if current_patient == null:
 		return
 	_close_all_panels()
-	monitor.show_monitor(current_patient)
+	notebook_panel.show_notebook()
+
+
+func _on_monitor_pressed() -> void:
+	_close_all_panels()
+	monitor_panel.show_monitor()
 
 
 func _on_topic_selected(topic: Topic.Name) -> void:
@@ -164,18 +178,29 @@ func _on_dialogue_finished() -> void:
 func _on_report_submitted(emotion: Emotion.Type, schedule: GameConfig.Schedule, notes: String) -> void:
 	EchoManager.commit_diagnosis(emotion, schedule)
 	_report_submitted = true
+	office.set_next_enabled(true)
+
+
+func _on_call_next_pressed() -> void:
+	EchoManager.call_next_patient()
+
+
+func _on_bell_pressed() -> void:
+	EchoManager.call_next_patient()
 
 
 func _on_close_panel() -> void:
-	book.hide_book()
-	monitor.hide_monitor()
+	file_panel.visible = false
+	notebook_panel.visible = false
+	monitor_panel.visible = false
 	topic_panel.close_dialogue()
 	echo_inspect.visible = false
 
 
 func _close_all_panels() -> void:
-	book.hide_book()
-	monitor.hide_monitor()
+	file_panel.visible = false
+	notebook_panel.visible = false
+	monitor_panel.visible = false
 	topic_panel.close_dialogue()
 	echo_inspect.visible = false
 

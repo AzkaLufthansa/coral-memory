@@ -1,0 +1,46 @@
+[gd_scene load_steps=2 format=3]
+
+[ext_resource type="Script" path="res://UI/office_objects.gd" id="1_office"]
+
+[node name="OfficeObjects" type="CanvasLayer"]
+script = ExtResource("1_office")
+
+[node name="PatientFileButton" type="Button" parent="."]
+unique_name_in_owner = true
+offset_left = 220.0
+offset_top = 540.0
+offset_right = 360.0
+offset_bottom = 600.0
+text = "Berkas Pasien"
+
+[node name="NotebookButton" type="Button" parent="."]
+unique_name_in_owner = true
+offset_left = 390.0
+offset_top = 540.0
+offset_right = 530.0
+offset_bottom = 600.0
+text = "Notebook"
+
+[node name="MonitorButton" type="Button" parent="."]
+unique_name_in_owner = true
+offset_left = 560.0
+offset_top = 540.0
+offset_right = 700.0
+offset_bottom = 600.0
+text = "Monitor"
+
+[node name="BellButton" type="Button" parent="."]
+unique_name_in_owner = true
+offset_left = 730.0
+offset_top = 540.0
+offset_right = 890.0
+offset_bottom = 600.0
+text = "Bel (Panggil Pasien)"
+
+[node name="CallNextButton" type="Button" parent="."]
+unique_name_in_owner = true
+offset_left = 730.0
+offset_top = 540.0
+offset_right = 920.0
+offset_bottom = 600.0
+text = "Panggil Pasien Berikutnya"
