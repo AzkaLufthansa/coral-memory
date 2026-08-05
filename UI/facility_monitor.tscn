@@ -1,9 +1,12 @@
-[gd_scene load_steps=2 format=3]
+[gd_scene format=3 uid="uid://dfwwt5kfuf158"]
 
-[ext_resource type="Script" path="res://UI/facility_monitor.gd" id="1_monitor"]
+[ext_resource type="Script" uid="uid://rswpu762widh" path="res://UI/facility_monitor.gd" id="1_monitor"]
+[ext_resource type="StyleBox" uid="uid://bmsl2ivdeekss" path="res://Button_Effect/normal.tres" id="2_djrge"]
+[ext_resource type="StyleBox" uid="uid://dsacgsdrhpcyg" path="res://Button_Effect/pressed.tres" id="3_t2h3w"]
+[ext_resource type="StyleBox" uid="uid://b0l5doruddxuo" path="res://Button_Effect/hover.tres" id="4_k7e6j"]
+[ext_resource type="StyleBox" uid="uid://bcgsfsibr84mj" path="res://Button_Effect/hover_pressed.tres" id="5_11wnm"]
 
-[node name="FacilityMonitor" type="PanelContainer"]
-script = ExtResource("1_monitor")
+[node name="FacilityMonitor" type="PanelContainer" unique_id=2030928902]
 anchors_preset = 1
 anchor_left = 1.0
 anchor_right = 1.0
@@ -12,46 +15,51 @@ offset_top = 12.0
 offset_right = -12.0
 offset_bottom = 200.0
 grow_horizontal = 0
+script = ExtResource("1_monitor")
 
-[node name="Margin" type="MarginContainer" parent="."]
+[node name="Margin" type="MarginContainer" parent="." unique_id=787526048]
 layout_mode = 2
 theme_override_constants/margin_left = 12
 theme_override_constants/margin_top = 8
 theme_override_constants/margin_right = 12
 theme_override_constants/margin_bottom = 8
 
-[node name="VBox" type="VBoxContainer" parent="Margin"]
+[node name="VBox" type="VBoxContainer" parent="Margin" unique_id=2097603895]
 layout_mode = 2
 
-[node name="Title" type="Label" parent="Margin/VBox"]
+[node name="Title" type="Label" parent="Margin/VBox" unique_id=235639367]
 layout_mode = 2
 text = "MONITOR FASILITAS"
 
-[node name="DayLabel" type="Label" parent="Margin/VBox"]
+[node name="DayLabel" type="Label" parent="Margin/VBox" unique_id=1282839520]
 unique_name_in_owner = true
 layout_mode = 2
 text = "HARI 1 / 7"
 
-[node name="SessionLabel" type="Label" parent="Margin/VBox"]
+[node name="SessionLabel" type="Label" parent="Margin/VBox" unique_id=1876528610]
 unique_name_in_owner = true
 layout_mode = 2
 text = "SESI 1 / 5"
 
-[node name="PatientsLabel" type="Label" parent="Margin/VBox"]
+[node name="PatientsLabel" type="Label" parent="Margin/VBox" unique_id=2118470503]
 unique_name_in_owner = true
 layout_mode = 2
 text = "Pasien terdaftar: 0"
 
-[node name="TimeLabel" type="Label" parent="Margin/VBox"]
+[node name="TimeLabel" type="Label" parent="Margin/VBox" unique_id=1719752615]
 unique_name_in_owner = true
 layout_mode = 2
 text = "Waktu: 08:00"
 
-[node name="Spacer" type="Control" parent="Margin/VBox"]
+[node name="Spacer" type="Control" parent="Margin/VBox" unique_id=512728486]
 layout_mode = 2
 size_flags_vertical = 3
 
-[node name="CloseButton" type="Button" parent="Margin/VBox"]
+[node name="CloseButton" type="Button" parent="Margin/VBox" unique_id=1260001200]
 unique_name_in_owner = true
 layout_mode = 2
+theme_override_styles/normal = ExtResource("2_djrge")
+theme_override_styles/pressed = ExtResource("3_t2h3w")
+theme_override_styles/hover = ExtResource("4_k7e6j")
+theme_override_styles/hover_pressed = ExtResource("5_11wnm")
 text = "Tutup"

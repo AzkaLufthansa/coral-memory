@@ -1,9 +1,12 @@
-[gd_scene load_steps=2 format=3]
+[gd_scene format=3 uid="uid://dd3ofcv4m67p"]
 
-[ext_resource type="Script" path="res://UI/topic_panel.gd" id="1_topic"]
+[ext_resource type="Script" uid="uid://d2kb2nnnwwjnt" path="res://UI/topic_panel.gd" id="1_topic"]
+[ext_resource type="StyleBox" uid="uid://bmsl2ivdeekss" path="res://Button_Effect/normal.tres" id="2_rq8l6"]
+[ext_resource type="StyleBox" uid="uid://dsacgsdrhpcyg" path="res://Button_Effect/pressed.tres" id="3_1rlls"]
+[ext_resource type="StyleBox" uid="uid://b0l5doruddxuo" path="res://Button_Effect/hover.tres" id="4_657xq"]
+[ext_resource type="StyleBox" uid="uid://bcgsfsibr84mj" path="res://Button_Effect/hover_pressed.tres" id="5_xbxoh"]
 
-[node name="TopicPanel" type="PanelContainer"]
-script = ExtResource("1_topic")
+[node name="TopicPanel" type="PanelContainer" unique_id=1300001394]
 anchors_preset = 2
 anchor_top = 1.0
 anchor_bottom = 1.0
@@ -12,38 +15,43 @@ offset_top = -280.0
 offset_right = -260.0
 offset_bottom = -16.0
 grow_vertical = 0
+script = ExtResource("1_topic")
 
-[node name="Margin" type="MarginContainer" parent="."]
+[node name="Margin" type="MarginContainer" parent="." unique_id=1709795325]
 layout_mode = 2
 theme_override_constants/margin_left = 12
 theme_override_constants/margin_top = 8
 theme_override_constants/margin_right = 12
 theme_override_constants/margin_bottom = 8
 
-[node name="VBox" type="VBoxContainer" parent="Margin"]
+[node name="VBox" type="VBoxContainer" parent="Margin" unique_id=1871742091]
 layout_mode = 2
 
-[node name="TitleLabel" type="Label" parent="Margin/VBox"]
+[node name="TitleLabel" type="Label" parent="Margin/VBox" unique_id=2055474176]
 unique_name_in_owner = true
 layout_mode = 2
 text = "Pilih pertanyaan"
 
-[node name="RemainingLabel" type="Label" parent="Margin/VBox"]
+[node name="RemainingLabel" type="Label" parent="Margin/VBox" unique_id=661906858]
 unique_name_in_owner = true
 layout_mode = 2
 text = "Pertanyaan tersisa: 3"
 
-[node name="Grid" type="GridContainer" parent="Margin/VBox"]
+[node name="Grid" type="GridContainer" parent="Margin/VBox" unique_id=1718450914]
 unique_name_in_owner = true
 layout_mode = 2
 columns = 3
 
-[node name="ResponseLabel" type="Label" parent="Margin/VBox"]
+[node name="ResponseLabel" type="Label" parent="Margin/VBox" unique_id=920201300]
 unique_name_in_owner = true
 layout_mode = 2
 autowrap_mode = 3
 
-[node name="FinishButton" type="Button" parent="Margin/VBox"]
+[node name="FinishButton" type="Button" parent="Margin/VBox" unique_id=837344417]
 unique_name_in_owner = true
 layout_mode = 2
+theme_override_styles/normal = ExtResource("2_rq8l6")
+theme_override_styles/pressed = ExtResource("3_1rlls")
+theme_override_styles/hover = ExtResource("4_657xq")
+theme_override_styles/hover_pressed = ExtResource("5_xbxoh")
 text = "Cukup"
