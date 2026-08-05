@@ -1,0 +1,215 @@
+[gd_scene format=3 uid="uid://ctgbe0qkspuke"]
+
+[ext_resource type="Script" uid="uid://bhsrow7rj2jju" path="res://Scripts/Menu/pause_menu.gd" id="1_6pfc5"]
+[ext_resource type="Texture2D" uid="uid://dnjdour47lnud" path="res://Assets/Sprites/karpet.png" id="2_jnmi5"]
+[ext_resource type="AudioStream" uid="uid://dl3it4uvj78yk" path="res://Assets/Audio/SFX  menu click.mp3" id="3_jnmi5"]
+
+[sub_resource type="LabelSettings" id="LabelSettings_4kxuq"]
+font_size = 141
+
+[node name="PauseMenu" type="CanvasLayer" unique_id=967780085]
+process_mode = 3
+script = ExtResource("1_6pfc5")
+
+[node name="ColorRect" type="ColorRect" parent="." unique_id=619308897]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_right = 128.0
+offset_bottom = 72.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0.105882354, 0.105882354, 0.105882354, 0.69803923)
+
+[node name="Label" type="Label" parent="ColorRect" unique_id=15580023]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -168.0
+offset_top = -188.0
+offset_right = 376.0
+offset_bottom = 5.0
+grow_horizontal = 2
+grow_vertical = 2
+text = "PAUSED"
+label_settings = SubResource("LabelSettings_4kxuq")
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Main" type="Control" parent="ColorRect" unique_id=204879101]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Resume" type="Button" parent="ColorRect/Main" unique_id=2126963004]
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -192.0
+offset_top = 368.0
+offset_right = 152.0
+offset_bottom = 416.0
+grow_horizontal = 2
+text = "Resume Game"
+
+[node name="Setting" type="Button" parent="ColorRect/Main" unique_id=1137472299]
+layout_mode = 0
+offset_left = 448.0
+offset_top = 424.0
+offset_right = 792.0
+offset_bottom = 472.0
+text = "Setting"
+
+[node name="MainMenu" type="Button" parent="ColorRect/Main" unique_id=996099597]
+layout_mode = 0
+offset_left = 448.0
+offset_top = 480.0
+offset_right = 792.0
+offset_bottom = 528.0
+text = "Main Menu"
+
+[node name="Button" type="Button" parent="." unique_id=1339372866]
+offset_left = 38.0
+offset_top = 32.0
+offset_right = 107.0
+offset_bottom = 113.0
+text = " II"
+
+[node name="Settings" type="Control" parent="." unique_id=2134658317]
+visible = false
+layout_mode = 3
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="TextureRect" type="TextureRect" parent="Settings" unique_id=2001079732]
+layout_mode = 0
+offset_left = 225.0
+offset_top = 12.0
+offset_right = 922.0
+offset_bottom = 836.0
+texture = ExtResource("2_jnmi5")
+
+[node name="Sound" type="Label" parent="Settings" unique_id=1250841193]
+layout_mode = 1
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = 318.0
+offset_top = 101.0
+offset_right = 461.0
+offset_bottom = 146.0
+grow_horizontal = 2
+grow_vertical = 0
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_font_sizes/font_size = 32
+text = "Sound"
+
+[node name="Decrease" type="Button" parent="Settings/Sound" unique_id=639172077]
+layout_mode = 0
+offset_left = 126.0
+offset_top = 10.0
+offset_right = 144.0
+offset_bottom = 41.0
+text = "<"
+
+[node name="Value" type="Label" parent="Settings/Sound" unique_id=618791614]
+layout_mode = 0
+offset_left = 164.0
+offset_top = 15.0
+offset_right = 204.0
+offset_bottom = 38.0
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+text = "10"
+horizontal_alignment = 1
+
+[node name="Increase" type="Button" parent="Settings/Sound" unique_id=687732226]
+layout_mode = 0
+offset_left = 217.0
+offset_top = 11.0
+offset_right = 235.0
+offset_bottom = 42.0
+text = ">"
+
+[node name="Music" type="Label" parent="Settings" unique_id=612392160]
+layout_mode = 0
+offset_left = 338.0
+offset_top = 189.0
+offset_right = 478.0
+offset_bottom = 234.0
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_font_sizes/font_size = 32
+text = "Music"
+
+[node name="Decrease" type="Button" parent="Settings/Music" unique_id=207175556]
+layout_mode = 1
+anchors_preset = 6
+anchor_left = 1.0
+anchor_top = 0.5
+anchor_right = 1.0
+anchor_bottom = 0.5
+offset_left = -18.0
+offset_top = -15.5
+offset_bottom = 15.5
+grow_horizontal = 0
+grow_vertical = 2
+text = "<"
+
+[node name="Value" type="Label" parent="Settings/Music" unique_id=1990455029]
+layout_mode = 1
+anchors_preset = 6
+anchor_left = 1.0
+anchor_top = 0.5
+anchor_right = 1.0
+anchor_bottom = 0.5
+offset_left = 24.0
+offset_top = -9.5
+offset_right = 64.0
+offset_bottom = 13.5
+grow_horizontal = 0
+grow_vertical = 2
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+text = "10"
+horizontal_alignment = 1
+
+[node name="Increase" type="Button" parent="Settings/Music" unique_id=48003183]
+layout_mode = 0
+offset_left = 219.0
+offset_top = 5.0
+offset_right = 237.0
+offset_bottom = 36.0
+text = ">"
+
+[node name="Confirm" type="Button" parent="Settings" unique_id=82557171]
+layout_mode = 0
+offset_left = 510.0
+offset_top = 582.0
+offset_right = 649.0
+offset_bottom = 613.0
+theme_override_font_sizes/font_size = 32
+text = "Confirm
+"
+
+[node name="SFX_Click" type="AudioStreamPlayer" parent="." unique_id=1348011616]
+stream = ExtResource("3_jnmi5")
+
+[connection signal="pressed" from="ColorRect/Main/Resume" to="." method="_on_resume_pressed"]
+[connection signal="pressed" from="ColorRect/Main/Setting" to="." method="_on_setting_pressed"]
+[connection signal="pressed" from="ColorRect/Main/MainMenu" to="." method="_on_main_menu_pressed"]
+[connection signal="mouse_entered" from="Button" to="." method="_on_button_mouse_entered"]
+[connection signal="mouse_exited" from="Button" to="." method="_on_button_mouse_exited"]
+[connection signal="pressed" from="Button" to="." method="_on_button_pressed"]
+[connection signal="pressed" from="Settings/Sound/Decrease" to="." method="_on_decrease_pressed"]
+[connection signal="pressed" from="Settings/Sound/Increase" to="." method="_on_increase_pressed"]
+[connection signal="pressed" from="Settings/Music/Decrease" to="." method="_on_decrease2_pressed"]
+[connection signal="pressed" from="Settings/Music/Increase" to="." method="_on_increase2_pressed"]
+[connection signal="pressed" from="Settings/Confirm" to="." method="_on_confirm_pressed"]
