@@ -1,18 +1,33 @@
-[gd_scene load_steps=4 format=3]
+[gd_scene load_steps=5 format=3]
 
 [ext_resource type="Script" path="res://NPC/patient.gd" id="1_patient"]
-[ext_resource type="PackedScene" path="res://Echo/echo.tscn" id="2_echo"]
+[ext_resource type="Texture2D" path="res://Assets/NPC/Kribo/sad.png" id="2_kribo"]
+[ext_resource type="PackedScene" path="res://Echo/echo.tscn" id="3_echo"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_click"]
+size = Vector2(200, 300)
 
 [node name="Patient" type="Node2D"]
 script = ExtResource("1_patient")
 
-[node name="Echo" parent="." instance=ExtResource("2_echo")]
-position = Vector2(0, -120)
+[node name="Sprite" type="Sprite2D" parent="."]
+scale = Vector2(3.9, 3.9)
+texture = ExtResource("2_kribo")
+
+[node name="ClickArea" type="Area2D" parent="."]
+z_index = 5
+
+[node name="ClickShape" type="CollisionShape2D" parent="ClickArea"]
+shape = SubResource("RectangleShape2D_click")
+
+[node name="Echo" parent="." instance=ExtResource("3_echo")]
+position = Vector2(0, -190)
+z_index = 2
 
 [node name="NameLabel" type="Label" parent="."]
-offset_left = -120.0
-offset_top = 50.0
-offset_right = 120.0
-offset_bottom = 76.0
+offset_left = -180.0
+offset_top = 300.0
+offset_right = 180.0
+offset_bottom = 340.0
 horizontal_alignment = 1
 text = "Pasien"

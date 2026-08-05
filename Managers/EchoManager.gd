@@ -135,6 +135,11 @@ func commit_diagnosis(chosen_emotion: Emotion.Type, chosen_schedule: GameConfig.
 		_pending_checkups.append(patient)
 
 	diagnosis_committed.emit(patient, was_correct)
+
+
+func call_next_patient() -> void:
+	if _game_over:
+		return
 	_start_next_session()
 
 

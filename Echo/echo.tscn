@@ -1,37 +1,54 @@
-[gd_scene load_steps=8 format=3]
+[gd_scene load_steps=10 format=3]
 
 [ext_resource type="Script" path="res://Echo/echo.gd" id="1_echo"]
 [ext_resource type="Script" path="res://Echo/echo_element.gd" id="2_element"]
 
+[sub_resource type="CircleShape2D" id="CircleShape2D_click"]
+radius = 80.0
+
+[sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_aura"]
+blend_mode = 1
+
 [node name="Echo" type="Node2D"]
 script = ExtResource("1_echo")
 
+[node name="Aura" type="AnimatedSprite2D" parent="."]
+position = Vector2(0, 0)
+scale = Vector2(1.2, 1.2)
+material = SubResource("CanvasItemMaterial_aura")
+
+[node name="ClickArea" type="Area2D" parent="."]
+z_index = 6
+
+[node name="ClickShape" type="CollisionShape2D" parent="ClickArea"]
+shape = SubResource("CircleShape2D_click")
+
 [node name="ElementFear" type="Node2D" parent="."]
-position = Vector2(0, -18)
+position = Vector2(0, -30)
 script = ExtResource("2_element")
 emotion = 0
 
 [node name="ElementAnger" type="Node2D" parent="."]
-position = Vector2(0, -6)
+position = Vector2(0, -30)
 script = ExtResource("2_element")
 emotion = 1
 
 [node name="ElementSadness" type="Node2D" parent="."]
-position = Vector2(0, -8)
+position = Vector2(0, -30)
 script = ExtResource("2_element")
 emotion = 2
 
 [node name="ElementGuilt" type="Node2D" parent="."]
-position = Vector2(0, -16)
+position = Vector2(0, -30)
 script = ExtResource("2_element")
 emotion = 3
 
 [node name="ElementShame" type="Node2D" parent="."]
-position = Vector2(0, -12)
+position = Vector2(0, -30)
 script = ExtResource("2_element")
 emotion = 4
 
 [node name="ElementEnvy" type="Node2D" parent="."]
-position = Vector2(0, -14)
+position = Vector2(0, -30)
 script = ExtResource("2_element")
 emotion = 5

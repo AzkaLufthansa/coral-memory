@@ -1,30 +1,45 @@
 class_name Echo2D
 extends Node2D
 
-var _fog_time := 0.0
-var _fog_color := Color(0.05, 0.05, 0.07, 0.85)
+signal echo_clicked
+
+const AURA_FRAMES_DIR := "res://Assets/Echo/Aura/Sprites/"
+const AURA_FRAME_COUNT := 25
+const AURA_FPS := 12.0
+
+var _fog_scale := 1.0
 var _elements: Dictionary = {}  # Emotion.Type -> EchoElement
 var _patient_emotion: Emotion.Type = Emotion.Type.FEAR
-var _fog_scale := 1.0
+var _inspecting := false
+var _base_position := Vector2.ZERO
+var _base_scale := Vector2.ONE
+
+@onready var aura: AnimatedSprite2D = $Aura
+@onready var click_area: Area2D = $ClickArea
 
 
 func _ready() -> void:
 	for child in get_children():
 		if child is EchoElement:
 			_elements[child.emotion] = child
+	_build_aura_animation()
+	click_area.input_event.connect(_on_clicked)
+	_base_position = position
+	_base_scale = scale
 
 
-func _process(delta: float) -> void:
-	_fog_time += delta
-	queue_redraw()
-
-
-func _draw() -> void:
-	# Kabut hitam dasar (State 0) yang berdenyut pelan
-	var radius := 34.0 * _fog_scale * (1.0 + sin(_fog_time * 1.2) * 0.04)
-	draw_circle(Vector2.ZERO, radius, _fog_color)
-	draw_circle(Vector2(6, -4), radius * 0.7, Color(_fog_color.r, _fog_color.g, _fog_color.b, _fog_color.a * 0.6))
-	draw_circle(Vector2(-8, 4), radius * 0.6, Color(_fog_color.r, _fog_color.g, _fog_color.b, _fog_color.a * 0.5))
+func _build_aura_animation() -> void:
+	var frames := SpriteFrames.new()
+	frames.add_animation("idle")
+	frames.set_animation_loop("idle", true)
+	frames.set_animation_speed("idle", AURA_FPS)
+	for i in range(1, AURA_FRAME_COUNT + 1):
+		var frame_texture := load(AURA_FRAMES_DIR + "%04d.png" % i) as Texture2D
+		if frame_texture:
+			frames.add_frame("idle", frame_texture)
+	if frames.get_frame_count("idle") > 0:
+		aura.sprite_frames = frames
+		aura.play("idle")
 
 
 func start_session(patient: PatientData) -> void:
@@ -36,7 +51,6 @@ func reset() -> void:
 	_fog_scale = 1.0
 	for element in _elements.values():
 		element.reset_reveal()
-	queue_redraw()
 
 
 func react(patient: PatientData, relevance: Topic.Relevance) -> void:
@@ -51,21 +65,49 @@ func react(patient: PatientData, relevance: Topic.Relevance) -> void:
 		Topic.Relevance.SECONDARY:
 			element.set_reveal(0.5)
 		Topic.Relevance.NEUTRAL:
-			_fog_shake()
+			pass
 		Topic.Relevance.DEFLECTIVE:
-			_fog_shrink()
-	queue_redraw()
-
-
-func _fog_shake() -> void:
-	_fog_scale = 0.97 + randf() * 0.06
-
-
-func _fog_shrink() -> void:
-	_fog_scale = 0.85
+			_fog_scale = 0.85
 
 
 func set_stability_hint(patient: PatientData) -> void:
-	# Indikator halus kondisi (tanpa angka eksplisit): kabut makin pekat jika tidak stabil.
+	# Indikator halus kondisi (tanpa angka eksplisit): aura makin pekat jika tidak stabil.
 	var instability := 1.0 - float(patient.stability) / 100.0
-	_fog_color = Color(0.05, 0.05, 0.07, 0.7 + instability * 0.3)
+	aura.modulate.a = 1.0 - instability * 0.3
+
+
+func set_inspecting(value: bool) -> void:
+	_inspecting = value
+	visible = value
+	if value:
+		# Perbesar & tampilkan di tengah layar saat diperiksa
+		position = Vector2(0, 0)
+		scale = Vector2(3.5, 3.5)
+		z_index = 20
+	else:
+		position = _base_position
+		scale = _base_scale
+		z_index = 2
+
+
+func _on_clicked(_viewport: Node, event: InputEvent, _shape_idx: int) -> void:
+	if event is InputEventMouseButton and event.pressed and event.button_index == MOUSE_BUTTON_LEFT:
+		echo_clicked.emit()
+
+
+func get_reveal_levels() -> Dictionary:
+	var out := {}
+	for emotion in _elements:
+		out[emotion] = _elements[emotion].reveal_level
+	return out
+
+
+func apply_reveal_levels(levels: Dictionary) -> void:
+	for emotion in levels:
+		var element: EchoElement = _elements.get(emotion)
+		if element:
+			element.set_reveal(levels[emotion])
+
+
+func get_patient_emotion() -> Emotion.Type:
+	return _patient_emotion

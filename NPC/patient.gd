@@ -1,23 +1,19 @@
 class_name Patient2D
 extends Node2D
 
+signal patient_clicked
+signal echo_clicked
+
 @onready var name_label: Label = $NameLabel
 @onready var echo: Echo2D = $Echo
+@onready var click_area: Area2D = $ClickArea
 
 var current_patient: PatientData = null
 
 
-func _draw() -> void:
-	# Placeholder pasien: badan sederhana
-	var color := Color(0.72, 0.66, 0.6)
-	if current_patient and current_patient.is_control_patient:
-		color = Color(0.6, 0.7, 0.78)
-	var body_points := PackedVector2Array([
-		Vector2(-20, -8), Vector2(-14, 44), Vector2(14, 44), Vector2(20, -8),
-	])
-	draw_colored_polygon(body_points, color)
-	# Kepala
-	draw_circle(Vector2(0, -24), 16.0, Color(0.9, 0.85, 0.8))
+func _ready() -> void:
+	click_area.input_event.connect(_on_patient_clicked)
+	echo.echo_clicked.connect(func() -> void: echo_clicked.emit())
 
 
 func setup(patient: PatientData) -> void:
@@ -26,7 +22,6 @@ func setup(patient: PatientData) -> void:
 	if patient.is_control_patient:
 		name_label.text += "  [KONTROL]"
 	echo.start_session(patient)
-	queue_redraw()
 
 
 func on_topic_reacted(relevance: Topic.Relevance) -> void:
@@ -35,3 +30,16 @@ func on_topic_reacted(relevance: Topic.Relevance) -> void:
 
 func update_stability_hint() -> void:
 	echo.set_stability_hint(current_patient)
+
+
+func inspect_echo() -> void:
+	echo.set_inspecting(true)
+
+
+func end_echo_inspect() -> void:
+	echo.set_inspecting(false)
+
+
+func _on_patient_clicked(_viewport: Node, event: InputEvent, _shape_idx: int) -> void:
+	if event is InputEventMouseButton and event.pressed and event.button_index == MOUSE_BUTTON_LEFT:
+		patient_clicked.emit()
