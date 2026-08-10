@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://bybp82c56gpjo"
-path="res://.godot/imported/MonitorUI.png-5e41307f0ef47044a1513fecfe04a8c1.ctex"
+uid="uid://dho28bfpu7xxy"
+path="res://.godot/imported/MonitorShadow.png-332d4431df14b2af984b8de70987fd1d.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Assets/RealAssets/MonitorUI/MonitorUI.png"
-dest_files=["res://.godot/imported/MonitorUI.png-5e41307f0ef47044a1513fecfe04a8c1.ctex"]
+source_file="res://Assets/RealAssets/Monitor/MonitorShadow.png"
+dest_files=["res://.godot/imported/MonitorShadow.png-332d4431df14b2af984b8de70987fd1d.ctex"]
 
 [params]
 
