@@ -2,6 +2,7 @@
 
 [ext_resource type="Script" uid="uid://coeler8jwj2l1" path="res://UI/game_over_screen.gd" id="1_gos"]
 [ext_resource type="Texture2D" uid="uid://bm8pssr3quxlp" path="res://Assets/UI/button.png" id="2_ftyas"]
+[ext_resource type="AudioStream" uid="uid://d1kl38618vy5x" path="res://Assets/SFX/Click-1.mp3" id="3_yjwqv"]
 
 [sub_resource type="StyleBoxTexture" id="StyleBoxTexture_ro3mb"]
 texture = ExtResource("2_ftyas")
@@ -68,3 +69,8 @@ theme_override_styles/pressed = SubResource("StyleBoxTexture_njjo1")
 theme_override_styles/hover = SubResource("StyleBoxTexture_mts6h")
 theme_override_styles/hover_pressed = SubResource("StyleBoxTexture_ai2hp")
 text = "Mulai Ulang"
+
+[node name="Click" type="AudioStreamPlayer" parent="." unique_id=1095816336]
+stream = ExtResource("3_yjwqv")
+
+[connection signal="pressed" from="Center/VBox/RestartButton" to="." method="_on_restart_button_pressed"]

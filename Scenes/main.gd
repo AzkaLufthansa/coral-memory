@@ -118,7 +118,7 @@ func _spawn_patient(patient: PatientData) -> void:
 	if patient_node:
 		patient_node.queue_free()
 	patient_node = PatientScene.instantiate()
-	patient_node.position = Vector2(576, 324)
+	patient_node.position = Vector2(576, 224)
 	patient_node.z_index = 1
 	add_child(patient_node)
 	patient_node.setup(patient)

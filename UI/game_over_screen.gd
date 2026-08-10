@@ -25,3 +25,7 @@ func show_ending(days: int) -> void:
 	title_label.modulate = Color(0.4, 0.8, 0.6)
 	detail_label.text = "Tidak ada Echo Burst selama %d hari.\nSemua pasien berhasil melalui periode kontrol." % days
 	visible = true
+
+
+func _on_restart_button_pressed():
+	$Click.play()

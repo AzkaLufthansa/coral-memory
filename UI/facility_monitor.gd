@@ -25,3 +25,7 @@ func show_monitor() -> void:
 func _on_close() -> void:
 	visible = false
 	monitor_closed.emit()
+
+
+func _on_close_button_pressed():
+	$Click.play()

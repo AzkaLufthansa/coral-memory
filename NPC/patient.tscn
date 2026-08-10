@@ -1,33 +1,41 @@
-[gd_scene load_steps=5 format=3]
+[gd_scene format=3 uid="uid://barq8f4g6gprh"]
 
-[ext_resource type="Script" path="res://NPC/patient.gd" id="1_patient"]
-[ext_resource type="Texture2D" path="res://Assets/NPC/Kribo/sad.png" id="2_kribo"]
+[ext_resource type="Script" uid="uid://cgv3a0bnpvais" path="res://NPC/patient.gd" id="1_patient"]
+[ext_resource type="Texture2D" uid="uid://by650q0g13p3l" path="res://Assets/NPC/Kribo/sad.png" id="2_kribo"]
 [ext_resource type="PackedScene" path="res://Echo/echo.tscn" id="3_echo"]
+[ext_resource type="AudioStream" uid="uid://d1kl38618vy5x" path="res://Assets/SFX/Click-1.mp3" id="4_r5pol"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_click"]
-size = Vector2(200, 300)
+size = Vector2(200, 128)
 
-[node name="Patient" type="Node2D"]
+[node name="Patient" type="Node2D" unique_id=1105038763]
 script = ExtResource("1_patient")
 
-[node name="Sprite" type="Sprite2D" parent="."]
-scale = Vector2(3.9, 3.9)
+[node name="Sprite" type="Sprite2D" parent="." unique_id=1556212521]
+position = Vector2(0, 164)
+scale = Vector2(2, 1.5)
 texture = ExtResource("2_kribo")
 
-[node name="ClickArea" type="Area2D" parent="."]
+[node name="ClickArea" type="Area2D" parent="." unique_id=1008427095]
 z_index = 5
 
-[node name="ClickShape" type="CollisionShape2D" parent="ClickArea"]
+[node name="ClickShape" type="CollisionShape2D" parent="ClickArea" unique_id=1678553417]
+position = Vector2(5, 208)
 shape = SubResource("RectangleShape2D_click")
 
-[node name="Echo" parent="." instance=ExtResource("3_echo")]
-position = Vector2(0, -190)
+[node name="Echo" parent="." unique_id=497236418 instance=ExtResource("3_echo")]
 z_index = 2
+position = Vector2(0, 49)
 
-[node name="NameLabel" type="Label" parent="."]
+[node name="NameLabel" type="Label" parent="." unique_id=1826291754]
 offset_left = -180.0
 offset_top = 300.0
 offset_right = 180.0
 offset_bottom = 340.0
-horizontal_alignment = 1
 text = "Pasien"
+horizontal_alignment = 1
+
+[node name="Click" type="AudioStreamPlayer" parent="." unique_id=792132599]
+stream = ExtResource("4_r5pol")
+
+[connection signal="echo_clicked" from="Echo" to="." method="_on_echo_echo_clicked"]

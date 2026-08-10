@@ -95,9 +95,13 @@ func _on_schedule_toggled(pressed: bool, schedule: GameConfig.Schedule) -> void:
 func _update_submit() -> void:
 	submit_button.disabled = _selected_emotion == -1 or _selected_schedule == -1
 
-
 func _on_submit_pressed() -> void:
+	$Click.play()
 	if _selected_emotion == -1 or _selected_schedule == -1:
 		return
 	hide_notebook()
 	report_submitted.emit(_selected_emotion, _selected_schedule, notes_input.text)
+
+
+func _on_close_button_pressed():
+	$Click.play()

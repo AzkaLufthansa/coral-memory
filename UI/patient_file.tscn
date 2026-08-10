@@ -5,6 +5,7 @@
 [ext_resource type="StyleBox" uid="uid://dsacgsdrhpcyg" path="res://Button_Effect/pressed.tres" id="3_0uu54"]
 [ext_resource type="StyleBox" uid="uid://b0l5doruddxuo" path="res://Button_Effect/hover.tres" id="4_kvcxo"]
 [ext_resource type="StyleBox" uid="uid://bcgsfsibr84mj" path="res://Button_Effect/hover_pressed.tres" id="5_il2yw"]
+[ext_resource type="AudioStream" uid="uid://d1kl38618vy5x" path="res://Assets/SFX/Click-1.mp3" id="6_0uu54"]
 
 [node name="PatientFile" type="PanelContainer" unique_id=884953185]
 anchors_preset = 8
@@ -67,3 +68,8 @@ theme_override_styles/pressed = ExtResource("3_0uu54")
 theme_override_styles/hover = ExtResource("4_kvcxo")
 theme_override_styles/hover_pressed = ExtResource("5_il2yw")
 text = "Tutup Berkas"
+
+[node name="Click" type="AudioStreamPlayer" parent="." unique_id=1690730612]
+stream = ExtResource("6_0uu54")
+
+[connection signal="pressed" from="Margin/VBox/CloseButton" to="." method="_on_close_button_pressed"]
