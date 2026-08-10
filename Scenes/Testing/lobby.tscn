@@ -3,7 +3,7 @@
 [ext_resource type="Texture2D" uid="uid://26876meghs4w" path="res://Assets/Background/background_front_1.png" id="1_0tr0a"]
 [ext_resource type="Script" uid="uid://s5eca12ftlt" path="res://Scripts/lobby.gd" id="1_sa736"]
 [ext_resource type="Texture2D" uid="uid://dgu2sq2tcmvno" path="res://Assets/Background/background_back_1.png" id="2_sa736"]
-[ext_resource type="PackedScene" uid="uid://be5fv78grkofx" path="res://Scenes/NPC/npc.tscn" id="3_gyrgo"]
+[ext_resource type="PackedScene" uid="uid://be5fv78grkofx" path="res://Scenes/NPC/Patient.tscn" id="3_gyrgo"]
 [ext_resource type="PackedScene" uid="uid://dfgiutyjmm0ra" path="res://Scenes/Monodialog/md_event_trigger.tscn" id="5_gyrgo"]
 [ext_resource type="PackedScene" uid="uid://ctgbe0qkspuke" path="res://Scenes/Menu/pause_menu.tscn" id="6_qn6bh"]
 

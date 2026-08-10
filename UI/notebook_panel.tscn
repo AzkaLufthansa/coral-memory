@@ -6,6 +6,7 @@
 [ext_resource type="StyleBox" uid="uid://dsacgsdrhpcyg" path="res://Button_Effect/pressed.tres" id="3_nvygb"]
 [ext_resource type="StyleBox" uid="uid://b0l5doruddxuo" path="res://Button_Effect/hover.tres" id="4_6x4qj"]
 [ext_resource type="StyleBox" uid="uid://bcgsfsibr84mj" path="res://Button_Effect/hover_pressed.tres" id="5_b546f"]
+[ext_resource type="AudioStream" uid="uid://d1kl38618vy5x" path="res://Assets/SFX/Click-1.mp3" id="7_nvygb"]
 
 [sub_resource type="StyleBoxTexture" id="StyleBoxTexture_ai2hp"]
 texture = ExtResource("2_ro3mb")
@@ -89,3 +90,8 @@ theme_override_styles/hover = ExtResource("4_6x4qj")
 theme_override_styles/hover_pressed = ExtResource("5_b546f")
 theme_override_styles/disabled = SubResource("StyleBoxTexture_ai2hp")
 text = "Submit Report"
+
+[node name="Click" type="AudioStreamPlayer" parent="." unique_id=399184345]
+stream = ExtResource("7_nvygb")
+
+[connection signal="pressed" from="Margin/VBox/HBox/CloseButton" to="." method="_on_close_button_pressed"]

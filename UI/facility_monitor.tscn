@@ -5,6 +5,7 @@
 [ext_resource type="StyleBox" uid="uid://dsacgsdrhpcyg" path="res://Button_Effect/pressed.tres" id="3_t2h3w"]
 [ext_resource type="StyleBox" uid="uid://b0l5doruddxuo" path="res://Button_Effect/hover.tres" id="4_k7e6j"]
 [ext_resource type="StyleBox" uid="uid://bcgsfsibr84mj" path="res://Button_Effect/hover_pressed.tres" id="5_11wnm"]
+[ext_resource type="AudioStream" uid="uid://d1kl38618vy5x" path="res://Assets/SFX/Click-1.mp3" id="6_t2h3w"]
 
 [node name="FacilityMonitor" type="PanelContainer" unique_id=2030928902]
 anchors_preset = 1
@@ -63,3 +64,8 @@ theme_override_styles/pressed = ExtResource("3_t2h3w")
 theme_override_styles/hover = ExtResource("4_k7e6j")
 theme_override_styles/hover_pressed = ExtResource("5_11wnm")
 text = "Tutup"
+
+[node name="Click" type="AudioStreamPlayer" parent="." unique_id=717286932]
+stream = ExtResource("6_t2h3w")
+
+[connection signal="pressed" from="Margin/VBox/CloseButton" to="." method="_on_close_button_pressed"]

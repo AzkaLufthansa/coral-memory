@@ -35,3 +35,7 @@ func show_patient(patient: PatientData) -> void:
 func _on_close() -> void:
 	visible = false
 	file_closed.emit()
+
+
+func _on_close_button_pressed():
+	$Click.play()

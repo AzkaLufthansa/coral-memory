@@ -43,3 +43,7 @@ func end_echo_inspect() -> void:
 func _on_patient_clicked(_viewport: Node, event: InputEvent, _shape_idx: int) -> void:
 	if event is InputEventMouseButton and event.pressed and event.button_index == MOUSE_BUTTON_LEFT:
 		patient_clicked.emit()
+
+
+func _on_echo_echo_clicked():
+	$Click.play()

@@ -27,3 +27,18 @@ func set_next_enabled(enabled: bool) -> void:
 	call_next_button.visible = enabled
 	call_next_button.disabled = not enabled
 	bell_button.visible = not enabled
+
+func _on_monitor_button_pressed():
+	$Click.play()
+
+func _on_bell_button_pressed():
+	$Bell.play()
+
+func _on_call_next_button_pressed():
+	$Bell.play()
+
+func _on_notebook_button_pressed():
+	$Click.play()
+
+func _on_patient_file_button_pressed():
+	$Click.play()

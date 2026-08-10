@@ -1,0 +1,7 @@
+[gd_resource type="StyleBoxTexture" format=3 uid="uid://cy4kxuwsxi2gv"]
+
+[ext_resource type="Texture2D" uid="uid://h6pvacxjnsya" path="res://Assets/RealAssets/Bell/Bell.png" id="1_5h71k"]
+
+[resource]
+texture = ExtResource("1_5h71k")
+modulate_color = Color(0.15686275, 0.15686275, 0.15686275, 1)

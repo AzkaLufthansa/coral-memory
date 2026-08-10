@@ -11,11 +11,9 @@ signal dialogue_finished
 
 var _buttons: Dictionary = {}  # Topic.Name -> Button
 
-
 func _ready() -> void:
 	_build_buttons()
 	finish_button.pressed.connect(func() -> void: dialogue_finished.emit())
-
 
 func _build_buttons() -> void:
 	for topic in Topic.ALL_TOPICS:
@@ -49,6 +47,6 @@ func show_response(patient: PatientData, topic: Topic.Name) -> void:
 func close_dialogue() -> void:
 	visible = false
 
-
 func _on_topic_pressed(topic: Topic.Name) -> void:
 	topic_selected.emit(topic)
+	

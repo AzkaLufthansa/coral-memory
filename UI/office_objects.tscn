@@ -1,70 +1,126 @@
 [gd_scene format=3 uid="uid://dj536rmd55yu1"]
 
 [ext_resource type="Script" uid="uid://bsvrtlh5slx0s" path="res://UI/office_objects.gd" id="1_office"]
-[ext_resource type="StyleBox" uid="uid://bmsl2ivdeekss" path="res://Button_Effect/normal.tres" id="2_nfp11"]
-[ext_resource type="StyleBox" uid="uid://dsacgsdrhpcyg" path="res://Button_Effect/pressed.tres" id="3_r4dh2"]
-[ext_resource type="StyleBox" uid="uid://b0l5doruddxuo" path="res://Button_Effect/hover.tres" id="4_l2lbq"]
-[ext_resource type="StyleBox" uid="uid://bcgsfsibr84mj" path="res://Button_Effect/hover_pressed.tres" id="5_px13u"]
+[ext_resource type="Texture2D" uid="uid://bmxe7jj07vn46" path="res://Assets/RealAssets/GuideBook/Guidebook.png" id="2_l2lbq"]
+[ext_resource type="Texture2D" uid="uid://cmr6ih5tjwx2h" path="res://Assets/RealAssets/Uninteractable Obj/Keyboard & Mouse/Keyboard & Mouse.png" id="2_yqv5m"]
+[ext_resource type="Texture2D" uid="uid://diomw70j6gk0a" path="res://Assets/RealAssets/Uninteractable Obj/Scattered Papers/Scattered Papers.png" id="3_b5ntf"]
+[ext_resource type="Texture2D" uid="uid://bf1l8gawb1h7s" path="res://Assets/RealAssets/GuideBook/Highlighted Guidebook.png" id="3_px13u"]
+[ext_resource type="Texture2D" uid="uid://c81j7is4frric" path="res://Assets/RealAssets/Uninteractable Obj/Pen Holder/Pen Holder.png" id="3_x1tq2"]
+[ext_resource type="Texture2D" uid="uid://cny7uev5j58p7" path="res://Assets/RealAssets/Uninteractable Obj/Tea Cup/Flattened.png" id="4_ngtvf"]
+[ext_resource type="Texture2D" uid="uid://7xo5g8fbeo52" path="res://Assets/RealAssets/Monitor/Monitor.png" id="6_s847r"]
+[ext_resource type="Texture2D" uid="uid://82bh6anu05lf" path="res://Assets/RealAssets/Monitor/Highlighted Monitor.png" id="7_lsof3"]
+[ext_resource type="StyleBox" uid="uid://d4b55f34q2q2o" path="res://Button_Effect/bell_normal.tres" id="10_x1tq2"]
+[ext_resource type="StyleBox" uid="uid://cy4kxuwsxi2gv" path="res://Button_Effect/bell_pressed.tres" id="11_ngtvf"]
+[ext_resource type="StyleBox" uid="uid://cfrsxyrygurp0" path="res://Button_Effect/bell_hover.tres" id="12_iq73t"]
+[ext_resource type="AudioStream" uid="uid://d1kl38618vy5x" path="res://Assets/SFX/Click-1.mp3" id="13_x1tq2"]
+[ext_resource type="AudioStream" uid="uid://boelhygo1gn0v" path="res://Assets/SFX/bell.mp3" id="14_ngtvf"]
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_yvsax"]
+texture = ExtResource("3_b5ntf")
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_65xwo"]
+texture = ExtResource("3_b5ntf")
+modulate_color = Color(0.15686275, 0.15686275, 0.15686275, 1)
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_15ghf"]
+texture = ExtResource("3_b5ntf")
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_62yky"]
+texture = ExtResource("2_l2lbq")
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_r8qnq"]
+texture = ExtResource("2_l2lbq")
+modulate_color = Color(0.15686275, 0.15686275, 0.15686275, 1)
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_6vnta"]
+texture = ExtResource("3_px13u")
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_bkrp2"]
+texture = ExtResource("6_s847r")
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_1b60r"]
+texture = ExtResource("6_s847r")
+modulate_color = Color(0.15686275, 0.15686275, 0.15686275, 1)
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_mxnwc"]
+texture = ExtResource("7_lsof3")
 
 [node name="OfficeObjects" type="CanvasLayer" unique_id=1786024609]
 script = ExtResource("1_office")
 
+[node name="Keyboard" type="Sprite2D" parent="." unique_id=592251209]
+position = Vector2(248, 580)
+scale = Vector2(0.5852018, 0.7075472)
+texture = ExtResource("2_yqv5m")
+
+[node name="PenHolder" type="Sprite2D" parent="." unique_id=590561231]
+position = Vector2(327, 506)
+scale = Vector2(0.5852018, 0.7075472)
+texture = ExtResource("3_x1tq2")
+
+[node name="TeaCup" type="Sprite2D" parent="." unique_id=709822680]
+position = Vector2(824, 581)
+scale = Vector2(0.5852018, 0.7075472)
+texture = ExtResource("4_ngtvf")
+
 [node name="PatientFileButton" type="Button" parent="." unique_id=713099942]
 unique_name_in_owner = true
-offset_left = 220.0
-offset_top = 540.0
-offset_right = 360.0
-offset_bottom = 600.0
-theme_override_styles/normal = ExtResource("2_nfp11")
-theme_override_styles/pressed = ExtResource("3_r4dh2")
-theme_override_styles/hover = ExtResource("4_l2lbq")
-theme_override_styles/hover_pressed = ExtResource("5_px13u")
-text = "Berkas Pasien"
+offset_left = 56.0
+offset_top = 552.0
+offset_right = 133.0
+offset_bottom = 633.0
+theme_override_styles/normal = SubResource("StyleBoxTexture_yvsax")
+theme_override_styles/pressed = SubResource("StyleBoxTexture_65xwo")
+theme_override_styles/hover = SubResource("StyleBoxTexture_15ghf")
 
 [node name="NotebookButton" type="Button" parent="." unique_id=1227294797]
 unique_name_in_owner = true
-offset_left = 390.0
-offset_top = 540.0
-offset_right = 530.0
-offset_bottom = 600.0
-theme_override_styles/normal = ExtResource("2_nfp11")
-theme_override_styles/pressed = ExtResource("3_r4dh2")
-theme_override_styles/hover = ExtResource("4_l2lbq")
-theme_override_styles/hover_pressed = ExtResource("5_px13u")
-text = "Notebook"
+offset_left = 801.0
+offset_top = 481.0
+offset_right = 941.0
+offset_bottom = 541.0
+theme_override_styles/normal = SubResource("StyleBoxTexture_62yky")
+theme_override_styles/pressed = SubResource("StyleBoxTexture_r8qnq")
+theme_override_styles/hover = SubResource("StyleBoxTexture_6vnta")
 
 [node name="MonitorButton" type="Button" parent="." unique_id=1289849380]
 unique_name_in_owner = true
-offset_left = 560.0
-offset_top = 540.0
-offset_right = 700.0
-offset_bottom = 600.0
-theme_override_styles/normal = ExtResource("2_nfp11")
-theme_override_styles/pressed = ExtResource("3_r4dh2")
-theme_override_styles/hover = ExtResource("4_l2lbq")
-theme_override_styles/hover_pressed = ExtResource("5_px13u")
-text = "Monitor"
+offset_left = 121.0
+offset_top = 406.0
+offset_right = 288.0
+offset_bottom = 565.0
+theme_override_styles/normal = SubResource("StyleBoxTexture_bkrp2")
+theme_override_styles/pressed = SubResource("StyleBoxTexture_1b60r")
+theme_override_styles/hover = SubResource("StyleBoxTexture_mxnwc")
 
 [node name="BellButton" type="Button" parent="." unique_id=1183430241]
 unique_name_in_owner = true
-offset_left = 730.0
-offset_top = 540.0
-offset_right = 890.0
-offset_bottom = 600.0
-theme_override_styles/normal = ExtResource("2_nfp11")
-theme_override_styles/pressed = ExtResource("3_r4dh2")
-theme_override_styles/hover = ExtResource("4_l2lbq")
-theme_override_styles/hover_pressed = ExtResource("5_px13u")
-text = "Bel (Panggil Pasien)"
+offset_left = 913.0
+offset_top = 551.0
+offset_right = 996.0
+offset_bottom = 611.0
+theme_override_styles/normal = ExtResource("10_x1tq2")
+theme_override_styles/pressed = ExtResource("11_ngtvf")
+theme_override_styles/hover = ExtResource("12_iq73t")
 
 [node name="CallNextButton" type="Button" parent="." unique_id=1868204755]
 unique_name_in_owner = true
-offset_left = 730.0
-offset_top = 540.0
-offset_right = 920.0
-offset_bottom = 600.0
-theme_override_styles/normal = ExtResource("2_nfp11")
-theme_override_styles/pressed = ExtResource("3_r4dh2")
-theme_override_styles/hover = ExtResource("4_l2lbq")
-theme_override_styles/hover_pressed = ExtResource("5_px13u")
-text = "Panggil Pasien Berikutnya"
+offset_left = 914.0
+offset_top = 550.0
+offset_right = 994.0
+offset_bottom = 610.0
+theme_override_styles/normal = ExtResource("10_x1tq2")
+theme_override_styles/pressed = ExtResource("11_ngtvf")
+theme_override_styles/hover = ExtResource("12_iq73t")
+
+[node name="Click" type="AudioStreamPlayer" parent="." unique_id=197186495]
+stream = ExtResource("13_x1tq2")
+
+[node name="Bell" type="AudioStreamPlayer" parent="." unique_id=204990225]
+stream = ExtResource("14_ngtvf")
+
+[connection signal="pressed" from="PatientFileButton" to="." method="_on_patient_file_button_pressed"]
+[connection signal="pressed" from="NotebookButton" to="." method="_on_notebook_button_pressed"]
+[connection signal="pressed" from="MonitorButton" to="." method="_on_monitor_button_pressed"]
+[connection signal="pressed" from="BellButton" to="." method="_on_bell_button_pressed"]
+[connection signal="pressed" from="CallNextButton" to="." method="_on_call_next_button_pressed"]
