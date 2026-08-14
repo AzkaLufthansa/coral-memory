@@ -17,6 +17,8 @@ texture = ExtResource("1_8h4xe")
 
 [sub_resource type="StyleBoxTexture" id="StyleBoxTexture_qwqyf"]
 
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_r8qnq"]
+
 [node name="GuideBook" type="PanelContainer" unique_id=1256934643]
 offset_left = 78.0
 offset_top = 50.0
@@ -72,7 +74,7 @@ text = "Lorem Ipsum dolor sit amet"
 [node name="ButtonOverlay" type="Control" parent="PanelContainer" unique_id=1646209552]
 layout_mode = 2
 
-[node name="Button" type="Button" parent="PanelContainer/ButtonOverlay" unique_id=845161732]
+[node name="NextButton" type="Button" parent="PanelContainer/ButtonOverlay" unique_id=845161732]
 layout_mode = 1
 anchors_preset = -1
 anchor_right = 0.024
@@ -85,6 +87,15 @@ theme_override_styles/normal = SubResource("StyleBoxTexture_4kxuq")
 theme_override_styles/pressed = SubResource("StyleBoxTexture_62yky")
 theme_override_styles/hover = SubResource("StyleBoxTexture_6vnta")
 theme_override_styles/hover_pressed = SubResource("StyleBoxTexture_qwqyf")
+
+[node name="CloseButton" type="Button" parent="PanelContainer/ButtonOverlay" unique_id=2106095874]
+layout_mode = 0
+offset_left = 746.0
+offset_top = 122.0
+offset_right = 766.0
+offset_bottom = 145.0
+theme_override_styles/normal = SubResource("StyleBoxTexture_r8qnq")
+text = "X"
 
 [node name="Paper" type="AudioStreamPlayer" parent="." unique_id=1150721581]
 stream = ExtResource("3_ihng2")

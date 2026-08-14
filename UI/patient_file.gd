@@ -1,4 +1,4 @@
-extends PanelContainer
+extends Control
 
 signal file_closed
 
@@ -10,27 +10,42 @@ signal file_closed
 @onready var day_label: Label = %DayLabel
 @onready var session_label: Label = %SessionLabel
 @onready var remaining_label: Label = %RemainingLabel
+@onready var notes_label: Label = %NotesLabel
 
-# Node navigasi jadwal (Diambil berdasarkan path karena belum menggunakan tanda %)
-@onready var page1: GridContainer = %ScheduleContent.get_node("MarginContainer/Page1")
-@onready var page2: GridContainer = %ScheduleContent.get_node("MarginContainer/Page2")
-@onready var left_arrow: Button = %ScheduleContent.get_node("LeftArrowButton")
+# --- NODE PATH JADWAL ---
+@onready var page1: Control = %ScheduleContent.get_node("Page1")
+@onready var page2: Control = %ScheduleContent.get_node("Page2")
+@onready var left_arrow: Button = page2.get_node("LeftArrowButton")
 @onready var right_arrow: Button = %ScheduleContent.get_node("RightArrowButton")
 
 
+@onready var patient_info_elements: Array = [
+	name_label, usia_label, job_label, rujukan_label, 
+	visits_label, notes_label, $Logo]
+
+
 func _ready() -> void:
-	%CloseButton.pressed.connect(func() -> void: file_closed.emit())
+	if not %CloseButton.pressed.is_connected(_on_close_button_pressed):
+		%CloseButton.pressed.connect(_on_close_button_pressed)
+		
+	if not $ScheduleButton.pressed.is_connected(_on_schedule_button_pressed):
+		$ScheduleButton.pressed.connect(_on_schedule_button_pressed)
+		
+	if not $PatientButton.pressed.is_connected(_on_patient_button_pressed):
+		$PatientButton.pressed.connect(_on_patient_button_pressed)
 	
-	# Hubungkan sinyal panah kiri dan kanan (jika belum dihubungkan via editor UI)
-	left_arrow.pressed.connect(_on_left_arrow_pressed)
-	right_arrow.pressed.connect(_on_right_arrow_pressed)
+	if not left_arrow.pressed.is_connected(_on_left_arrow_pressed):
+		left_arrow.pressed.connect(_on_left_arrow_pressed)
+		
+	if not right_arrow.pressed.is_connected(_on_right_arrow_pressed):
+		right_arrow.pressed.connect(_on_right_arrow_pressed)
 
 
 func show_patient(patient: PatientData) -> void:
-	name_label.text = "Nama: %s\n" % patient.display_name
-	usia_label.text = "Usia: %d\n" % [patient.age]
-	job_label.text = "Pekerjaan: %s\n" % [patient.profession]
-	rujukan_label.text = "Alasan Rujukan: %s\n" % [patient.referral_reason]
+	name_label.text = "Nama: %s" % patient.display_name
+	usia_label.text = "Usia: %d" % [patient.age]
+	job_label.text = "Pekerjaan: %s" % [patient.profession]
+	rujukan_label.text = "Alasan Rujukan: %s" % [patient.referral_reason]
 	
 	var visit_count := patient.diagnosis_history.size()
 	var visit_text := str(visit_count) if visit_count > 0 else "Pasien baru (belum pernah diperiksa)"
@@ -47,13 +62,11 @@ func show_patient(patient: PatientData) -> void:
 	
 	# --- RESET TAMPILAN AWAL SAAT BERKAS DIBUKA ---
 	# 1. Pastikan selalu membuka tab Informasi Pasien
-	%PatientContent.show()
-	%ScheduleContent.hide()
+	_show_patient_tab()
 	
 	# 2. Pastikan jadwal selalu mulai dari Halaman 1
 	page1.show()
-	page2.hide()
-	left_arrow.hide() # Sembunyikan panah kiri karena di awal (hal 1) tidak bisa mundur
+	page2.hide() # Otomatis menyembunyikan left_arrow juga
 	right_arrow.show()
 	
 	visible = true
@@ -65,41 +78,53 @@ func _on_close() -> void:
 
 
 func _on_close_button_pressed() -> void:
-	$Click.play()
+	_play_click()
 	_on_close()
 
 
 # --- FUNGSI TAB ---
 
 func _on_schedule_button_pressed() -> void:
-	$Click.play()
+	_play_click()
 	%ScheduleContent.show()
-	%PatientContent.hide() # Menyembunyikan Info Pasien
+	$Monitor2.hide() # Sembunyikan monitor utama
+	# Sembunyikan elemen informasi pasien satu per satu
+	for element in patient_info_elements:
+		if element:
+			element.hide()
 
 
 func _on_patient_button_pressed() -> void:
-	$Click.play()
-	%PatientContent.show() # Menampilkan Info Pasien
+	_play_click()
+	_show_patient_tab()
+
+
+func _show_patient_tab() -> void:
 	%ScheduleContent.hide()
+	$Monitor2.show() # Tampilkan kembali monitor utama
+	# Tampilkan kembali elemen informasi pasien
+	for element in patient_info_elements:
+		if element:
+			element.show()
 
 
 # --- FUNGSI NAVIGASI JADWAL (PAGINASI) ---
 
 func _on_right_arrow_pressed() -> void:
-	$Click.play()
-	# Pindah ke halaman 2
+	_play_click()
 	page1.hide()
-	page2.show()
-	# Tampilkan panah kiri, sembunyikan panah kanan
+	page2.show() # Otomatis menampilkan left_arrow
 	right_arrow.hide()
-	left_arrow.show()
 
 
 func _on_left_arrow_pressed() -> void:
-	$Click.play()
-	# Kembali ke halaman 1
-	page2.hide()
+	_play_click()
+	page2.hide() # Otomatis menyembunyikan left_arrow
 	page1.show()
-	# Sembunyikan panah kiri, tampilkan panah kanan
-	left_arrow.hide()
 	right_arrow.show()
+
+
+# Fungsi helper untuk suara klik agar aman jika node Click tidak sengaja terhapus
+func _play_click() -> void:
+	if has_node("Click"):
+		$Click.play()

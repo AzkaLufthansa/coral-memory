@@ -1,501 +1,763 @@
 [gd_scene format=3 uid="uid://n5xf1m1oxxqq"]
 
 [ext_resource type="Script" uid="uid://cpk2qdg60m48w" path="res://UI/patient_file.gd" id="1_file"]
+[ext_resource type="Texture2D" uid="uid://c1740rneenedj" path="res://Assets/RealAssets/MonitorUI/Monitor/Tab - Patient Information.png" id="2_bq4h4"]
 [ext_resource type="StyleBox" uid="uid://bmsl2ivdeekss" path="res://Button_Effect/normal.tres" id="2_heg3a"]
-[ext_resource type="Texture2D" uid="uid://cow43iwvtyuy3" path="res://Assets/RealAssets/MonitorUI/Monitor UI.png" id="2_kvcxo"]
 [ext_resource type="StyleBox" uid="uid://dsacgsdrhpcyg" path="res://Button_Effect/pressed.tres" id="3_0uu54"]
 [ext_resource type="Texture2D" uid="uid://bm8pssr3quxlp" path="res://Assets/UI/button.png" id="3_bq4h4"]
 [ext_resource type="Texture2D" uid="uid://by650q0g13p3l" path="res://Assets/NPC/Kribo/sad.png" id="3_il2yw"]
 [ext_resource type="StyleBox" uid="uid://b0l5doruddxuo" path="res://Button_Effect/hover.tres" id="4_kvcxo"]
 [ext_resource type="StyleBox" uid="uid://bcgsfsibr84mj" path="res://Button_Effect/hover_pressed.tres" id="5_il2yw"]
 [ext_resource type="AudioStream" uid="uid://d1kl38618vy5x" path="res://Assets/SFX/Click-1.mp3" id="6_0uu54"]
+[ext_resource type="Texture2D" uid="uid://dx56ct5ayqsra" path="res://Assets/RealAssets/MonitorUI/Monitor/Tab - Schedule 1.png" id="9_hgnhh"]
+[ext_resource type="Texture2D" uid="uid://d1xrkrsaxihvx" path="res://Assets/RealAssets/MonitorUI/Monitor/Tab - Schedule 2.png" id="10_m1tw1"]
 
-[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_7wd2l"]
-texture = ExtResource("2_kvcxo")
-expand_margin_bottom = 60.0
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_mti6b"]
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_4kxuq"]
 
 [sub_resource type="StyleBoxTexture" id="StyleBoxTexture_il2yw"]
 texture = ExtResource("3_bq4h4")
 region_rect = Rect2(447.5, 145, 182, 78)
 
-[node name="PatientFile" type="PanelContainer" unique_id=884953185]
+[node name="PatientFile" type="Control" unique_id=1025181158]
+layout_mode = 3
 anchors_preset = 8
 anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
-offset_left = -256.0
-offset_top = -135.0
-offset_right = 224.0
-offset_bottom = 265.0
+offset_left = -380.0
+offset_top = -272.0
+offset_right = 100.0
+offset_bottom = 287.0
 grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("1_file")
 
-[node name="Monitor" type="PanelContainer" parent="." unique_id=1742922322]
-layout_mode = 2
-theme_override_styles/panel = SubResource("StyleBoxTexture_7wd2l")
+[node name="Monitor2" type="TextureRect" parent="." unique_id=1493695395]
+layout_mode = 0
+offset_right = 847.0
+offset_bottom = 593.0
+texture = ExtResource("2_bq4h4")
 
-[node name="Margin" type="MarginContainer" parent="Monitor" unique_id=356063425]
-layout_mode = 2
-theme_override_constants/margin_left = 20
-theme_override_constants/margin_top = 16
-theme_override_constants/margin_right = 20
-theme_override_constants/margin_bottom = 40
-
-[node name="VBox" type="VBoxContainer" parent="Monitor/Margin" unique_id=1904761986]
-layout_mode = 2
-
-[node name="Title" type="Label" parent="Monitor/Margin/VBox" unique_id=525640017]
-layout_mode = 2
+[node name="Title" type="Label" parent="." unique_id=525640017]
+layout_mode = 0
+offset_left = 47.0
+offset_top = 42.0
+offset_right = 527.0
+offset_bottom = 65.0
 text = "PATIENT EXAMINATION MANAGEMENT"
 
-[node name="HBoxContainer" type="HBoxContainer" parent="Monitor/Margin/VBox" unique_id=570550098]
-layout_mode = 2
+[node name="Logo" type="TextureRect" parent="." unique_id=1701558755]
+custom_minimum_size = Vector2(149.455, 150)
+layout_mode = 0
+offset_left = 87.0
+offset_top = 161.0
+offset_right = 268.0
+offset_bottom = 345.0
+texture = ExtResource("3_il2yw")
+expand_mode = 1
 
-[node name="PatientButton" type="Button" parent="Monitor/Margin/VBox/HBoxContainer" unique_id=614596904]
-layout_mode = 2
-theme_override_styles/normal = ExtResource("2_heg3a")
-theme_override_styles/pressed = ExtResource("3_0uu54")
-theme_override_styles/hover = ExtResource("4_kvcxo")
-theme_override_styles/disabled = SubResource("StyleBoxTexture_il2yw")
-text = "Patient Information"
-
-[node name="ScheduleButton" type="Button" parent="Monitor/Margin/VBox/HBoxContainer" unique_id=929161621]
-layout_mode = 2
-theme_override_styles/normal = ExtResource("2_heg3a")
-theme_override_styles/pressed = ExtResource("3_0uu54")
-theme_override_styles/hover = ExtResource("4_kvcxo")
-theme_override_styles/hover_pressed = ExtResource("5_il2yw")
-text = "Schedule"
-
-[node name="PatientContent" type="VBoxContainer" parent="Monitor/Margin/VBox" unique_id=508735301]
+[node name="NameLabel" type="Label" parent="." unique_id=393390081]
 unique_name_in_owner = true
-layout_mode = 2
+layout_mode = 0
+offset_left = 320.0
+offset_top = 160.0
+offset_right = 503.0
+offset_bottom = 183.0
 
-[node name="HBoxContainer" type="HBoxContainer" parent="Monitor/Margin/VBox/PatientContent" unique_id=1387846474]
-layout_mode = 2
-
-[node name="TextureRect" type="TextureRect" parent="Monitor/Margin/VBox/PatientContent/HBoxContainer" unique_id=1701558755]
-layout_mode = 2
-texture = ExtResource("3_il2yw")
-
-[node name="VBoxContainer" type="VBoxContainer" parent="Monitor/Margin/VBox/PatientContent/HBoxContainer" unique_id=2108828989]
-layout_mode = 2
-
-[node name="NameLabel" type="Label" parent="Monitor/Margin/VBox/PatientContent/HBoxContainer/VBoxContainer" unique_id=393390081]
+[node name="UsiaLabel" type="Label" parent="." unique_id=838819508]
 unique_name_in_owner = true
-layout_mode = 2
+layout_mode = 0
+offset_left = 322.0
+offset_top = 193.0
+offset_right = 541.0
+offset_bottom = 216.0
 
-[node name="UsiaLabel" type="Label" parent="Monitor/Margin/VBox/PatientContent/HBoxContainer/VBoxContainer" unique_id=838819508]
+[node name="PekerjaanLabel" type="Label" parent="." unique_id=1171370219]
 unique_name_in_owner = true
-layout_mode = 2
-autowrap_mode = 2
+layout_mode = 0
+offset_left = 321.0
+offset_top = 227.0
+offset_right = 474.0
+offset_bottom = 250.0
 
-[node name="PekerjaanLabel" type="Label" parent="Monitor/Margin/VBox/PatientContent/HBoxContainer/VBoxContainer" unique_id=1171370219]
+[node name="RujukanLabel" type="Label" parent="." unique_id=1891606527]
 unique_name_in_owner = true
-layout_mode = 2
-autowrap_mode = 2
+layout_mode = 0
+offset_left = 325.0
+offset_top = 266.0
+offset_right = 538.0
+offset_bottom = 289.0
 
-[node name="RujukanLabel" type="Label" parent="Monitor/Margin/VBox/PatientContent/HBoxContainer/VBoxContainer" unique_id=1891606527]
+[node name="VisitsLabel" type="Label" parent="." unique_id=599097772]
 unique_name_in_owner = true
-layout_mode = 2
-autowrap_mode = 3
+layout_mode = 0
+offset_left = 324.0
+offset_top = 305.0
+offset_right = 423.0
+offset_bottom = 328.0
 
-[node name="VisitsLabel" type="Label" parent="Monitor/Margin/VBox/PatientContent/HBoxContainer/VBoxContainer" unique_id=599097772]
+[node name="DayLabel" type="Label" parent="." unique_id=1792604302]
 unique_name_in_owner = true
-layout_mode = 2
+layout_mode = 0
+offset_left = 72.0
+offset_top = 394.0
+offset_right = 123.0
+offset_bottom = 417.0
 
-[node name="ScheduleContent" type="HBoxContainer" parent="Monitor/Margin/VBox" unique_id=1472447431]
+[node name="SessionLabel" type="Label" parent="." unique_id=400180062]
 unique_name_in_owner = true
-visible = false
-layout_mode = 2
+layout_mode = 0
+offset_left = 68.0
+offset_top = 426.0
+offset_right = 126.0
+offset_bottom = 449.0
 
-[node name="LeftArrowButton" type="Button" parent="Monitor/Margin/VBox/ScheduleContent" unique_id=1445848924]
-layout_mode = 2
-text = "<"
+[node name="RemainingLabel" type="Label" parent="." unique_id=671590851]
+unique_name_in_owner = true
+layout_mode = 0
+offset_left = 65.0
+offset_top = 457.0
+offset_right = 131.0
+offset_bottom = 480.0
 
-[node name="MarginContainer" type="MarginContainer" parent="Monitor/Margin/VBox/ScheduleContent" unique_id=680400413]
-layout_mode = 2
+[node name="NotesLabel" type="Label" parent="." unique_id=508213817]
+unique_name_in_owner = true
+layout_mode = 0
+offset_left = 19.0
+offset_top = 471.0
+offset_right = 435.0
+offset_bottom = 494.0
 
-[node name="Page1" type="GridContainer" parent="Monitor/Margin/VBox/ScheduleContent/MarginContainer" unique_id=1957678202]
-layout_mode = 2
-columns = 2
-
-[node name="VBoxDay1" type="VBoxContainer" parent="Monitor/Margin/VBox/ScheduleContent/MarginContainer/Page1" unique_id=1349557681]
-custom_minimum_size = Vector2(40, 40)
-layout_mode = 2
-
-[node name="HariLabel" type="Label" parent="Monitor/Margin/VBox/ScheduleContent/MarginContainer/Page1/VBoxDay1" unique_id=1371046954]
-layout_mode = 2
-text = "Day 1"
-
-[node name="HBoxContainer" type="HBoxContainer" parent="Monitor/Margin/VBox/ScheduleContent/MarginContainer/Page1/VBoxDay1" unique_id=1708534432]
-layout_mode = 2
-
-[node name="Slot1" type="TextureRect" parent="Monitor/Margin/VBox/ScheduleContent/MarginContainer/Page1/VBoxDay1/HBoxContainer" unique_id=1916358710]
-custom_minimum_size = Vector2(40, 40)
-layout_mode = 2
-texture = ExtResource("3_il2yw")
-expand_mode = 1
-stretch_mode = 5
-
-[node name="Slot2" type="TextureRect" parent="Monitor/Margin/VBox/ScheduleContent/MarginContainer/Page1/VBoxDay1/HBoxContainer" unique_id=1471581814]
-custom_minimum_size = Vector2(40, 40)
-layout_mode = 2
-texture = ExtResource("3_il2yw")
-expand_mode = 1
-stretch_mode = 5
-
-[node name="Slot3" type="TextureRect" parent="Monitor/Margin/VBox/ScheduleContent/MarginContainer/Page1/VBoxDay1/HBoxContainer" unique_id=357295522]
-custom_minimum_size = Vector2(40, 40)
-layout_mode = 2
-texture = ExtResource("3_il2yw")
-expand_mode = 1
-stretch_mode = 5
-
-[node name="Slot4" type="TextureRect" parent="Monitor/Margin/VBox/ScheduleContent/MarginContainer/Page1/VBoxDay1/HBoxContainer" unique_id=808888205]
-custom_minimum_size = Vector2(40, 40)
-layout_mode = 2
-texture = ExtResource("3_il2yw")
-expand_mode = 1
-stretch_mode = 5
-
-[node name="Slot5" type="TextureRect" parent="Monitor/Margin/VBox/ScheduleContent/MarginContainer/Page1/VBoxDay1/HBoxContainer" unique_id=1286088930]
-custom_minimum_size = Vector2(40, 40)
-layout_mode = 2
-texture = ExtResource("3_il2yw")
-expand_mode = 1
-stretch_mode = 5
-
-[node name="VBoxDay2" type="VBoxContainer" parent="Monitor/Margin/VBox/ScheduleContent/MarginContainer/Page1" unique_id=1277408654]
-custom_minimum_size = Vector2(40, 40)
-layout_mode = 2
-
-[node name="HariLabel" type="Label" parent="Monitor/Margin/VBox/ScheduleContent/MarginContainer/Page1/VBoxDay2" unique_id=730761463]
-layout_mode = 2
-text = "Day 2"
-
-[node name="HBoxContainer" type="HBoxContainer" parent="Monitor/Margin/VBox/ScheduleContent/MarginContainer/Page1/VBoxDay2" unique_id=806404361]
-layout_mode = 2
-
-[node name="Slot1" type="TextureRect" parent="Monitor/Margin/VBox/ScheduleContent/MarginContainer/Page1/VBoxDay2/HBoxContainer" unique_id=325338476]
-custom_minimum_size = Vector2(40, 40)
-layout_mode = 2
-texture = ExtResource("3_il2yw")
-expand_mode = 1
-stretch_mode = 5
-
-[node name="Slot2" type="TextureRect" parent="Monitor/Margin/VBox/ScheduleContent/MarginContainer/Page1/VBoxDay2/HBoxContainer" unique_id=697811835]
-custom_minimum_size = Vector2(40, 40)
-layout_mode = 2
-texture = ExtResource("3_il2yw")
-expand_mode = 1
-stretch_mode = 5
-
-[node name="Slot3" type="TextureRect" parent="Monitor/Margin/VBox/ScheduleContent/MarginContainer/Page1/VBoxDay2/HBoxContainer" unique_id=996311543]
-custom_minimum_size = Vector2(40, 40)
-layout_mode = 2
-texture = ExtResource("3_il2yw")
-expand_mode = 1
-stretch_mode = 5
-
-[node name="Slot4" type="TextureRect" parent="Monitor/Margin/VBox/ScheduleContent/MarginContainer/Page1/VBoxDay2/HBoxContainer" unique_id=345159313]
-custom_minimum_size = Vector2(40, 40)
-layout_mode = 2
-texture = ExtResource("3_il2yw")
-expand_mode = 1
-stretch_mode = 5
-
-[node name="Slot5" type="TextureRect" parent="Monitor/Margin/VBox/ScheduleContent/MarginContainer/Page1/VBoxDay2/HBoxContainer" unique_id=1076194702]
-custom_minimum_size = Vector2(40, 40)
-layout_mode = 2
-texture = ExtResource("3_il2yw")
-expand_mode = 1
-stretch_mode = 5
-
-[node name="VBoxDay3" type="VBoxContainer" parent="Monitor/Margin/VBox/ScheduleContent/MarginContainer/Page1" unique_id=820483732]
-custom_minimum_size = Vector2(40, 40)
-layout_mode = 2
-
-[node name="HariLabel" type="Label" parent="Monitor/Margin/VBox/ScheduleContent/MarginContainer/Page1/VBoxDay3" unique_id=2130609339]
-layout_mode = 2
-text = "Day 3"
-
-[node name="HBoxContainer" type="HBoxContainer" parent="Monitor/Margin/VBox/ScheduleContent/MarginContainer/Page1/VBoxDay3" unique_id=1956610993]
-layout_mode = 2
-
-[node name="Slot1" type="TextureRect" parent="Monitor/Margin/VBox/ScheduleContent/MarginContainer/Page1/VBoxDay3/HBoxContainer" unique_id=2076222805]
-custom_minimum_size = Vector2(40, 40)
-layout_mode = 2
-texture = ExtResource("3_il2yw")
-expand_mode = 1
-stretch_mode = 5
-
-[node name="Slot2" type="TextureRect" parent="Monitor/Margin/VBox/ScheduleContent/MarginContainer/Page1/VBoxDay3/HBoxContainer" unique_id=2012665072]
-custom_minimum_size = Vector2(40, 40)
-layout_mode = 2
-texture = ExtResource("3_il2yw")
-expand_mode = 1
-stretch_mode = 5
-
-[node name="Slot3" type="TextureRect" parent="Monitor/Margin/VBox/ScheduleContent/MarginContainer/Page1/VBoxDay3/HBoxContainer" unique_id=1435044658]
-custom_minimum_size = Vector2(40, 40)
-layout_mode = 2
-texture = ExtResource("3_il2yw")
-expand_mode = 1
-stretch_mode = 5
-
-[node name="Slot4" type="TextureRect" parent="Monitor/Margin/VBox/ScheduleContent/MarginContainer/Page1/VBoxDay3/HBoxContainer" unique_id=571943375]
-custom_minimum_size = Vector2(40, 40)
-layout_mode = 2
-texture = ExtResource("3_il2yw")
-expand_mode = 1
-stretch_mode = 5
-
-[node name="Slot5" type="TextureRect" parent="Monitor/Margin/VBox/ScheduleContent/MarginContainer/Page1/VBoxDay3/HBoxContainer" unique_id=1171352505]
-custom_minimum_size = Vector2(40, 40)
-layout_mode = 2
-texture = ExtResource("3_il2yw")
-expand_mode = 1
-stretch_mode = 5
-
-[node name="VBoxDay4" type="VBoxContainer" parent="Monitor/Margin/VBox/ScheduleContent/MarginContainer/Page1" unique_id=1580581957]
-custom_minimum_size = Vector2(40, 40)
-layout_mode = 2
-
-[node name="HariLabel" type="Label" parent="Monitor/Margin/VBox/ScheduleContent/MarginContainer/Page1/VBoxDay4" unique_id=1164163619]
-layout_mode = 2
-text = "Day 4"
-
-[node name="HBoxContainer" type="HBoxContainer" parent="Monitor/Margin/VBox/ScheduleContent/MarginContainer/Page1/VBoxDay4" unique_id=765085408]
-layout_mode = 2
-
-[node name="Slot1" type="TextureRect" parent="Monitor/Margin/VBox/ScheduleContent/MarginContainer/Page1/VBoxDay4/HBoxContainer" unique_id=1815118879]
-custom_minimum_size = Vector2(40, 40)
-layout_mode = 2
-texture = ExtResource("3_il2yw")
-expand_mode = 1
-stretch_mode = 5
-
-[node name="Slot2" type="TextureRect" parent="Monitor/Margin/VBox/ScheduleContent/MarginContainer/Page1/VBoxDay4/HBoxContainer" unique_id=1195661773]
-custom_minimum_size = Vector2(40, 40)
-layout_mode = 2
-texture = ExtResource("3_il2yw")
-expand_mode = 1
-stretch_mode = 5
-
-[node name="Slot3" type="TextureRect" parent="Monitor/Margin/VBox/ScheduleContent/MarginContainer/Page1/VBoxDay4/HBoxContainer" unique_id=976860657]
-custom_minimum_size = Vector2(40, 40)
-layout_mode = 2
-texture = ExtResource("3_il2yw")
-expand_mode = 1
-stretch_mode = 5
-
-[node name="Slot4" type="TextureRect" parent="Monitor/Margin/VBox/ScheduleContent/MarginContainer/Page1/VBoxDay4/HBoxContainer" unique_id=1961445217]
-custom_minimum_size = Vector2(40, 40)
-layout_mode = 2
-texture = ExtResource("3_il2yw")
-expand_mode = 1
-stretch_mode = 5
-
-[node name="Slot5" type="TextureRect" parent="Monitor/Margin/VBox/ScheduleContent/MarginContainer/Page1/VBoxDay4/HBoxContainer" unique_id=1888730421]
-custom_minimum_size = Vector2(40, 40)
-layout_mode = 2
-texture = ExtResource("3_il2yw")
-expand_mode = 1
-stretch_mode = 5
-
-[node name="Page2" type="GridContainer" parent="Monitor/Margin/VBox/ScheduleContent/MarginContainer" unique_id=727089949]
-layout_mode = 2
-columns = 2
-
-[node name="VBoxDay5" type="VBoxContainer" parent="Monitor/Margin/VBox/ScheduleContent/MarginContainer/Page2" unique_id=973299405]
-custom_minimum_size = Vector2(40, 40)
-layout_mode = 2
-
-[node name="HariLabel" type="Label" parent="Monitor/Margin/VBox/ScheduleContent/MarginContainer/Page2/VBoxDay5" unique_id=1430592684]
-layout_mode = 2
-text = "Day 5"
-
-[node name="HBoxContainer" type="HBoxContainer" parent="Monitor/Margin/VBox/ScheduleContent/MarginContainer/Page2/VBoxDay5" unique_id=1397098332]
-layout_mode = 2
-
-[node name="Slot1" type="TextureRect" parent="Monitor/Margin/VBox/ScheduleContent/MarginContainer/Page2/VBoxDay5/HBoxContainer" unique_id=20609119]
-custom_minimum_size = Vector2(40, 40)
-layout_mode = 2
-texture = ExtResource("3_il2yw")
-expand_mode = 1
-stretch_mode = 5
-
-[node name="Slot2" type="TextureRect" parent="Monitor/Margin/VBox/ScheduleContent/MarginContainer/Page2/VBoxDay5/HBoxContainer" unique_id=889859224]
-custom_minimum_size = Vector2(40, 40)
-layout_mode = 2
-texture = ExtResource("3_il2yw")
-expand_mode = 1
-stretch_mode = 5
-
-[node name="Slot3" type="TextureRect" parent="Monitor/Margin/VBox/ScheduleContent/MarginContainer/Page2/VBoxDay5/HBoxContainer" unique_id=1091968522]
-custom_minimum_size = Vector2(40, 40)
-layout_mode = 2
-texture = ExtResource("3_il2yw")
-expand_mode = 1
-stretch_mode = 5
-
-[node name="Slot4" type="TextureRect" parent="Monitor/Margin/VBox/ScheduleContent/MarginContainer/Page2/VBoxDay5/HBoxContainer" unique_id=1386807847]
-custom_minimum_size = Vector2(40, 40)
-layout_mode = 2
-texture = ExtResource("3_il2yw")
-expand_mode = 1
-stretch_mode = 5
-
-[node name="Slot5" type="TextureRect" parent="Monitor/Margin/VBox/ScheduleContent/MarginContainer/Page2/VBoxDay5/HBoxContainer" unique_id=1999116988]
-custom_minimum_size = Vector2(40, 40)
-layout_mode = 2
-texture = ExtResource("3_il2yw")
-expand_mode = 1
-stretch_mode = 5
-
-[node name="VBoxDay6" type="VBoxContainer" parent="Monitor/Margin/VBox/ScheduleContent/MarginContainer/Page2" unique_id=523078771]
-custom_minimum_size = Vector2(40, 40)
-layout_mode = 2
-
-[node name="HariLabel" type="Label" parent="Monitor/Margin/VBox/ScheduleContent/MarginContainer/Page2/VBoxDay6" unique_id=874857550]
-layout_mode = 2
-text = "Day 6"
-
-[node name="HBoxContainer" type="HBoxContainer" parent="Monitor/Margin/VBox/ScheduleContent/MarginContainer/Page2/VBoxDay6" unique_id=1207841024]
-layout_mode = 2
-
-[node name="Slot1" type="TextureRect" parent="Monitor/Margin/VBox/ScheduleContent/MarginContainer/Page2/VBoxDay6/HBoxContainer" unique_id=1473598017]
-custom_minimum_size = Vector2(40, 40)
-layout_mode = 2
-texture = ExtResource("3_il2yw")
-expand_mode = 1
-stretch_mode = 5
-
-[node name="Slot2" type="TextureRect" parent="Monitor/Margin/VBox/ScheduleContent/MarginContainer/Page2/VBoxDay6/HBoxContainer" unique_id=1662110468]
-custom_minimum_size = Vector2(40, 40)
-layout_mode = 2
-texture = ExtResource("3_il2yw")
-expand_mode = 1
-stretch_mode = 5
-
-[node name="Slot3" type="TextureRect" parent="Monitor/Margin/VBox/ScheduleContent/MarginContainer/Page2/VBoxDay6/HBoxContainer" unique_id=1107127188]
-custom_minimum_size = Vector2(40, 40)
-layout_mode = 2
-texture = ExtResource("3_il2yw")
-expand_mode = 1
-stretch_mode = 5
-
-[node name="Slot4" type="TextureRect" parent="Monitor/Margin/VBox/ScheduleContent/MarginContainer/Page2/VBoxDay6/HBoxContainer" unique_id=1739156160]
-custom_minimum_size = Vector2(40, 40)
-layout_mode = 2
-texture = ExtResource("3_il2yw")
-expand_mode = 1
-stretch_mode = 5
-
-[node name="Slot5" type="TextureRect" parent="Monitor/Margin/VBox/ScheduleContent/MarginContainer/Page2/VBoxDay6/HBoxContainer" unique_id=1287726163]
-custom_minimum_size = Vector2(40, 40)
-layout_mode = 2
-texture = ExtResource("3_il2yw")
-expand_mode = 1
-stretch_mode = 5
-
-[node name="VBoxDay7" type="VBoxContainer" parent="Monitor/Margin/VBox/ScheduleContent/MarginContainer/Page2" unique_id=1479565871]
-custom_minimum_size = Vector2(40, 40)
-layout_mode = 2
-
-[node name="HariLabel" type="Label" parent="Monitor/Margin/VBox/ScheduleContent/MarginContainer/Page2/VBoxDay7" unique_id=1140257437]
-layout_mode = 2
-text = "Day 7"
-
-[node name="HBoxContainer" type="HBoxContainer" parent="Monitor/Margin/VBox/ScheduleContent/MarginContainer/Page2/VBoxDay7" unique_id=1648078953]
-layout_mode = 2
-
-[node name="Slot1" type="TextureRect" parent="Monitor/Margin/VBox/ScheduleContent/MarginContainer/Page2/VBoxDay7/HBoxContainer" unique_id=1202583620]
-custom_minimum_size = Vector2(40, 40)
-layout_mode = 2
-texture = ExtResource("3_il2yw")
-expand_mode = 1
-stretch_mode = 5
-
-[node name="Slot2" type="TextureRect" parent="Monitor/Margin/VBox/ScheduleContent/MarginContainer/Page2/VBoxDay7/HBoxContainer" unique_id=1849236808]
-custom_minimum_size = Vector2(40, 40)
-layout_mode = 2
-texture = ExtResource("3_il2yw")
-expand_mode = 1
-stretch_mode = 5
-
-[node name="Slot3" type="TextureRect" parent="Monitor/Margin/VBox/ScheduleContent/MarginContainer/Page2/VBoxDay7/HBoxContainer" unique_id=1679641382]
-custom_minimum_size = Vector2(40, 40)
-layout_mode = 2
-texture = ExtResource("3_il2yw")
-expand_mode = 1
-stretch_mode = 5
-
-[node name="Slot4" type="TextureRect" parent="Monitor/Margin/VBox/ScheduleContent/MarginContainer/Page2/VBoxDay7/HBoxContainer" unique_id=403146943]
-custom_minimum_size = Vector2(40, 40)
-layout_mode = 2
-texture = ExtResource("3_il2yw")
-expand_mode = 1
-stretch_mode = 5
-
-[node name="Slot5" type="TextureRect" parent="Monitor/Margin/VBox/ScheduleContent/MarginContainer/Page2/VBoxDay7/HBoxContainer" unique_id=1821549077]
-custom_minimum_size = Vector2(40, 40)
-layout_mode = 2
-texture = ExtResource("3_il2yw")
-expand_mode = 1
-stretch_mode = 5
-
-[node name="RightArrowButton" type="Button" parent="Monitor/Margin/VBox/ScheduleContent" unique_id=1916400870]
-layout_mode = 2
-text = ">"
-
-[node name="Spacer" type="Control" parent="Monitor/Margin/VBox" unique_id=1852386550]
-layout_mode = 2
+[node name="ScheduleContent" type="Control" parent="." unique_id=352151946]
+unique_name_in_owner = true
+anchors_preset = 0
+offset_right = 480.0
+offset_bottom = 559.0
 size_flags_vertical = 3
 
-[node name="VBoxContainer2" type="VBoxContainer" parent="Monitor/Margin/VBox" unique_id=844138767]
-layout_mode = 2
+[node name="Page1" type="Control" parent="ScheduleContent" unique_id=1495827806]
+visible = false
+anchors_preset = 0
+offset_left = 22.0
+offset_right = 458.0
+offset_bottom = 559.0
 
-[node name="PrevEchoLabel" type="Label" parent="Monitor/Margin/VBox/VBoxContainer2" unique_id=1896562101]
+[node name="Page1" type="TextureRect" parent="ScheduleContent/Page1" unique_id=932005322]
+layout_mode = 0
+offset_left = -22.0
+offset_right = 825.0
+offset_bottom = 593.0
+texture = ExtResource("9_hgnhh")
+
+[node name="VBoxDay1" type="Control" parent="ScheduleContent/Page1/Page1" unique_id=95638688]
+custom_minimum_size = Vector2(40, 40)
+anchors_preset = 0
+offset_right = 216.0
+offset_bottom = 67.0
+
+[node name="HariLabel" type="Label" parent="ScheduleContent/Page1/Page1/VBoxDay1" unique_id=1371046954]
+layout_mode = 0
+offset_left = 86.0
+offset_top = 139.0
+offset_right = 302.0
+offset_bottom = 162.0
+text = "Day 1"
+
+[node name="HBoxContainer" type="Control" parent="ScheduleContent/Page1/Page1/VBoxDay1" unique_id=59354562]
+anchors_preset = 0
+offset_top = 27.0
+offset_right = 216.0
+offset_bottom = 67.0
+
+[node name="Slot1" type="TextureRect" parent="ScheduleContent/Page1/Page1/VBoxDay1/HBoxContainer" unique_id=1916358710]
+custom_minimum_size = Vector2(40, 40)
+layout_mode = 0
+offset_left = 89.0
+offset_top = 144.0
+offset_right = 129.0
+offset_bottom = 184.0
+texture = ExtResource("3_il2yw")
+expand_mode = 1
+stretch_mode = 5
+
+[node name="Slot2" type="TextureRect" parent="ScheduleContent/Page1/Page1/VBoxDay1/HBoxContainer" unique_id=1471581814]
+custom_minimum_size = Vector2(40, 40)
+layout_mode = 0
+offset_left = 156.0
+offset_top = 142.0
+offset_right = 196.0
+offset_bottom = 182.0
+texture = ExtResource("3_il2yw")
+expand_mode = 1
+stretch_mode = 5
+
+[node name="Slot3" type="TextureRect" parent="ScheduleContent/Page1/Page1/VBoxDay1/HBoxContainer" unique_id=357295522]
+custom_minimum_size = Vector2(40, 40)
+layout_mode = 0
+offset_left = 221.0
+offset_top = 142.0
+offset_right = 261.0
+offset_bottom = 182.0
+texture = ExtResource("3_il2yw")
+expand_mode = 1
+stretch_mode = 5
+
+[node name="Slot4" type="TextureRect" parent="ScheduleContent/Page1/Page1/VBoxDay1/HBoxContainer" unique_id=808888205]
+custom_minimum_size = Vector2(40, 40)
+layout_mode = 0
+offset_left = 288.0
+offset_top = 142.0
+offset_right = 328.0
+offset_bottom = 182.0
+texture = ExtResource("3_il2yw")
+expand_mode = 1
+stretch_mode = 5
+
+[node name="Slot5" type="TextureRect" parent="ScheduleContent/Page1/Page1/VBoxDay1/HBoxContainer" unique_id=1286088930]
+custom_minimum_size = Vector2(40, 40)
+layout_mode = 0
+offset_left = 350.0
+offset_top = 143.0
+offset_right = 390.0
+offset_bottom = 183.0
+texture = ExtResource("3_il2yw")
+expand_mode = 1
+stretch_mode = 5
+
+[node name="VBoxDay2" type="Control" parent="ScheduleContent/Page1/Page1" unique_id=1779784697]
+custom_minimum_size = Vector2(40, 40)
+anchors_preset = 0
+offset_left = 220.0
+offset_right = 436.0
+offset_bottom = 67.0
+
+[node name="HariLabel" type="Label" parent="ScheduleContent/Page1/Page1/VBoxDay2" unique_id=730761463]
+layout_mode = 0
+offset_left = 228.0
+offset_top = 138.0
+offset_right = 444.0
+offset_bottom = 161.0
+text = "Day 2"
+
+[node name="HBoxContainer" type="Control" parent="ScheduleContent/Page1/Page1/VBoxDay2" unique_id=1463030415]
+anchors_preset = 0
+offset_top = 27.0
+offset_right = 216.0
+offset_bottom = 67.0
+
+[node name="Slot1" type="TextureRect" parent="ScheduleContent/Page1/Page1/VBoxDay2/HBoxContainer" unique_id=325338476]
+custom_minimum_size = Vector2(40, 40)
+layout_mode = 0
+offset_left = 235.0
+offset_top = 142.0
+offset_right = 275.0
+offset_bottom = 182.0
+texture = ExtResource("3_il2yw")
+expand_mode = 1
+stretch_mode = 5
+
+[node name="Slot2" type="TextureRect" parent="ScheduleContent/Page1/Page1/VBoxDay2/HBoxContainer" unique_id=697811835]
+custom_minimum_size = Vector2(40, 40)
+layout_mode = 0
+offset_left = 301.0
+offset_top = 141.0
+offset_right = 341.0
+offset_bottom = 181.0
+texture = ExtResource("3_il2yw")
+expand_mode = 1
+stretch_mode = 5
+
+[node name="Slot3" type="TextureRect" parent="ScheduleContent/Page1/Page1/VBoxDay2/HBoxContainer" unique_id=996311543]
+custom_minimum_size = Vector2(40, 40)
+layout_mode = 0
+offset_left = 364.0
+offset_top = 140.0
+offset_right = 404.0
+offset_bottom = 180.0
+texture = ExtResource("3_il2yw")
+expand_mode = 1
+stretch_mode = 5
+
+[node name="Slot4" type="TextureRect" parent="ScheduleContent/Page1/Page1/VBoxDay2/HBoxContainer" unique_id=345159313]
+custom_minimum_size = Vector2(40, 40)
+layout_mode = 0
+offset_left = 428.0
+offset_top = 140.0
+offset_right = 468.0
+offset_bottom = 180.0
+texture = ExtResource("3_il2yw")
+expand_mode = 1
+stretch_mode = 5
+
+[node name="Slot5" type="TextureRect" parent="ScheduleContent/Page1/Page1/VBoxDay2/HBoxContainer" unique_id=1076194702]
+custom_minimum_size = Vector2(40, 40)
+layout_mode = 0
+offset_left = 492.0
+offset_top = 141.0
+offset_right = 532.0
+offset_bottom = 181.0
+texture = ExtResource("3_il2yw")
+expand_mode = 1
+stretch_mode = 5
+
+[node name="VBoxDay3" type="Control" parent="ScheduleContent/Page1/Page1" unique_id=1533161137]
+custom_minimum_size = Vector2(40, 40)
+anchors_preset = 0
+offset_top = 71.0
+offset_right = 216.0
+offset_bottom = 138.0
+
+[node name="HariLabel" type="Label" parent="ScheduleContent/Page1/Page1/VBoxDay3" unique_id=2130609339]
+layout_mode = 0
+offset_left = 88.0
+offset_top = 190.0
+offset_right = 304.0
+offset_bottom = 213.0
+text = "Day 3"
+
+[node name="HBoxContainer" type="Control" parent="ScheduleContent/Page1/Page1/VBoxDay3" unique_id=50408676]
+anchors_preset = 0
+offset_top = 27.0
+offset_right = 216.0
+offset_bottom = 67.0
+
+[node name="Slot1" type="TextureRect" parent="ScheduleContent/Page1/Page1/VBoxDay3/HBoxContainer" unique_id=2076222805]
+custom_minimum_size = Vector2(40, 40)
+layout_mode = 0
+offset_left = 91.0
+offset_top = 193.0
+offset_right = 131.0
+offset_bottom = 233.0
+texture = ExtResource("3_il2yw")
+expand_mode = 1
+stretch_mode = 5
+
+[node name="Slot2" type="TextureRect" parent="ScheduleContent/Page1/Page1/VBoxDay3/HBoxContainer" unique_id=2012665072]
+custom_minimum_size = Vector2(40, 40)
+layout_mode = 0
+offset_left = 158.0
+offset_top = 193.0
+offset_right = 198.0
+offset_bottom = 233.0
+texture = ExtResource("3_il2yw")
+expand_mode = 1
+stretch_mode = 5
+
+[node name="Slot3" type="TextureRect" parent="ScheduleContent/Page1/Page1/VBoxDay3/HBoxContainer" unique_id=1435044658]
+custom_minimum_size = Vector2(40, 40)
+layout_mode = 0
+offset_left = 221.0
+offset_top = 191.0
+offset_right = 261.0
+offset_bottom = 231.0
+texture = ExtResource("3_il2yw")
+expand_mode = 1
+stretch_mode = 5
+
+[node name="Slot4" type="TextureRect" parent="ScheduleContent/Page1/Page1/VBoxDay3/HBoxContainer" unique_id=571943375]
+custom_minimum_size = Vector2(40, 40)
+layout_mode = 0
+offset_left = 286.0
+offset_top = 193.0
+offset_right = 326.0
+offset_bottom = 233.0
+texture = ExtResource("3_il2yw")
+expand_mode = 1
+stretch_mode = 5
+
+[node name="Slot5" type="TextureRect" parent="ScheduleContent/Page1/Page1/VBoxDay3/HBoxContainer" unique_id=1171352505]
+custom_minimum_size = Vector2(40, 40)
+layout_mode = 0
+offset_left = 348.0
+offset_top = 192.0
+offset_right = 388.0
+offset_bottom = 232.0
+texture = ExtResource("3_il2yw")
+expand_mode = 1
+stretch_mode = 5
+
+[node name="VBoxDay4" type="Control" parent="ScheduleContent/Page1/Page1" unique_id=21292798]
+custom_minimum_size = Vector2(40, 40)
+anchors_preset = 0
+offset_left = 243.0
+offset_top = 74.0
+offset_right = 459.0
+offset_bottom = 141.0
+
+[node name="HariLabel" type="Label" parent="ScheduleContent/Page1/Page1/VBoxDay4" unique_id=1164163619]
+layout_mode = 0
+offset_left = 202.0
+offset_top = 188.0
+offset_right = 418.0
+offset_bottom = 211.0
+text = "Day 4"
+
+[node name="HBoxContainer" type="Control" parent="ScheduleContent/Page1/Page1/VBoxDay4" unique_id=1367246117]
+anchors_preset = 0
+offset_top = 27.0
+offset_right = 216.0
+offset_bottom = 67.0
+
+[node name="Slot1" type="TextureRect" parent="ScheduleContent/Page1/Page1/VBoxDay4/HBoxContainer" unique_id=1815118879]
+custom_minimum_size = Vector2(40, 40)
+layout_mode = 0
+offset_left = 213.0
+offset_top = 189.0
+offset_right = 253.0
+offset_bottom = 229.0
+texture = ExtResource("3_il2yw")
+expand_mode = 1
+stretch_mode = 5
+
+[node name="Slot2" type="TextureRect" parent="ScheduleContent/Page1/Page1/VBoxDay4/HBoxContainer" unique_id=1195661773]
+custom_minimum_size = Vector2(40, 40)
+layout_mode = 0
+offset_left = 276.0
+offset_top = 190.0
+offset_right = 316.0
+offset_bottom = 230.0
+texture = ExtResource("3_il2yw")
+expand_mode = 1
+stretch_mode = 5
+
+[node name="Slot3" type="TextureRect" parent="ScheduleContent/Page1/Page1/VBoxDay4/HBoxContainer" unique_id=976860657]
+custom_minimum_size = Vector2(40, 40)
+layout_mode = 0
+offset_left = 340.0
+offset_top = 188.0
+offset_right = 380.0
+offset_bottom = 228.0
+texture = ExtResource("3_il2yw")
+expand_mode = 1
+stretch_mode = 5
+
+[node name="Slot4" type="TextureRect" parent="ScheduleContent/Page1/Page1/VBoxDay4/HBoxContainer" unique_id=1961445217]
+custom_minimum_size = Vector2(40, 40)
+layout_mode = 0
+offset_left = 406.0
+offset_top = 190.0
+offset_right = 446.0
+offset_bottom = 230.0
+texture = ExtResource("3_il2yw")
+expand_mode = 1
+stretch_mode = 5
+
+[node name="Slot5" type="TextureRect" parent="ScheduleContent/Page1/Page1/VBoxDay4/HBoxContainer" unique_id=1888730421]
+custom_minimum_size = Vector2(40, 40)
+layout_mode = 0
+offset_left = 470.0
+offset_top = 190.0
+offset_right = 510.0
+offset_bottom = 230.0
+texture = ExtResource("3_il2yw")
+expand_mode = 1
+stretch_mode = 5
+
+[node name="Page2" type="Control" parent="ScheduleContent" unique_id=940363121]
+visible = false
+anchors_preset = 0
+offset_left = 22.0
+offset_right = 458.0
+offset_bottom = 559.0
+
+[node name="Page2" type="TextureRect" parent="ScheduleContent/Page2" unique_id=59329699]
+layout_mode = 0
+offset_left = -23.0
+offset_top = 3.0
+offset_right = 824.0
+offset_bottom = 596.0
+texture = ExtResource("10_m1tw1")
+
+[node name="VBoxDay5" type="Control" parent="ScheduleContent/Page2/Page2" unique_id=1386022088]
+custom_minimum_size = Vector2(40, 40)
+anchors_preset = 0
+offset_right = 216.0
+offset_bottom = 67.0
+
+[node name="HariLabel" type="Label" parent="ScheduleContent/Page2/Page2/VBoxDay5" unique_id=1430592684]
+layout_mode = 0
+offset_left = 86.0
+offset_top = 139.0
+offset_right = 302.0
+offset_bottom = 162.0
+text = "Day 5"
+
+[node name="HBoxContainer" type="Control" parent="ScheduleContent/Page2/Page2/VBoxDay5" unique_id=1957511930]
+anchors_preset = 0
+offset_left = 21.0
+offset_top = 27.0
+offset_right = 237.0
+offset_bottom = 67.0
+
+[node name="Slot1" type="TextureRect" parent="ScheduleContent/Page2/Page2/VBoxDay5/HBoxContainer" unique_id=20609119]
+custom_minimum_size = Vector2(40, 40)
+layout_mode = 0
+offset_left = 68.0
+offset_top = 141.0
+offset_right = 108.0
+offset_bottom = 181.0
+texture = ExtResource("3_il2yw")
+expand_mode = 1
+stretch_mode = 5
+
+[node name="Slot2" type="TextureRect" parent="ScheduleContent/Page2/Page2/VBoxDay5/HBoxContainer" unique_id=889859224]
+custom_minimum_size = Vector2(40, 40)
+layout_mode = 0
+offset_left = 137.0
+offset_top = 140.0
+offset_right = 177.0
+offset_bottom = 180.0
+texture = ExtResource("3_il2yw")
+expand_mode = 1
+stretch_mode = 5
+
+[node name="Slot3" type="TextureRect" parent="ScheduleContent/Page2/Page2/VBoxDay5/HBoxContainer" unique_id=1091968522]
+custom_minimum_size = Vector2(40, 40)
+layout_mode = 0
+offset_left = 201.0
+offset_top = 141.0
+offset_right = 241.0
+offset_bottom = 181.0
+texture = ExtResource("3_il2yw")
+expand_mode = 1
+stretch_mode = 5
+
+[node name="Slot4" type="TextureRect" parent="ScheduleContent/Page2/Page2/VBoxDay5/HBoxContainer" unique_id=1386807847]
+custom_minimum_size = Vector2(40, 40)
+layout_mode = 0
+offset_left = 264.0
+offset_top = 143.0
+offset_right = 304.0
+offset_bottom = 183.0
+texture = ExtResource("3_il2yw")
+expand_mode = 1
+stretch_mode = 5
+
+[node name="Slot5" type="TextureRect" parent="ScheduleContent/Page2/Page2/VBoxDay5/HBoxContainer" unique_id=1999116988]
+custom_minimum_size = Vector2(40, 40)
+layout_mode = 0
+offset_left = 329.0
+offset_top = 144.0
+offset_right = 369.0
+offset_bottom = 184.0
+texture = ExtResource("3_il2yw")
+expand_mode = 1
+stretch_mode = 5
+
+[node name="VBoxDay6" type="Control" parent="ScheduleContent/Page2/Page2" unique_id=1931060356]
+custom_minimum_size = Vector2(40, 40)
+anchors_preset = 0
+offset_left = 220.0
+offset_right = 436.0
+offset_bottom = 67.0
+
+[node name="HariLabel" type="Label" parent="ScheduleContent/Page2/Page2/VBoxDay6" unique_id=874857550]
+layout_mode = 0
+offset_left = 228.0
+offset_top = 138.0
+offset_right = 444.0
+offset_bottom = 161.0
+text = "Day 6"
+
+[node name="HBoxContainer" type="Control" parent="ScheduleContent/Page2/Page2/VBoxDay6" unique_id=878936753]
+anchors_preset = 0
+offset_left = 21.0
+offset_top = 27.0
+offset_right = 237.0
+offset_bottom = 67.0
+
+[node name="Slot1" type="TextureRect" parent="ScheduleContent/Page2/Page2/VBoxDay6/HBoxContainer" unique_id=1473598017]
+custom_minimum_size = Vector2(40, 40)
+layout_mode = 0
+offset_left = 211.0
+offset_top = 142.0
+offset_right = 251.0
+offset_bottom = 182.0
+texture = ExtResource("3_il2yw")
+expand_mode = 1
+stretch_mode = 5
+
+[node name="Slot2" type="TextureRect" parent="ScheduleContent/Page2/Page2/VBoxDay6/HBoxContainer" unique_id=1662110468]
+custom_minimum_size = Vector2(40, 40)
+layout_mode = 0
+offset_left = 281.0
+offset_top = 142.0
+offset_right = 321.0
+offset_bottom = 182.0
+texture = ExtResource("3_il2yw")
+expand_mode = 1
+stretch_mode = 5
+
+[node name="Slot3" type="TextureRect" parent="ScheduleContent/Page2/Page2/VBoxDay6/HBoxContainer" unique_id=1107127188]
+custom_minimum_size = Vector2(40, 40)
+layout_mode = 0
+offset_left = 343.0
+offset_top = 141.0
+offset_right = 383.0
+offset_bottom = 181.0
+texture = ExtResource("3_il2yw")
+expand_mode = 1
+stretch_mode = 5
+
+[node name="Slot4" type="TextureRect" parent="ScheduleContent/Page2/Page2/VBoxDay6/HBoxContainer" unique_id=1739156160]
+custom_minimum_size = Vector2(40, 40)
+layout_mode = 0
+offset_left = 405.0
+offset_top = 142.0
+offset_right = 445.0
+offset_bottom = 182.0
+texture = ExtResource("3_il2yw")
+expand_mode = 1
+stretch_mode = 5
+
+[node name="Slot5" type="TextureRect" parent="ScheduleContent/Page2/Page2/VBoxDay6/HBoxContainer" unique_id=1287726163]
+custom_minimum_size = Vector2(40, 40)
+layout_mode = 0
+offset_left = 472.0
+offset_top = 142.0
+offset_right = 512.0
+offset_bottom = 182.0
+texture = ExtResource("3_il2yw")
+expand_mode = 1
+stretch_mode = 5
+
+[node name="VBoxDay7" type="Control" parent="ScheduleContent/Page2/Page2" unique_id=1698139107]
+custom_minimum_size = Vector2(40, 40)
+anchors_preset = 0
+offset_left = 20.0
+offset_top = 71.0
+offset_right = 236.0
+offset_bottom = 138.0
+
+[node name="HariLabel" type="Label" parent="ScheduleContent/Page2/Page2/VBoxDay7" unique_id=1140257437]
+layout_mode = 0
+offset_left = 67.0
+offset_top = 188.0
+offset_right = 283.0
+offset_bottom = 211.0
+text = "Day 7"
+
+[node name="HBoxContainer" type="Control" parent="ScheduleContent/Page2/Page2/VBoxDay7" unique_id=2123448681]
+anchors_preset = 0
+offset_top = 27.0
+offset_right = 216.0
+offset_bottom = 67.0
+
+[node name="Slot1" type="TextureRect" parent="ScheduleContent/Page2/Page2/VBoxDay7/HBoxContainer" unique_id=1202583620]
+custom_minimum_size = Vector2(40, 40)
+layout_mode = 0
+offset_left = 69.0
+offset_top = 193.0
+offset_right = 109.0
+offset_bottom = 233.0
+texture = ExtResource("3_il2yw")
+expand_mode = 1
+stretch_mode = 5
+
+[node name="Slot2" type="TextureRect" parent="ScheduleContent/Page2/Page2/VBoxDay7/HBoxContainer" unique_id=1849236808]
+custom_minimum_size = Vector2(40, 40)
+layout_mode = 0
+offset_left = 133.0
+offset_top = 192.0
+offset_right = 173.0
+offset_bottom = 232.0
+texture = ExtResource("3_il2yw")
+expand_mode = 1
+stretch_mode = 5
+
+[node name="Slot3" type="TextureRect" parent="ScheduleContent/Page2/Page2/VBoxDay7/HBoxContainer" unique_id=1679641382]
+custom_minimum_size = Vector2(40, 40)
+layout_mode = 0
+offset_left = 200.0
+offset_top = 193.0
+offset_right = 240.0
+offset_bottom = 233.0
+texture = ExtResource("3_il2yw")
+expand_mode = 1
+stretch_mode = 5
+
+[node name="Slot4" type="TextureRect" parent="ScheduleContent/Page2/Page2/VBoxDay7/HBoxContainer" unique_id=403146943]
+custom_minimum_size = Vector2(40, 40)
+layout_mode = 0
+offset_left = 265.0
+offset_top = 192.0
+offset_right = 305.0
+offset_bottom = 232.0
+texture = ExtResource("3_il2yw")
+expand_mode = 1
+stretch_mode = 5
+
+[node name="Slot5" type="TextureRect" parent="ScheduleContent/Page2/Page2/VBoxDay7/HBoxContainer" unique_id=1821549077]
+custom_minimum_size = Vector2(40, 40)
+layout_mode = 0
+offset_left = 329.0
+offset_top = 193.0
+offset_right = 369.0
+offset_bottom = 233.0
+texture = ExtResource("3_il2yw")
+expand_mode = 1
+stretch_mode = 5
+
+[node name="LeftArrowButton" type="Button" parent="ScheduleContent/Page2" unique_id=1445848924]
+layout_mode = 0
+offset_left = 10.0
+offset_top = 123.0
+offset_right = 65.0
+offset_bottom = 378.0
+theme_override_styles/normal = SubResource("StyleBoxTexture_mti6b")
+text = "<"
+
+[node name="RightArrowButton" type="Button" parent="ScheduleContent" unique_id=1916400870]
+layout_mode = 0
+offset_left = 760.0
+offset_top = 196.0
+offset_right = 812.0
+offset_bottom = 319.0
+theme_override_styles/normal = SubResource("StyleBoxTexture_4kxuq")
+
+[node name="CloseButton" type="Button" parent="." unique_id=1291277582]
 unique_name_in_owner = true
-layout_mode = 2
-
-[node name="NotesLabel" type="Label" parent="Monitor/Margin/VBox/VBoxContainer2" unique_id=508213817]
-unique_name_in_owner = true
-layout_mode = 2
-
-[node name="DayLabel" type="Label" parent="Monitor/Margin/VBox/VBoxContainer2" unique_id=1792604302]
-unique_name_in_owner = true
-layout_mode = 2
-
-[node name="SessionLabel" type="Label" parent="Monitor/Margin/VBox/VBoxContainer2" unique_id=400180062]
-unique_name_in_owner = true
-layout_mode = 2
-
-[node name="RemainingLabel" type="Label" parent="Monitor/Margin/VBox/VBoxContainer2" unique_id=671590851]
-unique_name_in_owner = true
-layout_mode = 2
-
-[node name="HBoxContainer" type="HBoxContainer" parent="Monitor/Margin/VBox/VBoxContainer2" unique_id=961456380]
-layout_mode = 2
-size_flags_horizontal = 4
-theme_override_constants/separation = 4
-
-[node name="CloseButton" type="Button" parent="Monitor/Margin/VBox/VBoxContainer2/HBoxContainer" unique_id=1291277582]
-unique_name_in_owner = true
-layout_mode = 2
+layout_mode = 0
+offset_left = 372.0
+offset_top = 501.0
+offset_right = 475.0
+offset_bottom = 524.0
 theme_override_styles/normal = ExtResource("2_heg3a")
 theme_override_styles/pressed = ExtResource("3_0uu54")
 theme_override_styles/hover = ExtResource("4_kvcxo")
 theme_override_styles/hover_pressed = ExtResource("5_il2yw")
 text = "Tutup Berkas"
 
+[node name="PatientButton" type="Button" parent="." unique_id=614596904]
+layout_mode = 0
+offset_left = 43.0
+offset_top = 84.0
+offset_right = 219.0
+offset_bottom = 107.0
+theme_override_styles/normal = ExtResource("2_heg3a")
+theme_override_styles/pressed = ExtResource("3_0uu54")
+theme_override_styles/hover = ExtResource("4_kvcxo")
+theme_override_styles/disabled = SubResource("StyleBoxTexture_il2yw")
+text = "Patient Information"
+
+[node name="ScheduleButton" type="Button" parent="." unique_id=929161621]
+layout_mode = 0
+offset_left = 232.0
+offset_top = 84.0
+offset_right = 409.0
+offset_bottom = 107.0
+theme_override_styles/normal = ExtResource("2_heg3a")
+theme_override_styles/pressed = ExtResource("3_0uu54")
+theme_override_styles/hover = ExtResource("4_kvcxo")
+theme_override_styles/hover_pressed = ExtResource("5_il2yw")
+text = "Schedule"
+
 [node name="Click" type="AudioStreamPlayer" parent="." unique_id=1690730612]
 stream = ExtResource("6_0uu54")
 
-[connection signal="pressed" from="Monitor/Margin/VBox/HBoxContainer/PatientButton" to="." method="_on_patient_button_pressed"]
-[connection signal="pressed" from="Monitor/Margin/VBox/HBoxContainer/ScheduleButton" to="." method="_on_schedule_button_pressed"]
-[connection signal="pressed" from="Monitor/Margin/VBox/VBoxContainer2/HBoxContainer/CloseButton" to="." method="_on_close_button_pressed"]
+[connection signal="pressed" from="CloseButton" to="." method="_on_close_button_pressed"]
+[connection signal="pressed" from="PatientButton" to="." method="_on_patient_button_pressed"]
+[connection signal="pressed" from="ScheduleButton" to="." method="_on_schedule_button_pressed"]
