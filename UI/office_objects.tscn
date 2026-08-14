@@ -14,6 +14,7 @@
 [ext_resource type="StyleBox" uid="uid://cfrsxyrygurp0" path="res://Button_Effect/bell_hover.tres" id="12_iq73t"]
 [ext_resource type="AudioStream" uid="uid://d1kl38618vy5x" path="res://Assets/SFX/Click-1.mp3" id="13_x1tq2"]
 [ext_resource type="AudioStream" uid="uid://boelhygo1gn0v" path="res://Assets/SFX/bell.mp3" id="14_ngtvf"]
+[ext_resource type="PackedScene" uid="uid://q5mll3fwg2p4" path="res://UI/guide_book.tscn" id="15_ngtvf"]
 
 [sub_resource type="StyleBoxTexture" id="StyleBoxTexture_yvsax"]
 texture = ExtResource("3_b5ntf")
@@ -83,6 +84,16 @@ theme_override_styles/normal = SubResource("StyleBoxTexture_62yky")
 theme_override_styles/pressed = SubResource("StyleBoxTexture_r8qnq")
 theme_override_styles/hover = SubResource("StyleBoxTexture_6vnta")
 
+[node name="GuidebookButton" type="Button" parent="." unique_id=2072366627]
+unique_name_in_owner = true
+offset_left = 994.0
+offset_top = 153.0
+offset_right = 1134.0
+offset_bottom = 213.0
+theme_override_styles/normal = SubResource("StyleBoxTexture_62yky")
+theme_override_styles/pressed = SubResource("StyleBoxTexture_r8qnq")
+theme_override_styles/hover = SubResource("StyleBoxTexture_6vnta")
+
 [node name="MonitorButton" type="Button" parent="." unique_id=1289849380]
 unique_name_in_owner = true
 offset_left = 121.0
@@ -119,8 +130,13 @@ stream = ExtResource("13_x1tq2")
 [node name="Bell" type="AudioStreamPlayer" parent="." unique_id=204990225]
 stream = ExtResource("14_ngtvf")
 
+[node name="GuideBook" parent="." unique_id=1256934643 instance=ExtResource("15_ngtvf")]
+unique_name_in_owner = true
+visible = false
+
 [connection signal="pressed" from="PatientFileButton" to="." method="_on_patient_file_button_pressed"]
 [connection signal="pressed" from="NotebookButton" to="." method="_on_notebook_button_pressed"]
+[connection signal="pressed" from="GuidebookButton" to="." method="_on_guidebook_button_pressed"]
 [connection signal="pressed" from="MonitorButton" to="." method="_on_monitor_button_pressed"]
 [connection signal="pressed" from="BellButton" to="." method="_on_bell_button_pressed"]
 [connection signal="pressed" from="CallNextButton" to="." method="_on_call_next_button_pressed"]

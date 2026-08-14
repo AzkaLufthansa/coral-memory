@@ -5,15 +5,18 @@ signal notebook_pressed
 signal monitor_pressed
 signal bell_pressed
 signal call_next_pressed
+signal guidebook_pressed
 
 @onready var bell_button: Button = %BellButton
 @onready var call_next_button: Button = %CallNextButton
+@onready var guide_book: PanelContainer = %GuideBook
 
 
 func _ready() -> void:
 	%PatientFileButton.pressed.connect(func() -> void: patient_file_pressed.emit())
 	%NotebookButton.pressed.connect(func() -> void: notebook_pressed.emit())
 	%MonitorButton.pressed.connect(func() -> void: monitor_pressed.emit())
+	%GuidebookButton.pressed.connect(func() -> void: guidebook_pressed.emit())
 	bell_button.pressed.connect(func() -> void: bell_pressed.emit())
 	call_next_button.pressed.connect(func() -> void: call_next_pressed.emit())
 	set_next_enabled(false)
@@ -42,3 +45,8 @@ func _on_notebook_button_pressed():
 
 func _on_patient_file_button_pressed():
 	$Click.play()
+
+
+func _on_guidebook_button_pressed():
+	$Click.play()
+	guide_book.show()
