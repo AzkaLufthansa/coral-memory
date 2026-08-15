@@ -2,6 +2,7 @@ extends Control
 
 signal file_closed
 
+# --- REFERENSI NODE LABELS PASIEN ---
 @onready var name_label: Label = %NameLabel
 @onready var usia_label: Label = %UsiaLabel
 @onready var visits_label: Label = %VisitsLabel
@@ -11,41 +12,85 @@ signal file_closed
 @onready var session_label: Label = %SessionLabel
 @onready var remaining_label: Label = %RemainingLabel
 @onready var notes_label: Label = %NotesLabel
+@onready var monitor: TextureRect = $PatientOverlay/Monitor
+@onready var logo: TextureRect = $PatientOverlay/Logo
 
-# --- NODE PATH JADWAL ---
-@onready var page1: Control = %ScheduleContent.get_node("Page1")
-@onready var page2: Control = %ScheduleContent.get_node("Page2")
-@onready var left_arrow: Button = page2.get_node("LeftArrowButton")
-@onready var right_arrow: Button = %ScheduleContent.get_node("RightArrowButton")
+# --- REFERENSI NODE TOMBOL & UI UTAMA ---
+@onready var close_button: Button = %CloseButton
+@onready var schedule_button: Button = $ScheduleButton if has_node("ScheduleButton") else null
+@onready var patient_button: Button = $PatientButton if has_node("PatientButton") else null
+@onready var title_label: Control = $PatientOverlay/Title if has_node("PatientOverlay/Title") else null
+@onready var click_sfx: AudioStreamPlayer = $Click if has_node("Click") else null
 
+# --- REFERENSI NODE JADWAL ---
+@onready var schedule_content: Control = %ScheduleContent
+@onready var page1: Control = %ScheduleContent/Page1
+@onready var page2: Control = %ScheduleContent/Page2
+@onready var left_arrow: Button = %ScheduleContent/Page2/LeftArrowButton
+@onready var right_arrow: Button = %ScheduleContent/RightArrowButton
 
-@onready var patient_info_elements: Array = [
+# --- ANIMATION PLAYER ---
+@onready var anim_player: AnimationPlayer = $AnimationPlayer
+
+# --- KELOMPOK ELEMEN INFO PASIEN (Teks, Judul & Logo) ---
+@onready var patient_info_elements: Array[Control] = [
 	name_label, usia_label, job_label, rujukan_label, 
-	visits_label, notes_label, $Logo]
+	visits_label, day_label, session_label, remaining_label, 
+	notes_label, logo
+]
 
 
 func _ready() -> void:
-	if not %CloseButton.pressed.is_connected(_on_close_button_pressed):
-		%CloseButton.pressed.connect(_on_close_button_pressed)
+	if close_button and not close_button.pressed.is_connected(_on_close_button_pressed):
+		close_button.pressed.connect(_on_close_button_pressed)
 		
-	if not $ScheduleButton.pressed.is_connected(_on_schedule_button_pressed):
-		$ScheduleButton.pressed.connect(_on_schedule_button_pressed)
+	if schedule_button and not schedule_button.pressed.is_connected(_on_schedule_button_pressed):
+		schedule_button.pressed.connect(_on_schedule_button_pressed)
 		
-	if not $PatientButton.pressed.is_connected(_on_patient_button_pressed):
-		$PatientButton.pressed.connect(_on_patient_button_pressed)
-	
-	if not left_arrow.pressed.is_connected(_on_left_arrow_pressed):
+	if patient_button and not patient_button.pressed.is_connected(_on_patient_button_pressed):
+		patient_button.pressed.connect(_on_patient_button_pressed)
+		
+	if left_arrow and not left_arrow.pressed.is_connected(_on_left_arrow_pressed):
 		left_arrow.pressed.connect(_on_left_arrow_pressed)
 		
-	if not right_arrow.pressed.is_connected(_on_right_arrow_pressed):
+	if right_arrow and not right_arrow.pressed.is_connected(_on_right_arrow_pressed):
 		right_arrow.pressed.connect(_on_right_arrow_pressed)
 
 
 func show_patient(patient: PatientData) -> void:
+	# 1. Isi data teks pasien terlebih dahulu
+	_populate_patient_data(patient)
+	
+	# 2. Reset tampilan halaman jadwal
+	page1.show()
+	page2.hide()
+	right_arrow.show()
+	
+	# 3. Sembunyikan semua teks, logo, judul & tombol SEBELUM animasi berjalan
+	_set_ui_content_visible(false)
+	schedule_content.hide()
+	
+	# 4. Aktifkan root node
+	visible = true
+	
+	# 5. Mainkan animasi & PAKSA mundur ke Frame 0 seketika itu juga
+	if anim_player and anim_player.has_animation("open_monitor"):
+		anim_player.play("open_monitor")
+		anim_player.seek(0, true) # <--- KUNCI PERBAIKAN: Mencegah tampilan berkedip/langsung muncul utuh
+		await anim_player.animation_finished
+	
+	# 6. Tampilkan teks, logo & judul SETELAH animasi selesai
+	_show_patient_tab()
+
+
+func _populate_patient_data(patient: PatientData) -> void:
 	name_label.text = "Nama: %s" % patient.display_name
-	usia_label.text = "Usia: %d" % [patient.age]
-	job_label.text = "Pekerjaan: %s" % [patient.profession]
-	rujukan_label.text = "Alasan Rujukan: %s" % [patient.referral_reason]
+	usia_label.text = "Usia: %d" % patient.age
+	job_label.text = "Pekerjaan: %s" % patient.profession
+	rujukan_label.text = "Alasan Rujukan: %s" % patient.referral_reason
+	
+	if "notes" in patient:
+		notes_label.text = "Catatan: %s" % patient.notes
 	
 	var visit_count := patient.diagnosis_history.size()
 	var visit_text := str(visit_count) if visit_count > 0 else "Pasien baru (belum pernah diperiksa)"
@@ -55,24 +100,16 @@ func show_patient(patient: PatientData) -> void:
 	session_label.text = "SESI %d / %d" % [EchoManager.session_index, GameConfig.SESSIONS_PER_DAY]
 	remaining_label.text = "Pertanyaan tersisa: %d" % EchoManager.get_topics_remaining()
 
-	var prev_echo := "-"
-	if not patient.diagnosis_history.is_empty():
-		var last: Dictionary = patient.diagnosis_history[-1]
-		prev_echo = Emotion.display_name(last["chosen_emotion"])
-	
-	# --- RESET TAMPILAN AWAL SAAT BERKAS DIBUKA ---
-	# 1. Pastikan selalu membuka tab Informasi Pasien
-	_show_patient_tab()
-	
-	# 2. Pastikan jadwal selalu mulai dari Halaman 1
-	page1.show()
-	page2.hide() # Otomatis menyembunyikan left_arrow juga
-	right_arrow.show()
-	
-	visible = true
-
 
 func _on_close() -> void:
+	_set_ui_content_visible(false)
+	schedule_content.hide()
+	
+	if anim_player and anim_player.has_animation("close_monitor"):
+		anim_player.play("close_monitor")
+		anim_player.seek(0, true)
+		await anim_player.animation_finished
+		
 	visible = false
 	file_closed.emit()
 
@@ -86,9 +123,7 @@ func _on_close_button_pressed() -> void:
 
 func _on_schedule_button_pressed() -> void:
 	_play_click()
-	%ScheduleContent.show()
-	$Monitor2.hide() # Sembunyikan monitor utama
-	# Sembunyikan elemen informasi pasien satu per satu
+	schedule_content.show()
 	for element in patient_info_elements:
 		if element:
 			element.hide()
@@ -100,12 +135,19 @@ func _on_patient_button_pressed() -> void:
 
 
 func _show_patient_tab() -> void:
-	%ScheduleContent.hide()
-	$Monitor2.show() # Tampilkan kembali monitor utama
-	# Tampilkan kembali elemen informasi pasien
+	schedule_content.hide()
+	_set_ui_content_visible(true)
+
+
+func _set_ui_content_visible(is_show: bool) -> void:
 	for element in patient_info_elements:
 		if element:
-			element.show()
+			element.visible = is_show
+	
+	if patient_button: patient_button.visible = is_show
+	if schedule_button: schedule_button.visible = is_show
+	if close_button: close_button.visible = is_show
+	if title_label: title_label.visible = is_show
 
 
 # --- FUNGSI NAVIGASI JADWAL (PAGINASI) ---
@@ -113,18 +155,17 @@ func _show_patient_tab() -> void:
 func _on_right_arrow_pressed() -> void:
 	_play_click()
 	page1.hide()
-	page2.show() # Otomatis menampilkan left_arrow
+	page2.show()
 	right_arrow.hide()
 
 
 func _on_left_arrow_pressed() -> void:
 	_play_click()
-	page2.hide() # Otomatis menyembunyikan left_arrow
+	page2.hide()
 	page1.show()
 	right_arrow.show()
 
 
-# Fungsi helper untuk suara klik agar aman jika node Click tidak sengaja terhapus
 func _play_click() -> void:
-	if has_node("Click"):
-		$Click.play()
+	if click_sfx:
+		click_sfx.play()
