@@ -13,10 +13,13 @@ const GameOverScene := preload("res://UI/game_over_screen.tscn")
 
 var patient_node: Patient2D
 var office: CanvasLayer
-var file_panel: PanelContainer
-var notebook_panel: PanelContainer
-var monitor_panel: PanelContainer
-var topic_panel: PanelContainer
+
+# --- PERBAIKAN TIPE DATA ---
+# Mengubah PanelContainer menjadi Control agar aman untuk semua jenis Node UI
+var file_panel: Control 
+var notebook_panel: Control 
+var monitor_panel: Control 
+var topic_panel: Control 
 var echo_inspect: Control
 var day_transition: Control
 var game_over_screen: Control
@@ -190,19 +193,16 @@ func _on_bell_pressed() -> void:
 
 
 func _on_close_panel() -> void:
-	file_panel.visible = false
-	notebook_panel.visible = false
-	monitor_panel.visible = false
-	topic_panel.close_dialogue()
-	echo_inspect.visible = false
+	_close_all_panels()
 
 
 func _close_all_panels() -> void:
-	file_panel.visible = false
-	notebook_panel.visible = false
-	monitor_panel.visible = false
-	topic_panel.close_dialogue()
-	echo_inspect.visible = false
+	if is_instance_valid(file_panel): file_panel.visible = false
+	if is_instance_valid(notebook_panel): notebook_panel.visible = false
+	if is_instance_valid(monitor_panel): monitor_panel.visible = false
+	if is_instance_valid(topic_panel) and topic_panel.has_method("close_dialogue"):
+		topic_panel.close_dialogue()
+	if is_instance_valid(echo_inspect): echo_inspect.visible = false
 
 
 # --- Game over / ending ---
