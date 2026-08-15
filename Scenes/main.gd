@@ -205,8 +205,6 @@ func _close_all_panels() -> void:
 	if is_instance_valid(echo_inspect): echo_inspect.visible = false
 
 
-# --- Game over / ending ---
-
 func _on_echo_burst(patient: PatientData) -> void:
 	_close_all_panels()
 	game_over_screen.show_burst(patient)

@@ -155,20 +155,20 @@ layout_mode = 1
 anchors_preset = -1
 anchor_right = 0.024
 anchor_bottom = 0.029000001
-offset_left = 247.0
-offset_top = 137.0
-offset_right = 271.024
-offset_bottom = 154.745
+offset_left = 266.0
+offset_top = 164.0
+offset_right = 279.024
+offset_bottom = 174.745
 theme_override_styles/normal = SubResource("StyleBoxTexture_7wd2l")
 theme_override_styles/pressed = SubResource("StyleBoxTexture_owa6n")
 theme_override_styles/hover = SubResource("StyleBoxTexture_6vnta")
 
 [node name="CloseButton" type="Button" parent="PanelContainer/ButtonOverlay" unique_id=2106095874]
 layout_mode = 0
-offset_left = 294.0
-offset_top = -234.0
-offset_right = 314.0
-offset_bottom = -211.0
+offset_left = 548.0
+offset_top = -288.0
+offset_right = 597.0
+offset_bottom = -249.0
 theme_override_styles/normal = SubResource("StyleBoxTexture_r8qnq")
 text = "X"
 
