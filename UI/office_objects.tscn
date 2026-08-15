@@ -27,6 +27,9 @@ modulate_color = Color(0.15686275, 0.15686275, 0.15686275, 1)
 [sub_resource type="StyleBoxTexture" id="StyleBoxTexture_6vnta"]
 texture = ExtResource("3_px13u")
 
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_bkrp2"]
+texture = ExtResource("3_px13u")
+
 [node name="OfficeObjects" type="CanvasLayer" unique_id=1786024609]
 script = ExtResource("1_office")
 
@@ -52,7 +55,7 @@ offset_top = 406.0
 offset_right = 288.0
 offset_bottom = 565.0
 theme_override_styles/normal = ExtResource("5_ngtvf")
-theme_override_styles/pressed = ExtResource("6_iq73t")
+theme_override_styles/pressed = ExtResource("7_bkrp2")
 theme_override_styles/hover = ExtResource("7_bkrp2")
 
 [node name="NotebookButton" type="Button" parent="." unique_id=1227294797]
@@ -73,7 +76,7 @@ offset_top = 480.0
 offset_right = 938.0
 offset_bottom = 540.0
 theme_override_styles/normal = SubResource("StyleBoxTexture_62yky")
-theme_override_styles/pressed = SubResource("StyleBoxTexture_r8qnq")
+theme_override_styles/pressed = SubResource("StyleBoxTexture_bkrp2")
 theme_override_styles/hover = SubResource("StyleBoxTexture_6vnta")
 
 [node name="MonitorButton" type="Button" parent="." unique_id=1289849380]
@@ -104,7 +107,7 @@ offset_top = 550.0
 offset_right = 994.0
 offset_bottom = 610.0
 theme_override_styles/normal = ExtResource("10_x1tq2")
-theme_override_styles/pressed = ExtResource("11_ngtvf")
+theme_override_styles/pressed = ExtResource("12_iq73t")
 theme_override_styles/hover = ExtResource("12_iq73t")
 
 [node name="Click" type="AudioStreamPlayer" parent="." unique_id=197186495]

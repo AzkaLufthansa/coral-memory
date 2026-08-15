@@ -144,9 +144,6 @@ func _set_ui_content_visible(is_show: bool) -> void:
 	if close_button: close_button.visible = is_show
 	if title_label: title_label.visible = is_show
 
-
-# --- FUNGSI NAVIGASI JADWAL (PAGINASI) ---
-
 func _on_right_arrow_pressed() -> void:
 	_play_click()
 	page1.hide()
