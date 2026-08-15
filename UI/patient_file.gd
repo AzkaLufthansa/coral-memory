@@ -30,7 +30,7 @@ signal file_closed
 @onready var right_arrow: Button = %ScheduleContent/RightArrowButton
 
 # --- ANIMATION PLAYER ---
-@onready var anim_player: AnimationPlayer = $AnimationPlayer
+#@onready var anim_player: AnimationPlayer = $AnimationPlayer
 
 # --- KELOMPOK ELEMEN INFO PASIEN (Teks, Judul & Logo) ---
 @onready var patient_info_elements: Array[Control] = [
@@ -58,28 +58,22 @@ func _ready() -> void:
 
 
 func show_patient(patient: PatientData) -> void:
-	# 1. Isi data teks pasien terlebih dahulu
 	_populate_patient_data(patient)
 	
-	# 2. Reset tampilan halaman jadwal
 	page1.show()
 	page2.hide()
 	right_arrow.show()
 	
-	# 3. Sembunyikan semua teks, logo, judul & tombol SEBELUM animasi berjalan
 	_set_ui_content_visible(false)
 	schedule_content.hide()
-	
-	# 4. Aktifkan root node
 	visible = true
 	
-	# 5. Mainkan animasi & PAKSA mundur ke Frame 0 seketika itu juga
-	if anim_player and anim_player.has_animation("open_monitor"):
-		anim_player.play("open_monitor")
-		anim_player.seek(0, true) # <--- KUNCI PERBAIKAN: Mencegah tampilan berkedip/langsung muncul utuh
-		await anim_player.animation_finished
+	# 5. kode animasi cuy
+	#if anim_player and anim_player.has_animation("open_monitor"):
+		#anim_player.play("open_monitor")
+		#anim_player.seek(0, true) # <--- KUNCI PERBAIKAN: Mencegah tampilan berkedip/langsung muncul utuh
+		#await anim_player.animation_finished
 	
-	# 6. Tampilkan teks, logo & judul SETELAH animasi selesai
 	_show_patient_tab()
 
 
@@ -105,10 +99,11 @@ func _on_close() -> void:
 	_set_ui_content_visible(false)
 	schedule_content.hide()
 	
-	if anim_player and anim_player.has_animation("close_monitor"):
-		anim_player.play("close_monitor")
-		anim_player.seek(0, true)
-		await anim_player.animation_finished
+#	Kode Animasi coy
+	#if anim_player and anim_player.has_animation("close_monitor"):
+		#anim_player.play("close_monitor")
+		#anim_player.seek(0, true)
+		#await anim_player.animation_finished
 		
 	visible = false
 	file_closed.emit()

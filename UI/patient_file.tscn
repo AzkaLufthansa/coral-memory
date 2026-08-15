@@ -8,6 +8,7 @@
 [ext_resource type="Texture2D" uid="uid://bm8pssr3quxlp" path="res://Assets/UI/button.png" id="3_bq4h4"]
 [ext_resource type="Texture2D" uid="uid://by650q0g13p3l" path="res://Assets/NPC/Kribo/sad.png" id="3_il2yw"]
 [ext_resource type="StyleBox" uid="uid://b0l5doruddxuo" path="res://Button_Effect/hover.tres" id="4_kvcxo"]
+[ext_resource type="FontFile" uid="uid://csmbxujwlcspk" path="res://Assets/Fonts/Fusion Pixel 10px Monospaced/fusion-pixel-10px-monospaced-ja.otf" id="4_oovme"]
 [ext_resource type="StyleBox" uid="uid://bcgsfsibr84mj" path="res://Button_Effect/hover_pressed.tres" id="5_il2yw"]
 [ext_resource type="AudioStream" uid="uid://d1kl38618vy5x" path="res://Assets/SFX/Click-1.mp3" id="6_0uu54"]
 [ext_resource type="Texture2D" uid="uid://dx56ct5ayqsra" path="res://Assets/RealAssets/MonitorUI/Monitor/Tab - Schedule 1.png" id="9_hgnhh"]
@@ -91,6 +92,7 @@ grow_vertical = 2
 script = ExtResource("1_file")
 
 [node name="Monitor2" type="Sprite2D" parent="." unique_id=1172839247]
+visible = false
 position = Vector2(427, 271)
 texture = ExtResource("2_hgnhh")
 hframes = 4
@@ -108,11 +110,14 @@ texture = ExtResource("2_bq4h4")
 
 [node name="Title" type="Label" parent="PatientOverlay" unique_id=525640017]
 layout_mode = 0
-offset_left = 47.0
-offset_top = 42.0
-offset_right = 527.0
-offset_bottom = 65.0
+offset_left = 48.0
+offset_top = 36.0
+offset_right = 528.0
+offset_bottom = 70.0
+theme_override_fonts/font = ExtResource("4_oovme")
+theme_override_font_sizes/font_size = 24
 text = "PATIENT EXAMINATION MANAGEMENT"
+vertical_alignment = 1
 
 [node name="Logo" type="TextureRect" parent="PatientOverlay" unique_id=1701558755]
 custom_minimum_size = Vector2(149.455, 150)
@@ -128,73 +133,83 @@ expand_mode = 1
 unique_name_in_owner = true
 layout_mode = 0
 offset_left = 320.0
-offset_top = 160.0
+offset_top = 157.0
 offset_right = 503.0
-offset_bottom = 183.0
+offset_bottom = 180.0
+theme_override_fonts/font = ExtResource("4_oovme")
 
 [node name="UsiaLabel" type="Label" parent="PatientOverlay" unique_id=838819508]
 unique_name_in_owner = true
 layout_mode = 0
-offset_left = 322.0
-offset_top = 193.0
-offset_right = 541.0
-offset_bottom = 216.0
+offset_left = 320.0
+offset_top = 194.0
+offset_right = 539.0
+offset_bottom = 217.0
+theme_override_fonts/font = ExtResource("4_oovme")
 
 [node name="PekerjaanLabel" type="Label" parent="PatientOverlay" unique_id=1171370219]
 unique_name_in_owner = true
 layout_mode = 0
-offset_left = 321.0
-offset_top = 227.0
-offset_right = 474.0
-offset_bottom = 250.0
+offset_left = 320.0
+offset_top = 230.0
+offset_right = 473.0
+offset_bottom = 253.0
+theme_override_fonts/font = ExtResource("4_oovme")
 
 [node name="RujukanLabel" type="Label" parent="PatientOverlay" unique_id=1891606527]
 unique_name_in_owner = true
 layout_mode = 0
-offset_left = 325.0
-offset_top = 266.0
-offset_right = 538.0
-offset_bottom = 289.0
+offset_left = 319.0
+offset_top = 270.0
+offset_right = 532.0
+offset_bottom = 293.0
+theme_override_fonts/font = ExtResource("4_oovme")
 
 [node name="VisitsLabel" type="Label" parent="PatientOverlay" unique_id=599097772]
 unique_name_in_owner = true
 layout_mode = 0
-offset_left = 324.0
-offset_top = 305.0
-offset_right = 423.0
-offset_bottom = 328.0
+offset_left = 320.0
+offset_top = 309.0
+offset_right = 419.0
+offset_bottom = 332.0
+theme_override_fonts/font = ExtResource("4_oovme")
 
 [node name="DayLabel" type="Label" parent="PatientOverlay" unique_id=1792604302]
 unique_name_in_owner = true
 layout_mode = 0
-offset_left = 72.0
-offset_top = 394.0
-offset_right = 123.0
-offset_bottom = 417.0
+offset_left = 63.0
+offset_top = 397.0
+offset_right = 114.0
+offset_bottom = 420.0
+theme_override_fonts/font = ExtResource("4_oovme")
 
 [node name="SessionLabel" type="Label" parent="PatientOverlay" unique_id=400180062]
 unique_name_in_owner = true
 layout_mode = 0
-offset_left = 68.0
+offset_left = 63.0
 offset_top = 426.0
-offset_right = 126.0
+offset_right = 121.0
 offset_bottom = 449.0
+theme_override_fonts/font = ExtResource("4_oovme")
 
 [node name="RemainingLabel" type="Label" parent="PatientOverlay" unique_id=671590851]
 unique_name_in_owner = true
 layout_mode = 0
-offset_left = 65.0
-offset_top = 457.0
-offset_right = 131.0
-offset_bottom = 480.0
+offset_left = 62.0
+offset_top = 458.0
+offset_right = 128.0
+offset_bottom = 481.0
+theme_override_fonts/font = ExtResource("4_oovme")
 
 [node name="NotesLabel" type="Label" parent="PatientOverlay" unique_id=508213817]
 unique_name_in_owner = true
+visible = false
 layout_mode = 0
 offset_left = 19.0
 offset_top = 471.0
 offset_right = 435.0
 offset_bottom = 494.0
+theme_override_fonts/font = ExtResource("4_oovme")
 
 [node name="ScheduleContent" type="Control" parent="." unique_id=352151946]
 unique_name_in_owner = true
@@ -230,6 +245,7 @@ offset_left = 86.0
 offset_top = 139.0
 offset_right = 302.0
 offset_bottom = 162.0
+theme_override_fonts/font = ExtResource("4_oovme")
 text = "Day 1"
 
 [node name="HBoxContainer" type="Control" parent="ScheduleContent/Page1/Page1/VBoxDay1" unique_id=59354562]
@@ -306,6 +322,7 @@ offset_left = 228.0
 offset_top = 138.0
 offset_right = 444.0
 offset_bottom = 161.0
+theme_override_fonts/font = ExtResource("4_oovme")
 text = "Day 2"
 
 [node name="HBoxContainer" type="Control" parent="ScheduleContent/Page1/Page1/VBoxDay2" unique_id=1463030415]
@@ -382,6 +399,7 @@ offset_left = 88.0
 offset_top = 190.0
 offset_right = 304.0
 offset_bottom = 213.0
+theme_override_fonts/font = ExtResource("4_oovme")
 text = "Day 3"
 
 [node name="HBoxContainer" type="Control" parent="ScheduleContent/Page1/Page1/VBoxDay3" unique_id=50408676]
@@ -459,6 +477,7 @@ offset_left = 202.0
 offset_top = 188.0
 offset_right = 418.0
 offset_bottom = 211.0
+theme_override_fonts/font = ExtResource("4_oovme")
 text = "Day 4"
 
 [node name="HBoxContainer" type="Control" parent="ScheduleContent/Page1/Page1/VBoxDay4" unique_id=1367246117]
@@ -549,6 +568,7 @@ offset_left = 86.0
 offset_top = 139.0
 offset_right = 302.0
 offset_bottom = 162.0
+theme_override_fonts/font = ExtResource("4_oovme")
 text = "Day 5"
 
 [node name="HBoxContainer" type="Control" parent="ScheduleContent/Page2/Page2/VBoxDay5" unique_id=1957511930]
@@ -626,6 +646,7 @@ offset_left = 228.0
 offset_top = 138.0
 offset_right = 444.0
 offset_bottom = 161.0
+theme_override_fonts/font = ExtResource("4_oovme")
 text = "Day 6"
 
 [node name="HBoxContainer" type="Control" parent="ScheduleContent/Page2/Page2/VBoxDay6" unique_id=878936753]
@@ -704,6 +725,7 @@ offset_left = 67.0
 offset_top = 188.0
 offset_right = 283.0
 offset_bottom = 211.0
+theme_override_fonts/font = ExtResource("4_oovme")
 text = "Day 7"
 
 [node name="HBoxContainer" type="Control" parent="ScheduleContent/Page2/Page2/VBoxDay7" unique_id=2123448681]
@@ -799,10 +821,11 @@ text = "Tutup Berkas"
 
 [node name="PatientButton" type="Button" parent="." unique_id=614596904]
 layout_mode = 0
-offset_left = 43.0
-offset_top = 84.0
-offset_right = 219.0
-offset_bottom = 107.0
+offset_left = 41.0
+offset_top = 85.0
+offset_right = 217.0
+offset_bottom = 108.0
+theme_override_fonts/font = ExtResource("4_oovme")
 theme_override_styles/normal = ExtResource("2_heg3a")
 theme_override_styles/pressed = ExtResource("3_0uu54")
 theme_override_styles/hover = ExtResource("4_kvcxo")
@@ -815,6 +838,7 @@ offset_left = 232.0
 offset_top = 84.0
 offset_right = 409.0
 offset_bottom = 107.0
+theme_override_fonts/font = ExtResource("4_oovme")
 theme_override_styles/normal = ExtResource("2_heg3a")
 theme_override_styles/pressed = ExtResource("3_0uu54")
 theme_override_styles/hover = ExtResource("4_kvcxo")

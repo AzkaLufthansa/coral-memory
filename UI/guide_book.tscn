@@ -1,101 +1,179 @@
 [gd_scene format=3 uid="uid://q5mll3fwg2p4"]
 
-[ext_resource type="Texture2D" uid="uid://dea54vqxpif11" path="res://Assets/RealAssets/BookUI/Book_UI.png" id="1_8h4xe"]
+[ext_resource type="Script" uid="uid://dx22hbij7gq7o" path="res://UI/guide_book.gd" id="1_5pb4o"]
+[ext_resource type="Texture2D" uid="uid://orovqhn227aq" path="res://Assets/RealAssets/GuideBook/drive-download-20260815T065707Z-1-001/Book UI.png" id="1_py5uy"]
 [ext_resource type="Texture2D" uid="uid://cuuoc220hh7of" path="res://Assets/NPC/NPC2.png" id="2_ihng2"]
+[ext_resource type="Texture2D" uid="uid://bwsofnustpi7b" path="res://Assets/RealAssets/GuideBook/drive-download-20260815T065707Z-1-001/Button.png" id="3_5pb4o"]
 [ext_resource type="AudioStream" uid="uid://bd3iberviqry4" path="res://Assets/SFX/Paper Flip 1.wav" id="3_ihng2"]
+[ext_resource type="Texture2D" uid="uid://ylnhhbtdxtkv" path="res://Assets/RealAssets/GuideBook/drive-download-20260815T065707Z-1-001/Highlighted Button.png" id="4_k335p"]
 
-[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_mm1bc"]
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_7wd2l"]
+texture = ExtResource("3_5pb4o")
 
-[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_mti6b"]
-texture = ExtResource("1_8h4xe")
-
-[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_4kxuq"]
-
-[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_62yky"]
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_owa6n"]
+texture = ExtResource("3_5pb4o")
 
 [sub_resource type="StyleBoxTexture" id="StyleBoxTexture_6vnta"]
-
-[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_qwqyf"]
+texture = ExtResource("4_k335p")
 
 [sub_resource type="StyleBoxTexture" id="StyleBoxTexture_r8qnq"]
 
-[node name="GuideBook" type="PanelContainer" unique_id=1256934643]
+[node name="GuideBook" type="Control" unique_id=1823509929]
+layout_mode = 3
+anchors_preset = 0
 offset_left = 78.0
 offset_top = 50.0
 offset_right = 1077.0
 offset_bottom = 645.0
-theme_override_styles/panel = SubResource("StyleBoxTexture_mm1bc")
+script = ExtResource("1_5pb4o")
 
-[node name="PanelContainer" type="PanelContainer" parent="." unique_id=673534011]
-layout_mode = 2
-theme_override_styles/panel = SubResource("StyleBoxTexture_mti6b")
+[node name="PanelContainer" type="Sprite2D" parent="." unique_id=1075489345]
+position = Vector2(457, 246)
+texture = ExtResource("1_py5uy")
 
-[node name="MarginContainer" type="MarginContainer" parent="PanelContainer" unique_id=486828192]
-layout_mode = 2
-theme_override_constants/margin_left = 233
-theme_override_constants/margin_top = 117
-theme_override_constants/margin_right = 225
-theme_override_constants/margin_bottom = 80
+[node name="Page1" type="Control" parent="PanelContainer" unique_id=249311788]
+layout_mode = 3
+anchors_preset = 0
+offset_left = -457.0
+offset_top = -246.0
+offset_right = -417.0
+offset_bottom = -206.0
 
-[node name="Lembar1" type="HBoxContainer" parent="PanelContainer/MarginContainer" unique_id=1701181799]
-layout_mode = 2
-theme_override_constants/separation = 82
+[node name="Label1" type="Label" parent="PanelContainer/Page1" unique_id=488129620]
+layout_mode = 0
+offset_left = 176.0
+offset_top = 29.0
+offset_right = 391.0
+offset_bottom = 52.0
+text = "Echo 1"
 
-[node name="Hal1" type="VBoxContainer" parent="PanelContainer/MarginContainer/Lembar1" unique_id=1164814509]
-layout_mode = 2
-
-[node name="Label" type="Label" parent="PanelContainer/MarginContainer/Lembar1/Hal1" unique_id=488129620]
-layout_mode = 2
-text = "Guide Book"
-
-[node name="TextureRect" type="TextureRect" parent="PanelContainer/MarginContainer/Lembar1/Hal1" unique_id=2016824399]
-layout_mode = 2
+[node name="Logo1" type="TextureRect" parent="PanelContainer/Page1" unique_id=2016824399]
+layout_mode = 0
+offset_left = 188.0
+offset_top = 58.0
+offset_right = 403.0
+offset_bottom = 186.0
 texture = ExtResource("2_ihng2")
 
-[node name="DescriptionLabel" type="Label" parent="PanelContainer/MarginContainer/Lembar1/Hal1" unique_id=205464512]
-layout_mode = 2
+[node name="DescriptionLabel1" type="Label" parent="PanelContainer/Page1" unique_id=205464512]
+layout_mode = 0
+offset_left = 188.0
+offset_top = 221.0
+offset_right = 403.0
+offset_bottom = 244.0
 text = "Lorem Ipsum dolor sit amet"
 
-[node name="Hal2" type="VBoxContainer" parent="PanelContainer/MarginContainer/Lembar1" unique_id=43516383]
-layout_mode = 2
+[node name="Label2" type="Label" parent="PanelContainer/Page1" unique_id=996246571]
+layout_mode = 0
+offset_left = 510.0
+offset_top = 21.0
+offset_right = 725.0
+offset_bottom = 44.0
+text = "Echo 2"
 
-[node name="Label" type="Label" parent="PanelContainer/MarginContainer/Lembar1/Hal2" unique_id=996246571]
-layout_mode = 2
-text = "Guide Book"
-
-[node name="TextureRect" type="TextureRect" parent="PanelContainer/MarginContainer/Lembar1/Hal2" unique_id=534491133]
-layout_mode = 2
+[node name="Logo2" type="TextureRect" parent="PanelContainer/Page1" unique_id=534491133]
+layout_mode = 0
+offset_left = 512.0
+offset_top = 64.0
+offset_right = 727.0
+offset_bottom = 192.0
 texture = ExtResource("2_ihng2")
 
-[node name="DescriptionLabel" type="Label" parent="PanelContainer/MarginContainer/Lembar1/Hal2" unique_id=1602578256]
-layout_mode = 2
+[node name="DescriptionLabel2" type="Label" parent="PanelContainer/Page1" unique_id=1602578256]
+layout_mode = 0
+offset_left = 526.0
+offset_top = 225.0
+offset_right = 741.0
+offset_bottom = 248.0
+text = "Lorem Ipsum dolor sit amet"
+
+[node name="Page2" type="Control" parent="PanelContainer" unique_id=1704106267]
+visible = false
+layout_mode = 3
+anchors_preset = 0
+offset_left = -457.0
+offset_top = -246.0
+offset_right = -417.0
+offset_bottom = -206.0
+
+[node name="Label3" type="Label" parent="PanelContainer/Page2" unique_id=432164031]
+layout_mode = 0
+offset_left = 176.0
+offset_top = 29.0
+offset_right = 391.0
+offset_bottom = 52.0
+text = "Echo 3"
+
+[node name="Logo3" type="TextureRect" parent="PanelContainer/Page2" unique_id=111039963]
+layout_mode = 0
+offset_left = 188.0
+offset_top = 58.0
+offset_right = 403.0
+offset_bottom = 186.0
+texture = ExtResource("2_ihng2")
+
+[node name="DescriptionLabel3" type="Label" parent="PanelContainer/Page2" unique_id=1408819311]
+layout_mode = 0
+offset_left = 188.0
+offset_top = 221.0
+offset_right = 403.0
+offset_bottom = 244.0
+text = "Lorem Ipsum dolor sit amet"
+
+[node name="Label4" type="Label" parent="PanelContainer/Page2" unique_id=1421318741]
+layout_mode = 0
+offset_left = 510.0
+offset_top = 21.0
+offset_right = 725.0
+offset_bottom = 44.0
+text = "Echo 4"
+
+[node name="Logo4" type="TextureRect" parent="PanelContainer/Page2" unique_id=2093452889]
+layout_mode = 0
+offset_left = 512.0
+offset_top = 64.0
+offset_right = 727.0
+offset_bottom = 192.0
+texture = ExtResource("2_ihng2")
+
+[node name="DescriptionLabel4" type="Label" parent="PanelContainer/Page2" unique_id=203548189]
+layout_mode = 0
+offset_left = 526.0
+offset_top = 225.0
+offset_right = 741.0
+offset_bottom = 248.0
 text = "Lorem Ipsum dolor sit amet"
 
 [node name="ButtonOverlay" type="Control" parent="PanelContainer" unique_id=1646209552]
-layout_mode = 2
+layout_mode = 3
+anchors_preset = 0
+offset_right = 999.0
+offset_bottom = 595.0
 
 [node name="NextButton" type="Button" parent="PanelContainer/ButtonOverlay" unique_id=845161732]
 layout_mode = 1
 anchors_preset = -1
 anchor_right = 0.024
 anchor_bottom = 0.029000001
-offset_left = 732.0
-offset_top = 472.0
-offset_right = 756.024
-offset_bottom = 489.745
-theme_override_styles/normal = SubResource("StyleBoxTexture_4kxuq")
-theme_override_styles/pressed = SubResource("StyleBoxTexture_62yky")
+offset_left = 247.0
+offset_top = 137.0
+offset_right = 271.024
+offset_bottom = 154.745
+theme_override_styles/normal = SubResource("StyleBoxTexture_7wd2l")
+theme_override_styles/pressed = SubResource("StyleBoxTexture_owa6n")
 theme_override_styles/hover = SubResource("StyleBoxTexture_6vnta")
-theme_override_styles/hover_pressed = SubResource("StyleBoxTexture_qwqyf")
 
 [node name="CloseButton" type="Button" parent="PanelContainer/ButtonOverlay" unique_id=2106095874]
 layout_mode = 0
-offset_left = 746.0
-offset_top = 122.0
-offset_right = 766.0
-offset_bottom = 145.0
+offset_left = 294.0
+offset_top = -234.0
+offset_right = 314.0
+offset_bottom = -211.0
 theme_override_styles/normal = SubResource("StyleBoxTexture_r8qnq")
 text = "X"
 
 [node name="Paper" type="AudioStreamPlayer" parent="." unique_id=1150721581]
 stream = ExtResource("3_ihng2")
+
+[connection signal="pressed" from="PanelContainer/ButtonOverlay/NextButton" to="." method="_on_next_button_pressed"]
+[connection signal="pressed" from="PanelContainer/ButtonOverlay/CloseButton" to="." method="_on_close_button_pressed"]

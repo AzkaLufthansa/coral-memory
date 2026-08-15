@@ -1,29 +1,29 @@
 [gd_scene format=3 uid="uid://6ca6npc3mk41"]
 
 [ext_resource type="Script" uid="uid://c3n1vx54gf03u" path="res://Scripts/Menu/main_menu.gd" id="1_pn3xf"]
-[ext_resource type="Texture2D" uid="uid://ce0rn16a2g1xi" path="res://Assets/RealAssets/Background.png" id="2_w1xia"]
+[ext_resource type="Texture2D" uid="uid://da5pdn361lsiv" path="res://Assets/RealAssets/bg_cropped.png" id="2_17gaq"]
 [ext_resource type="Texture2D" uid="uid://my1mq8l3cfwa" path="res://Assets/RealAssets/MainMenu/Main Menu Foreground.png" id="3_nbh3q"]
 [ext_resource type="StyleBox" uid="uid://ipe4o1b1b1ic" path="res://Button_Effect/menu_normal.tres" id="4_4qbh4"]
 [ext_resource type="StyleBox" uid="uid://bajdaf5lgfdj8" path="res://Button_Effect/menu_clicked.tres" id="5_3ko7u"]
 [ext_resource type="Texture2D" uid="uid://dnjdour47lnud" path="res://Assets/Sprites/karpet.png" id="6_gpijq"]
 [ext_resource type="StyleBox" uid="uid://cgqt7rc5rbnya" path="res://Button_Effect/menu_hover.tres" id="6_jqrnd"]
-[ext_resource type="AudioStream" uid="uid://d0e6fipuhdgoc" path="res://Assets/Audio/BGM/BGM Menu.mp3" id="8_w1xia"]
 [ext_resource type="AudioStream" uid="uid://d1kl38618vy5x" path="res://Assets/SFX/Click-1.mp3" id="9_w1xia"]
 
 [node name="MainMenu" type="CanvasLayer" unique_id=1162107157]
 script = ExtResource("1_pn3xf")
 
-[node name="Title" type="TextureRect" parent="." unique_id=2099952824]
-offset_left = 102.0
-offset_top = 45.0
-offset_right = 920.0
-offset_bottom = 598.0
-texture = ExtResource("2_w1xia")
-expand_mode = 1
+[node name="Background" type="Sprite2D" parent="." unique_id=686475345]
+modulate = Color(0.31061712, 0.31061712, 0.3106171, 1)
+position = Vector2(557, 385.00003)
+scale = Vector2(0.8034602, 0.6805208)
+texture = ExtResource("2_17gaq")
+region_rect = Rect2(0.255, 0, 0, 0)
 
-[node name="Background" type="TextureRect" parent="." unique_id=380183767]
-offset_right = 1153.0
-offset_bottom = 649.0
+[node name="Frontground" type="TextureRect" parent="." unique_id=380183767]
+offset_left = 4.0
+offset_top = -4.0
+offset_right = 1157.0
+offset_bottom = 645.0
 texture = ExtResource("3_nbh3q")
 
 [node name="Button" type="Control" parent="." unique_id=1486649792]
@@ -176,7 +176,6 @@ text = "Confirm
 "
 
 [node name="BGM" type="AudioStreamPlayer" parent="." unique_id=1411902224]
-stream = ExtResource("8_w1xia")
 bus = &"Music"
 
 [node name="SFX_Click" type="AudioStreamPlayer" parent="." unique_id=155721996]

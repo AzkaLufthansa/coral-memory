@@ -11,6 +11,7 @@ func fade_to_scene(scene_path: String, duration := 0.5):
 	fade_rect.visible = true
 
 	var tween := create_tween()
+	# UBAH: 0.5 menjadi 1.0 agar layar tertutup warna hitam seutuhnya
 	tween.tween_property(fade_rect, "modulate:a", 1.0, duration)
 	await tween.finished
 
