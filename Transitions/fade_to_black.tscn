@@ -1,14 +1,14 @@
-[gd_scene load_steps=2 format=3 uid="uid://en06v6ovc2rl"]
+[gd_scene format=3 uid="uid://en06v6ovc2rl"]
 
 [ext_resource type="Script" uid="uid://5e0nghks0kik" path="res://Transitions/fade_to_black.gd" id="1_plv7l"]
 
-[node name="FadeToBlack" type="CanvasLayer"]
+[node name="FadeToBlack" type="CanvasLayer" unique_id=106856006]
 process_mode = 3
 layer = 100
 follow_viewport_enabled = true
 script = ExtResource("1_plv7l")
 
-[node name="ColorRect" type="ColorRect" parent="."]
+[node name="ColorRect" type="ColorRect" parent="." unique_id=1978402769]
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0

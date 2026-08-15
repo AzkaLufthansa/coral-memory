@@ -9,7 +9,7 @@ signal guidebook_pressed
 
 @onready var bell_button: Button = %BellButton
 @onready var call_next_button: Button = %CallNextButton
-@onready var guide_book: PanelContainer = %GuideBook
+@onready var guide_book: Control = %GuideBook
 
 
 func _ready() -> void:

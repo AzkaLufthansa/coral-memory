@@ -7,24 +7,15 @@
 [ext_resource type="Texture2D" uid="uid://bf1l8gawb1h7s" path="res://Assets/RealAssets/GuideBook/Highlighted Guidebook.png" id="3_px13u"]
 [ext_resource type="Texture2D" uid="uid://c81j7is4frric" path="res://Assets/RealAssets/Uninteractable Obj/Pen Holder/Pen Holder.png" id="3_x1tq2"]
 [ext_resource type="Texture2D" uid="uid://cny7uev5j58p7" path="res://Assets/RealAssets/Uninteractable Obj/Tea Cup/Flattened.png" id="4_ngtvf"]
-[ext_resource type="Texture2D" uid="uid://7xo5g8fbeo52" path="res://Assets/RealAssets/Monitor/Monitor.png" id="6_s847r"]
-[ext_resource type="Texture2D" uid="uid://82bh6anu05lf" path="res://Assets/RealAssets/Monitor/Highlighted Monitor.png" id="7_lsof3"]
+[ext_resource type="StyleBox" uid="uid://ct7pefteohvcy" path="res://Button_Effect/monitor_normal.tres" id="5_ngtvf"]
+[ext_resource type="StyleBox" uid="uid://d2tnpnmx4yyfg" path="res://Button_Effect/monitor_press.tres" id="6_iq73t"]
+[ext_resource type="StyleBox" uid="uid://bdsvqwrwdyxl4" path="res://Button_Effect/monitor_hover.tres" id="7_bkrp2"]
 [ext_resource type="StyleBox" uid="uid://d4b55f34q2q2o" path="res://Button_Effect/bell_normal.tres" id="10_x1tq2"]
 [ext_resource type="StyleBox" uid="uid://cy4kxuwsxi2gv" path="res://Button_Effect/bell_pressed.tres" id="11_ngtvf"]
 [ext_resource type="StyleBox" uid="uid://cfrsxyrygurp0" path="res://Button_Effect/bell_hover.tres" id="12_iq73t"]
 [ext_resource type="AudioStream" uid="uid://d1kl38618vy5x" path="res://Assets/SFX/Click-1.mp3" id="13_x1tq2"]
 [ext_resource type="AudioStream" uid="uid://boelhygo1gn0v" path="res://Assets/SFX/bell.mp3" id="14_ngtvf"]
 [ext_resource type="PackedScene" uid="uid://q5mll3fwg2p4" path="res://UI/guide_book.tscn" id="15_ngtvf"]
-
-[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_yvsax"]
-texture = ExtResource("3_b5ntf")
-
-[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_65xwo"]
-texture = ExtResource("3_b5ntf")
-modulate_color = Color(0.15686275, 0.15686275, 0.15686275, 1)
-
-[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_15ghf"]
-texture = ExtResource("3_b5ntf")
 
 [sub_resource type="StyleBoxTexture" id="StyleBoxTexture_62yky"]
 texture = ExtResource("2_l2lbq")
@@ -35,16 +26,6 @@ modulate_color = Color(0.15686275, 0.15686275, 0.15686275, 1)
 
 [sub_resource type="StyleBoxTexture" id="StyleBoxTexture_6vnta"]
 texture = ExtResource("3_px13u")
-
-[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_bkrp2"]
-texture = ExtResource("6_s847r")
-
-[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_1b60r"]
-texture = ExtResource("6_s847r")
-modulate_color = Color(0.15686275, 0.15686275, 0.15686275, 1)
-
-[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_mxnwc"]
-texture = ExtResource("7_lsof3")
 
 [node name="OfficeObjects" type="CanvasLayer" unique_id=1786024609]
 script = ExtResource("1_office")
@@ -66,16 +47,17 @@ texture = ExtResource("4_ngtvf")
 
 [node name="PatientFileButton" type="Button" parent="." unique_id=713099942]
 unique_name_in_owner = true
-offset_left = 56.0
-offset_top = 552.0
-offset_right = 133.0
-offset_bottom = 633.0
-theme_override_styles/normal = SubResource("StyleBoxTexture_yvsax")
-theme_override_styles/pressed = SubResource("StyleBoxTexture_65xwo")
-theme_override_styles/hover = SubResource("StyleBoxTexture_15ghf")
+offset_left = 121.0
+offset_top = 406.0
+offset_right = 288.0
+offset_bottom = 565.0
+theme_override_styles/normal = ExtResource("5_ngtvf")
+theme_override_styles/pressed = ExtResource("6_iq73t")
+theme_override_styles/hover = ExtResource("7_bkrp2")
 
 [node name="NotebookButton" type="Button" parent="." unique_id=1227294797]
 unique_name_in_owner = true
+visible = false
 offset_left = 801.0
 offset_top = 481.0
 offset_right = 941.0
@@ -86,23 +68,24 @@ theme_override_styles/hover = SubResource("StyleBoxTexture_6vnta")
 
 [node name="GuidebookButton" type="Button" parent="." unique_id=2072366627]
 unique_name_in_owner = true
-offset_left = 994.0
-offset_top = 153.0
-offset_right = 1134.0
-offset_bottom = 213.0
+offset_left = 798.0
+offset_top = 480.0
+offset_right = 938.0
+offset_bottom = 540.0
 theme_override_styles/normal = SubResource("StyleBoxTexture_62yky")
 theme_override_styles/pressed = SubResource("StyleBoxTexture_r8qnq")
 theme_override_styles/hover = SubResource("StyleBoxTexture_6vnta")
 
 [node name="MonitorButton" type="Button" parent="." unique_id=1289849380]
 unique_name_in_owner = true
+visible = false
 offset_left = 121.0
 offset_top = 406.0
 offset_right = 288.0
 offset_bottom = 565.0
-theme_override_styles/normal = SubResource("StyleBoxTexture_bkrp2")
-theme_override_styles/pressed = SubResource("StyleBoxTexture_1b60r")
-theme_override_styles/hover = SubResource("StyleBoxTexture_mxnwc")
+theme_override_styles/normal = ExtResource("5_ngtvf")
+theme_override_styles/pressed = ExtResource("6_iq73t")
+theme_override_styles/hover = ExtResource("7_bkrp2")
 
 [node name="BellButton" type="Button" parent="." unique_id=1183430241]
 unique_name_in_owner = true
@@ -133,6 +116,11 @@ stream = ExtResource("14_ngtvf")
 [node name="GuideBook" parent="." unique_id=1256934643 instance=ExtResource("15_ngtvf")]
 unique_name_in_owner = true
 visible = false
+
+[node name="Files" type="Sprite2D" parent="." unique_id=1690384955]
+position = Vector2(115, 589)
+scale = Vector2(0.5852018, 0.7075472)
+texture = ExtResource("3_b5ntf")
 
 [connection signal="pressed" from="PatientFileButton" to="." method="_on_patient_file_button_pressed"]
 [connection signal="pressed" from="NotebookButton" to="." method="_on_notebook_button_pressed"]
