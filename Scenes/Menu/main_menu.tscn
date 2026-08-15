@@ -2,7 +2,7 @@
 
 [ext_resource type="Script" uid="uid://c3n1vx54gf03u" path="res://Scripts/Menu/main_menu.gd" id="1_pn3xf"]
 [ext_resource type="Texture2D" uid="uid://ce0rn16a2g1xi" path="res://Assets/RealAssets/Background.png" id="2_w1xia"]
-[ext_resource type="Texture2D" uid="uid://l1cvw1smdctg" path="res://Assets/RealAssets/MainMenu/Main Menu Foreground.png" id="3_nbh3q"]
+[ext_resource type="Texture2D" uid="uid://my1mq8l3cfwa" path="res://Assets/RealAssets/MainMenu/Main Menu Foreground.png" id="3_nbh3q"]
 [ext_resource type="StyleBox" uid="uid://ipe4o1b1b1ic" path="res://Button_Effect/menu_normal.tres" id="4_4qbh4"]
 [ext_resource type="StyleBox" uid="uid://bajdaf5lgfdj8" path="res://Button_Effect/menu_clicked.tres" id="5_3ko7u"]
 [ext_resource type="Texture2D" uid="uid://dnjdour47lnud" path="res://Assets/Sprites/karpet.png" id="6_gpijq"]
@@ -34,10 +34,10 @@ offset_bottom = 40.0
 
 [node name="Start" type="Button" parent="Button" unique_id=1640541135]
 layout_mode = 0
-offset_left = 924.0
-offset_top = 182.0
-offset_right = 1137.0
-offset_bottom = 254.0
+offset_left = 940.0
+offset_top = 144.0
+offset_right = 1134.0
+offset_bottom = 210.0
 theme_override_font_sizes/font_size = 32
 theme_override_styles/normal = ExtResource("4_4qbh4")
 theme_override_styles/pressed = ExtResource("5_3ko7u")
@@ -47,10 +47,10 @@ text = "START
 
 [node name="Exit" type="Button" parent="Button" unique_id=1128903568]
 layout_mode = 0
-offset_left = 924.0
-offset_top = 293.0
-offset_right = 1137.0
-offset_bottom = 365.0
+offset_left = 940.0
+offset_top = 242.0
+offset_right = 1134.0
+offset_bottom = 310.0
 theme_override_font_sizes/font_size = 32
 theme_override_styles/normal = ExtResource("4_4qbh4")
 theme_override_styles/pressed = ExtResource("5_3ko7u")
