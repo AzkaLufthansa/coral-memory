@@ -13,22 +13,39 @@ func _ready() -> void:
 func _on_start_pressed() -> void:
 	$SFX_Click.play() 
 	
-	# 1. Sembunyikan elemen depan (Frontground) dan Tombol agar transisi bersih
-	frontground.visible = false
+	# 1. Pastikan Frontground terlihat dan sembunyikan Tombol
+	frontground.visible = true
 	button_container.visible = false
 	
-	# 2. Atur pivot (titik tumpu) background ke tengah
+	# 2. Atur pivot (titik tumpu) background DAN frontground ke tengah
 	if "pivot_offset" in background and "size" in background:
 		background.pivot_offset = background.size / 2.0
+		
+	if "pivot_offset" in frontground and "size" in frontground:
+		frontground.pivot_offset = frontground.size / 2.0
 	
-	# --- PERUBAHAN DI SINI ---
 	# Ubah angka 3.0 di bawah ini untuk mengatur seberapa lambat transisinya
-	# Semakin besar angkanya, semakin lambat zoom-nya.
 	var zoom_duration: float = 3.0 
 	
-	# 3. Buat animasi Zoom In untuk Latar Belakang
+	# --- PERBAIKAN DI SINI (SOLUSI SKALA RELATIF) ---
+	# Kita tentukan berapa kali lipat mereka membesar (misal: 3x lipat)
+	var zoom_factor: float = 3.0
+	
+	# Hitung target skala akhir berdasarkan skala mereka saat ini
+	var bg_target_scale = background.scale * zoom_factor
+	var fg_target_scale = frontground.scale * zoom_factor
+	
+	# 3. Buat animasi Zoom In untuk Latar Belakang dan Depan
 	var tween := create_tween()
-	tween.tween_property(background, "scale", Vector2(3.0, 3.0), zoom_duration)\
+	
+	# Gunakan target yang sudah dihitung agar pertumbuhannya proporsional (kecepatan sama)
+	# Zoom untuk background
+	tween.tween_property(background, "scale", bg_target_scale, zoom_duration)\
+		.set_trans(Tween.TRANS_SINE)\
+		.set_ease(Tween.EASE_IN_OUT)
+		
+	# Menggunakan parallel() agar zoom frontground berjalan bersamaan dengan background
+	tween.parallel().tween_property(frontground, "scale", fg_target_scale, zoom_duration)\
 		.set_trans(Tween.TRANS_SINE)\
 		.set_ease(Tween.EASE_IN_OUT)
 	
