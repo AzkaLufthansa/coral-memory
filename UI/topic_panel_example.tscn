@@ -1,0 +1,178 @@
+[gd_scene format=3 uid="uid://d2jc4snrvg03j"]
+
+[ext_resource type="Script" uid="uid://d2kb2nnnwwjnt" path="res://UI/topic_panel.gd" id="1_ngfkx"]
+[ext_resource type="FontFile" uid="uid://csmbxujwlcspk" path="res://Assets/Fonts/Fusion Pixel 10px Monospaced/fusion-pixel-10px-monospaced-ja.otf" id="3_45b54"]
+[ext_resource type="AudioStream" uid="uid://d1kl38618vy5x" path="res://Assets/SFX/Click-1.mp3" id="6_06ch7"]
+
+[node name="TopicPanel" type="Control" unique_id=106696125]
+layout_mode = 3
+anchors_preset = 2
+anchor_top = 1.0
+anchor_bottom = 1.0
+offset_left = -5.0
+offset_top = -227.0
+offset_right = 1166.0
+offset_bottom = 13.0
+grow_vertical = 0
+script = ExtResource("1_ngfkx")
+
+[node name="Click" type="AudioStreamPlayer" parent="." unique_id=253450304]
+stream = ExtResource("6_06ch7")
+
+[node name="ColorRect" type="ColorRect" parent="." unique_id=173249967]
+layout_mode = 0
+offset_top = 15.0
+offset_right = 614.0
+offset_bottom = 234.0
+color = Color(0, 0, 0, 0.5176471)
+
+[node name="ColorRect2" type="ColorRect" parent="." unique_id=1020385732]
+layout_mode = 0
+offset_left = 634.0
+offset_top = 15.0
+offset_right = 1187.0
+offset_bottom = 234.0
+color = Color(0, 0, 0, 0.5176471)
+
+[node name="Label" type="Label" parent="." unique_id=1670610688]
+layout_mode = 0
+offset_left = 43.0
+offset_top = 63.0
+offset_right = 578.0
+offset_bottom = 198.0
+theme_override_fonts/font = ExtResource("3_45b54")
+theme_override_font_sizes/font_size = 18
+text = "Dialog here"
+autowrap_mode = 3
+
+[node name="Label8" type="Label" parent="." unique_id=1792469091]
+layout_mode = 0
+offset_left = 758.0
+offset_top = 34.0
+offset_right = 1053.0
+offset_bottom = 62.0
+theme_override_fonts/font = ExtResource("3_45b54")
+theme_override_font_sizes/font_size = 18
+text = "Pilih Topik "
+horizontal_alignment = 1
+autowrap_mode = 3
+
+[node name="Button" type="Button" parent="." unique_id=303654625]
+layout_mode = 0
+offset_left = 669.0
+offset_top = 72.0
+offset_right = 888.0
+offset_bottom = 108.0
+theme_override_fonts/font = ExtResource("3_45b54")
+text = "Keluarga"
+
+[node name="Label2" type="Label" parent="Button" unique_id=1005788849]
+layout_mode = 0
+offset_left = 51.0
+offset_top = 5.0
+offset_right = 165.0
+offset_bottom = 33.0
+theme_override_fonts/font = ExtResource("3_45b54")
+theme_override_font_sizes/font_size = 18
+horizontal_alignment = 1
+autowrap_mode = 3
+
+[node name="Button2" type="Button" parent="." unique_id=1451002542]
+layout_mode = 0
+offset_left = 670.0
+offset_top = 115.0
+offset_right = 889.0
+offset_bottom = 151.0
+theme_override_fonts/font = ExtResource("3_45b54")
+text = "Hubungan"
+
+[node name="Label2" type="Label" parent="Button2" unique_id=1597885188]
+layout_mode = 0
+offset_left = 51.0
+offset_top = 5.0
+offset_right = 165.0
+offset_bottom = 33.0
+theme_override_fonts/font = ExtResource("3_45b54")
+theme_override_font_sizes/font_size = 18
+horizontal_alignment = 1
+autowrap_mode = 3
+
+[node name="Button3" type="Button" parent="." unique_id=21928166]
+layout_mode = 0
+offset_left = 670.0
+offset_top = 159.0
+offset_right = 889.0
+offset_bottom = 195.0
+theme_override_fonts/font = ExtResource("3_45b54")
+text = "Pekerjaan"
+
+[node name="Label2" type="Label" parent="Button3" unique_id=1741402687]
+layout_mode = 0
+offset_left = 51.0
+offset_top = 5.0
+offset_right = 165.0
+offset_bottom = 33.0
+theme_override_fonts/font = ExtResource("3_45b54")
+theme_override_font_sizes/font_size = 18
+horizontal_alignment = 1
+autowrap_mode = 3
+
+[node name="Button4" type="Button" parent="." unique_id=1202932524]
+layout_mode = 0
+offset_left = 906.0
+offset_top = 72.0
+offset_right = 1125.0
+offset_bottom = 108.0
+theme_override_fonts/font = ExtResource("3_45b54")
+text = "Keluarga"
+
+[node name="Label2" type="Label" parent="Button4" unique_id=946977668]
+layout_mode = 0
+offset_left = 51.0
+offset_top = 5.0
+offset_right = 165.0
+offset_bottom = 33.0
+theme_override_fonts/font = ExtResource("3_45b54")
+theme_override_font_sizes/font_size = 18
+horizontal_alignment = 1
+autowrap_mode = 3
+
+[node name="Button5" type="Button" parent="." unique_id=1398203015]
+layout_mode = 0
+offset_left = 907.0
+offset_top = 115.0
+offset_right = 1126.0
+offset_bottom = 151.0
+theme_override_fonts/font = ExtResource("3_45b54")
+text = "Hubungan"
+
+[node name="Label2" type="Label" parent="Button5" unique_id=535337423]
+layout_mode = 0
+offset_left = 51.0
+offset_top = 5.0
+offset_right = 165.0
+offset_bottom = 33.0
+theme_override_fonts/font = ExtResource("3_45b54")
+theme_override_font_sizes/font_size = 18
+horizontal_alignment = 1
+autowrap_mode = 3
+
+[node name="Button6" type="Button" parent="." unique_id=1337412691]
+layout_mode = 0
+offset_left = 907.0
+offset_top = 159.0
+offset_right = 1126.0
+offset_bottom = 195.0
+theme_override_fonts/font = ExtResource("3_45b54")
+text = "Pekerjaan"
+
+[node name="Label2" type="Label" parent="Button6" unique_id=1357302117]
+layout_mode = 0
+offset_left = 51.0
+offset_top = 5.0
+offset_right = 165.0
+offset_bottom = 33.0
+theme_override_fonts/font = ExtResource("3_45b54")
+theme_override_font_sizes/font_size = 18
+horizontal_alignment = 1
+autowrap_mode = 3

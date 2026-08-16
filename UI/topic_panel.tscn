@@ -11,10 +11,10 @@
 anchors_preset = 2
 anchor_top = 1.0
 anchor_bottom = 1.0
-offset_left = 260.0
-offset_top = -280.0
-offset_right = -260.0
-offset_bottom = -16.0
+offset_left = -5.0
+offset_top = -227.0
+offset_right = 1166.0
+offset_bottom = 13.0
 grow_vertical = 0
 script = ExtResource("1_topic")
 
