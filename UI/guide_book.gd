@@ -1,5 +1,7 @@
 extends Control
 
+signal closed
+
 @onready var panel_container: Sprite2D = $PanelContainer
 @onready var next_button: Button = $PanelContainer/ButtonOverlay/NextButton
 @onready var close_button: Button = $PanelContainer/ButtonOverlay/CloseButton
@@ -39,3 +41,4 @@ func _on_next_button_pressed() -> void:
 
 func _on_close_button_pressed() -> void:
 	visible = false
+	closed.emit()

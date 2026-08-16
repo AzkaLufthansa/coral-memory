@@ -89,10 +89,8 @@ static func generate_new_patients(count: int, day: int) -> Array[PatientData]:
 
 
 static func _pick_emotion(used: Array) -> Emotion.Type:
-	var available := ALL_EMOTIONS.filter(func(e): return not used.has(e))
-	if available.is_empty():
-		available = ALL_EMOTIONS.duplicate()
-	return available[_rng.randi_range(0, available.size() - 1)]
+	# PROTOTIPE: hanya pasien FEAR yang muncul karena baru ada sprite echo fase final untuk FEAR.
+	return Emotion.Type.FEAR
 
 
 static func _build_patient(emotion: Emotion.Type, day: int, index: int) -> PatientData:

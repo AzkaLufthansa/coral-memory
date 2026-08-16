@@ -148,6 +148,8 @@ func call_next_patient() -> void:
 func _end_of_day() -> void:
 	end_of_day_finished.emit(day)
 
+
+func advance_day() -> void:
 	if _game_over:
 		return
 

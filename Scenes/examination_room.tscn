@@ -9,6 +9,7 @@
 [node name="ExaminationRoom" type="Node2D" unique_id=1093799944]
 
 [node name="Back" type="Sprite2D" parent="." unique_id=1830287500]
+z_index = -999
 texture_filter = 1
 position = Vector2(574.99994, 323.5)
 scale = Vector2(0.7486979, 0.6279297)

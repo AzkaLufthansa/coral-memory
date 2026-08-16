@@ -1,45 +1,62 @@
 class_name Echo2D
 extends Node2D
 
-signal echo_clicked
+signal phase_changed(phase: int)
 
-const AURA_FRAMES_DIR := "res://Assets/Echo/Aura/Sprites/"
-const AURA_FRAME_COUNT := 25
-const AURA_FPS := 12.0
+const FRAME_SIZE := 128
+const INITIAL_SHEET := "res://Assets/Echo/Initial.png"
+const PHASE2_SHEETS: Dictionary = {
+	Emotion.Type.FEAR: "res://Assets/Echo/Fear.png",
+}
 
-var _fog_scale := 1.0
-var _elements: Dictionary = {}  # Emotion.Type -> EchoElement
+const INITIAL_FPS := 8.0
+const PHASE2_FPS := 8.0
+
 var _patient_emotion: Emotion.Type = Emotion.Type.FEAR
+var _phase := 1
 var _inspecting := false
 var _base_position := Vector2.ZERO
 var _base_scale := Vector2.ONE
 
-@onready var aura: AnimatedSprite2D = $Aura
-@onready var click_area: Area2D = $ClickArea
+@onready var echo_sprite: AnimatedSprite2D = $EchoSprite
 
 
 func _ready() -> void:
-	for child in get_children():
-		if child is EchoElement:
-			_elements[child.emotion] = child
-	_build_aura_animation()
-	click_area.input_event.connect(_on_clicked)
+	_build_sprite_animations()
 	_base_position = position
 	_base_scale = scale
 
 
-func _build_aura_animation() -> void:
+func _build_sprite_animations() -> void:
 	var frames := SpriteFrames.new()
-	frames.add_animation("idle")
-	frames.set_animation_loop("idle", true)
-	frames.set_animation_speed("idle", AURA_FPS)
-	for i in range(1, AURA_FRAME_COUNT + 1):
-		var frame_texture := load(AURA_FRAMES_DIR + "%04d.png" % i) as Texture2D
-		if frame_texture:
-			frames.add_frame("idle", frame_texture)
-	if frames.get_frame_count("idle") > 0:
-		aura.sprite_frames = frames
-		aura.play("idle")
+
+	var initial_tex := load(INITIAL_SHEET) as Texture2D
+	if initial_tex:
+		frames.add_animation("phase1")
+		frames.set_animation_loop("phase1", true)
+		frames.set_animation_speed("phase1", INITIAL_FPS)
+		for i in range(initial_tex.get_width() / FRAME_SIZE):
+			frames.add_frame("phase1", _make_atlas(initial_tex, i, 0))
+
+	for emotion in PHASE2_SHEETS:
+		var tex := load(PHASE2_SHEETS[emotion]) as Texture2D
+		if tex == null:
+			continue
+		var anim_name := "phase2_%d" % emotion
+		frames.add_animation(anim_name)
+		frames.set_animation_loop(anim_name, true)
+		frames.set_animation_speed(anim_name, PHASE2_FPS)
+		for i in range(tex.get_width() / FRAME_SIZE):
+			frames.add_frame(anim_name, _make_atlas(tex, i, 0))
+
+	echo_sprite.sprite_frames = frames
+
+
+func _make_atlas(tex: Texture2D, col: int, row: int) -> AtlasTexture:
+	var atlas := AtlasTexture.new()
+	atlas.atlas = tex
+	atlas.region = Rect2(col * FRAME_SIZE, row * FRAME_SIZE, FRAME_SIZE, FRAME_SIZE)
+	return atlas
 
 
 func start_session(patient: PatientData) -> void:
@@ -48,39 +65,54 @@ func start_session(patient: PatientData) -> void:
 
 
 func reset() -> void:
-	_fog_scale = 1.0
-	for element in _elements.values():
-		element.reset_reveal()
+	_set_phase(1)
 
 
 func react(patient: PatientData, relevance: Topic.Relevance) -> void:
-	# Section 15: reaksi Echo berdasarkan relevansi topik terhadap emosi asli.
-	var element: EchoElement = _elements.get(_patient_emotion)
-	if element == null:
-		return
+	# Transformasi ke fase final di-handle main.gd setelah transisi kedip.
 	match relevance:
-		Topic.Relevance.PRIMARY:
-			element.set_reveal(1.0)
-			_fog_scale = 1.0
 		Topic.Relevance.SECONDARY:
-			element.set_reveal(0.5)
-		Topic.Relevance.NEUTRAL:
-			pass
+			_pulse(1.15)
 		Topic.Relevance.DEFLECTIVE:
-			_fog_scale = 0.85
+			_pulse(0.92)
+
+
+func transform_to_phase_2() -> void:
+	if _phase == 2:
+		return
+	_set_phase(2)
+
+
+func _set_phase(phase: int) -> void:
+	_phase = phase
+	if phase == 2:
+		var anim_name := "phase2_%d" % _patient_emotion
+		if echo_sprite.sprite_frames and echo_sprite.sprite_frames.has_animation(anim_name):
+			echo_sprite.play(anim_name)
+		else:
+			_phase = 1
+			echo_sprite.play("phase1")
+	else:
+		echo_sprite.play("phase1")
+	phase_changed.emit(_phase)
+
+
+func _pulse(target: float) -> void:
+	var tween := create_tween()
+	tween.set_trans(Tween.TRANS_QUAD).set_ease(Tween.EASE_OUT)
+	tween.tween_property(echo_sprite, "scale", Vector2(target, target), 0.18)
+	tween.tween_property(echo_sprite, "scale", Vector2.ONE, 0.35)
 
 
 func set_stability_hint(patient: PatientData) -> void:
-	# Indikator halus kondisi (tanpa angka eksplisit): aura makin pekat jika tidak stabil.
 	var instability := 1.0 - float(patient.stability) / 100.0
-	aura.modulate.a = 1.0 - instability * 0.3
+	echo_sprite.modulate.a = 1.0 - instability * 0.3
 
 
 func set_inspecting(value: bool) -> void:
 	_inspecting = value
 	visible = value
 	if value:
-		# Perbesar & tampilkan di tengah layar saat diperiksa
 		position = Vector2(0, 0)
 		scale = Vector2(3.5, 3.5)
 		z_index = 20
@@ -90,23 +122,15 @@ func set_inspecting(value: bool) -> void:
 		z_index = 2
 
 
-func _on_clicked(_viewport: Node, event: InputEvent, _shape_idx: int) -> void:
-	if event is InputEventMouseButton and event.pressed and event.button_index == MOUSE_BUTTON_LEFT:
-		echo_clicked.emit()
-
-
 func get_reveal_levels() -> Dictionary:
-	var out := {}
-	for emotion in _elements:
-		out[emotion] = _elements[emotion].reveal_level
-	return out
+	return {_patient_emotion: 1.0 if _phase == 2 else 0.0}
 
 
 func apply_reveal_levels(levels: Dictionary) -> void:
-	for emotion in levels:
-		var element: EchoElement = _elements.get(emotion)
-		if element:
-			element.set_reveal(levels[emotion])
+	if levels.get(_patient_emotion, 0.0) >= 1.0:
+		_set_phase(2)
+	else:
+		_set_phase(1)
 
 
 func get_patient_emotion() -> Emotion.Type:
