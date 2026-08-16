@@ -1,6 +1,7 @@
 extends Control
 
 signal file_closed
+signal decision_submitted(emotion: Emotion.Type, schedule: GameConfig.Schedule)
 
 # --- REFERENSI NODE LABELS PASIEN ---
 @onready var name_label: Label = %NameLabel
@@ -29,6 +30,15 @@ signal file_closed
 @onready var page2: Control = %ScheduleContent/Page2
 @onready var left_arrow: Button = %ScheduleContent/Page2/LeftArrowButton
 @onready var right_arrow: Button = %ScheduleContent/RightArrowButton
+
+# --- REFERENSI NODE SUBMIT ---
+@onready var submit_content: Control = %SubmitContent
+
+var submit_confirm_button: Button = null
+var _emotion_buttons: Dictionary = {}  # Emotion.Type -> Button
+var _schedule_buttons: Dictionary = {}  # GameConfig.Schedule -> Button
+var _selected_emotion: Emotion.Type = -1
+var _selected_schedule: GameConfig.Schedule = -1
 
 # --- ANIMATION PLAYER (monitor terbuka/tertutup) ---
 @onready var anim_player: AnimationPlayer = $AnimationPlayer
@@ -78,6 +88,11 @@ func _ready() -> void:
 		"res://Assets/SFX/tutup_monitor.mp3",
 	])
 
+	submit_confirm_button = $SubmitContent/SubmitButton
+	submit_confirm_button.disabled = true
+	_build_submit_buttons()
+	submit_confirm_button.pressed.connect(_on_submit_confirm_pressed)
+
 
 func show_patient(patient: PatientData) -> void:
 	_populate_patient_data(patient)
@@ -88,6 +103,7 @@ func show_patient(patient: PatientData) -> void:
 
 	_set_ui_content_visible(false)
 	schedule_content.hide()
+	submit_content.hide()
 	visible = true
 
 	await _play_open_animation()
@@ -129,6 +145,7 @@ func _populate_patient_data(patient: PatientData) -> void:
 func _on_close() -> void:
 	_set_ui_content_visible(false)
 	schedule_content.hide()
+	submit_content.hide()
 
 	await _play_close_animation()
 
@@ -159,6 +176,7 @@ func _on_close_button_pressed() -> void:
 
 func _on_schedule_button_pressed() -> void:
 	_play_click()
+	submit_content.hide()
 	schedule_content.show()
 	for element in patient_details:
 		if element:
@@ -172,11 +190,86 @@ func _on_patient_button_pressed() -> void:
 
 func _on_submit_button_pressed() -> void:
 	_play_click()
-	# Placeholder: belum ada aksi pengambilan keputusan.
+	_reset_submit_selection()
+	schedule_content.hide()
+	submit_content.show()
+	for element in patient_details:
+		if element:
+			element.hide()
+
+
+func _build_submit_buttons() -> void:
+	_emotion_buttons[Emotion.Type.FEAR] = $SubmitContent/KetakutanButton
+	_emotion_buttons[Emotion.Type.ANGER] = $SubmitContent/KemarahanButton
+	_emotion_buttons[Emotion.Type.SADNESS] = $SubmitContent/KesedihanButton
+	_emotion_buttons[Emotion.Type.GUILT] = $SubmitContent/RasaBersalahButton
+	_emotion_buttons[Emotion.Type.SHAME] = $SubmitContent/RasaMaluButton
+	_emotion_buttons[Emotion.Type.ENVY] = $SubmitContent/KedengkianButton
+	for emotion in _emotion_buttons:
+		var button: Button = _emotion_buttons[emotion]
+		button.toggle_mode = true
+		button.toggled.connect(_on_emotion_toggled.bind(emotion))
+	_emotion_buttons[Emotion.Type.ANGER].text = "Kemarahan" # bersihkan newline bawaan editor
+
+	_schedule_buttons[GameConfig.Schedule.BESOK] = $SubmitContent/BesokButton
+	_schedule_buttons[GameConfig.Schedule.DUA_HARI] = $SubmitContent/LusaButton
+	_schedule_buttons[GameConfig.Schedule.TIGA_HARI] = $SubmitContent/TigaHariButton
+	_schedule_buttons[GameConfig.Schedule.TIGA_HARI].text = "Tiga Hari" # perbaiki salah tulis "Lusa"
+	for schedule in _schedule_buttons:
+		var button: Button = _schedule_buttons[schedule]
+		button.toggle_mode = true
+		button.toggled.connect(_on_schedule_toggled.bind(schedule))
+
+
+func _reset_submit_selection() -> void:
+	_selected_emotion = -1
+	_selected_schedule = -1
+	for button in _emotion_buttons.values():
+		button.set_pressed_no_signal(false)
+	for button in _schedule_buttons.values():
+		button.set_pressed_no_signal(false)
+	submit_confirm_button.disabled = true
+
+
+func _on_emotion_toggled(pressed: bool, emotion: Emotion.Type) -> void:
+	if pressed:
+		_selected_emotion = emotion
+		for other in _emotion_buttons:
+			if other != emotion:
+				_emotion_buttons[other].set_pressed_no_signal(false)
+	else:
+		if _selected_emotion == emotion:
+			_selected_emotion = -1
+	_update_submit_confirm()
+
+
+func _on_schedule_toggled(pressed: bool, schedule: GameConfig.Schedule) -> void:
+	if pressed:
+		_selected_schedule = schedule
+		for other in _schedule_buttons:
+			if other != schedule:
+				_schedule_buttons[other].set_pressed_no_signal(false)
+	else:
+		if _selected_schedule == schedule:
+			_selected_schedule = -1
+	_update_submit_confirm()
+
+
+func _update_submit_confirm() -> void:
+	submit_confirm_button.disabled = _selected_emotion == -1 or _selected_schedule == -1
+
+
+func _on_submit_confirm_pressed() -> void:
+	if _selected_emotion == -1 or _selected_schedule == -1:
+		return
+	_play_click()
+	decision_submitted.emit(_selected_emotion, _selected_schedule)
+	_on_close()
 
 
 func _show_patient_tab() -> void:
 	schedule_content.hide()
+	submit_content.hide()
 	_set_ui_content_visible(true)
 
 

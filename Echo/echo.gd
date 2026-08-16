@@ -12,6 +12,10 @@ const PHASE2_SHEETS: Dictionary = {
 const INITIAL_FPS := 8.0
 const PHASE2_FPS := 8.0
 
+# Static supaya bertahan antar instance echo (setiap bel membuat scene
+# pasien baru -> node echo baru). Sekali wujud berubah, tetap berubah.
+static var _revealed := false
+
 var _patient_emotion: Emotion.Type = Emotion.Type.FEAR
 var _phase := 1
 var _inspecting := false
@@ -65,7 +69,8 @@ func start_session(patient: PatientData) -> void:
 
 
 func reset() -> void:
-	_set_phase(1)
+	# Sekali echo sudah berubah wujud (fase final), wujud itu dipertahankan.
+	_set_phase(2 if _revealed else 1)
 
 
 func react(patient: PatientData, relevance: Topic.Relevance) -> void:
@@ -80,7 +85,12 @@ func react(patient: PatientData, relevance: Topic.Relevance) -> void:
 func transform_to_phase_2() -> void:
 	if _phase == 2:
 		return
+	_revealed = true
 	_set_phase(2)
+
+
+static func reset_revealed() -> void:
+	_revealed = false
 
 
 func _set_phase(phase: int) -> void:

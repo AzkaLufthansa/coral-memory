@@ -18,6 +18,7 @@ var _control_patients: Array = []
 var _session_queue: Array = []
 var _pending_checkups: Array = []
 var _game_over: bool = false
+var _day_advancing: bool = false
 
 
 func start_game() -> void:
@@ -27,6 +28,7 @@ func start_game() -> void:
 	_session_queue = []
 	_pending_checkups = []
 	_game_over = false
+	_day_advancing = false
 	PatientFactory.setup_rng()
 	_start_next_day()
 
@@ -138,7 +140,7 @@ func commit_diagnosis(chosen_emotion: Emotion.Type, chosen_schedule: GameConfig.
 
 
 func call_next_patient() -> void:
-	if _game_over:
+	if _game_over or _day_advancing:
 		return
 	_start_next_session()
 
@@ -146,12 +148,19 @@ func call_next_patient() -> void:
 # --- End of Day (Section 16, 18, 36) ---
 
 func _end_of_day() -> void:
+	# Guard agar bel/next yang diklik berulang tidak memicu end-of-day
+	# berkali-kali (yang bisa melewati hari).
+	if _day_advancing:
+		return
+	_day_advancing = true
 	end_of_day_finished.emit(day)
 
 
 func advance_day() -> void:
 	if _game_over:
 		return
+
+	_day_advancing = false
 
 	if day >= GameConfig.DAYS_TOTAL:
 		game_ended.emit(day)

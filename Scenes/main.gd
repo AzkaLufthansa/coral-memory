@@ -133,6 +133,7 @@ func _setup_signals() -> void:
 		guide_book.closed.connect(_on_guide_book_closed)
 
 	file_panel.file_closed.connect(_on_close_panel)
+	file_panel.decision_submitted.connect(_on_monitor_decision_submitted)
 	notebook_panel.notebook_closed.connect(_on_close_panel)
 	notebook_panel.report_submitted.connect(_on_report_submitted)
 	monitor_panel.monitor_closed.connect(_on_close_panel)
@@ -229,9 +230,15 @@ func _on_dialogue_finished() -> void:
 
 
 func _on_report_submitted(emotion: Emotion.Type, schedule: GameConfig.Schedule, notes: String) -> void:
+	if _report_submitted:
+		return
 	EchoManager.commit_diagnosis(emotion, schedule)
 	_report_submitted = true
 	office.set_next_enabled(true)
+
+
+func _on_monitor_decision_submitted(emotion: Emotion.Type, schedule: GameConfig.Schedule) -> void:
+	_on_report_submitted(emotion, schedule, "")
 
 
 func _on_call_next_pressed() -> void:
@@ -283,4 +290,5 @@ func _on_game_ended(days: int) -> void:
 
 
 func _on_restart_requested() -> void:
+	Echo2D.reset_revealed()
 	get_tree().reload_current_scene()

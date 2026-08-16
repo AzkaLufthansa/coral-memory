@@ -22,6 +22,8 @@ var _arrow_tween: Tween = null
 
 var _current_patient: PatientData = null
 var _buttons: Dictionary = {}  # Topic.Name -> Button
+var _dialog_generation := 0
+var _expand_tween: Tween = null
 
 
 func _ready() -> void:
@@ -78,29 +80,39 @@ func open_dialogue(patient: PatientData) -> void:
 
 
 func _setup_choice_mode() -> void:
+	_interrupt_dialog()
 	dialog_label.text = OPEN_TEXT
 	dialog_panel.offset_right = DIALOG_PANEL_DEFAULT
 	topic_choice.visible = true
 	topic_title.visible = true
 	topic_choice.modulate.a = 1.0
 	topic_title.modulate.a = 1.0
+	var out_of_questions := _current_patient != null \
+		and _current_patient.topics_used.size() >= GameConfig.MAX_TOPICS_PER_SESSION
 	for topic in _buttons:
 		var button: Button = _buttons[topic]
 		var used := _current_patient != null and _current_patient.topics_used.has(topic)
+		var blocked := used or out_of_questions
 		button.visible = true
-		button.modulate.a = 0.4 if used else 1.0
-		button.disabled = used
+		button.modulate.a = 0.4 if blocked else 1.0
+		button.disabled = blocked
 
 
 func show_response(patient: PatientData, topic: Topic.Name) -> void:
+	var gen := _dialog_generation
 	_current_patient = patient
-	await _expand_dialog_panel()
+	await _expand_dialog_panel(gen)
+	if gen != _dialog_generation:
+		return
 	await get_tree().create_timer(TYPE_START_DELAY).timeout
-	await _type_text(patient.get_dialog(topic))
+	if gen != _dialog_generation:
+		return
+	await _type_text(patient.get_dialog(topic), gen)
 
 
-func _expand_dialog_panel() -> void:
-	var tween := create_tween()
+func _expand_dialog_panel(gen: int) -> void:
+	_expand_tween = create_tween()
+	var tween := _expand_tween
 	tween.set_trans(Tween.TRANS_QUAD).set_ease(Tween.EASE_OUT)
 	tween.tween_property(dialog_panel, "offset_right", DIALOG_PANEL_EXPANDED, 0.3)
 	tween.parallel().tween_property(topic_choice, "modulate:a", 0.0, 0.2)
@@ -108,17 +120,23 @@ func _expand_dialog_panel() -> void:
 	for topic in _buttons:
 		tween.parallel().tween_property(_buttons[topic], "modulate:a", 0.0, 0.2)
 	await tween.finished
+	if gen != _dialog_generation:
+		return
 	topic_choice.visible = false
 	topic_title.visible = false
 	for topic in _buttons:
 		_buttons[topic].visible = false
 
 
-func _type_text(full_text: String) -> void:
+func _type_text(full_text: String, gen: int) -> void:
 	dialog_label.text = ""
 	if dialog_sfx and dialog_sfx.stream:
 		dialog_sfx.play()
 	for i in full_text.length():
+		if gen != _dialog_generation:
+			if dialog_sfx and dialog_sfx.playing:
+				dialog_sfx.stop()
+			return
 		dialog_label.text = full_text.substr(0, i + 1)
 		await get_tree().create_timer(TYPE_INTERVAL).timeout
 	if dialog_sfx and dialog_sfx.playing:
@@ -137,13 +155,25 @@ func _on_dialog_panel_input(event: InputEvent) -> void:
 
 
 func _close() -> void:
+	_interrupt_dialog()
 	if click_sfx and click_sfx.stream:
 		click_sfx.play()
 	dialogue_finished.emit()
 
 
 func close_dialogue() -> void:
+	_interrupt_dialog()
 	visible = false
+
+
+func _interrupt_dialog() -> void:
+	# Membatalkan ketikan/animasi dialog yang sedang berjalan supaya tidak
+	# "melanjutkan" sisa ketikan ketika dialog dibuka lagi.
+	_dialog_generation += 1
+	if dialog_sfx and dialog_sfx.playing:
+		dialog_sfx.stop()
+	if _expand_tween and _expand_tween.is_valid():
+		_expand_tween.kill()
 
 
 func _start_close_arrow_animation() -> void:
