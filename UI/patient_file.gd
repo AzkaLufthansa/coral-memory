@@ -19,6 +19,7 @@ signal file_closed
 @onready var close_button: Button = %CloseButton
 @onready var schedule_button: Button = $ScheduleButton if has_node("ScheduleButton") else null
 @onready var patient_button: Button = $PatientButton if has_node("PatientButton") else null
+@onready var submit_button: Button = $SubmitButton if has_node("SubmitButton") else null
 @onready var title_label: Control = $PatientOverlay/Title if has_node("PatientOverlay/Title") else null
 @onready var click_sfx: AudioStreamPlayer = $Click if has_node("Click") else null
 
@@ -29,13 +30,22 @@ signal file_closed
 @onready var left_arrow: Button = %ScheduleContent/Page2/LeftArrowButton
 @onready var right_arrow: Button = %ScheduleContent/RightArrowButton
 
-# --- ANIMATION PLAYER ---
-#@onready var anim_player: AnimationPlayer = $AnimationPlayer
+# --- ANIMATION PLAYER (monitor terbuka/tertutup) ---
+@onready var anim_player: AnimationPlayer = $AnimationPlayer
+@onready var monitor2: Sprite2D = $Monitor2
+@onready var open_sfx: AudioStreamPlayer = $OpenSound
+@onready var close_sfx: AudioStreamPlayer = $CloseSound
 
-# --- KELOMPOK ELEMEN INFO PASIEN (Teks, Judul & Logo) ---
+# Detail pasien (disembunyikan saat tab Schedule; Hari/Sesi/Sisa tetap tampil).
+@onready var patient_details: Array[Control] = [
+	name_label, usia_label, job_label, rujukan_label,
+	visits_label, notes_label, logo
+]
+
+# Semua elemen info (untuk buka/tutup monitor secara keseluruhan).
 @onready var patient_info_elements: Array[Control] = [
-	name_label, usia_label, job_label, rujukan_label, 
-	visits_label, day_label, session_label, remaining_label, 
+	name_label, usia_label, job_label, rujukan_label,
+	visits_label, day_label, session_label, remaining_label,
 	notes_label, logo
 ]
 
@@ -43,38 +53,59 @@ signal file_closed
 func _ready() -> void:
 	if close_button and not close_button.pressed.is_connected(_on_close_button_pressed):
 		close_button.pressed.connect(_on_close_button_pressed)
-		
+
 	if schedule_button and not schedule_button.pressed.is_connected(_on_schedule_button_pressed):
 		schedule_button.pressed.connect(_on_schedule_button_pressed)
-		
+
 	if patient_button and not patient_button.pressed.is_connected(_on_patient_button_pressed):
 		patient_button.pressed.connect(_on_patient_button_pressed)
-		
+
+	if submit_button and not submit_button.pressed.is_connected(_on_submit_button_pressed):
+		submit_button.pressed.connect(_on_submit_button_pressed)
+
 	if left_arrow and not left_arrow.pressed.is_connected(_on_left_arrow_pressed):
 		left_arrow.pressed.connect(_on_left_arrow_pressed)
-		
+
 	if right_arrow and not right_arrow.pressed.is_connected(_on_right_arrow_pressed):
 		right_arrow.pressed.connect(_on_right_arrow_pressed)
+
+	open_sfx.stream = SfxUtil.first_available([
+		"res://Assets/Audio/SFX buka lemari.mp3",
+		"res://Assets/SFX/buka_monitor.mp3",
+	])
+	close_sfx.stream = SfxUtil.first_available([
+		"res://Assets/Audio/SFX buka tutup kunci pintu.mp3",
+		"res://Assets/SFX/tutup_monitor.mp3",
+	])
 
 
 func show_patient(patient: PatientData) -> void:
 	_populate_patient_data(patient)
-	
+
 	page1.show()
 	page2.hide()
 	right_arrow.show()
-	
+
 	_set_ui_content_visible(false)
 	schedule_content.hide()
 	visible = true
-	
-	# 5. kode animasi cuy
-	#if anim_player and anim_player.has_animation("open_monitor"):
-		#anim_player.play("open_monitor")
-		#anim_player.seek(0, true) # <--- KUNCI PERBAIKAN: Mencegah tampilan berkedip/langsung muncul utuh
-		#await anim_player.animation_finished
-	
+
+	await _play_open_animation()
 	_show_patient_tab()
+
+
+func _play_open_animation() -> void:
+	monitor.visible = false
+	monitor2.visible = true
+	monitor2.frame = 0
+	if open_sfx and open_sfx.stream:
+		open_sfx.play()
+	if anim_player and anim_player.has_animation("open_monitor"):
+		anim_player.play("open_monitor")
+		anim_player.seek(0.0, true) # KUNCI: mencegah tampilan langsung muncul utuh
+		await anim_player.animation_finished
+	monitor2.visible = false
+	monitor.visible = true
 
 
 func _populate_patient_data(patient: PatientData) -> void:
@@ -82,14 +113,14 @@ func _populate_patient_data(patient: PatientData) -> void:
 	usia_label.text = "Usia: %d" % patient.age
 	job_label.text = "Pekerjaan: %s" % patient.profession
 	rujukan_label.text = "Alasan Rujukan: %s" % patient.referral_reason
-	
+
 	if "notes" in patient:
 		notes_label.text = "Catatan: %s" % patient.notes
-	
+
 	var visit_count := patient.diagnosis_history.size()
 	var visit_text := str(visit_count) if visit_count > 0 else "Pasien baru (belum pernah diperiksa)"
 	visits_label.text = "Kunjungan Sebelumnya: %s" % visit_text
-	
+
 	day_label.text = "HARI %d / %d" % [EchoManager.day, GameConfig.DAYS_TOTAL]
 	session_label.text = "SESI %d / %d" % [EchoManager.session_index, GameConfig.SESSIONS_PER_DAY]
 	remaining_label.text = "Pertanyaan tersisa: %d" % EchoManager.get_topics_remaining()
@@ -98,15 +129,25 @@ func _populate_patient_data(patient: PatientData) -> void:
 func _on_close() -> void:
 	_set_ui_content_visible(false)
 	schedule_content.hide()
-	
-#	Kode Animasi coy
-	#if anim_player and anim_player.has_animation("close_monitor"):
-		#anim_player.play("close_monitor")
-		#anim_player.seek(0, true)
-		#await anim_player.animation_finished
-		
+
+	await _play_close_animation()
+
 	visible = false
 	file_closed.emit()
+
+
+func _play_close_animation() -> void:
+	monitor.visible = false
+	monitor2.visible = true
+	monitor2.frame = 3
+	if close_sfx and close_sfx.stream:
+		close_sfx.play()
+	if anim_player and anim_player.has_animation("close_monitor"):
+		anim_player.play("close_monitor")
+		anim_player.seek(0.0, true)
+		await anim_player.animation_finished
+	monitor2.visible = false
+	monitor.visible = true
 
 
 func _on_close_button_pressed() -> void:
@@ -119,7 +160,7 @@ func _on_close_button_pressed() -> void:
 func _on_schedule_button_pressed() -> void:
 	_play_click()
 	schedule_content.show()
-	for element in patient_info_elements:
+	for element in patient_details:
 		if element:
 			element.hide()
 
@@ -127,6 +168,11 @@ func _on_schedule_button_pressed() -> void:
 func _on_patient_button_pressed() -> void:
 	_play_click()
 	_show_patient_tab()
+
+
+func _on_submit_button_pressed() -> void:
+	_play_click()
+	# Placeholder: belum ada aksi pengambilan keputusan.
 
 
 func _show_patient_tab() -> void:
@@ -138,11 +184,13 @@ func _set_ui_content_visible(is_show: bool) -> void:
 	for element in patient_info_elements:
 		if element:
 			element.visible = is_show
-	
+
 	if patient_button: patient_button.visible = is_show
 	if schedule_button: schedule_button.visible = is_show
+	if submit_button: submit_button.visible = is_show
 	if close_button: close_button.visible = is_show
 	if title_label: title_label.visible = is_show
+
 
 func _on_right_arrow_pressed() -> void:
 	_play_click()

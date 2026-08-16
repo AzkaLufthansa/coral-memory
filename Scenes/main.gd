@@ -47,6 +47,7 @@ func _build_room() -> void:
 
 
 func _build_ui() -> void:
+	# Layer 1: objek kantor (meja, tombol-tombol) + overlay gelap.
 	var ui_layer := CanvasLayer.new()
 	ui_layer.name = "UI"
 	add_child(ui_layer)
@@ -61,33 +62,40 @@ func _build_ui() -> void:
 	office = OfficeScene.instantiate()
 	ui_layer.add_child(office)
 
+	# Layer 2: panel interaktif (monitor, buku, transisi, dst) agar selalu
+	# tampil di atas objek kantor.
+	var panels_layer := CanvasLayer.new()
+	panels_layer.name = "Panels"
+	panels_layer.layer = 2
+	add_child(panels_layer)
+
 	file_panel = FileScene.instantiate()
 	file_panel.visible = false
-	ui_layer.add_child(file_panel)
+	panels_layer.add_child(file_panel)
 
 	notebook_panel = NotebookScene.instantiate()
 	notebook_panel.visible = false
-	ui_layer.add_child(notebook_panel)
+	panels_layer.add_child(notebook_panel)
 
 	monitor_panel = MonitorScene.instantiate()
 	monitor_panel.visible = false
-	ui_layer.add_child(monitor_panel)
+	panels_layer.add_child(monitor_panel)
 
 	topic_panel = TopicScene.instantiate()
 	topic_panel.visible = false
-	ui_layer.add_child(topic_panel)
+	panels_layer.add_child(topic_panel)
 
 	day_transition = DayTransitionScene.instantiate()
 	day_transition.visible = false
-	ui_layer.add_child(day_transition)
+	panels_layer.add_child(day_transition)
 
 	transform_flash = TransformFlashScene.instantiate()
 	transform_flash.visible = false
-	ui_layer.add_child(transform_flash)
+	panels_layer.add_child(transform_flash)
 
 	game_over_screen = GameOverScene.instantiate()
 	game_over_screen.visible = false
-	ui_layer.add_child(game_over_screen)
+	panels_layer.add_child(game_over_screen)
 
 
 func _build_sfx() -> void:

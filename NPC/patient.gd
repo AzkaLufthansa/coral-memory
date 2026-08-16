@@ -70,7 +70,12 @@ func setup(patient: PatientData) -> void:
 	if patient.is_control_patient:
 		name_label.text += "  [KONTROL]"
 	echo.start_session(patient)
-	_begin_echo_delay()
+	# Delay echo hanya untuk pasien pertama di tiap hari (sesi 1).
+	# Pasien berikutnya (via bel) langsung menampilkan echo agar tidak "hilang".
+	if EchoManager.session_index <= 1:
+		_begin_echo_delay()
+	else:
+		echo.visible = true
 
 
 func _begin_echo_delay() -> void:
@@ -93,8 +98,7 @@ func _show_echo() -> void:
 
 func fade_out(duration := 1.2) -> void:
 	var tween := create_tween()
-	tween.tween_property(npc_sprite, "modulate:a", 0.0, duration)
-	tween.parallel().tween_property(name_label, "modulate:a", 0.0, duration)
+	tween.tween_property(self, "modulate:a", 0.0, duration)
 
 
 func on_topic_reacted(relevance: Topic.Relevance) -> void:
