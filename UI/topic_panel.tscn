@@ -1,13 +1,16 @@
 [gd_scene format=3 uid="uid://dd3ofcv4m67p"]
 
 [ext_resource type="Script" uid="uid://d2kb2nnnwwjnt" path="res://UI/topic_panel.gd" id="1_topic"]
-[ext_resource type="StyleBox" uid="uid://bmsl2ivdeekss" path="res://Button_Effect/normal.tres" id="2_rq8l6"]
-[ext_resource type="StyleBox" uid="uid://dsacgsdrhpcyg" path="res://Button_Effect/pressed.tres" id="3_1rlls"]
-[ext_resource type="StyleBox" uid="uid://b0l5doruddxuo" path="res://Button_Effect/hover.tres" id="4_657xq"]
-[ext_resource type="StyleBox" uid="uid://bcgsfsibr84mj" path="res://Button_Effect/hover_pressed.tres" id="5_xbxoh"]
-[ext_resource type="AudioStream" uid="uid://d1kl38618vy5x" path="res://Assets/SFX/Click-1.mp3" id="6_1rlls"]
+[ext_resource type="FontFile" uid="uid://csmbxujwlcspk" path="res://Assets/Fonts/Fusion Pixel 10px Monospaced/fusion-pixel-10px-monospaced-ja.otf" id="2_font"]
+[ext_resource type="StyleBox" uid="uid://bmsl2ivdeekss" path="res://Button_Effect/normal.tres" id="3_norm"]
+[ext_resource type="StyleBox" uid="uid://dsacgsdrhpcyg" path="res://Button_Effect/pressed.tres" id="4_press"]
+[ext_resource type="StyleBox" uid="uid://b0l5doruddxuo" path="res://Button_Effect/hover.tres" id="5_hover"]
+[ext_resource type="StyleBox" uid="uid://bcgsfsibr84mj" path="res://Button_Effect/hover_pressed.tres" id="6_hpress"]
+[ext_resource type="AudioStream" uid="uid://d1kl38618vy5x" path="res://Assets/SFX/Click-1.mp3" id="7_click"]
+[ext_resource type="Texture2D" uid="uid://b3pqhlxmliy86" path="res://Assets/Textures/Down.png" id="8_down"]
 
-[node name="TopicPanel" type="PanelContainer" unique_id=1300001394]
+[node name="TopicPanel2" type="Control" unique_id=1300001394]
+layout_mode = 3
 anchors_preset = 2
 anchor_top = 1.0
 anchor_bottom = 1.0
@@ -18,46 +21,145 @@ offset_bottom = 13.0
 grow_vertical = 0
 script = ExtResource("1_topic")
 
-[node name="Margin" type="MarginContainer" parent="." unique_id=1709795325]
-layout_mode = 2
-theme_override_constants/margin_left = 12
-theme_override_constants/margin_top = 8
-theme_override_constants/margin_right = 12
-theme_override_constants/margin_bottom = 8
+[node name="Click" type="AudioStreamPlayer" parent="." unique_id=253450304]
+stream = ExtResource("7_click")
 
-[node name="VBox" type="VBoxContainer" parent="Margin" unique_id=1871742091]
-layout_mode = 2
+[node name="DialogPanel" type="ColorRect" parent="." unique_id=173249967]
+layout_mode = 0
+offset_top = 15.0
+offset_right = 614.0
+offset_bottom = 234.0
+color = Color(0, 0, 0, 0.52)
 
-[node name="TitleLabel" type="Label" parent="Margin/VBox" unique_id=2055474176]
-unique_name_in_owner = true
-layout_mode = 2
-text = "Pilih pertanyaan"
-
-[node name="RemainingLabel" type="Label" parent="Margin/VBox" unique_id=661906858]
-unique_name_in_owner = true
-layout_mode = 2
-text = "Pertanyaan tersisa: 3"
-
-[node name="Grid" type="GridContainer" parent="Margin/VBox" unique_id=1718450914]
-unique_name_in_owner = true
-layout_mode = 2
-columns = 3
-
-[node name="ResponseLabel" type="Label" parent="Margin/VBox" unique_id=920201300]
-unique_name_in_owner = true
-layout_mode = 2
+[node name="DialogLabel" type="Label" parent="DialogPanel" unique_id=1670610688]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 35.0
+offset_top = 25.0
+offset_right = -30.0
+offset_bottom = -54.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_fonts/font = ExtResource("2_font")
+theme_override_font_sizes/font_size = 18
+text = "..."
 autowrap_mode = 3
 
-[node name="FinishButton" type="Button" parent="Margin/VBox" unique_id=837344417]
-unique_name_in_owner = true
-layout_mode = 2
-theme_override_styles/normal = ExtResource("2_rq8l6")
-theme_override_styles/pressed = ExtResource("3_1rlls")
-theme_override_styles/hover = ExtResource("4_657xq")
-theme_override_styles/hover_pressed = ExtResource("5_xbxoh")
-text = "Cukup"
+[node name="CloseArrow" type="TextureRect" parent="DialogPanel" unique_id=1142300888]
+layout_mode = 1
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = 228.0
+offset_top = -65.0
+offset_right = 276.0
+offset_bottom = -17.0
+grow_horizontal = 2
+grow_vertical = 0
+mouse_filter = 2
+texture = ExtResource("8_down")
 
-[node name="Click" type="AudioStreamPlayer" parent="." unique_id=253450304]
-stream = ExtResource("6_1rlls")
+[node name="TopicChoice" type="ColorRect" parent="." unique_id=1020385732]
+layout_mode = 0
+offset_left = 634.0
+offset_top = 15.0
+offset_right = 1187.0
+offset_bottom = 234.0
+color = Color(0, 0, 0, 0.52)
 
-[connection signal="pressed" from="Margin/VBox/FinishButton" to="." method="_on_finish_button_pressed"]
+[node name="TopicTitle" type="Label" parent="." unique_id=1792469091]
+layout_mode = 0
+offset_left = 758.0
+offset_top = 34.0
+offset_right = 1053.0
+offset_bottom = 62.0
+theme_override_fonts/font = ExtResource("2_font")
+theme_override_font_sizes/font_size = 18
+text = "Pilih Topik"
+horizontal_alignment = 1
+autowrap_mode = 3
+
+[node name="TopicButton0" type="Button" parent="." unique_id=303654625]
+layout_mode = 0
+offset_left = 669.0
+offset_top = 72.0
+offset_right = 888.0
+offset_bottom = 108.0
+theme_override_fonts/font = ExtResource("2_font")
+theme_override_font_sizes/font_size = 18
+theme_override_styles/normal = ExtResource("3_norm")
+theme_override_styles/pressed = ExtResource("4_press")
+theme_override_styles/hover = ExtResource("5_hover")
+theme_override_styles/hover_pressed = ExtResource("6_hpress")
+
+[node name="TopicButton1" type="Button" parent="." unique_id=1451002542]
+layout_mode = 0
+offset_left = 670.0
+offset_top = 115.0
+offset_right = 889.0
+offset_bottom = 151.0
+theme_override_fonts/font = ExtResource("2_font")
+theme_override_font_sizes/font_size = 18
+theme_override_styles/normal = ExtResource("3_norm")
+theme_override_styles/pressed = ExtResource("4_press")
+theme_override_styles/hover = ExtResource("5_hover")
+theme_override_styles/hover_pressed = ExtResource("6_hpress")
+
+[node name="TopicButton2" type="Button" parent="." unique_id=21928166]
+layout_mode = 0
+offset_left = 670.0
+offset_top = 159.0
+offset_right = 889.0
+offset_bottom = 195.0
+theme_override_fonts/font = ExtResource("2_font")
+theme_override_font_sizes/font_size = 18
+theme_override_styles/normal = ExtResource("3_norm")
+theme_override_styles/pressed = ExtResource("4_press")
+theme_override_styles/hover = ExtResource("5_hover")
+theme_override_styles/hover_pressed = ExtResource("6_hpress")
+
+[node name="TopicButton3" type="Button" parent="." unique_id=1202932524]
+layout_mode = 0
+offset_left = 906.0
+offset_top = 72.0
+offset_right = 1125.0
+offset_bottom = 108.0
+theme_override_fonts/font = ExtResource("2_font")
+theme_override_font_sizes/font_size = 18
+theme_override_styles/normal = ExtResource("3_norm")
+theme_override_styles/pressed = ExtResource("4_press")
+theme_override_styles/hover = ExtResource("5_hover")
+theme_override_styles/hover_pressed = ExtResource("6_hpress")
+
+[node name="TopicButton4" type="Button" parent="." unique_id=1398203015]
+layout_mode = 0
+offset_left = 907.0
+offset_top = 115.0
+offset_right = 1126.0
+offset_bottom = 151.0
+theme_override_fonts/font = ExtResource("2_font")
+theme_override_font_sizes/font_size = 18
+theme_override_styles/normal = ExtResource("3_norm")
+theme_override_styles/pressed = ExtResource("4_press")
+theme_override_styles/hover = ExtResource("5_hover")
+theme_override_styles/hover_pressed = ExtResource("6_hpress")
+
+[node name="TopicButton5" type="Button" parent="." unique_id=1337412691]
+layout_mode = 0
+offset_left = 907.0
+offset_top = 159.0
+offset_right = 1126.0
+offset_bottom = 195.0
+theme_override_fonts/font = ExtResource("2_font")
+theme_override_font_sizes/font_size = 18
+theme_override_styles/normal = ExtResource("3_norm")
+theme_override_styles/pressed = ExtResource("4_press")
+theme_override_styles/hover = ExtResource("5_hover")
+theme_override_styles/hover_pressed = ExtResource("6_hpress")
+
+[node name="DialogSFX" type="AudioStreamPlayer" parent="." unique_id=253450305]
+volume_db = -8.0
