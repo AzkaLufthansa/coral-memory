@@ -26,11 +26,13 @@ AudioFade="*uid://clrmvkfujs4n0"
 EchoManager="*res://Managers/EchoManager.gd"
 PauseGameController="*uid://cghtwncnh7ab4"
 UserSettings="*uid://ckb2kfv3ene2d"
+Cursor="*uid://blxnjubwy7kfy"
 
 [display]
 
 window/stretch/mode="canvas_items"
 window/stretch/aspect="expand"
+mouse_cursor/custom_image="uid://ccpai0603ga4t"
 
 [filesystem]
 

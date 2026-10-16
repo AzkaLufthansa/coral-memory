@@ -1,0 +1,183 @@
+[gd_scene format=3 uid="uid://bnbxspvlgp2tj"]
+
+[ext_resource type="Script" uid="uid://cm075clhwu86g" path="res://Scripts/Cutscene/newspaper_cutscene.gd" id="1_5cy7u"]
+[ext_resource type="Script" uid="uid://5jcxalasykfd" path="res://Scripts/Cutscene/camera_2d.gd" id="2_vm58f"]
+[ext_resource type="Texture2D" uid="uid://gnr4io1f6p4q" path="res://Assets/Cutscene/intro/BG-Intro.png" id="3_nd5jf"]
+[ext_resource type="Texture2D" uid="uid://ce7xsqa4j71xs" path="res://Assets/Cutscene/intro/bg2.jpg" id="4_ka8g1"]
+[ext_resource type="Texture2D" uid="uid://ducxgy67q0j3e" path="res://Assets/Cutscene/intro/Monitor.png" id="5_aa46b"]
+[ext_resource type="Texture2D" uid="uid://cf3x8q7vtpyxa" path="res://Assets/Cutscene/intro/Intro.png" id="6_qigrf"]
+[ext_resource type="FontFile" uid="uid://qceu1igxm6sk" path="res://Assets/Fonts/Retro Pixel/thick/retro-pixel-thick.otf" id="7_cm35m"]
+[ext_resource type="FontFile" uid="uid://6ik02l1yg1ii" path="res://Assets/Fonts/Fusion Pixel 10px Monospaced/fusion-pixel-10px-monospaced-zh_hans.otf" id="8_2j6p2"]
+[ext_resource type="AudioStream" uid="uid://cq8q2ceq7arpt" path="res://Assets/Audio/SFX langkah kaki 1x bunyi.mp3" id="9_5sb4d"]
+[ext_resource type="AudioStream" uid="uid://bqqn0x3qyc4c6" path="res://Assets/Audio/BGM/BGM Map suasana gelap.mp3" id="10_gkqvk"]
+[ext_resource type="AudioStream" uid="uid://cv7ukhcqyc10e" path="res://Assets/Audio/BGM/SFX buka pintu.mp3" id="11_t3sec"]
+[ext_resource type="AudioStream" uid="uid://c31sox5dq4558" path="res://Assets/Audio/SFX buka tutup kunci pintu.mp3" id="12_73qsw"]
+[ext_resource type="AudioStream" uid="uid://la7n7w1qxxsx" path="res://Assets/Audio/SFX gangguan bisikan.mp3" id="13_bjtbn"]
+[ext_resource type="PackedScene" uid="uid://ctgbe0qkspuke" path="res://Scenes/Menu/pause_menu.tscn" id="14_rynrt"]
+[ext_resource type="PackedScene" uid="uid://blxnjubwy7kfy" path="res://Scenes/Autoload/cursor.tscn" id="15_o8fpa"]
+[ext_resource type="Script" uid="uid://bfme3eghy41dr" path="res://Scenes/Cutscene/area_2d.gd" id="16_74x17"]
+
+[sub_resource type="LabelSettings" id="LabelSettings_u3aui"]
+line_spacing = -16.175
+font = ExtResource("7_cm35m")
+font_size = 66
+font_color = Color(0, 0, 0, 1)
+
+[sub_resource type="LabelSettings" id="LabelSettings_s1qq5"]
+font = ExtResource("8_2j6p2")
+font_size = 44
+font_color = Color(0, 0, 0, 1)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_v2tx7"]
+size = Vector2(1409, 827)
+
+[node name="NewspaperCutscene" type="Node2D" unique_id=2071304118]
+script = ExtResource("1_5cy7u")
+
+[node name="Control" type="Control" parent="." unique_id=1120589604]
+layout_mode = 3
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+metadata/_edit_use_anchors_ = true
+
+[node name="Camera2D" type="Camera2D" parent="Control" unique_id=760451741]
+offset = Vector2(0, 400)
+zoom = Vector2(0.6, 0.6)
+script = ExtResource("2_vm58f")
+peek_factor = 0.05
+edge_pan_speed = 500.0
+max_zoom = 2.0
+bounds_rect = Rect2(-1000, -500, 1800, 1000)
+
+[node name="Bg2" type="Sprite2D" parent="." unique_id=799521076]
+position = Vector2(-109.493576, 780)
+scale = Vector2(8.963738, 7.9876547)
+texture = ExtResource("3_nd5jf")
+
+[node name="Bg6" type="Sprite2D" parent="." unique_id=1520202992]
+texture_filter = 1
+position = Vector2(-110.93852, -507.03357)
+scale = Vector2(0.94096124, 0.83849794)
+texture = ExtResource("4_ka8g1")
+flip_v = true
+
+[node name="Bg7" type="Sprite2D" parent="." unique_id=567796842]
+texture_filter = 1
+position = Vector2(-110.93883, 2056.9663)
+scale = Vector2(0.9482668, 0.8450081)
+texture = ExtResource("4_ka8g1")
+flip_v = true
+
+[node name="Monitor" type="Sprite2D" parent="." unique_id=305155822]
+position = Vector2(-55.500057, 392.3443)
+scale = Vector2(14.945312, 13.31788)
+texture = ExtResource("5_aa46b")
+
+[node name="MonitorWebpage" type="Sprite2D" parent="." unique_id=1788677290]
+position = Vector2(-289, 393.99997)
+scale = Vector2(7.273437, 6.4814143)
+texture = ExtResource("6_qigrf")
+
+[node name="ColorRect" type="ColorRect" parent="MonitorWebpage" unique_id=1902227644]
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -0.34371185
+offset_top = -127.87494
+offset_right = 64.412476
+offset_bottom = 0.18353271
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+color = Color(0.60784316, 0.6784314, 0.7176471, 1)
+
+[node name="Title2" type="Label" parent="." unique_id=912687197]
+offset_left = -726.0
+offset_top = 388.0
+offset_right = 397.0
+offset_bottom = 471.0
+text = "Protokol penganggulangan echo burst"
+label_settings = SubResource("LabelSettings_u3aui")
+horizontal_alignment = 1
+uppercase = true
+metadata/_edit_use_anchors_ = true
+
+[node name="Label" type="Label" parent="." unique_id=469372058]
+custom_maximum_size = Vector2(1300, 1000)
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -725.0
+offset_top = 492.0
+offset_right = 575.0
+offset_bottom = 763.0
+grow_horizontal = 2
+grow_vertical = 2
+text = "Tragedi memilukan mengguncang kota 10 tahun lalu. Keluarga pengrajin boneka, Julia dan suaminya, serta kedua anak mereka, ditemukan tewas secara brutal di kediaman pribadi mereka di ujung bukit. Mereka tinggal di sebuah mansion di Frans Bonaparta St."
+label_settings = SubResource("LabelSettings_s1qq5")
+horizontal_alignment = 3
+autowrap_mode = 3
+
+[node name="Langkah" type="AudioStreamPlayer" parent="." unique_id=1440520702]
+stream = ExtResource("9_5sb4d")
+bus = &"SFX"
+parameters/looping = true
+
+[node name="Timer" type="Timer" parent="Langkah" unique_id=941898320]
+wait_time = 3.0
+
+[node name="BGM" type="AudioStreamPlayer" parent="." unique_id=1795316221]
+stream = ExtResource("10_gkqvk")
+pitch_scale = 0.8
+autoplay = true
+bus = &"Music"
+parameters/looping = true
+
+[node name="PintuBuka" type="AudioStreamPlayer" parent="." unique_id=2023907850]
+stream = ExtResource("11_t3sec")
+
+[node name="PintuTutup" type="AudioStreamPlayer" parent="." unique_id=846407991]
+stream = ExtResource("12_73qsw")
+
+[node name="Reveal" type="AudioStreamPlayer" parent="." unique_id=1909279027]
+stream = ExtResource("13_bjtbn")
+volume_db = -4.407
+bus = &"SFX"
+parameters/looping = false
+
+[node name="PauseMenu" parent="." unique_id=131475378 instance=ExtResource("14_rynrt")]
+visible = false
+
+[node name="Cursor" parent="." unique_id=1251280238 instance=ExtResource("15_o8fpa")]
+
+[node name="Area2D" type="Area2D" parent="." unique_id=1050560573]
+position = Vector2(-52.5, 394.5)
+script = ExtResource("16_74x17")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D" unique_id=166123549]
+shape = SubResource("RectangleShape2D_v2tx7")
+
+[node name="DoneButton" type="Button" parent="." unique_id=118616193]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 214.0
+offset_top = 177.0
+offset_right = 596.0
+offset_bottom = 296.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 1
+theme_override_font_sizes/font_size = 81
+text = "LOGOUT"
+
+[connection signal="timeout" from="Langkah/Timer" to="." method="_on_timer_timeout"]
+[connection signal="finished" from="PintuBuka" to="." method="_on_pintu_buka_finished"]
+[connection signal="finished" from="PintuTutup" to="." method="_on_pintu_tutup_finished"]
+[connection signal="finished" from="Reveal" to="." method="_on_pintu_tutup_finished"]
+[connection signal="pressed" from="DoneButton" to="." method="_on_done_button_pressed"]

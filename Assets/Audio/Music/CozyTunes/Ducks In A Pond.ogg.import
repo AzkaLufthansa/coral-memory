@@ -1,0 +1,19 @@
+[remap]
+
+importer="oggvorbisstr"
+type="AudioStreamOggVorbis"
+uid="uid://cy647scclcayl"
+path="res://.godot/imported/Ducks In A Pond.ogg-e1b8738a4124397ef45aec07c37c8fad.oggvorbisstr"
+
+[deps]
+
+source_file="res://Assets/Audio/Music/CozyTunes/Ducks In A Pond.ogg"
+dest_files=["res://.godot/imported/Ducks In A Pond.ogg-e1b8738a4124397ef45aec07c37c8fad.oggvorbisstr"]
+
+[params]
+
+loop=false
+loop_offset=0
+bpm=0
+beat_count=0
+bar_beats=4

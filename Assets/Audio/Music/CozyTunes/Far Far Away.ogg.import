@@ -1,0 +1,19 @@
+[remap]
+
+importer="oggvorbisstr"
+type="AudioStreamOggVorbis"
+uid="uid://bnejhnvtrsuxk"
+path="res://.godot/imported/Far Far Away.ogg-172c43e60a12d7867fd0bf382ac673f2.oggvorbisstr"
+
+[deps]
+
+source_file="res://Assets/Audio/Music/CozyTunes/Far Far Away.ogg"
+dest_files=["res://.godot/imported/Far Far Away.ogg-172c43e60a12d7867fd0bf382ac673f2.oggvorbisstr"]
+
+[params]
+
+loop=false
+loop_offset=0
+bpm=0
+beat_count=0
+bar_beats=4
