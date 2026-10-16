@@ -40,3 +40,4 @@ stream = ExtResource("4_r5pol")
 
 [node name="EchoAppear" type="AudioStreamPlayer" parent="." unique_id=792132600]
 volume_db = -6.0
+bus = &"SFX"

@@ -28,6 +28,7 @@ var ui_dim: ColorRect
 var current_patient: PatientData = null
 var _report_submitted := false
 
+var _bgm: AudioStreamPlayer
 var _sfx_footsteps: AudioStreamPlayer
 var _sfx_door: AudioStreamPlayer
 
@@ -35,6 +36,7 @@ var _sfx_door: AudioStreamPlayer
 func _ready() -> void:
 	_build_room()
 	_build_ui()
+	_build_bgm()
 	_build_sfx()
 	_setup_signals()
 	EchoManager.start_game()
@@ -97,6 +99,14 @@ func _build_ui() -> void:
 	game_over_screen.visible = false
 	panels_layer.add_child(game_over_screen)
 
+func _build_bgm() -> void:
+	_bgm = AudioStreamPlayer.new()
+	_bgm.stream = SfxUtil.first_available([
+		"res://Assets/Audio/Music/CozyTunes/Sunlight Through Leaves.ogg",
+		"res://Assets/SFX/langkah_kaki.mp3",
+	])
+	_bgm.bus = "Music"
+	add_child(_bgm)
 
 func _build_sfx() -> void:
 	_sfx_footsteps = AudioStreamPlayer.new()
@@ -147,6 +157,8 @@ func _setup_signals() -> void:
 
 func _on_day_started(day: int) -> void:
 	day_transition.show_day(day)
+	if _bgm:
+		AudioFade.fade_in(_bgm)
 
 
 func _on_session_started(patient: PatientData, session_index: int, total_sessions: int) -> void:
@@ -270,6 +282,8 @@ func _on_end_of_day_finished(day: int) -> void:
 	_close_all_panels()
 	if is_instance_valid(patient_node):
 		patient_node.fade_out(1.2)
+	if _bgm and _bgm.stream:
+		AudioFade.fade_out(_bgm)
 	if _sfx_footsteps and _sfx_footsteps.stream:
 		_sfx_footsteps.play()
 	await get_tree().create_timer(1.0).timeout
