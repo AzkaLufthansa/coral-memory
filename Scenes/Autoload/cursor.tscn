@@ -1,12 +1,11 @@
 [gd_scene format=3 uid="uid://blxnjubwy7kfy"]
 
 [ext_resource type="Script" uid="uid://ctrcldtq72rah" path="res://Scripts/Cutscene/cursor.gd" id="1_3bvg3"]
-[ext_resource type="Texture2D" uid="uid://b3v6roma0d7vr" path="res://icon.svg" id="2_32yrh"]
+[ext_resource type="Texture2D" uid="uid://bp0scv72dj2bs" path="res://Assets/Cursor/cursor.png" id="2_3bvg3"]
 
 [node name="Cursor" type="CanvasLayer" unique_id=1251280238]
 layer = 128
 script = ExtResource("1_3bvg3")
 
 [node name="Sprite2D" type="Sprite2D" parent="." unique_id=1833984771]
-visible = false
-texture = ExtResource("2_32yrh")
+texture = ExtResource("2_3bvg3")

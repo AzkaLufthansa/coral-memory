@@ -1,69 +1,43 @@
 [gd_scene format=3 uid="uid://6ca6npc3mk41"]
 
 [ext_resource type="Script" uid="uid://c3n1vx54gf03u" path="res://Scripts/Menu/main_menu.gd" id="1_pn3xf"]
-[ext_resource type="Texture2D" uid="uid://da5pdn361lsiv" path="res://Assets/RealAssets/bg_cropped.png" id="2_17gaq"]
-[ext_resource type="Texture2D" uid="uid://my1mq8l3cfwa" path="res://Assets/RealAssets/MainMenu/Main Menu Foreground.png" id="3_nbh3q"]
+[ext_resource type="Texture2D" uid="uid://1t4giikfdnh5" path="res://Assets/MainMenu/MainMenu.png" id="2_w1xia"]
 [ext_resource type="FontFile" uid="uid://csmbxujwlcspk" path="res://Assets/Fonts/Fusion Pixel 10px Monospaced/fusion-pixel-10px-monospaced-ja.otf" id="4_1di0l"]
 [ext_resource type="StyleBox" uid="uid://ipe4o1b1b1ic" path="res://Button_Effect/menu_normal.tres" id="4_4qbh4"]
 [ext_resource type="StyleBox" uid="uid://bajdaf5lgfdj8" path="res://Button_Effect/menu_clicked.tres" id="5_3ko7u"]
 [ext_resource type="Texture2D" uid="uid://dnjdour47lnud" path="res://Assets/Sprites/karpet.png" id="6_gpijq"]
 [ext_resource type="StyleBox" uid="uid://cgqt7rc5rbnya" path="res://Button_Effect/menu_hover.tres" id="6_jqrnd"]
+[ext_resource type="Texture2D" uid="uid://j8q201471l0k" path="res://Assets/MainMenu/Button/quit(normal).png" id="7_3ko7u"]
+[ext_resource type="Texture2D" uid="uid://b20ltfmk3b7rq" path="res://Assets/MainMenu/Button/quit(clicked).png" id="8_jqrnd"]
+[ext_resource type="Texture2D" uid="uid://ddpbw0fr44uw2" path="res://Assets/MainMenu/Button/quit(hover).png" id="9_2sy2r"]
+[ext_resource type="Texture2D" uid="uid://fn66lf70qj36" path="res://Assets/MainMenu/bkam.png" id="9_nbh3q"]
 [ext_resource type="AudioStream" uid="uid://d1kl38618vy5x" path="res://Assets/SFX/Click-1.mp3" id="9_w1xia"]
-[ext_resource type="Texture2D" uid="uid://b71klj1uw1mkc" path="res://Assets/Logo/LogoTitle.png" id="10_w1xia"]
+[ext_resource type="Texture2D" uid="uid://cbmvqob11tcnx" path="res://Assets/MainMenu/Titles.png" id="10_4qbh4"]
 
-[sub_resource type="Animation" id="Animation_nbh3q"]
-length = 0.001
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath("Title/Logo:frame")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 1,
-"values": [0]
-}
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_4kxuq"]
+texture = ExtResource("7_3ko7u")
+region_rect = Rect2(36.585106, 49.915916, 55.13269, 27.384315)
 
-[sub_resource type="Animation" id="Animation_4qbh4"]
-resource_name = "logo"
-length = 3.3
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath("Title/Logo:frame")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0.06999993, 0.40333328, 0.7699999, 1.1366667, 1.4833332, 1.8299999, 2.1533334, 2.51),
-"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1),
-"update": 1,
-"values": [0, 1, 2, 3, 4, 5, 6, 7]
-}
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_mti6b"]
+texture = ExtResource("8_jqrnd")
+region_rect = Rect2(36.585, 49.916, 55.133, 27.384)
 
-[sub_resource type="AnimationLibrary" id="AnimationLibrary_3ko7u"]
-_data = {
-&"RESET": SubResource("Animation_nbh3q"),
-&"logo": SubResource("Animation_4qbh4")
-}
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_mm1bc"]
+texture = ExtResource("9_2sy2r")
+region_rect = Rect2(36.585, 49.916, 55.133, 27.384)
 
 [node name="MainMenu" type="CanvasLayer" unique_id=1162107157]
 script = ExtResource("1_pn3xf")
 
-[node name="Background" type="Sprite2D" parent="." unique_id=686475345]
-modulate = Color(0.31061712, 0.31061712, 0.3106171, 1)
-position = Vector2(557, 385.00003)
-scale = Vector2(0.8034602, 0.6805208)
-texture = ExtResource("2_17gaq")
-region_rect = Rect2(0.255, 0, 0, 0)
-
-[node name="Frontground" type="TextureRect" parent="." unique_id=380183767]
-offset_left = 4.0
-offset_top = -4.0
-offset_right = 1157.0
-offset_bottom = 645.0
-texture = ExtResource("3_nbh3q")
+[node name="Background" type="TextureRect" parent="." unique_id=380183767]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+texture = ExtResource("2_w1xia")
 
 [node name="Button" type="Control" parent="." unique_id=1486649792]
 layout_mode = 3
@@ -73,31 +47,26 @@ offset_bottom = 40.0
 
 [node name="Start" type="Button" parent="Button" unique_id=1640541135]
 layout_mode = 0
-offset_left = 940.0
-offset_top = 150.0
-offset_right = 1134.0
-offset_bottom = 215.99988
+offset_left = 214.0
+offset_top = 295.0
+offset_right = 470.0
+offset_bottom = 422.0
+offset_transform_position = Vector2(-2.72, 0)
 theme_override_fonts/font = ExtResource("4_1di0l")
 theme_override_font_sizes/font_size = 32
 theme_override_styles/normal = ExtResource("4_4qbh4")
 theme_override_styles/pressed = ExtResource("5_3ko7u")
 theme_override_styles/hover = ExtResource("6_jqrnd")
-text = "START
-"
 
-[node name="Exit" type="Button" parent="Button" unique_id=1128903568]
+[node name="Exit" type="Button" parent="Button" unique_id=439124740]
 layout_mode = 0
-offset_left = 940.0
-offset_top = 250.0
-offset_right = 1134.0
-offset_bottom = 317.99988
-theme_override_fonts/font = ExtResource("4_1di0l")
-theme_override_font_sizes/font_size = 32
-theme_override_styles/normal = ExtResource("4_4qbh4")
-theme_override_styles/pressed = ExtResource("5_3ko7u")
-theme_override_styles/hover = ExtResource("6_jqrnd")
-text = "EXIT
-"
+offset_left = 208.0
+offset_top = 483.0
+offset_right = 464.0
+offset_bottom = 596.0
+theme_override_styles/normal = SubResource("StyleBoxTexture_4kxuq")
+theme_override_styles/pressed = SubResource("StyleBoxTexture_mti6b")
+theme_override_styles/hover = SubResource("StyleBoxTexture_mm1bc")
 
 [node name="Settings" type="Control" parent="." unique_id=826233170]
 visible = false
@@ -233,26 +202,17 @@ offset_right = 40.0
 offset_bottom = 40.0
 
 [node name="Logo" type="Sprite2D" parent="Title" unique_id=1402570627]
-position = Vector2(513, 309)
-scale = Vector2(2.3828125, 2.078125)
-texture = ExtResource("10_w1xia")
-hframes = 8
+position = Vector2(128, 128)
+scale = Vector2(2, 2)
+texture = ExtResource("9_nbh3q")
 
-[node name="TitleLabel" type="Label" parent="Title" unique_id=1877470383]
-layout_mode = 0
-offset_left = 302.0
-offset_top = 473.0
-offset_right = 718.0
-offset_bottom = 538.0
-theme_override_fonts/font = ExtResource("4_1di0l")
-theme_override_font_sizes/font_size = 64
-text = "Echoes Within"
-
-[node name="AnimationPlayer" type="AnimationPlayer" parent="." unique_id=42054587]
-libraries/ = SubResource("AnimationLibrary_3ko7u")
-autoplay = &"logo"
+[node name="TitleLabel" type="Sprite2D" parent="Title" unique_id=630844964]
+position = Vector2(409, 139.315)
+scale = Vector2(5, 5)
+texture = ExtResource("10_4qbh4")
 
 [node name="Volume" type="Control" parent="." unique_id=1479695498]
+visible = false
 layout_mode = 3
 anchors_preset = 0
 offset_right = 40.0
