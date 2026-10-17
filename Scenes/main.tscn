@@ -1,6 +1,11 @@
 [gd_scene format=3 uid="uid://bk62smdi5iqci"]
 
 [ext_resource type="Script" uid="uid://bv3ghj308xmv5" path="res://Scenes/main.gd" id="1_main"]
+[ext_resource type="PackedScene" uid="uid://ctgbe0qkspuke" path="res://Scenes/Menu/pause_menu.tscn" id="2_bo1nx"]
 
 [node name="EchoExaminer" type="Node2D" unique_id=1528150081]
 script = ExtResource("1_main")
+
+[node name="PauseMenu" parent="." unique_id=967780085 instance=ExtResource("2_bo1nx")]
+layer = 128
+visible = false

@@ -1,11 +1,46 @@
 [gd_scene format=3 uid="uid://ctgbe0qkspuke"]
 
 [ext_resource type="Script" uid="uid://bhsrow7rj2jju" path="res://Scripts/Menu/pause_menu.gd" id="1_6pfc5"]
+[ext_resource type="Texture2D" uid="uid://fn66lf70qj36" path="res://Assets/MainMenu/bkam.png" id="2_0km3y"]
 [ext_resource type="Texture2D" uid="uid://dnjdour47lnud" path="res://Assets/Sprites/karpet.png" id="2_jnmi5"]
+[ext_resource type="Texture2D" uid="uid://cbmvqob11tcnx" path="res://Assets/MainMenu/Titles.png" id="3_3hoqq"]
 [ext_resource type="AudioStream" uid="uid://dl3it4uvj78yk" path="res://Assets/Audio/SFX  menu click.mp3" id="3_jnmi5"]
+[ext_resource type="Texture2D" uid="uid://c1jil0beuyq2f" path="res://Assets/PauseMenu/Resume(normal).png" id="4_gy8ec"]
+[ext_resource type="Texture2D" uid="uid://suipx8heomkc" path="res://Assets/PauseMenu/Resume(clicked).png" id="5_xcmcy"]
+[ext_resource type="Texture2D" uid="uid://hke406qic0xt" path="res://Assets/PauseMenu/Resume(hover).png" id="6_avgy8"]
+[ext_resource type="Texture2D" uid="uid://d1ihcjyyfesii" path="res://Assets/PauseMenu/Setting(normal).png" id="7_3pdrh"]
+[ext_resource type="Texture2D" uid="uid://b1ka1j2kh6noc" path="res://Assets/PauseMenu/Setting(clickeds).png" id="8_27xhj"]
+[ext_resource type="Texture2D" uid="uid://bgbuca5heu87y" path="res://Assets/PauseMenu/Setting(hover).png" id="9_4g2u8"]
+[ext_resource type="Texture2D" uid="uid://chfnd6orvdbn1" path="res://Assets/PauseMenu/Menu(normal).png" id="10_oro2f"]
+[ext_resource type="Texture2D" uid="uid://b6ld5m3gkhcvp" path="res://Assets/PauseMenu/Menu(clicked).png" id="11_bpkf0"]
+[ext_resource type="Texture2D" uid="uid://c1qgfmkq5noca" path="res://Assets/PauseMenu/Menu(hover).png" id="12_4wfsh"]
 
-[sub_resource type="LabelSettings" id="LabelSettings_4kxuq"]
-font_size = 141
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_dehqv"]
+texture = ExtResource("4_gy8ec")
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_j2cck"]
+texture = ExtResource("5_xcmcy")
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_2on0c"]
+texture = ExtResource("6_avgy8")
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_d37mi"]
+texture = ExtResource("7_3pdrh")
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_n2ruk"]
+texture = ExtResource("8_27xhj")
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_gy8ec"]
+texture = ExtResource("9_4g2u8")
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_28aqb"]
+texture = ExtResource("10_oro2f")
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_xcmcy"]
+texture = ExtResource("11_bpkf0")
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_avgy8"]
+texture = ExtResource("12_4wfsh")
 
 [node name="PauseMenu" type="CanvasLayer" unique_id=967780085]
 process_mode = 3
@@ -19,25 +54,19 @@ offset_right = 128.0
 offset_bottom = 72.0
 grow_horizontal = 2
 grow_vertical = 2
-color = Color(0.105882354, 0.105882354, 0.105882354, 0.69803923)
+color = Color(0.105882354, 0.105882354, 0.105882354, 0.99607843)
 
-[node name="Label" type="Label" parent="ColorRect" unique_id=15580023]
-layout_mode = 1
-anchors_preset = 8
-anchor_left = 0.5
-anchor_top = 0.5
-anchor_right = 0.5
-anchor_bottom = 0.5
-offset_left = -168.0
-offset_top = -188.0
-offset_right = 376.0
-offset_bottom = 5.0
-grow_horizontal = 2
-grow_vertical = 2
-text = "PAUSED"
-label_settings = SubResource("LabelSettings_4kxuq")
-horizontal_alignment = 1
-vertical_alignment = 1
+[node name="Logo" type="Sprite2D" parent="ColorRect" unique_id=500536617]
+position = Vector2(334, 132)
+scale = Vector2(2, 2)
+texture = ExtResource("2_0km3y")
+
+[node name="Label" type="Sprite2D" parent="ColorRect" unique_id=383197758]
+position = Vector2(640, 122)
+scale = Vector2(5, 5)
+texture = ExtResource("3_3hoqq")
+region_enabled = true
+region_rect = Rect2(27.766785, 30.935692, 100.58923, 54.866707)
 
 [node name="Main" type="Control" parent="ColorRect" unique_id=204879101]
 layout_mode = 1
@@ -52,30 +81,38 @@ layout_mode = 1
 anchors_preset = 5
 anchor_left = 0.5
 anchor_right = 0.5
-offset_left = -192.0
-offset_top = 368.0
-offset_right = 152.0
-offset_bottom = 416.0
+offset_left = -232.0
+offset_top = 328.0
+offset_right = 112.0
+offset_bottom = 376.0
 grow_horizontal = 2
-text = "Resume Game"
+theme_override_styles/normal = SubResource("StyleBoxTexture_dehqv")
+theme_override_styles/pressed = SubResource("StyleBoxTexture_j2cck")
+theme_override_styles/hover = SubResource("StyleBoxTexture_2on0c")
 
 [node name="Setting" type="Button" parent="ColorRect/Main" unique_id=1137472299]
 layout_mode = 0
-offset_left = 448.0
+offset_left = 408.0
 offset_top = 424.0
-offset_right = 792.0
+offset_right = 752.0
 offset_bottom = 472.0
-text = "Setting"
+theme_override_styles/normal = SubResource("StyleBoxTexture_d37mi")
+theme_override_styles/pressed = SubResource("StyleBoxTexture_n2ruk")
+theme_override_styles/hover = SubResource("StyleBoxTexture_gy8ec")
 
 [node name="MainMenu" type="Button" parent="ColorRect/Main" unique_id=996099597]
 layout_mode = 0
-offset_left = 448.0
-offset_top = 480.0
-offset_right = 792.0
-offset_bottom = 528.0
-text = "Main Menu"
+offset_left = 408.0
+offset_top = 512.0
+offset_right = 752.0
+offset_bottom = 560.0
+theme_override_styles/normal = SubResource("StyleBoxTexture_28aqb")
+theme_override_styles/pressed = SubResource("StyleBoxTexture_xcmcy")
+theme_override_styles/hover = SubResource("StyleBoxTexture_avgy8")
+alignment = 0
 
 [node name="Button" type="Button" parent="." unique_id=1339372866]
+visible = false
 offset_left = 38.0
 offset_top = 32.0
 offset_right = 107.0

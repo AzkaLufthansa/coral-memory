@@ -32,7 +32,6 @@ Cursor="*uid://blxnjubwy7kfy"
 
 window/stretch/mode="canvas_items"
 window/stretch/aspect="expand"
-mouse_cursor/custom_image="uid://bp0scv72dj2bs"
 
 [filesystem]
 
