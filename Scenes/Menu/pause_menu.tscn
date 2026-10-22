@@ -238,6 +238,7 @@ text = "Confirm
 
 [node name="SFX_Click" type="AudioStreamPlayer" parent="." unique_id=1348011616]
 stream = ExtResource("3_jnmi5")
+bus = &"SFX"
 
 [connection signal="pressed" from="ColorRect/Main/Resume" to="." method="_on_resume_pressed"]
 [connection signal="pressed" from="ColorRect/Main/Setting" to="." method="_on_setting_pressed"]
