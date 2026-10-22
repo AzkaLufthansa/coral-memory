@@ -25,10 +25,17 @@ var transform_flash: Control
 var game_over_screen: Control
 var ui_dim: ColorRect
 
+var pause_menu: CanvasLayer
+
 var current_patient: PatientData = null
 var _report_submitted := false
 
 var _bgm: AudioStreamPlayer
+var _bgm_pause: AudioStreamPlayer
+var _bgm_transition: AudioStreamPlayer
+var _bgm_tense: AudioStreamPlayer
+var _bgm_tense_pause: AudioStreamPlayer
+var _bgm_tense_transition: AudioStreamPlayer
 var _sfx_footsteps: AudioStreamPlayer
 var _sfx_door: AudioStreamPlayer
 
@@ -50,26 +57,15 @@ func _build_room() -> void:
 
 func _build_ui() -> void:
 	# Layer 1: objek kantor (meja, tombol-tombol) + overlay gelap.
-	var ui_layer := CanvasLayer.new()
-	ui_layer.name = "UI"
-	add_child(ui_layer)
-
-	ui_dim = ColorRect.new()
-	ui_dim.color = Color(0, 0, 0, 0.6)
-	ui_dim.mouse_filter = Control.MOUSE_FILTER_IGNORE
-	ui_dim.set_anchors_preset(Control.PRESET_FULL_RECT)
-	ui_dim.visible = false
-	ui_layer.add_child(ui_dim)
+	var ui_layer := $UILayer
+	ui_dim = $UILayer/UIDim
 
 	office = OfficeScene.instantiate()
 	ui_layer.add_child(office)
 
 	# Layer 2: panel interaktif (monitor, buku, transisi, dst) agar selalu
 	# tampil di atas objek kantor.
-	var panels_layer := CanvasLayer.new()
-	panels_layer.name = "Panels"
-	panels_layer.layer = 2
-	add_child(panels_layer)
+	var panels_layer := $Panels
 
 	file_panel = FileScene.instantiate()
 	file_panel.visible = false
@@ -98,30 +94,31 @@ func _build_ui() -> void:
 	game_over_screen = GameOverScene.instantiate()
 	game_over_screen.visible = false
 	panels_layer.add_child(game_over_screen)
+	
+	# Layer 999: pause menu
+	var pause_menu = $PauseMenu
+	pause_menu.game_paused.connect(_on_game_paused)
+	pause_menu.game_resumed.connect(_on_game_resumed)
+
+func _on_game_paused() -> void:
+	AudioServer.set_bus_mute(AudioServer.get_bus_index("Music"), true)
+	AudioServer.set_bus_mute(AudioServer.get_bus_index("Music_Paused"), false)
+	
+func _on_game_resumed() -> void:
+	AudioServer.set_bus_mute(AudioServer.get_bus_index("Music"), false)
+	AudioServer.set_bus_mute(AudioServer.get_bus_index("Music_Paused"), true)
 
 func _build_bgm() -> void:
-	_bgm = AudioStreamPlayer.new()
-	_bgm.stream = SfxUtil.first_available([
-		"res://Assets/Audio/Music/CozyTunes/Sunlight Through Leaves.ogg",
-		"res://Assets/SFX/langkah_kaki.mp3",
-	])
-	_bgm.bus = "Music"
-	add_child(_bgm)
+	_bgm = $GameBGM
+	_bgm_pause = $GameBGMPause
+	_bgm_transition = $GameBGMTransition
+	_bgm_tense = $TenseBGM
+	_bgm_tense_pause = $TenseBGMPause
+	_bgm_tense_transition = $TenseBGMTransition
 
 func _build_sfx() -> void:
-	_sfx_footsteps = AudioStreamPlayer.new()
-	_sfx_footsteps.stream = SfxUtil.first_available([
-		"res://Assets/Audio/SFX langkah kaki 1x bunyi.mp3",
-		"res://Assets/SFX/langkah_kaki.mp3",
-	])
-	add_child(_sfx_footsteps)
-
-	_sfx_door = AudioStreamPlayer.new()
-	_sfx_door.stream = SfxUtil.first_available([
-		"res://Assets/Audio/SFX buka tutup kunci pintu.mp3",
-		"res://Assets/SFX/pintu_terbuka.mp3",
-	])
-	add_child(_sfx_door)
+	_sfx_footsteps = $EnterSFX
+	_sfx_door = $EnterSFX2
 
 
 func _setup_signals() -> void:
@@ -157,8 +154,9 @@ func _setup_signals() -> void:
 
 func _on_day_started(day: int) -> void:
 	day_transition.show_day(day)
-	if _bgm:
-		AudioFade.fade_in(_bgm)
+	if _bgm and _bgm_pause:
+		AudioFade.fade_in(_bgm, 4)
+		_bgm_pause.play()
 
 
 func _on_session_started(patient: PatientData, session_index: int, total_sessions: int) -> void:

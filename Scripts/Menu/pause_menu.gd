@@ -1,5 +1,8 @@
 extends CanvasLayer
 
+signal game_paused
+signal game_resumed
+
 var in_settings: bool = false
 
 # Called when the node enters the scene tree for the first time.
@@ -10,11 +13,16 @@ func _ready() -> void:
 	$Settings/Music/Value.text = str(int(UserSettings.music_volume * 10))
 
 func toggle_pause() -> void:
+	$SFX_Click.play()
 	if in_settings:
 		$Settings.visible = false
 		$ColorRect/Main.visible = true
 	visible = not visible
 	get_tree().paused = not get_tree().paused
+	if get_tree().paused:
+		game_paused.emit()
+	else:
+		game_resumed.emit()
 
 func _unhandled_input(event: InputEvent) -> void:
 	if event.is_action_pressed("ui_cancel"):
@@ -23,7 +31,6 @@ func _unhandled_input(event: InputEvent) -> void:
 			$Button.visible = false
 
 func _on_button_pressed():
-	$SFX_Click.play()
 	toggle_pause()
 	$Button.visible = false
 

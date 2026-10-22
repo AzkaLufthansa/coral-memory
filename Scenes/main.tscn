@@ -2,6 +2,12 @@
 
 [ext_resource type="Script" uid="uid://bv3ghj308xmv5" path="res://Scenes/main.gd" id="1_main"]
 [ext_resource type="PackedScene" uid="uid://ctgbe0qkspuke" path="res://Scenes/Menu/pause_menu.tscn" id="2_bo1nx"]
+[ext_resource type="AudioStream" uid="uid://bsybukq5dq1pa" path="res://Assets/Audio/Music/Game.wav" id="3_344ge"]
+[ext_resource type="AudioStream" uid="uid://1owc8moqox0c" path="res://Assets/Audio/Music/Game_Pause.wav" id="4_ynf5e"]
+[ext_resource type="AudioStream" uid="uid://cv8bloicui4a3" path="res://Assets/Audio/Music/Game_Day_Transition.wav" id="5_hptm8"]
+[ext_resource type="AudioStream" uid="uid://cll2og4ckwern" path="res://Assets/Audio/Music/Tense.wav" id="6_d1ilt"]
+[ext_resource type="AudioStream" uid="uid://dh83jt5ys0da3" path="res://Assets/Audio/Music/Tense_Pause.wav" id="7_6iyac"]
+[ext_resource type="AudioStream" uid="uid://du67paxx7msfk" path="res://Assets/Audio/Music/Tense_Day_Transition.wav" id="8_fdnlq"]
 
 [node name="EchoExaminer" type="Node2D" unique_id=1528150081]
 script = ExtResource("1_main")
@@ -9,3 +15,54 @@ script = ExtResource("1_main")
 [node name="PauseMenu" parent="." unique_id=967780085 instance=ExtResource("2_bo1nx")]
 layer = 128
 visible = false
+
+[node name="UILayer" type="CanvasLayer" parent="." unique_id=451942922]
+
+[node name="UIDim" type="ColorRect" parent="UILayer" unique_id=420500964]
+visible = false
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+color = Color(0, 0, 0, 0.6)
+
+[node name="Panels" type="CanvasLayer" parent="." unique_id=513672440]
+layer = 2
+
+[node name="GameBGM" type="AudioStreamPlayer" parent="." unique_id=1882937043]
+process_mode = 3
+stream = ExtResource("3_344ge")
+bus = &"Music"
+
+[node name="GameBGMPause" type="AudioStreamPlayer" parent="." unique_id=427197937]
+process_mode = 3
+stream = ExtResource("4_ynf5e")
+bus = &"Music_Paused"
+
+[node name="GameBGMTransition" type="AudioStreamPlayer" parent="." unique_id=594414129]
+process_mode = 3
+stream = ExtResource("5_hptm8")
+bus = &"Music_Transition"
+
+[node name="TenseBGM" type="AudioStreamPlayer" parent="." unique_id=510870880]
+process_mode = 3
+stream = ExtResource("6_d1ilt")
+bus = &"Music"
+
+[node name="TenseBGMPause" type="AudioStreamPlayer" parent="." unique_id=1592050147]
+process_mode = 3
+stream = ExtResource("7_6iyac")
+bus = &"Music_Paused"
+
+[node name="TenseBGMTransition" type="AudioStreamPlayer" parent="." unique_id=710707490]
+process_mode = 3
+stream = ExtResource("8_fdnlq")
+bus = &"Music_Transition"
+
+[node name="EnterSFX" type="AudioStreamPlayer" parent="." unique_id=84225140]
+bus = &"SFX"
+
+[node name="EnterSFX2" type="AudioStreamPlayer" parent="." unique_id=746000311]
+bus = &"SFX"
