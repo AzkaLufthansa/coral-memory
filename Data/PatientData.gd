@@ -4,6 +4,7 @@ extends Resource
 # Identitas (Section 28)
 @export var npc_instance_id: String = ""
 @export var base_npc_id: String = "NPC-A"
+@export var sprite_id: String = "" 
 @export var display_name: String = ""
 @export var age: int = 30
 @export var profession: String = ""

@@ -10,10 +10,15 @@ const TopicScene := preload("res://UI/topic_panel.tscn")
 const DayTransitionScene := preload("res://UI/day_transition.tscn")
 const TransformFlashScene := preload("res://UI/transform_flash.tscn")
 const GameOverScene := preload("res://UI/game_over_screen.tscn")
+const SPRITE_POOL := [
+	"Pasien1", "Pasien3", "Pasien6", "Pasien7",
+	"Pasien8", "Pasien9", "Pasien10", "Pasien11",
+]
 
 var patient_node: Patient2D
 var office: CanvasLayer
-
+var _sprite_bag: Array = []
+var _spawn_count := 0
 # --- PERBAIKAN TIPE DATA ---
 # Mengubah PanelContainer menjadi Control agar aman untuk semua jenis Node UI
 var file_panel: Control 
@@ -167,10 +172,17 @@ func _on_session_started(patient: PatientData, session_index: int, total_session
 	office.show_office()
 	office.set_next_enabled(false)
 
-
 func _spawn_patient(patient: PatientData) -> void:
 	if patient_node:
 		patient_node.queue_free()
+
+	# Tentukan sprite jika belum ada
+	if patient.sprite_id == "":
+		patient.sprite_id = _next_sprite_id()
+	
+	_spawn_count += 1
+	print("Pasien ke-%d | Sprite: %s" % [_spawn_count, patient.sprite_id])
+
 	patient_node = PatientScene.instantiate()
 	patient_node.position = Vector2(576, 224)
 	patient_node.z_index = 1
@@ -178,6 +190,11 @@ func _spawn_patient(patient: PatientData) -> void:
 	patient_node.setup(patient)
 	patient_node.patient_clicked.connect(_on_patient_clicked)
 
+func _next_sprite_id() -> String:
+	if _sprite_bag.is_empty():
+		_sprite_bag = SPRITE_POOL.duplicate()
+		_sprite_bag.shuffle()
+	return _sprite_bag.pop_back()
 
 # --- Office interactions ---
 

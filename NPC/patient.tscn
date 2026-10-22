@@ -18,7 +18,7 @@ scale = Vector2(4, 4)
 [node name="NpcSprite" type="AnimatedSprite2D" parent="." unique_id=1556212521]
 texture_filter = 1
 position = Vector2(0, 144)
-scale = Vector2(2, 2)
+scale = Vector2(2.5, 2.5)
 
 [node name="ClickArea" type="Area2D" parent="." unique_id=1008427095]
 z_index = 5
