@@ -2,7 +2,6 @@
 
 [ext_resource type="Script" uid="uid://cpk2qdg60m48w" path="res://UI/patient_file.gd" id="1_file"]
 [ext_resource type="Texture2D" uid="uid://c1740rneenedj" path="res://Assets/RealAssets/MonitorUI/Monitor/Tab - Patient Information.png" id="2_bq4h4"]
-[ext_resource type="StyleBox" uid="uid://bmsl2ivdeekss" path="res://Button_Effect/normal.tres" id="2_heg3a"]
 [ext_resource type="Texture2D" uid="uid://cun0o88orfbqm" path="res://Assets/RealAssets/MonitorUI/Monitor/monitor-transition.png" id="2_hgnhh"]
 [ext_resource type="StyleBox" uid="uid://dsacgsdrhpcyg" path="res://Button_Effect/pressed.tres" id="3_0uu54"]
 [ext_resource type="Texture2D" uid="uid://bm8pssr3quxlp" path="res://Assets/UI/button.png" id="3_bq4h4"]
@@ -14,6 +13,7 @@
 [ext_resource type="Texture2D" uid="uid://dx56ct5ayqsra" path="res://Assets/RealAssets/MonitorUI/Monitor/Tab - Schedule 1.png" id="9_hgnhh"]
 [ext_resource type="Texture2D" uid="uid://d1xrkrsaxihvx" path="res://Assets/RealAssets/MonitorUI/Monitor/Tab - Schedule 2.png" id="10_m1tw1"]
 [ext_resource type="Texture2D" uid="uid://djh4ykpuc8eet" path="res://Assets/RealAssets/MonitorUI/Monitor/Tab - Submit.png" id="11_submit"]
+[ext_resource type="StyleBox" uid="uid://banq7okwy4sje" path="res://Button_Effect/normal_button.tres" id="13_eqf8g"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_r5pol"]
 atlas = ExtResource("5_lfr58")
@@ -951,7 +951,7 @@ offset_top = 241.0
 offset_right = 770.0
 offset_bottom = 264.0
 theme_override_fonts/font = ExtResource("4_oovme")
-theme_override_styles/normal = ExtResource("2_heg3a")
+theme_override_styles/normal = ExtResource("13_eqf8g")
 theme_override_styles/pressed = ExtResource("3_0uu54")
 theme_override_styles/hover = ExtResource("4_kvcxo")
 theme_override_styles/hover_pressed = ExtResource("5_il2yw")
@@ -975,7 +975,7 @@ offset_left = 766.0
 offset_top = 42.0
 offset_right = 798.0
 offset_bottom = 65.0
-theme_override_styles/normal = ExtResource("2_heg3a")
+theme_override_styles/normal = ExtResource("13_eqf8g")
 theme_override_styles/pressed = ExtResource("3_0uu54")
 theme_override_styles/hover = ExtResource("4_kvcxo")
 theme_override_styles/hover_pressed = ExtResource("5_il2yw")
@@ -988,11 +988,11 @@ offset_top = 85.0
 offset_right = 217.0
 offset_bottom = 108.0
 theme_override_fonts/font = ExtResource("4_oovme")
-theme_override_styles/normal = ExtResource("2_heg3a")
+theme_override_styles/normal = ExtResource("13_eqf8g")
 theme_override_styles/pressed = ExtResource("3_0uu54")
 theme_override_styles/hover = ExtResource("4_kvcxo")
 theme_override_styles/disabled = SubResource("StyleBoxTexture_il2yw")
-text = "Patient Information"
+text = "Patient Info"
 
 [node name="ScheduleButton" type="Button" parent="." unique_id=929161621]
 layout_mode = 0
@@ -1001,7 +1001,7 @@ offset_top = 84.0
 offset_right = 409.0
 offset_bottom = 107.0
 theme_override_fonts/font = ExtResource("4_oovme")
-theme_override_styles/normal = ExtResource("2_heg3a")
+theme_override_styles/normal = ExtResource("13_eqf8g")
 theme_override_styles/pressed = ExtResource("3_0uu54")
 theme_override_styles/hover = ExtResource("4_kvcxo")
 theme_override_styles/hover_pressed = ExtResource("5_il2yw")
@@ -1014,7 +1014,7 @@ offset_top = 84.0
 offset_right = 603.0
 offset_bottom = 108.0
 theme_override_fonts/font = ExtResource("4_oovme")
-theme_override_styles/normal = ExtResource("2_heg3a")
+theme_override_styles/normal = ExtResource("13_eqf8g")
 theme_override_styles/pressed = ExtResource("3_0uu54")
 theme_override_styles/hover = ExtResource("4_kvcxo")
 theme_override_styles/hover_pressed = ExtResource("5_il2yw")

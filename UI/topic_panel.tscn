@@ -3,11 +3,94 @@
 [ext_resource type="Script" uid="uid://d2kb2nnnwwjnt" path="res://UI/topic_panel.gd" id="1_topic"]
 [ext_resource type="FontFile" uid="uid://csmbxujwlcspk" path="res://Assets/Fonts/Fusion Pixel 10px Monospaced/fusion-pixel-10px-monospaced-ja.otf" id="2_font"]
 [ext_resource type="StyleBox" uid="uid://bmsl2ivdeekss" path="res://Button_Effect/normal.tres" id="3_norm"]
-[ext_resource type="StyleBox" uid="uid://dsacgsdrhpcyg" path="res://Button_Effect/pressed.tres" id="4_press"]
-[ext_resource type="StyleBox" uid="uid://b0l5doruddxuo" path="res://Button_Effect/hover.tres" id="5_hover"]
-[ext_resource type="StyleBox" uid="uid://bcgsfsibr84mj" path="res://Button_Effect/hover_pressed.tres" id="6_hpress"]
+[ext_resource type="Texture2D" uid="uid://dy0tmem2r311f" path="res://Assets/Dialog/Dialog_Box-Sheet.png" id="3_v6gsn"]
+[ext_resource type="Texture2D" uid="uid://cpq5wioqwj51x" path="res://Assets/Dialog/dialog-box-sheet000.png" id="6_xqey2"]
 [ext_resource type="AudioStream" uid="uid://d1kl38618vy5x" path="res://Assets/SFX/Click-1.mp3" id="7_click"]
+[ext_resource type="Texture2D" uid="uid://d1oserckpa8n3" path="res://Assets/Dialog/dialog-box-sheet001.png" id="7_mpx23"]
+[ext_resource type="Texture2D" uid="uid://cpeekuk4idlgw" path="res://Assets/Dialog/dialog-box-sheet002.png" id="8_2qfks"]
 [ext_resource type="Texture2D" uid="uid://b3pqhlxmliy86" path="res://Assets/Textures/Down.png" id="8_down"]
+[ext_resource type="Texture2D" uid="uid://cs85s3m4q5c5y" path="res://Assets/Dialog/dialog-box-sheet003.png" id="9_1sw21"]
+[ext_resource type="Texture2D" uid="uid://dxjaenc7pysty" path="res://Assets/Dialog/dialog-box-sheet004.png" id="10_8b0ec"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_xqey2"]
+atlas = ExtResource("3_v6gsn")
+region = Rect2(0, 0, 128, 128)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_26nd2"]
+atlas = ExtResource("3_v6gsn")
+region = Rect2(256, 0, 128, 128)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_qf014"]
+atlas = ExtResource("3_v6gsn")
+region = Rect2(128, 0, 128, 128)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_8tlgq"]
+atlas = ExtResource("3_v6gsn")
+region = Rect2(384, 0, 128, 128)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_mpx23"]
+atlas = ExtResource("3_v6gsn")
+region = Rect2(512, 0, 128, 128)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_v2tx7"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_xqey2")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_26nd2")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_qf014")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_8tlgq")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_mpx23")
+}],
+"loop": 1,
+"name": &"default",
+"speed": 5.0
+}]
+
+[sub_resource type="Animation" id="Animation_177v4"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:texture")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [ExtResource("6_xqey2")]
+}
+
+[sub_resource type="Animation" id="Animation_kjhca"]
+resource_name = "texture"
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:texture")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.16666667, 0.36666667, 0.56666666, 0.76666665, 1),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1),
+"update": 1,
+"values": [ExtResource("6_xqey2"), ExtResource("7_mpx23"), ExtResource("8_2qfks"), ExtResource("9_1sw21"), ExtResource("10_8b0ec"), ExtResource("6_xqey2")]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_636l0"]
+_data = {
+&"RESET": SubResource("Animation_177v4"),
+&"texture": SubResource("Animation_kjhca")
+}
 
 [node name="TopicPanel2" type="Control" unique_id=1300001394]
 layout_mode = 3
@@ -31,37 +114,65 @@ offset_right = 614.0
 offset_bottom = 234.0
 color = Color(0, 0, 0, 0.52)
 
-[node name="DialogLabel" type="Label" parent="DialogPanel" unique_id=1670610688]
-layout_mode = 1
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-offset_left = 35.0
-offset_top = 25.0
-offset_right = -30.0
-offset_bottom = -54.0
-grow_horizontal = 2
-grow_vertical = 2
-theme_override_fonts/font = ExtResource("2_font")
-theme_override_font_sizes/font_size = 18
-text = "..."
-autowrap_mode = 3
+[node name="DialogBox" type="AnimatedSprite2D" parent="DialogPanel" unique_id=424074692]
+visible = false
+position = Vector2(306, 70)
+scale = Vector2(5.484375, 4.578125)
+sprite_frames = SubResource("SpriteFrames_v2tx7")
+autoplay = "default"
 
 [node name="CloseArrow" type="TextureRect" parent="DialogPanel" unique_id=1142300888]
+visible = false
 layout_mode = 1
 anchors_preset = 7
 anchor_left = 0.5
 anchor_top = 1.0
 anchor_right = 0.5
 anchor_bottom = 1.0
-offset_left = 228.0
-offset_top = -65.0
-offset_right = 276.0
-offset_bottom = -17.0
+offset_left = 139.0
+offset_top = -128.0
+offset_right = 187.0
+offset_bottom = -80.0
 grow_horizontal = 2
 grow_vertical = 0
 mouse_filter = 2
 texture = ExtResource("8_down")
+
+[node name="NinePatchRect" type="NinePatchRect" parent="DialogPanel" unique_id=1381992256]
+layout_mode = 0
+offset_left = 16.0
+offset_top = 15.0
+offset_right = 602.0
+offset_bottom = 201.0
+mouse_filter = 0
+texture = ExtResource("6_xqey2")
+region_rect = Rect2(13.783863, 31.852222, 100.68761, 62.23556)
+patch_margin_left = 28
+patch_margin_top = 28
+patch_margin_right = 28
+patch_margin_bottom = 28
+axis_stretch_horizontal = 2
+axis_stretch_vertical = 2
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="DialogPanel/NinePatchRect" unique_id=1414413408]
+libraries/ = SubResource("AnimationLibrary_636l0")
+autoplay = &"texture"
+
+[node name="DialogLabel" type="Label" parent="DialogPanel/NinePatchRect" unique_id=1670610688]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 27.0
+offset_top = 22.0
+offset_right = -27.0
+offset_bottom = -22.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_fonts/font = ExtResource("2_font")
+theme_override_font_sizes/font_size = 18
+text = "..."
+autowrap_mode = 3
 
 [node name="TopicChoice" type="ColorRect" parent="." unique_id=1020385732]
 layout_mode = 0
@@ -79,7 +190,7 @@ offset_right = 1053.0
 offset_bottom = 62.0
 theme_override_fonts/font = ExtResource("2_font")
 theme_override_font_sizes/font_size = 18
-text = "Pilih Topik"
+text = "Pilih Topik Pembicaraan"
 horizontal_alignment = 1
 autowrap_mode = 3
 
@@ -87,79 +198,79 @@ autowrap_mode = 3
 layout_mode = 0
 offset_left = 669.0
 offset_top = 72.0
-offset_right = 888.0
+offset_right = 863.0
 offset_bottom = 108.0
 theme_override_fonts/font = ExtResource("2_font")
 theme_override_font_sizes/font_size = 18
 theme_override_styles/normal = ExtResource("3_norm")
-theme_override_styles/pressed = ExtResource("4_press")
-theme_override_styles/hover = ExtResource("5_hover")
-theme_override_styles/hover_pressed = ExtResource("6_hpress")
+theme_override_styles/pressed = ExtResource("3_norm")
+theme_override_styles/hover = ExtResource("3_norm")
+theme_override_styles/hover_pressed = ExtResource("3_norm")
 
 [node name="TopicButton1" type="Button" parent="." unique_id=1451002542]
 layout_mode = 0
 offset_left = 670.0
 offset_top = 115.0
-offset_right = 889.0
+offset_right = 862.0
 offset_bottom = 151.0
 theme_override_fonts/font = ExtResource("2_font")
 theme_override_font_sizes/font_size = 18
 theme_override_styles/normal = ExtResource("3_norm")
-theme_override_styles/pressed = ExtResource("4_press")
-theme_override_styles/hover = ExtResource("5_hover")
-theme_override_styles/hover_pressed = ExtResource("6_hpress")
+theme_override_styles/pressed = ExtResource("3_norm")
+theme_override_styles/hover = ExtResource("3_norm")
+theme_override_styles/hover_pressed = ExtResource("3_norm")
 
 [node name="TopicButton2" type="Button" parent="." unique_id=21928166]
 layout_mode = 0
 offset_left = 670.0
 offset_top = 159.0
-offset_right = 889.0
+offset_right = 860.0
 offset_bottom = 195.0
 theme_override_fonts/font = ExtResource("2_font")
 theme_override_font_sizes/font_size = 18
 theme_override_styles/normal = ExtResource("3_norm")
-theme_override_styles/pressed = ExtResource("4_press")
-theme_override_styles/hover = ExtResource("5_hover")
-theme_override_styles/hover_pressed = ExtResource("6_hpress")
+theme_override_styles/pressed = ExtResource("3_norm")
+theme_override_styles/hover = ExtResource("3_norm")
+theme_override_styles/hover_pressed = ExtResource("3_norm")
 
 [node name="TopicButton3" type="Button" parent="." unique_id=1202932524]
 layout_mode = 0
-offset_left = 906.0
+offset_left = 927.0
 offset_top = 72.0
 offset_right = 1125.0
 offset_bottom = 108.0
 theme_override_fonts/font = ExtResource("2_font")
 theme_override_font_sizes/font_size = 18
 theme_override_styles/normal = ExtResource("3_norm")
-theme_override_styles/pressed = ExtResource("4_press")
-theme_override_styles/hover = ExtResource("5_hover")
-theme_override_styles/hover_pressed = ExtResource("6_hpress")
+theme_override_styles/pressed = ExtResource("3_norm")
+theme_override_styles/hover = ExtResource("3_norm")
+theme_override_styles/hover_pressed = ExtResource("3_norm")
 
 [node name="TopicButton4" type="Button" parent="." unique_id=1398203015]
 layout_mode = 0
-offset_left = 907.0
+offset_left = 926.0
 offset_top = 115.0
 offset_right = 1126.0
 offset_bottom = 151.0
 theme_override_fonts/font = ExtResource("2_font")
 theme_override_font_sizes/font_size = 18
 theme_override_styles/normal = ExtResource("3_norm")
-theme_override_styles/pressed = ExtResource("4_press")
-theme_override_styles/hover = ExtResource("5_hover")
-theme_override_styles/hover_pressed = ExtResource("6_hpress")
+theme_override_styles/pressed = ExtResource("3_norm")
+theme_override_styles/hover = ExtResource("3_norm")
+theme_override_styles/hover_pressed = ExtResource("3_norm")
 
 [node name="TopicButton5" type="Button" parent="." unique_id=1337412691]
 layout_mode = 0
-offset_left = 907.0
+offset_left = 922.0
 offset_top = 159.0
 offset_right = 1126.0
 offset_bottom = 195.0
 theme_override_fonts/font = ExtResource("2_font")
 theme_override_font_sizes/font_size = 18
 theme_override_styles/normal = ExtResource("3_norm")
-theme_override_styles/pressed = ExtResource("4_press")
-theme_override_styles/hover = ExtResource("5_hover")
-theme_override_styles/hover_pressed = ExtResource("6_hpress")
+theme_override_styles/pressed = ExtResource("3_norm")
+theme_override_styles/hover = ExtResource("3_norm")
+theme_override_styles/hover_pressed = ExtResource("3_norm")
 
 [node name="DialogSFX" type="AudioStreamPlayer" parent="." unique_id=253450305]
 volume_db = -8.0

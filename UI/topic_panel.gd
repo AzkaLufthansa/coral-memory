@@ -7,11 +7,11 @@ const TYPE_INTERVAL := 0.03
 const TYPE_START_DELAY := 0.5
 const OPEN_TEXT := "..."
 const DIALOG_PANEL_DEFAULT := 614.0
-const DIALOG_PANEL_EXPANDED := 1166.0
+const DIALOG_PANEL_EXPANDED := 1150.0
 const DOWN_ARROW_TEXTURE := "res://Assets/Textures/Down.png"
 
-@onready var dialog_panel: ColorRect = $DialogPanel
-@onready var dialog_label: Label = $DialogPanel/DialogLabel
+@onready var dialog_panel: NinePatchRect = $DialogPanel/NinePatchRect
+@onready var dialog_label: Label = $DialogPanel/NinePatchRect/DialogLabel
 @onready var topic_choice: ColorRect = $TopicChoice
 @onready var topic_title: Label = $TopicTitle
 @onready var click_sfx: AudioStreamPlayer = $Click
@@ -27,14 +27,15 @@ var _expand_tween: Tween = null
 
 
 func _ready() -> void:
+
 	_build_buttons()
 	dialog_panel.gui_input.connect(_on_dialog_panel_input)
 	dialog_sfx.stream = SfxUtil.first_available([
 		"res://Assets/Audio/Voice/SFX jilly talk loop.mp3",
 		"res://Assets/SFX/Click-1.mp3",
 	])
-	_setup_close_arrow()
-	_start_close_arrow_animation()
+	#_setup_close_arrow()
+	#_start_close_arrow_animation()
 
 
 func _setup_close_arrow() -> void:
