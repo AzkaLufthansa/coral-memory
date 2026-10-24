@@ -45,7 +45,7 @@ func _on_start_pressed() -> void:
 		.set_ease(Tween.EASE_IN_OUT)
 	
 	AudioFade.fade_out($BGM, zoom_duration)
-	FadeToBlack.fade_to_scene("res://Scenes/main.tscn", zoom_duration)
+	FadeToBlack.fade_to_scene("res://Scenes/Cutscene/tablet_cutscene.tscn", zoom_duration)
 
 func _on_exit_pressed() -> void:
 	$SFX_Click.play() 

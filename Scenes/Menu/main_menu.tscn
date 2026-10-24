@@ -13,6 +13,7 @@
 [ext_resource type="Texture2D" uid="uid://fn66lf70qj36" path="res://Assets/MainMenu/bkam.png" id="9_nbh3q"]
 [ext_resource type="AudioStream" uid="uid://d1kl38618vy5x" path="res://Assets/SFX/Click-1.mp3" id="9_w1xia"]
 [ext_resource type="Texture2D" uid="uid://cbmvqob11tcnx" path="res://Assets/MainMenu/Titles.png" id="10_4qbh4"]
+[ext_resource type="AudioStream" uid="uid://rxcts77fdaye" path="res://Assets/Audio/Music/Main_Menu.wav" id="11_jqrnd"]
 
 [sub_resource type="StyleBoxTexture" id="StyleBoxTexture_4kxuq"]
 texture = ExtResource("7_3ko7u")
@@ -186,6 +187,7 @@ text = "Confirm
 "
 
 [node name="BGM" type="AudioStreamPlayer" parent="." unique_id=1411902224]
+stream = ExtResource("11_jqrnd")
 bus = &"Music"
 
 [node name="SFX_Click" type="AudioStreamPlayer" parent="." unique_id=155721996]

@@ -9,7 +9,7 @@
 [ext_resource type="FontFile" uid="uid://qceu1igxm6sk" path="res://Assets/Fonts/Retro Pixel/thick/retro-pixel-thick.otf" id="7_cm35m"]
 [ext_resource type="FontFile" uid="uid://6ik02l1yg1ii" path="res://Assets/Fonts/Fusion Pixel 10px Monospaced/fusion-pixel-10px-monospaced-zh_hans.otf" id="8_2j6p2"]
 [ext_resource type="AudioStream" uid="uid://cq8q2ceq7arpt" path="res://Assets/Audio/SFX langkah kaki 1x bunyi.mp3" id="9_5sb4d"]
-[ext_resource type="AudioStream" uid="uid://bqqn0x3qyc4c6" path="res://Assets/Audio/BGM/BGM Map suasana gelap.mp3" id="10_gkqvk"]
+[ext_resource type="AudioStream" uid="uid://dyr0wrgaf4n0k" path="res://Assets/Audio/Music/Tutorial.wav" id="10_5cy7u"]
 [ext_resource type="AudioStream" uid="uid://cv7ukhcqyc10e" path="res://Assets/Audio/BGM/SFX buka pintu.mp3" id="11_t3sec"]
 [ext_resource type="AudioStream" uid="uid://c31sox5dq4558" path="res://Assets/Audio/SFX buka tutup kunci pintu.mp3" id="12_73qsw"]
 [ext_resource type="AudioStream" uid="uid://la7n7w1qxxsx" path="res://Assets/Audio/SFX gangguan bisikan.mp3" id="13_bjtbn"]
@@ -132,11 +132,10 @@ parameters/looping = true
 wait_time = 3.0
 
 [node name="BGM" type="AudioStreamPlayer" parent="." unique_id=1795316221]
-stream = ExtResource("10_gkqvk")
+stream = ExtResource("10_5cy7u")
 pitch_scale = 0.8
 autoplay = true
 bus = &"Music"
-parameters/looping = true
 
 [node name="PintuBuka" type="AudioStreamPlayer" parent="." unique_id=2023907850]
 stream = ExtResource("11_t3sec")
