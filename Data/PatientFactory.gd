@@ -3,13 +3,30 @@ extends RefCounted
 
 static var _rng := RandomNumberGenerator.new()
 
+# Pasien6 dan Pasien8 hanya untuk pool NPC-A dan NPC-E
+const FEMALE_NPC_POOLS: Array[String] = ["NPC-A", "NPC-E"]
+const FEMALE_SPRITES: Array[String] = ["Pasien6", "Pasien8"]
+const MALE_SPRITES: Array[String] = [
+	"Pasien1", "Pasien3", "Pasien7",
+	"Pasien9", "Pasien10", "Pasien11",
+]
+
+static func is_female_npc(base_npc_id: String) -> bool:
+	var id := base_npc_id.to_upper().strip_edges()
+	return id in FEMALE_NPC_POOLS
+
+static func get_allowed_sprites(base_npc_id: String) -> Array[String]:
+	if is_female_npc(base_npc_id):
+		return FEMALE_SPRITES.duplicate()
+	return MALE_SPRITES.duplicate()
+
 const BASE_NPC_POOLS: Array[Dictionary] = [
-	{"base": "NPC-A", "names": ["Dimas", "Rara", "Bima", "Maya"], "professions": ["karyawan magang", "mahasiswa", "kurir"], "referrals": ["dirujuk setelah kecelakaan ringan di tempat kerja", "laporan keluarga soal perubahan perilaku"]},
-	{"base": "NPC-B", "names": ["Hendra", "Santi", "Bagus", "Linda"], "professions": ["manajer", "guru", "birokrat"], "referrals": ["keluhan atasan tentang performa kerja", "dirujuk oleh klinik rutin tahunan"]},
-	{"base": "NPC-C", "names": ["Joko", "Eka", "Udin", "Sri"], "professions": ["buruh", "sopir", "teknisi"], "referrals": ["insiden keselamatan di lapangan", "dirujuk karena sering izin mendadak"]},
-	{"base": "NPC-D", "names": ["Pak Marno", "Bu Ratna", "Pak Slamet", "Bu Wati"], "professions": ["pensiunan", "orang tua tunggal"], "referrals": ["perubahan drastis setelah kehilangan anggota keluarga", "laporan tetangga soal kondisi rumah"]},
-	{"base": "NPC-E", "names": ["Andi", "Vina", "Rio", "Dita"], "professions": ["freelancer", "seniman", "perawat"], "referrals": ["rekan kerja melihat tanda-tanda kurang tidur", "dirujuk oleh komunitas seni"]},
-	{"base": "NPC-F", "names": ["Bapak Hasan", "Ibu Nia", "Pak Gatot", "Bu Ina"], "professions": ["petugas keamanan", "atasan divisi", "pejabat dinas"], "referrals": ["dirujuk setelah insiden di ruang rapat", "observasi internal fasilitas"]},
+	{"base": "NPC-A", "names": ["Linda", "Rara", "Santi", "Maya"], "professions": ["karyawan magang", "mahasiswa", "dosen"], "referrals": ["kecelakaan ringan di tempat kerja", "laporan keluarga soal perubahan perilaku"]},
+	{"base": "NPC-B", "names": ["Hendra", "Bima", "Bagus", "Dimas"], "professions": ["manajer", "guru", "birokrat"], "referrals": ["keluhan atasan tentang pekerjaan", "dirujuk oleh klinik langganan"]},
+	{"base": "NPC-C", "names": ["Joko", "Eka", "Udin", "Slamet"], "professions": ["buruh", "sopir", "teknisi"], "referrals": ["insiden keselamatan di lapangan", "dirujuk karena sering izin mendadak"]},
+	{"base": "NPC-D", "names": ["Marno", "Rio", "Andi", "Wati"], "professions": ["pensiunan", "pengangguran"], "referrals": ["perubahan setelah kehilangan anggota keluarga", "laporan tetangga soal kondisi rumah"]},
+	{"base": "NPC-E", "names": ["Sri", "Vina", "Ratna", "Dita"], "professions": ["freelancer", "seniman", "perawat"], "referrals": ["terlihat tanda-tanda kurang tidur", "dirujuk oleh komunitas seni"]},
+	{"base": "NPC-F", "names": ["Hasan", "Putra", "Gatot", "Yohanes"], "professions": ["petugas keamanan", "atasan divisi", "pejabat dinas"], "referrals": ["dirujuk setelah insiden di ruang rapat", "observasi internal fasilitas"]},
 ]
 
 # Templat dialog per emosi per topik. TIDAK menyebut nama emosi secara eksplisit.
@@ -99,7 +116,7 @@ static func _build_patient(emotion: Emotion.Type, day: int, index: int) -> Patie
 	patient.npc_instance_id = "%s-day%d-%d" % [emotion, day, index]
 	patient.base_npc_id = pool.base
 	patient.display_name = pool.names[_rng.randi_range(0, pool.names.size() - 1)]
-	patient.age = _rng.randi_range(22, 70)
+	patient.age = _rng.randi_range(18, 40)
 	patient.profession = pool.professions[_rng.randi_range(0, pool.professions.size() - 1)]
 	patient.referral_reason = pool.referrals[_rng.randi_range(0, pool.referrals.size() - 1)]
 	patient.true_emotion = emotion

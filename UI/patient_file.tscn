@@ -130,12 +130,13 @@ text = "PATIENT EXAMINATION MANAGEMENT"
 vertical_alignment = 1
 
 [node name="Logo" type="TextureRect" parent="PatientOverlay" unique_id=1701558755]
+unique_name_in_owner = true
 custom_minimum_size = Vector2(149.455, 150)
 layout_mode = 0
-offset_left = 84.0
-offset_top = 167.0
-offset_right = 268.0
-offset_bottom = 351.0
+offset_left = 68.0
+offset_top = 135.0
+offset_right = 285.60498
+offset_bottom = 352.60498
 texture = SubResource("AtlasTexture_r5pol")
 expand_mode = 3
 
@@ -226,14 +227,12 @@ theme_override_fonts/font = ExtResource("4_oovme")
 
 [node name="ScheduleContent" type="Control" parent="." unique_id=352151946]
 unique_name_in_owner = true
-visible = false
 anchors_preset = 0
 offset_right = 480.0
 offset_bottom = 559.0
 size_flags_vertical = 3
 
 [node name="Page1" type="Control" parent="ScheduleContent" unique_id=1495827806]
-visible = false
 anchors_preset = 0
 offset_left = 22.0
 offset_right = 458.0
@@ -268,55 +267,55 @@ offset_right = 216.0
 offset_bottom = 67.0
 
 [node name="Slot1" type="TextureRect" parent="ScheduleContent/Page1/Page1/VBoxDay1/HBoxContainer" unique_id=1916358710]
-custom_minimum_size = Vector2(40, 40)
+custom_minimum_size = Vector2(70, 70)
 layout_mode = 0
-offset_left = 86.0
-offset_top = 136.0
-offset_right = 138.0
+offset_left = 78.0
+offset_top = 118.0
+offset_right = 148.0
 offset_bottom = 188.0
 texture = SubResource("AtlasTexture_lfr58")
 expand_mode = 1
 stretch_mode = 5
 
 [node name="Slot2" type="TextureRect" parent="ScheduleContent/Page1/Page1/VBoxDay1/HBoxContainer" unique_id=766326619]
-custom_minimum_size = Vector2(40, 40)
+custom_minimum_size = Vector2(70, 70)
 layout_mode = 0
-offset_left = 152.0
-offset_top = 136.0
-offset_right = 204.0
+offset_left = 144.0
+offset_top = 118.0
+offset_right = 214.0
 offset_bottom = 188.0
 texture = SubResource("AtlasTexture_lfr58")
 expand_mode = 1
 stretch_mode = 5
 
 [node name="Slot3" type="TextureRect" parent="ScheduleContent/Page1/Page1/VBoxDay1/HBoxContainer" unique_id=1592608285]
-custom_minimum_size = Vector2(40, 40)
+custom_minimum_size = Vector2(70, 70)
 layout_mode = 0
-offset_left = 216.0
-offset_top = 136.0
-offset_right = 268.0
+offset_left = 208.0
+offset_top = 118.0
+offset_right = 278.0
 offset_bottom = 188.0
 texture = SubResource("AtlasTexture_lfr58")
 expand_mode = 1
 stretch_mode = 5
 
 [node name="Slot4" type="TextureRect" parent="ScheduleContent/Page1/Page1/VBoxDay1/HBoxContainer" unique_id=1468548651]
-custom_minimum_size = Vector2(40, 40)
+custom_minimum_size = Vector2(70, 70)
 layout_mode = 0
-offset_left = 280.0
-offset_top = 136.0
-offset_right = 332.0
+offset_left = 272.0
+offset_top = 118.0
+offset_right = 342.0
 offset_bottom = 188.0
 texture = SubResource("AtlasTexture_lfr58")
 expand_mode = 1
 stretch_mode = 5
 
 [node name="Slot5" type="TextureRect" parent="ScheduleContent/Page1/Page1/VBoxDay1/HBoxContainer" unique_id=129129345]
-custom_minimum_size = Vector2(40, 40)
+custom_minimum_size = Vector2(70, 70)
 layout_mode = 0
-offset_left = 345.0
-offset_top = 136.0
-offset_right = 397.0
+offset_left = 337.0
+offset_top = 118.0
+offset_right = 407.0
 offset_bottom = 188.0
 texture = SubResource("AtlasTexture_lfr58")
 expand_mode = 1
@@ -345,55 +344,55 @@ offset_right = 216.0
 offset_bottom = 67.0
 
 [node name="Slot1" type="TextureRect" parent="ScheduleContent/Page1/Page1/VBoxDay2/HBoxContainer" unique_id=525668505]
-custom_minimum_size = Vector2(40, 40)
+custom_minimum_size = Vector2(70, 70)
 layout_mode = 0
-offset_left = 229.0
-offset_top = 136.0
-offset_right = 281.0
+offset_left = 221.0
+offset_top = 118.0
+offset_right = 291.0
 offset_bottom = 188.0
 texture = SubResource("AtlasTexture_lfr58")
 expand_mode = 1
 stretch_mode = 5
 
 [node name="Slot2" type="TextureRect" parent="ScheduleContent/Page1/Page1/VBoxDay2/HBoxContainer" unique_id=1964794151]
-custom_minimum_size = Vector2(40, 40)
+custom_minimum_size = Vector2(70, 70)
 layout_mode = 0
-offset_left = 295.0
-offset_top = 136.0
-offset_right = 347.0
+offset_left = 287.0
+offset_top = 118.0
+offset_right = 357.0
 offset_bottom = 188.0
 texture = SubResource("AtlasTexture_lfr58")
 expand_mode = 1
 stretch_mode = 5
 
 [node name="Slot3" type="TextureRect" parent="ScheduleContent/Page1/Page1/VBoxDay2/HBoxContainer" unique_id=1607104825]
-custom_minimum_size = Vector2(40, 40)
+custom_minimum_size = Vector2(70, 70)
 layout_mode = 0
-offset_left = 359.0
-offset_top = 136.0
-offset_right = 411.0
+offset_left = 351.0
+offset_top = 118.0
+offset_right = 421.0
 offset_bottom = 188.0
 texture = SubResource("AtlasTexture_lfr58")
 expand_mode = 1
 stretch_mode = 5
 
 [node name="Slot4" type="TextureRect" parent="ScheduleContent/Page1/Page1/VBoxDay2/HBoxContainer" unique_id=622424514]
-custom_minimum_size = Vector2(40, 40)
+custom_minimum_size = Vector2(70, 70)
 layout_mode = 0
-offset_left = 423.0
-offset_top = 136.0
-offset_right = 475.0
+offset_left = 415.0
+offset_top = 118.0
+offset_right = 485.0
 offset_bottom = 188.0
 texture = SubResource("AtlasTexture_lfr58")
 expand_mode = 1
 stretch_mode = 5
 
 [node name="Slot5" type="TextureRect" parent="ScheduleContent/Page1/Page1/VBoxDay2/HBoxContainer" unique_id=583405186]
-custom_minimum_size = Vector2(40, 40)
+custom_minimum_size = Vector2(70, 70)
 layout_mode = 0
-offset_left = 488.0
-offset_top = 136.0
-offset_right = 540.0
+offset_left = 480.0
+offset_top = 118.0
+offset_right = 550.0
 offset_bottom = 188.0
 texture = SubResource("AtlasTexture_lfr58")
 expand_mode = 1
@@ -422,55 +421,55 @@ offset_right = 216.0
 offset_bottom = 67.0
 
 [node name="Slot1" type="TextureRect" parent="ScheduleContent/Page1/Page1/VBoxDay3/HBoxContainer" unique_id=1418837864]
-custom_minimum_size = Vector2(40, 40)
+custom_minimum_size = Vector2(70, 70)
 layout_mode = 0
-offset_left = 88.0
-offset_top = 187.0
-offset_right = 140.0
+offset_left = 80.0
+offset_top = 169.0
+offset_right = 150.0
 offset_bottom = 239.0
 texture = SubResource("AtlasTexture_lfr58")
 expand_mode = 1
 stretch_mode = 5
 
 [node name="Slot2" type="TextureRect" parent="ScheduleContent/Page1/Page1/VBoxDay3/HBoxContainer" unique_id=1580083378]
-custom_minimum_size = Vector2(40, 40)
+custom_minimum_size = Vector2(70, 70)
 layout_mode = 0
-offset_left = 154.0
-offset_top = 187.0
-offset_right = 206.0
+offset_left = 146.0
+offset_top = 169.0
+offset_right = 216.0
 offset_bottom = 239.0
 texture = SubResource("AtlasTexture_lfr58")
 expand_mode = 1
 stretch_mode = 5
 
 [node name="Slot3" type="TextureRect" parent="ScheduleContent/Page1/Page1/VBoxDay3/HBoxContainer" unique_id=1058400354]
-custom_minimum_size = Vector2(40, 40)
+custom_minimum_size = Vector2(70, 70)
 layout_mode = 0
-offset_left = 218.0
-offset_top = 187.0
-offset_right = 270.0
+offset_left = 210.0
+offset_top = 169.0
+offset_right = 280.0
 offset_bottom = 239.0
 texture = SubResource("AtlasTexture_lfr58")
 expand_mode = 1
 stretch_mode = 5
 
 [node name="Slot4" type="TextureRect" parent="ScheduleContent/Page1/Page1/VBoxDay3/HBoxContainer" unique_id=562497049]
-custom_minimum_size = Vector2(40, 40)
+custom_minimum_size = Vector2(70, 70)
 layout_mode = 0
-offset_left = 282.0
-offset_top = 187.0
-offset_right = 334.0
+offset_left = 274.0
+offset_top = 169.0
+offset_right = 344.0
 offset_bottom = 239.0
 texture = SubResource("AtlasTexture_lfr58")
 expand_mode = 1
 stretch_mode = 5
 
 [node name="Slot5" type="TextureRect" parent="ScheduleContent/Page1/Page1/VBoxDay3/HBoxContainer" unique_id=477436247]
-custom_minimum_size = Vector2(40, 40)
+custom_minimum_size = Vector2(70, 70)
 layout_mode = 0
-offset_left = 347.0
-offset_top = 187.0
-offset_right = 399.0
+offset_left = 339.0
+offset_top = 169.0
+offset_right = 409.0
 offset_bottom = 239.0
 texture = SubResource("AtlasTexture_lfr58")
 expand_mode = 1
@@ -500,55 +499,55 @@ offset_right = 216.0
 offset_bottom = 67.0
 
 [node name="Slot1" type="TextureRect" parent="ScheduleContent/Page1/Page1/VBoxDay4/HBoxContainer" unique_id=510478434]
-custom_minimum_size = Vector2(40, 40)
+custom_minimum_size = Vector2(70, 70)
 layout_mode = 0
-offset_left = 205.0
-offset_top = 184.0
-offset_right = 257.0
+offset_left = 197.0
+offset_top = 166.0
+offset_right = 267.0
 offset_bottom = 236.0
 texture = SubResource("AtlasTexture_lfr58")
 expand_mode = 1
 stretch_mode = 5
 
 [node name="Slot2" type="TextureRect" parent="ScheduleContent/Page1/Page1/VBoxDay4/HBoxContainer" unique_id=222713173]
-custom_minimum_size = Vector2(40, 40)
+custom_minimum_size = Vector2(70, 70)
 layout_mode = 0
-offset_left = 271.0
-offset_top = 184.0
-offset_right = 323.0
+offset_left = 263.0
+offset_top = 166.0
+offset_right = 333.0
 offset_bottom = 236.0
 texture = SubResource("AtlasTexture_lfr58")
 expand_mode = 1
 stretch_mode = 5
 
 [node name="Slot3" type="TextureRect" parent="ScheduleContent/Page1/Page1/VBoxDay4/HBoxContainer" unique_id=202086527]
-custom_minimum_size = Vector2(40, 40)
+custom_minimum_size = Vector2(70, 70)
 layout_mode = 0
-offset_left = 335.0
-offset_top = 184.0
-offset_right = 387.0
+offset_left = 327.0
+offset_top = 166.0
+offset_right = 397.0
 offset_bottom = 236.0
 texture = SubResource("AtlasTexture_lfr58")
 expand_mode = 1
 stretch_mode = 5
 
 [node name="Slot4" type="TextureRect" parent="ScheduleContent/Page1/Page1/VBoxDay4/HBoxContainer" unique_id=1442198163]
-custom_minimum_size = Vector2(40, 40)
+custom_minimum_size = Vector2(70, 70)
 layout_mode = 0
-offset_left = 399.0
-offset_top = 184.0
-offset_right = 451.0
+offset_left = 391.0
+offset_top = 166.0
+offset_right = 461.0
 offset_bottom = 236.0
 texture = SubResource("AtlasTexture_lfr58")
 expand_mode = 1
 stretch_mode = 5
 
 [node name="Slot5" type="TextureRect" parent="ScheduleContent/Page1/Page1/VBoxDay4/HBoxContainer" unique_id=1859305935]
-custom_minimum_size = Vector2(40, 40)
+custom_minimum_size = Vector2(70, 70)
 layout_mode = 0
-offset_left = 464.0
-offset_top = 184.0
-offset_right = 516.0
+offset_left = 456.0
+offset_top = 166.0
+offset_right = 526.0
 offset_bottom = 236.0
 texture = SubResource("AtlasTexture_lfr58")
 expand_mode = 1
@@ -563,10 +562,9 @@ offset_bottom = 559.0
 
 [node name="Page2" type="TextureRect" parent="ScheduleContent/Page2" unique_id=59329699]
 layout_mode = 0
-offset_left = -23.0
-offset_top = 3.0
-offset_right = 824.0
-offset_bottom = 596.0
+offset_left = -20.0
+offset_right = 827.0
+offset_bottom = 593.0
 texture = ExtResource("10_m1tw1")
 
 [node name="VBoxDay5" type="Control" parent="ScheduleContent/Page2/Page2" unique_id=1386022088]
@@ -592,56 +590,56 @@ offset_right = 237.0
 offset_bottom = 67.0
 
 [node name="Slot1" type="TextureRect" parent="ScheduleContent/Page2/Page2/VBoxDay5/HBoxContainer" unique_id=768505416]
-custom_minimum_size = Vector2(40, 40)
+custom_minimum_size = Vector2(70, 70)
 layout_mode = 0
-offset_left = 65.0
-offset_top = 136.0
-offset_right = 117.0
-offset_bottom = 188.0
+offset_left = 56.0
+offset_top = 119.0
+offset_right = 126.0
+offset_bottom = 189.0
 texture = SubResource("AtlasTexture_lfr58")
 expand_mode = 1
 stretch_mode = 5
 
 [node name="Slot2" type="TextureRect" parent="ScheduleContent/Page2/Page2/VBoxDay5/HBoxContainer" unique_id=932104087]
-custom_minimum_size = Vector2(40, 40)
+custom_minimum_size = Vector2(70, 70)
 layout_mode = 0
-offset_left = 131.0
-offset_top = 136.0
-offset_right = 183.0
-offset_bottom = 188.0
+offset_left = 122.0
+offset_top = 119.0
+offset_right = 192.0
+offset_bottom = 189.0
 texture = SubResource("AtlasTexture_lfr58")
 expand_mode = 1
 stretch_mode = 5
 
 [node name="Slot3" type="TextureRect" parent="ScheduleContent/Page2/Page2/VBoxDay5/HBoxContainer" unique_id=135480751]
-custom_minimum_size = Vector2(40, 40)
+custom_minimum_size = Vector2(70, 70)
 layout_mode = 0
-offset_left = 195.0
-offset_top = 136.0
-offset_right = 247.0
-offset_bottom = 188.0
+offset_left = 186.0
+offset_top = 119.0
+offset_right = 256.0
+offset_bottom = 189.0
 texture = SubResource("AtlasTexture_lfr58")
 expand_mode = 1
 stretch_mode = 5
 
 [node name="Slot4" type="TextureRect" parent="ScheduleContent/Page2/Page2/VBoxDay5/HBoxContainer" unique_id=833320552]
-custom_minimum_size = Vector2(40, 40)
+custom_minimum_size = Vector2(70, 70)
 layout_mode = 0
-offset_left = 259.0
-offset_top = 136.0
-offset_right = 311.0
-offset_bottom = 188.0
+offset_left = 250.0
+offset_top = 119.0
+offset_right = 320.0
+offset_bottom = 189.0
 texture = SubResource("AtlasTexture_lfr58")
 expand_mode = 1
 stretch_mode = 5
 
 [node name="Slot5" type="TextureRect" parent="ScheduleContent/Page2/Page2/VBoxDay5/HBoxContainer" unique_id=1777919495]
-custom_minimum_size = Vector2(40, 40)
+custom_minimum_size = Vector2(70, 70)
 layout_mode = 0
-offset_left = 324.0
-offset_top = 136.0
-offset_right = 376.0
-offset_bottom = 188.0
+offset_left = 315.0
+offset_top = 119.0
+offset_right = 385.0
+offset_bottom = 189.0
 texture = SubResource("AtlasTexture_lfr58")
 expand_mode = 1
 stretch_mode = 5
@@ -670,56 +668,56 @@ offset_right = 237.0
 offset_bottom = 67.0
 
 [node name="Slot1" type="TextureRect" parent="ScheduleContent/Page2/Page2/VBoxDay6/HBoxContainer" unique_id=1193726735]
-custom_minimum_size = Vector2(40, 40)
+custom_minimum_size = Vector2(70, 70)
 layout_mode = 0
-offset_left = 208.0
-offset_top = 136.0
-offset_right = 260.0
-offset_bottom = 188.0
+offset_left = 199.0
+offset_top = 119.0
+offset_right = 269.0
+offset_bottom = 189.0
 texture = SubResource("AtlasTexture_lfr58")
 expand_mode = 1
 stretch_mode = 5
 
 [node name="Slot2" type="TextureRect" parent="ScheduleContent/Page2/Page2/VBoxDay6/HBoxContainer" unique_id=1514713297]
-custom_minimum_size = Vector2(40, 40)
+custom_minimum_size = Vector2(70, 70)
 layout_mode = 0
-offset_left = 274.0
-offset_top = 136.0
-offset_right = 326.0
-offset_bottom = 188.0
+offset_left = 265.0
+offset_top = 119.0
+offset_right = 335.0
+offset_bottom = 189.0
 texture = SubResource("AtlasTexture_lfr58")
 expand_mode = 1
 stretch_mode = 5
 
 [node name="Slot3" type="TextureRect" parent="ScheduleContent/Page2/Page2/VBoxDay6/HBoxContainer" unique_id=654145832]
-custom_minimum_size = Vector2(40, 40)
+custom_minimum_size = Vector2(70, 70)
 layout_mode = 0
-offset_left = 338.0
-offset_top = 136.0
-offset_right = 390.0
-offset_bottom = 188.0
+offset_left = 329.0
+offset_top = 119.0
+offset_right = 399.0
+offset_bottom = 189.0
 texture = SubResource("AtlasTexture_lfr58")
 expand_mode = 1
 stretch_mode = 5
 
 [node name="Slot4" type="TextureRect" parent="ScheduleContent/Page2/Page2/VBoxDay6/HBoxContainer" unique_id=1140440115]
-custom_minimum_size = Vector2(40, 40)
+custom_minimum_size = Vector2(70, 70)
 layout_mode = 0
-offset_left = 402.0
-offset_top = 136.0
-offset_right = 454.0
-offset_bottom = 188.0
+offset_left = 393.0
+offset_top = 119.0
+offset_right = 463.0
+offset_bottom = 189.0
 texture = SubResource("AtlasTexture_lfr58")
 expand_mode = 1
 stretch_mode = 5
 
 [node name="Slot5" type="TextureRect" parent="ScheduleContent/Page2/Page2/VBoxDay6/HBoxContainer" unique_id=1811916406]
-custom_minimum_size = Vector2(40, 40)
+custom_minimum_size = Vector2(70, 70)
 layout_mode = 0
-offset_left = 467.0
-offset_top = 136.0
-offset_right = 519.0
-offset_bottom = 188.0
+offset_left = 458.0
+offset_top = 119.0
+offset_right = 528.0
+offset_bottom = 189.0
 texture = SubResource("AtlasTexture_lfr58")
 expand_mode = 1
 stretch_mode = 5
@@ -748,56 +746,56 @@ offset_right = 216.0
 offset_bottom = 67.0
 
 [node name="Slot1" type="TextureRect" parent="ScheduleContent/Page2/Page2/VBoxDay7/HBoxContainer" unique_id=1786842116]
-custom_minimum_size = Vector2(40, 40)
+custom_minimum_size = Vector2(70, 70)
 layout_mode = 0
-offset_left = 66.0
-offset_top = 187.0
-offset_right = 118.0
-offset_bottom = 239.0
+offset_left = 57.0
+offset_top = 170.0
+offset_right = 127.0
+offset_bottom = 240.0
 texture = SubResource("AtlasTexture_lfr58")
 expand_mode = 1
 stretch_mode = 5
 
 [node name="Slot2" type="TextureRect" parent="ScheduleContent/Page2/Page2/VBoxDay7/HBoxContainer" unique_id=1050745863]
-custom_minimum_size = Vector2(40, 40)
+custom_minimum_size = Vector2(70, 70)
 layout_mode = 0
-offset_left = 132.0
-offset_top = 187.0
-offset_right = 184.0
-offset_bottom = 239.0
+offset_left = 123.0
+offset_top = 170.0
+offset_right = 193.0
+offset_bottom = 240.0
 texture = SubResource("AtlasTexture_lfr58")
 expand_mode = 1
 stretch_mode = 5
 
 [node name="Slot3" type="TextureRect" parent="ScheduleContent/Page2/Page2/VBoxDay7/HBoxContainer" unique_id=178830196]
-custom_minimum_size = Vector2(40, 40)
+custom_minimum_size = Vector2(70, 70)
 layout_mode = 0
-offset_left = 196.0
-offset_top = 187.0
-offset_right = 248.0
-offset_bottom = 239.0
+offset_left = 187.0
+offset_top = 170.0
+offset_right = 257.0
+offset_bottom = 240.0
 texture = SubResource("AtlasTexture_lfr58")
 expand_mode = 1
 stretch_mode = 5
 
 [node name="Slot4" type="TextureRect" parent="ScheduleContent/Page2/Page2/VBoxDay7/HBoxContainer" unique_id=1686184263]
-custom_minimum_size = Vector2(40, 40)
+custom_minimum_size = Vector2(70, 70)
 layout_mode = 0
-offset_left = 260.0
-offset_top = 187.0
-offset_right = 312.0
-offset_bottom = 239.0
+offset_left = 251.0
+offset_top = 170.0
+offset_right = 321.0
+offset_bottom = 240.0
 texture = SubResource("AtlasTexture_lfr58")
 expand_mode = 1
 stretch_mode = 5
 
 [node name="Slot5" type="TextureRect" parent="ScheduleContent/Page2/Page2/VBoxDay7/HBoxContainer" unique_id=2082656548]
-custom_minimum_size = Vector2(40, 40)
+custom_minimum_size = Vector2(70, 70)
 layout_mode = 0
-offset_left = 325.0
-offset_top = 187.0
-offset_right = 377.0
-offset_bottom = 239.0
+offset_left = 316.0
+offset_top = 170.0
+offset_right = 386.0
+offset_bottom = 240.0
 texture = SubResource("AtlasTexture_lfr58")
 expand_mode = 1
 stretch_mode = 5
@@ -832,6 +830,7 @@ vertical_alignment = 1
 
 [node name="SubmitContent" type="Control" parent="." unique_id=352151947]
 unique_name_in_owner = true
+visible = false
 anchors_preset = 0
 offset_right = 480.0
 offset_bottom = 559.0
