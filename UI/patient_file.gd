@@ -3,6 +3,10 @@ extends Control
 signal file_closed
 signal decision_submitted(emotion: Emotion.Type, schedule: GameConfig.Schedule)
 
+const NPC_SHEET := "res://Assets/NPC/Real/NPC Base.png"
+const PATIENT_DIR := "res://Assets/NPC"
+const FRAME_SIZE := 128
+
 # --- REFERENSI NODE LABELS PASIEN ---
 @onready var name_label: Label = %NameLabel
 @onready var usia_label: Label = %UsiaLabel
@@ -14,7 +18,7 @@ signal decision_submitted(emotion: Emotion.Type, schedule: GameConfig.Schedule)
 @onready var remaining_label: Label = %RemainingLabel
 @onready var notes_label: Label = %NotesLabel
 @onready var monitor: TextureRect = $PatientOverlay/Monitor
-@onready var logo: TextureRect = $PatientOverlay/Logo
+@onready var logo: TextureRect = %Logo if has_node("%Logo") else $PatientOverlay/Logo
 
 # --- REFERENSI NODE TOMBOL & UI UTAMA ---
 @onready var close_button: Button = %CloseButton
@@ -96,6 +100,7 @@ func _ready() -> void:
 
 func show_patient(patient: PatientData) -> void:
 	_populate_patient_data(patient)
+	_populate_schedule_content()
 
 	page1.show()
 	page2.hide()
@@ -128,7 +133,9 @@ func _populate_patient_data(patient: PatientData) -> void:
 	name_label.text = "Nama: %s" % patient.display_name
 	usia_label.text = "Usia: %d" % patient.age
 	job_label.text = "Pekerjaan: %s" % patient.profession
-	rujukan_label.text = "Alasan Rujukan: %s" % patient.referral_reason
+	rujukan_label.text = "Rujukan: %s" % patient.referral_reason
+
+	_update_patient_logo(patient.sprite_id)
 
 	if "notes" in patient:
 		notes_label.text = "Catatan: %s" % patient.notes
@@ -140,6 +147,107 @@ func _populate_patient_data(patient: PatientData) -> void:
 	day_label.text = "HARI %d / %d" % [EchoManager.day, GameConfig.DAYS_TOTAL]
 	session_label.text = "SESI %d / %d" % [EchoManager.session_index, GameConfig.SESSIONS_PER_DAY]
 	remaining_label.text = "Pertanyaan tersisa: %d" % EchoManager.get_topics_remaining()
+
+
+func _create_patient_logo_texture(sprite_id: String) -> Texture2D:
+	var path := ""
+	if sprite_id != "":
+		path = "%s/%s/%s.png" % [PATIENT_DIR, sprite_id, sprite_id]
+
+	if path == "" or not ResourceLoader.exists(path):
+		path = NPC_SHEET
+
+	if ResourceLoader.exists(path):
+		var tex := load(path) as Texture2D
+		if tex:
+			var atlas := AtlasTexture.new()
+			atlas.atlas = tex
+			atlas.region = Rect2(0, 0, FRAME_SIZE, FRAME_SIZE)
+			return atlas
+	return null
+
+
+func _update_patient_logo(sprite_id: String) -> void:
+	if not logo:
+		return
+	var atlas := _create_patient_logo_texture(sprite_id)
+	if atlas:
+		logo.texture = atlas
+
+
+func _populate_schedule_content() -> void:
+	if not schedule_content:
+		return
+
+	for day_num in range(1, GameConfig.DAYS_TOTAL + 1):
+		var slots := _get_day_slots(day_num)
+		var patients := _get_patients_for_schedule_day(day_num)
+
+		var vbox := schedule_content.find_child("VBoxDay%d" % day_num, true, false)
+		if vbox:
+			var hari_label: Label = vbox.find_child("HariLabel", true, false)
+			if hari_label:
+				hari_label.text = "Day %d" % day_num
+
+		for i in range(slots.size()):
+			var slot := slots[i]
+			if i < patients.size():
+				var patient: PatientData = patients[i]
+				slot.texture = _create_patient_logo_texture(patient.sprite_id)
+				slot.visible = true
+				slot.tooltip_text = "%s (%s)" % [patient.display_name, patient.profession]
+			else:
+				slot.texture = null
+				slot.visible = false
+				slot.tooltip_text = ""
+
+
+func _get_day_slots(day_num: int) -> Array[TextureRect]:
+	var slots: Array[TextureRect] = []
+	var vbox_name := "VBoxDay%d" % day_num
+	var vbox := schedule_content.find_child(vbox_name, true, false)
+	if not vbox:
+		return slots
+	var hbox := vbox.find_child("HBoxContainer", true, false)
+	if not hbox:
+		return slots
+	for i in range(1, GameConfig.SESSIONS_PER_DAY + 1):
+		var slot := hbox.find_child("Slot%d" % i, false, false) as TextureRect
+		if slot:
+			slots.append(slot)
+	if slots.is_empty():
+		for child in hbox.get_children():
+			if child is TextureRect:
+				slots.append(child)
+	return slots
+
+
+func _get_patients_for_schedule_day(target_day: int) -> Array[PatientData]:
+	var result: Array[PatientData] = []
+	if not Engine.has_singleton("EchoManager") and not is_instance_valid(EchoManager):
+		return result
+
+	var pending: Array = EchoManager.get_pending_checkups()
+	for p in pending:
+		if p is PatientData:
+			# Pasien yang dijadwalkan untuk kontrol di target_day
+			if p.next_checkup_day == target_day:
+				if not result.has(p):
+					result.append(p)
+			# Atau pasien yang sudah diperiksa pada target_day (hari ini atau sebelumnya)
+			elif target_day <= EchoManager.day:
+				for h in p.diagnosis_history:
+					if h.get("day", -1) == target_day:
+						if not result.has(p):
+							result.append(p)
+						break
+
+	# Jika target_day adalah hari ini, sertakan juga pasien yang sedang diperiksa
+	if target_day == EchoManager.day and EchoManager.current_patient:
+		if not result.has(EchoManager.current_patient):
+			result.append(EchoManager.current_patient)
+
+	return result
 
 
 func _on_close() -> void:
@@ -176,6 +284,7 @@ func _on_close_button_pressed() -> void:
 
 func _on_schedule_button_pressed() -> void:
 	_play_click()
+	_populate_schedule_content()
 	submit_content.hide()
 	schedule_content.show()
 	for element in patient_details:
