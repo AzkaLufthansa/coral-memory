@@ -140,8 +140,11 @@ func _populate_patient_data(patient: PatientData) -> void:
 	if "notes" in patient:
 		notes_label.text = "Catatan: %s" % patient.notes
 
-	var visit_count := patient.diagnosis_history.size()
-	var visit_text := str(visit_count) if visit_count > 0 else "Pasien baru (belum pernah diperiksa)"
+	var valid_diagnoses := 0
+	for h in patient.diagnosis_history:
+		if not h.get("unattended", false):
+			valid_diagnoses += 1
+	var visit_text := str(valid_diagnoses) if valid_diagnoses > 0 else "Pasien baru (belum pernah diperiksa)"
 	visits_label.text = "Kunjungan Sebelumnya: %s" % visit_text
 
 	day_label.text = "HARI %d / %d" % [EchoManager.day, GameConfig.DAYS_TOTAL]
