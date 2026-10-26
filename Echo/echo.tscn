@@ -1,10 +1,9 @@
-[gd_scene load_steps=2 format=3 uid="uid://d4imqi5h613ig"]
+[gd_scene format=3 uid="uid://d4imqi5h613ig"]
 
-[ext_resource type="Script" path="res://Echo/echo.gd" id="1_echo"]
+[ext_resource type="Script" uid="uid://cduuqibhn5bs" path="res://Echo/echo.gd" id="1_echo"]
 
-[node name="Echo" type="Node2D"]
+[node name="Echo" type="Node2D" unique_id=629164285]
 script = ExtResource("1_echo")
 
-[node name="EchoSprite" type="AnimatedSprite2D" parent="."]
-position = Vector2(0, 0)
+[node name="EchoSprite" type="AnimatedSprite2D" parent="." unique_id=367299360]
 texture_filter = 1

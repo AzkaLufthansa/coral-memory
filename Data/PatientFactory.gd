@@ -3,22 +3,66 @@ extends RefCounted
 
 static var _rng := RandomNumberGenerator.new()
 
-# Pasien6 dan Pasien8 hanya untuk pool NPC-A dan NPC-E
-const FEMALE_NPC_POOLS: Array[String] = ["NPC-A", "NPC-E"]
+# Kategori Sprite:
+# - cat: Pasien3 khusus NPC-H
+# - female: Pasien6, Pasien8 untuk NPC-A dan NPC-E
+# - male: Pasien1, Pasien7, Pasien9, Pasien10, Pasien11 untuk NPC-B, NPC-C, NPC-D, NPC-F, NPC-G
+const CAT_SPRITES: Array[String] = ["Pasien3"]
 const FEMALE_SPRITES: Array[String] = ["Pasien6", "Pasien8"]
 const MALE_SPRITES: Array[String] = [
-	"Pasien1", "Pasien3", "Pasien7",
-	"Pasien9", "Pasien10", "Pasien11",
+	"Pasien1", "Pasien7", "Pasien9", "Pasien10", "Pasien11",
 ]
+
+const CAT_NPC_POOLS: Array[String] = ["NPC-H"]
+const FEMALE_NPC_POOLS: Array[String] = ["NPC-A", "NPC-E"]
+const MALE_NPC_POOLS: Array[String] = [
+	"NPC-B", "NPC-C", "NPC-D", "NPC-F", "NPC-G",
+]
+
+static var _npc_sprite_map: Dictionary = {}
+
+static func is_cat_npc(base_npc_id: String) -> bool:
+	var id := base_npc_id.to_upper().strip_edges()
+	return id in CAT_NPC_POOLS
 
 static func is_female_npc(base_npc_id: String) -> bool:
 	var id := base_npc_id.to_upper().strip_edges()
 	return id in FEMALE_NPC_POOLS
 
+static func is_male_npc(base_npc_id: String) -> bool:
+	var id := base_npc_id.to_upper().strip_edges()
+	return id in MALE_NPC_POOLS
+
 static func get_allowed_sprites(base_npc_id: String) -> Array[String]:
-	if is_female_npc(base_npc_id):
+	if is_cat_npc(base_npc_id):
+		return CAT_SPRITES.duplicate()
+	elif is_female_npc(base_npc_id):
 		return FEMALE_SPRITES.duplicate()
 	return MALE_SPRITES.duplicate()
+
+static func init_npc_sprite_mapping() -> void:
+	_npc_sprite_map.clear()
+
+	# 1. Cat: Pasien3 khusus NPC-H
+	_npc_sprite_map["NPC-H"] = "Pasien3"
+
+	# 2. Female: acak Pasien6 dan Pasien8 ke NPC-A dan NPC-E tanpa duplikasi
+	var female_pool := FEMALE_SPRITES.duplicate()
+	female_pool.shuffle()
+	for i in range(mini(FEMALE_NPC_POOLS.size(), female_pool.size())):
+		_npc_sprite_map[FEMALE_NPC_POOLS[i]] = female_pool[i]
+
+	# 3. Male: acak Pasien1, 7, 9, 10, 11 ke NPC-B, C, D, F, G tanpa duplikasi
+	var male_pool := MALE_SPRITES.duplicate()
+	male_pool.shuffle()
+	for i in range(mini(MALE_NPC_POOLS.size(), male_pool.size())):
+		_npc_sprite_map[MALE_NPC_POOLS[i]] = male_pool[i]
+
+static func get_sprite_for_npc(base_npc_id: String) -> String:
+	if _npc_sprite_map.is_empty():
+		init_npc_sprite_mapping()
+	var key := base_npc_id.to_upper().strip_edges()
+	return _npc_sprite_map.get(key, "Pasien1")
 
 const BASE_NPC_POOLS: Array[Dictionary] = [
 	{"base": "NPC-A", "names": ["Linda", "Rara", "Santi", "Maya"], "professions": ["karyawan magang", "mahasiswa", "dosen"], "referrals": ["kecelakaan ringan di tempat kerja", "laporan keluarga soal perubahan perilaku"]},
@@ -27,6 +71,8 @@ const BASE_NPC_POOLS: Array[Dictionary] = [
 	{"base": "NPC-D", "names": ["Marno", "Rio", "Andi", "Wati"], "professions": ["pensiunan", "pengangguran"], "referrals": ["perubahan setelah kehilangan anggota keluarga", "laporan tetangga soal kondisi rumah"]},
 	{"base": "NPC-E", "names": ["Sri", "Vina", "Ratna", "Dita"], "professions": ["freelancer", "seniman", "perawat"], "referrals": ["terlihat tanda-tanda kurang tidur", "dirujuk oleh komunitas seni"]},
 	{"base": "NPC-F", "names": ["Hasan", "Putra", "Gatot", "Yohanes"], "professions": ["petugas keamanan", "atasan divisi", "pejabat dinas"], "referrals": ["dirujuk setelah insiden di ruang rapat", "observasi internal fasilitas"]},
+	{"base": "NPC-G", "names": ["Brian", "Jonathan", "Alvin", "Doni"], "professions": ["pemain piano", "pelatih musik", "musisi"], "referrals": ["bergumam nada yang sama terus-menerus", "dirujuk oleh komunitas seni"]},
+	{"base": "NPC-H", "names": ["Cimeng", "Momo", "Gato", "Neko"], "professions": ["kucing", "penjaga rumah"], "referrals": ["sering membuat rumah berantakan", "dirujuk oleh majikannya"]},
 ]
 
 # Templat dialog per emosi per topik. TIDAK menyebut nama emosi secara eksplisit.
@@ -93,6 +139,7 @@ const ALL_EMOTIONS: Array = [
 
 static func setup_rng() -> void:
 	_rng.randomize()
+	init_npc_sprite_mapping()
 
 
 static func generate_new_patients(count: int, day: int) -> Array[PatientData]:
@@ -115,6 +162,7 @@ static func _build_patient(emotion: Emotion.Type, day: int, index: int) -> Patie
 	var patient := PatientData.new()
 	patient.npc_instance_id = "%s-day%d-%d" % [emotion, day, index]
 	patient.base_npc_id = pool.base
+	patient.sprite_id = get_sprite_for_npc(pool.base)
 	patient.display_name = pool.names[_rng.randi_range(0, pool.names.size() - 1)]
 	patient.age = _rng.randi_range(18, 40)
 	patient.profession = pool.professions[_rng.randi_range(0, pool.professions.size() - 1)]

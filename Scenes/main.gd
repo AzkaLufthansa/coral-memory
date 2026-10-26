@@ -10,6 +10,7 @@ const TopicScene := preload("res://UI/topic_panel.tscn")
 const DayTransitionScene := preload("res://UI/day_transition.tscn")
 const TransformFlashScene := preload("res://UI/transform_flash.tscn")
 const GameOverScene := preload("res://UI/game_over_screen.tscn")
+const SPRITE_POOL_CAT := PatientFactory.CAT_SPRITES
 const SPRITE_POOL_FEMALE := PatientFactory.FEMALE_SPRITES
 const SPRITE_POOL_MALE := PatientFactory.MALE_SPRITES
 const SPRITE_POOL := [
@@ -19,8 +20,6 @@ const SPRITE_POOL := [
 
 var patient_node: Patient2D
 var office: CanvasLayer
-var _female_sprite_bag: Array = []
-var _male_sprite_bag: Array = []
 var _spawn_count := 0
 # --- PERBAIKAN TIPE DATA ---
 # Mengubah PanelContainer menjadi Control agar aman untuk semua jenis Node UI
@@ -179,14 +178,21 @@ func _spawn_patient(patient: PatientData) -> void:
 	if patient_node:
 		patient_node.queue_free()
 
-	# Pastikan sprite sesuai pool NPC (Pasien6 dan Pasien8 HANYA untuk NPC-A dan NPC-E)
-	var is_female := PatientFactory.is_female_npc(patient.base_npc_id)
+	# Pastikan sprite sesuai mapping tipe NPC:
+	# - Pasien3 khusus kategori cat (NPC-H)
+	# - Pasien6 & Pasien8 khusus kategori female (NPC-A, NPC-E)
+	# - Pasien1, 7, 9, 10, 11 khusus kategori male (NPC-B, C, D, F, G)
+	var expected_sprite := PatientFactory.get_sprite_for_npc(patient.base_npc_id)
 	if patient.sprite_id == "":
-		patient.sprite_id = _next_sprite_id(patient.base_npc_id)
-	elif not is_female and SPRITE_POOL_FEMALE.has(patient.sprite_id):
-		patient.sprite_id = _next_sprite_id(patient.base_npc_id)
-	elif is_female and not SPRITE_POOL_FEMALE.has(patient.sprite_id):
-		patient.sprite_id = _next_sprite_id(patient.base_npc_id)
+		patient.sprite_id = expected_sprite
+	elif PatientFactory.is_cat_npc(patient.base_npc_id) and patient.sprite_id != "Pasien3":
+		patient.sprite_id = "Pasien3"
+	elif not PatientFactory.is_cat_npc(patient.base_npc_id) and patient.sprite_id == "Pasien3":
+		patient.sprite_id = expected_sprite
+	elif PatientFactory.is_female_npc(patient.base_npc_id) and not SPRITE_POOL_FEMALE.has(patient.sprite_id):
+		patient.sprite_id = expected_sprite
+	elif PatientFactory.is_male_npc(patient.base_npc_id) and not SPRITE_POOL_MALE.has(patient.sprite_id):
+		patient.sprite_id = expected_sprite
 	
 	_spawn_count += 1
 	print("Pasien ke-%d | Base: %s | Sprite: %s" % [_spawn_count, patient.base_npc_id, patient.sprite_id])
@@ -199,16 +205,7 @@ func _spawn_patient(patient: PatientData) -> void:
 	patient_node.patient_clicked.connect(_on_patient_clicked)
 
 func _next_sprite_id(base_npc_id: String = "") -> String:
-	if PatientFactory.is_female_npc(base_npc_id):
-		if _female_sprite_bag.is_empty():
-			_female_sprite_bag = SPRITE_POOL_FEMALE.duplicate()
-			_female_sprite_bag.shuffle()
-		return _female_sprite_bag.pop_back()
-	else:
-		if _male_sprite_bag.is_empty():
-			_male_sprite_bag = SPRITE_POOL_MALE.duplicate()
-			_male_sprite_bag.shuffle()
-		return _male_sprite_bag.pop_back()
+	return PatientFactory.get_sprite_for_npc(base_npc_id)
 
 # --- Office interactions ---
 

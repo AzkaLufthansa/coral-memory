@@ -3,15 +3,15 @@
 importer="texture"
 type="CompressedTexture2D"
 uid="uid://lc0rcih024vj"
-path="res://.godot/imported/Shame-Sprite.png-652eb4eac95c5ba05c05e40ac3c1c71c.ctex"
+path="res://.godot/imported/Shame-Sheet.png-d23a0a7ec532d39de8857969641bdbf2.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Assets/Echo/Shame/Shame-Sprite.png"
-dest_files=["res://.godot/imported/Shame-Sprite.png-652eb4eac95c5ba05c05e40ac3c1c71c.ctex"]
+source_file="res://Assets/Echo/Shame/Shame-Sheet.png"
+dest_files=["res://.godot/imported/Shame-Sheet.png-d23a0a7ec532d39de8857969641bdbf2.ctex"]
 
 [params]
 

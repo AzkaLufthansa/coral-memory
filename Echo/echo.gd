@@ -7,6 +7,11 @@ const FRAME_SIZE := 128
 const INITIAL_SHEET := "res://Assets/Echo/Initial.png"
 const PHASE2_SHEETS: Dictionary = {
 	Emotion.Type.FEAR: "res://Assets/Echo/Fear.png",
+	Emotion.Type.ANGER: "res://Assets/Echo/Angry/Angry-Sheet.png",
+	Emotion.Type.ENVY: "res://Assets/Echo/Envy/Envy-Sheet.png",
+	Emotion.Type.GUILT: "res://Assets/Echo/Guilt/Guilt-Sheet.png",
+	Emotion.Type.SADNESS: "res://Assets/Echo/Sad/Sad-Sheet.png",
+	Emotion.Type.SHAME: "res://Assets/Echo/Shame/Shame-Sheet.png"
 }
 
 const INITIAL_FPS := 8.0
