@@ -17,9 +17,8 @@ const PHASE2_SHEETS: Dictionary = {
 const INITIAL_FPS := 8.0
 const PHASE2_FPS := 8.0
 
-# Static supaya bertahan antar instance echo (setiap bel membuat scene
-# pasien baru -> node echo baru). Sekali wujud berubah, tetap berubah.
-static var _revealed := false
+# Instance variable agar echo tidak terbawa ke pasien berikutnya
+var _revealed := false
 
 var _patient_emotion: Emotion.Type = Emotion.Type.FEAR
 var _phase := 1
@@ -70,6 +69,7 @@ func _make_atlas(tex: Texture2D, col: int, row: int) -> AtlasTexture:
 
 func start_session(patient: PatientData) -> void:
 	_patient_emotion = patient.true_emotion
+	_revealed = patient.is_diagnosed
 	reset()
 
 
@@ -95,7 +95,7 @@ func transform_to_phase_2() -> void:
 
 
 static func reset_revealed() -> void:
-	_revealed = false
+	pass
 
 
 func _set_phase(phase: int) -> void:

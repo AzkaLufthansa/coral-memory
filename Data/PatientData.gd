@@ -28,6 +28,8 @@ var schedule_tolerance_map: Dictionary = {}
 
 # State kontrol
 var is_control_patient: bool = false
+@export var is_diagnosed: bool = false
+@export var echo_transformed: bool = false
 var next_checkup_day: int = -1
 var pending_decay_per_day: int = 0
 var diagnosis_history: Array = []
@@ -45,4 +47,26 @@ func get_relevance(topic: Topic.Name) -> Topic.Relevance:
 
 
 func get_dialog(topic: Topic.Name) -> String:
+	if (is_diagnosed or topic == Topic.Name.KABAR) and not dialog_lines.has(topic):
+		return get_checkup_dialog()
 	return dialog_lines.get(topic, "")
+
+
+func get_checkup_dialog() -> String:
+	if base_npc_id.to_upper().strip_edges() == "NPC-H":
+		return "Meow... (tampak lebih tenang dan mendengkur pelan)."
+	match true_emotion:
+		Emotion.Type.FEAR:
+			return "Keadaanku sudah jauh lebih tenang. Ketakutan itu masih ada sesekali, tapi aku mulai bisa menghadapinya."
+		Emotion.Type.ANGER:
+			return "Nafasku sudah tidak seberat dulu. Aku berusaha tidak membiarkan amarah itu mengendalikanku lagi."
+		Emotion.Type.SADNESS:
+			return "Rumah masih terasa sunyi, tapi aku mulai bisa melangkah lagi hari ini. Terima kasih."
+		Emotion.Type.GUILT:
+			return "Beban di dadaku rasanya sedikit berkurang. Aku sedang berusaha berdamai dengan masa lalu."
+		Emotion.Type.SHAME:
+			return "Aku mencoba untuk tidak terlalu keras pada diriku sendiri. Perlahan, aku merasa lebih berharga."
+		Emotion.Type.ENVY:
+			return "Aku mulai belajar fokus pada perjalananku sendiri, bukan orang lain. Rasanya jauh lebih melegakan."
+		_:
+			return "Keadaanku jauh lebih baik sekarang. Terima kasih atas bantuanmu."
