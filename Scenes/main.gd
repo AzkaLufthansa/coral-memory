@@ -135,6 +135,7 @@ func _setup_signals() -> void:
 	EchoManager.end_of_day_finished.connect(_on_end_of_day_finished)
 	EchoManager.echo_burst.connect(_on_echo_burst)
 	EchoManager.game_ended.connect(_on_game_ended)
+	EchoManager.game_failed.connect(_on_game_failed)
 
 	office.patient_file_pressed.connect(_on_patient_file_pressed)
 	office.notebook_pressed.connect(_on_notebook_pressed)
@@ -320,14 +321,32 @@ func _on_end_of_day_finished(day: int) -> void:
 	EchoManager.advance_day()
 
 
+func _stop_all_bgm() -> void:
+	var players: Array = [
+		_bgm, _bgm_pause, _bgm_transition,
+		_bgm_tense, _bgm_tense_pause, _bgm_tense_transition
+	]
+	for player in players:
+		if is_instance_valid(player) and player is AudioStreamPlayer and player.playing:
+			player.stop()
+
+
 func _on_echo_burst(patient: PatientData) -> void:
 	_close_all_panels()
+	_stop_all_bgm()
 	game_over_screen.show_burst(patient)
 
 
 func _on_game_ended(days: int) -> void:
 	_close_all_panels()
+	_stop_all_bgm()
 	game_over_screen.show_ending(days)
+
+
+func _on_game_failed(detail: String) -> void:
+	_close_all_panels()
+	_stop_all_bgm()
+	game_over_screen.show_game_over(detail)
 
 
 func _on_restart_requested() -> void:
