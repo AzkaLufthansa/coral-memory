@@ -142,14 +142,38 @@ static func setup_rng() -> void:
 	init_npc_sprite_mapping()
 
 
-static func generate_new_patients(count: int, day: int) -> Array[PatientData]:
+static func generate_new_patients(count: int, day: int, exclude_base_ids: Array = [], preferred_excludes: Array = []) -> Array[PatientData]:
 	var patients: Array[PatientData] = []
 	var used_emotions: Array = []
+	var used_bases: Array = exclude_base_ids.duplicate()
+
 	for i in count:
 		var emotion := _pick_emotion(used_emotions)
 		used_emotions.append(emotion)
-		patients.append(_build_patient(emotion, day, i))
+		var pool := _pick_available_pool(used_bases, preferred_excludes)
+		if pool.has("base"):
+			used_bases.append(pool.base)
+		patients.append(_build_patient(emotion, day, i, pool))
 	return patients
+
+
+static func _pick_available_pool(used_bases: Array, preferred_excludes: Array = []) -> Dictionary:
+	var available: Array[Dictionary] = []
+	for p in BASE_NPC_POOLS:
+		if not used_bases.has(p.base) and not preferred_excludes.has(p.base):
+			available.append(p)
+
+	# Jika tidak ada yang lolos karena preferred_excludes, gunakan yang penting tidak ada di used_bases
+	if available.is_empty():
+		for p in BASE_NPC_POOLS:
+			if not used_bases.has(p.base):
+				available.append(p)
+
+	# Fallback aman jika semua base_npc_id sudah terpakai
+	if available.is_empty():
+		return BASE_NPC_POOLS[_rng.randi_range(0, BASE_NPC_POOLS.size() - 1)]
+
+	return available[_rng.randi_range(0, available.size() - 1)]
 
 
 static func _pick_emotion(used: Array) -> Emotion.Type:
@@ -157,8 +181,9 @@ static func _pick_emotion(used: Array) -> Emotion.Type:
 	return Emotion.Type.FEAR
 
 
-static func _build_patient(emotion: Emotion.Type, day: int, index: int) -> PatientData:
-	var pool := BASE_NPC_POOLS[_rng.randi_range(0, BASE_NPC_POOLS.size() - 1)]
+static func _build_patient(emotion: Emotion.Type, day: int, index: int, pool: Dictionary = {}) -> PatientData:
+	if pool.is_empty():
+		pool = _pick_available_pool([])
 	var patient := PatientData.new()
 	patient.npc_instance_id = "%s-day%d-%d" % [emotion, day, index]
 	patient.base_npc_id = pool.base

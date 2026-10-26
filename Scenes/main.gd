@@ -255,6 +255,7 @@ func _on_topic_reacted(patient: PatientData, topic: Topic.Name, relevance: Topic
 	if patient_node == null or patient_node.current_patient != patient:
 		return
 	if relevance == Topic.Relevance.PRIMARY:
+		patient.echo_transformed = true
 		patient_node.play_shocked()
 		await transform_flash.play()
 		if is_instance_valid(patient_node):

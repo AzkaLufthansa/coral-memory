@@ -1,7 +1,7 @@
 class_name Topic
 extends RefCounted
 
-enum Name { KELUARGA, PEKERJAAN, HUBUNGAN, MASA_LALU, PENYESALAN, MASA_DEPAN }
+enum Name { KELUARGA, PEKERJAAN, HUBUNGAN, MASA_LALU, PENYESALAN, MASA_DEPAN, KABAR }
 
 enum Relevance { PRIMARY, SECONDARY, NEUTRAL, DEFLECTIVE }
 
@@ -12,6 +12,7 @@ const DISPLAY_NAMES: Dictionary = {
 	Name.MASA_LALU: "Masa Lalu",
 	Name.PENYESALAN: "Penyesalan",
 	Name.MASA_DEPAN: "Masa Depan",
+	Name.KABAR: "Apa kabarmu?",
 }
 
 const ALL_TOPICS: Array = [

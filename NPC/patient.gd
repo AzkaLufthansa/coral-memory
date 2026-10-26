@@ -195,6 +195,8 @@ func _play_if_exists(anim: String) -> void:
 
 
 func transform_echo() -> void:
+	if current_patient:
+		current_patient.echo_transformed = true
 	echo.transform_to_phase_2()
 
 

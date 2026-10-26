@@ -88,15 +88,42 @@ func _setup_choice_mode() -> void:
 	topic_title.visible = true
 	topic_choice.modulate.a = 1.0
 	topic_title.modulate.a = 1.0
-	var out_of_questions := _current_patient != null \
-		and _current_patient.topics_used.size() >= GameConfig.MAX_TOPICS_PER_SESSION
-	for topic in _buttons:
-		var button: Button = _buttons[topic]
-		var used := _current_patient != null and _current_patient.topics_used.has(topic)
-		var blocked := used or out_of_questions
-		button.visible = true
-		button.modulate.a = 0.4 if blocked else 1.0
-		button.disabled = blocked
+
+	var first_button: Button = $TopicButton0
+	var is_diagnosed := _current_patient != null and _current_patient.is_diagnosed
+
+	if is_diagnosed:
+		var used := _current_patient.topics_used.size() >= 1
+		first_button.text = "Apa kabarmu?"
+		first_button.visible = true
+		first_button.disabled = used
+		first_button.modulate.a = 0.4 if used else 1.0
+		first_button.offset_left = 798.0
+		first_button.offset_top = 115.0
+		first_button.offset_right = 1022.0
+		first_button.offset_bottom = 155.0
+
+		for topic in _buttons:
+			var btn: Button = _buttons[topic]
+			if btn != first_button:
+				btn.visible = false
+				btn.disabled = true
+	else:
+		first_button.offset_left = 669.0
+		first_button.offset_top = 72.0
+		first_button.offset_right = 863.0
+		first_button.offset_bottom = 108.0
+
+		var out_of_questions := _current_patient != null \
+			and _current_patient.topics_used.size() >= GameConfig.MAX_TOPICS_PER_SESSION
+		for topic in _buttons:
+			var button: Button = _buttons[topic]
+			button.text = Topic.display_name(topic)
+			var used := _current_patient != null and _current_patient.topics_used.has(topic)
+			var blocked := used or out_of_questions
+			button.visible = true
+			button.modulate.a = 0.4 if blocked else 1.0
+			button.disabled = blocked
 
 
 func show_response(patient: PatientData, topic: Topic.Name) -> void:
@@ -147,7 +174,10 @@ func _type_text(full_text: String, gen: int) -> void:
 func _on_topic_pressed(topic: Topic.Name) -> void:
 	if click_sfx and click_sfx.stream:
 		click_sfx.play()
-	topic_selected.emit(topic)
+	var selected_topic := topic
+	if _current_patient != null and _current_patient.is_diagnosed:
+		selected_topic = Topic.Name.KABAR
+	topic_selected.emit(selected_topic)
 
 
 func _on_dialog_panel_input(event: InputEvent) -> void:

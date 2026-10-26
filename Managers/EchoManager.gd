@@ -17,6 +17,7 @@ var _new_patients: Array = []
 var _control_patients: Array = []
 var _session_queue: Array = []
 var _pending_checkups: Array = []
+var _daily_patients: Dictionary = {}
 var _game_over: bool = false
 var _day_advancing: bool = false
 
@@ -27,6 +28,7 @@ func start_game() -> void:
 	_control_patients = []
 	_session_queue = []
 	_pending_checkups = []
+	_daily_patients.clear()
 	_game_over = false
 	_day_advancing = false
 	PatientFactory.setup_rng()
@@ -50,11 +52,34 @@ func _start_next_day() -> void:
 			patient.is_control_patient = true
 			_control_patients.append(patient)
 
-	# Sisa slot diisi pasien baru (komposisi Section 18)
+	# Kumpulkan base_npc_id pasien kontrol hari ini agar tidak duplikat dengan pasien baru
+	var used_base_ids: Array[String] = []
+	for patient in _control_patients:
+		if patient is PatientData:
+			used_base_ids.append(patient.base_npc_id)
+
+	# Kumpulkan base_npc_id pasien yang masih menunggu jadwal kontrol di hari mendatang
+	var future_pending_base_ids: Array[String] = []
+	for patient in _pending_checkups:
+		if patient is PatientData and patient.next_checkup_day > day:
+			future_pending_base_ids.append(patient.base_npc_id)
+
+	# Sisa slot diisi pasien baru (komposisi Section 18) tanpa duplikasi tipe NPC
 	var remaining: int = GameConfig.SESSIONS_PER_DAY - _control_patients.size()
-	_new_patients = PatientFactory.generate_new_patients(max(remaining, 0), day)
+	_new_patients = PatientFactory.generate_new_patients(max(remaining, 0), day, used_base_ids, future_pending_base_ids)
 
 	_build_session_queue()
+
+	# Catat seluruh pasien yang dijadwalkan pada hari ini
+	var day_patients: Array[PatientData] = []
+	for p in _control_patients:
+		if p is PatientData:
+			day_patients.append(p)
+	for p in _new_patients:
+		if p is PatientData:
+			day_patients.append(p)
+	_daily_patients[day] = day_patients
+
 	day_started.emit(day)
 	_start_next_session()
 
@@ -83,14 +108,15 @@ func _start_next_session() -> void:
 func ask_topic(topic: Topic.Name) -> Topic.Relevance:
 	if _game_over or current_patient == null:
 		return Topic.Relevance.NEUTRAL
-	if current_patient.topics_used.size() >= GameConfig.MAX_TOPICS_PER_SESSION:
+	var max_topics := 1 if current_patient.is_diagnosed else GameConfig.MAX_TOPICS_PER_SESSION
+	if current_patient.topics_used.size() >= max_topics:
 		return Topic.Relevance.NEUTRAL
 
 	current_patient.topics_used.append(topic)
 	var relevance: Topic.Relevance = current_patient.get_relevance(topic)
 	topic_reacted.emit(current_patient, topic, relevance)
 
-	if current_patient.topics_used.size() >= GameConfig.MAX_TOPICS_PER_SESSION:
+	if current_patient.topics_used.size() >= max_topics:
 		investigation_finished.emit(current_patient)
 	return relevance
 
@@ -98,7 +124,8 @@ func ask_topic(topic: Topic.Name) -> Topic.Relevance:
 func get_topics_remaining() -> int:
 	if current_patient == null:
 		return 0
-	return GameConfig.MAX_TOPICS_PER_SESSION - current_patient.topics_used.size()
+	var max_topics := 1 if current_patient.is_diagnosed else GameConfig.MAX_TOPICS_PER_SESSION
+	return maxi(0, max_topics - current_patient.topics_used.size())
 
 
 func has_topics_remaining() -> bool:
@@ -113,6 +140,14 @@ func commit_diagnosis(chosen_emotion: Emotion.Type, chosen_schedule: GameConfig.
 
 	var patient := current_patient
 	var was_correct: bool = chosen_emotion == patient.true_emotion
+
+	# Mark as diagnosed if correct core echo is chosen AND echo was transformed to phase 2
+	# regardless of which schedule day option chosen
+	if was_correct and (patient.echo_transformed or patient.is_diagnosed):
+		patient.is_diagnosed = true
+	elif not was_correct:
+		patient.is_diagnosed = false
+		patient.echo_transformed = false
 
 	# Section 36 onDecisionSubmit
 	if was_correct:
@@ -186,3 +221,13 @@ func is_game_over() -> bool:
 
 func get_pending_checkups() -> Array:
 	return _pending_checkups
+
+
+func get_daily_patients(target_day: int) -> Array[PatientData]:
+	if _daily_patients.has(target_day):
+		var list: Array[PatientData] = []
+		for p in _daily_patients[target_day]:
+			if p is PatientData:
+				list.append(p)
+		return list
+	return []

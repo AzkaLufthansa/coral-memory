@@ -227,6 +227,14 @@ func _get_patients_for_schedule_day(target_day: int) -> Array[PatientData]:
 	if not Engine.has_singleton("EchoManager") and not is_instance_valid(EchoManager):
 		return result
 
+	# Jika target_day adalah hari ini atau hari sebelumnya, ambil dari riwayat jadwal harian
+	# sehingga pasien yang tidak diperiksa (unattended) tetap tersimpan di jadwal dan tidak hilang
+	if target_day <= EchoManager.day:
+		var daily := EchoManager.get_daily_patients(target_day)
+		if not daily.is_empty():
+			return daily
+
+	# Untuk hari masa depan (atau fallback jika target_day belum ada di daily_patients):
 	var pending: Array = EchoManager.get_pending_checkups()
 	for p in pending:
 		if p is PatientData:
@@ -242,7 +250,7 @@ func _get_patients_for_schedule_day(target_day: int) -> Array[PatientData]:
 							result.append(p)
 						break
 
-	# Jika target_day adalah hari ini, sertakan juga pasien yang sedang diperiksa
+	# Jika target_day adalah hari ini dan daily_patients kosong, sertakan pasien yang sedang diperiksa
 	if target_day == EchoManager.day and EchoManager.current_patient:
 		if not result.has(EchoManager.current_patient):
 			result.append(EchoManager.current_patient)
