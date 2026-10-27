@@ -67,9 +67,15 @@ func _start_next_day() -> void:
 	var remaining: int = GameConfig.SESSIONS_PER_DAY - _control_patients.size()
 	var count_to_generate: int = mini(max(remaining, 0), unadmitted.size())
 
+	# Kumpulkan emosi dari pasien yang sudah pernah terdaftar agar variasi emosi merata
+	var admitted_emotions: Array = []
+	for patient in _all_admitted_patients:
+		if patient is PatientData:
+			admitted_emotions.append(patient.true_emotion)
+
 	_new_patients = []
 	if count_to_generate > 0:
-		_new_patients = PatientFactory.generate_new_patients(count_to_generate, day, admitted_base_ids)
+		_new_patients = PatientFactory.generate_new_patients(count_to_generate, day, admitted_base_ids, [], admitted_emotions)
 		for p in _new_patients:
 			if p is PatientData and not _all_admitted_patients.has(p):
 				_all_admitted_patients.append(p)
@@ -100,6 +106,7 @@ func _start_next_session() -> void:
 	if _game_over:
 		return
 	if _session_queue.is_empty():
+		current_patient = null
 		_end_of_day()
 		return
 
@@ -194,7 +201,7 @@ func commit_diagnosis(chosen_emotion: Emotion.Type, chosen_schedule: GameConfig.
 func call_next_patient() -> void:
 	if _game_over or _day_advancing:
 		return
-	_handle_unattended_patient(current_patient)
+	_handle_patient_leaving(current_patient)
 	if _game_over:
 		return
 	_start_next_session()
@@ -207,6 +214,27 @@ func _was_patient_diagnosed_today(patient: PatientData) -> bool:
 		if h.get("day", -1) == day and not h.get("unattended", false):
 			return true
 	return false
+
+
+func _handle_patient_leaving(patient: PatientData) -> void:
+	if patient == null or _was_patient_diagnosed_today(patient):
+		return
+
+	# Kasus 1: Pasien kontrol yang sudah terdiagnosis dan telah ditanya "Apa kabarmu?"
+	if patient.is_diagnosed and not patient.topics_used.is_empty():
+		_pending_checkups.erase(patient)
+		patient.next_checkup_day = -1
+		patient.is_control_patient = false
+		patient.stability = clampi(patient.stability + GameConfig.RECOVERY_BONUS, GameConfig.MIN_STABILITY, GameConfig.MAX_STABILITY)
+		patient.diagnosis_history.append({
+			"day": day,
+			"control_checkup": true,
+			"was_correct": true,
+		})
+		return
+
+	# Kasus 2: Pasien tidak dilayani / dilewati tanpa diagnosa (unattended)
+	_handle_unattended_patient(patient)
 
 
 func _handle_unattended_patient(patient: PatientData) -> void:

@@ -5,7 +5,6 @@
 [ext_resource type="FontFile" uid="uid://csmbxujwlcspk" path="res://Assets/Fonts/Fusion Pixel 10px Monospaced/fusion-pixel-10px-monospaced-ja.otf" id="4_1di0l"]
 [ext_resource type="StyleBox" uid="uid://ipe4o1b1b1ic" path="res://Button_Effect/menu_normal.tres" id="4_4qbh4"]
 [ext_resource type="StyleBox" uid="uid://bajdaf5lgfdj8" path="res://Button_Effect/menu_clicked.tres" id="5_3ko7u"]
-[ext_resource type="Texture2D" uid="uid://dnjdour47lnud" path="res://Assets/Sprites/karpet.png" id="6_gpijq"]
 [ext_resource type="StyleBox" uid="uid://cgqt7rc5rbnya" path="res://Button_Effect/menu_hover.tres" id="6_jqrnd"]
 [ext_resource type="Texture2D" uid="uid://j8q201471l0k" path="res://Assets/MainMenu/Button/quit(normal).png" id="7_3ko7u"]
 [ext_resource type="Texture2D" uid="uid://b20ltfmk3b7rq" path="res://Assets/MainMenu/Button/quit(clicked).png" id="8_jqrnd"]
@@ -69,123 +68,6 @@ theme_override_styles/normal = SubResource("StyleBoxTexture_4kxuq")
 theme_override_styles/pressed = SubResource("StyleBoxTexture_mti6b")
 theme_override_styles/hover = SubResource("StyleBoxTexture_mm1bc")
 
-[node name="Settings" type="Control" parent="." unique_id=826233170]
-visible = false
-layout_mode = 3
-anchors_preset = 0
-offset_right = 40.0
-offset_bottom = 40.0
-
-[node name="TextureRect" type="TextureRect" parent="Settings" unique_id=1196510589]
-layout_mode = 0
-offset_left = 225.0
-offset_top = 12.0
-offset_right = 922.0
-offset_bottom = 836.0
-texture = ExtResource("6_gpijq")
-
-[node name="Sound" type="Label" parent="Settings" unique_id=417618106]
-layout_mode = 1
-anchors_preset = 7
-anchor_left = 0.5
-anchor_top = 1.0
-anchor_right = 0.5
-anchor_bottom = 1.0
-offset_left = 318.0
-offset_top = 101.0
-offset_right = 461.0
-offset_bottom = 146.0
-grow_horizontal = 2
-grow_vertical = 0
-theme_override_colors/font_color = Color(0, 0, 0, 1)
-theme_override_font_sizes/font_size = 32
-text = "Sound"
-
-[node name="Decrease" type="Button" parent="Settings/Sound" unique_id=1802620713]
-layout_mode = 0
-offset_left = 126.0
-offset_top = 10.0
-offset_right = 144.0
-offset_bottom = 41.0
-text = "<"
-
-[node name="Value" type="Label" parent="Settings/Sound" unique_id=409853908]
-layout_mode = 0
-offset_left = 164.0
-offset_top = 15.0
-offset_right = 204.0
-offset_bottom = 38.0
-theme_override_colors/font_color = Color(0, 0, 0, 1)
-text = "10"
-horizontal_alignment = 1
-
-[node name="Increase" type="Button" parent="Settings/Sound" unique_id=1672505878]
-layout_mode = 0
-offset_left = 217.0
-offset_top = 11.0
-offset_right = 235.0
-offset_bottom = 42.0
-text = ">"
-
-[node name="Music" type="Label" parent="Settings" unique_id=1275309198]
-layout_mode = 0
-offset_left = 338.0
-offset_top = 189.0
-offset_right = 478.0
-offset_bottom = 234.0
-theme_override_colors/font_color = Color(0, 0, 0, 1)
-theme_override_font_sizes/font_size = 32
-text = "Music"
-
-[node name="Decrease" type="Button" parent="Settings/Music" unique_id=926698561]
-layout_mode = 1
-anchors_preset = 6
-anchor_left = 1.0
-anchor_top = 0.5
-anchor_right = 1.0
-anchor_bottom = 0.5
-offset_left = -18.0
-offset_top = -15.5
-offset_bottom = 15.5
-grow_horizontal = 0
-grow_vertical = 2
-text = "<"
-
-[node name="Value" type="Label" parent="Settings/Music" unique_id=440025491]
-layout_mode = 1
-anchors_preset = 6
-anchor_left = 1.0
-anchor_top = 0.5
-anchor_right = 1.0
-anchor_bottom = 0.5
-offset_left = 24.0
-offset_top = -9.5
-offset_right = 64.0
-offset_bottom = 13.5
-grow_horizontal = 0
-grow_vertical = 2
-theme_override_colors/font_color = Color(0, 0, 0, 1)
-text = "10"
-horizontal_alignment = 1
-
-[node name="Increase" type="Button" parent="Settings/Music" unique_id=609899345]
-layout_mode = 0
-offset_left = 219.0
-offset_top = 5.0
-offset_right = 237.0
-offset_bottom = 36.0
-text = ">"
-
-[node name="Confirm" type="Button" parent="Settings" unique_id=451481474]
-layout_mode = 0
-offset_left = 510.0
-offset_top = 582.0
-offset_right = 649.0
-offset_bottom = 613.0
-theme_override_font_sizes/font_size = 32
-text = "Confirm
-"
-
 [node name="BGM" type="AudioStreamPlayer" parent="." unique_id=1411902224]
 stream = ExtResource("11_jqrnd")
 bus = &"Music"
@@ -240,8 +122,3 @@ text = "Volume :"
 
 [connection signal="pressed" from="Button/Start" to="." method="_on_start_pressed"]
 [connection signal="pressed" from="Button/Exit" to="." method="_on_exit_pressed"]
-[connection signal="pressed" from="Settings/Sound/Decrease" to="." method="_on_decrease_pressed"]
-[connection signal="pressed" from="Settings/Sound/Increase" to="." method="_on_increase_pressed"]
-[connection signal="pressed" from="Settings/Music/Decrease" to="." method="_on_decrease2_pressed"]
-[connection signal="pressed" from="Settings/Music/Increase" to="." method="_on_increase2_pressed"]
-[connection signal="pressed" from="Settings/Confirm" to="." method="_on_confirm_pressed"]

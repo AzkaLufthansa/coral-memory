@@ -10,7 +10,7 @@ config_version=5
 
 [application]
 
-config/name="Coral Memory"
+config/name="Echoes Within"
 run/main_scene="uid://6ca6npc3mk41"
 config/features=PackedStringArray("4.7", "Forward Plus")
 config/icon="res://icon.svg"

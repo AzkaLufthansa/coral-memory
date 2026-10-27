@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://c8142ij30jukk"
-path="res://.godot/imported/sam.png-7df42d754b5459499c10349e71ba97d2.ctex"
+uid="uid://gflanu7sren7"
+path="res://.godot/imported/cursor2.png-a40f15efb39cd64742bddd9bdb4307d1.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Assets/Sprites/sam.png"
-dest_files=["res://.godot/imported/sam.png-7df42d754b5459499c10349e71ba97d2.ctex"]
+source_file="res://Assets/cursor2.png"
+dest_files=["res://.godot/imported/cursor2.png-a40f15efb39cd64742bddd9bdb4307d1.ctex"]
 
 [params]
 

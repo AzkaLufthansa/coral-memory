@@ -2,6 +2,7 @@ extends CanvasLayer
 
 signal game_paused
 signal game_resumed
+signal game_exited
 
 var in_settings: bool = false
 
@@ -52,7 +53,8 @@ func _on_setting_pressed():
 
 func _on_main_menu_pressed():
 	$SFX_Click.play()
-	FadeToBlack.fade_to_scene("res://Scenes/Menu/main_menu.tscn", 4)
+	game_exited.emit()
+	FadeToBlack.fade_to_scene("res://Scenes/Menu/main_menu.tscn", 1)
 
 
 func _on_confirm_pressed():

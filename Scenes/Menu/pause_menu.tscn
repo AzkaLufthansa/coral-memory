@@ -2,7 +2,6 @@
 
 [ext_resource type="Script" uid="uid://bhsrow7rj2jju" path="res://Scripts/Menu/pause_menu.gd" id="1_6pfc5"]
 [ext_resource type="Texture2D" uid="uid://fn66lf70qj36" path="res://Assets/MainMenu/bkam.png" id="2_0km3y"]
-[ext_resource type="Texture2D" uid="uid://dnjdour47lnud" path="res://Assets/Sprites/karpet.png" id="2_jnmi5"]
 [ext_resource type="Texture2D" uid="uid://cbmvqob11tcnx" path="res://Assets/MainMenu/Titles.png" id="3_3hoqq"]
 [ext_resource type="AudioStream" uid="uid://dl3it4uvj78yk" path="res://Assets/Audio/SFX  menu click.mp3" id="3_jnmi5"]
 [ext_resource type="Texture2D" uid="uid://c1jil0beuyq2f" path="res://Assets/PauseMenu/Resume(normal).png" id="4_gy8ec"]
@@ -81,10 +80,10 @@ layout_mode = 1
 anchors_preset = 5
 anchor_left = 0.5
 anchor_right = 0.5
-offset_left = -143.99997
-offset_top = 328.0
-offset_right = 200.0
-offset_bottom = 376.0
+offset_left = -143.0
+offset_top = 377.0
+offset_right = 201.0
+offset_bottom = 425.0
 grow_horizontal = 2
 scale = Vector2(0.6, 0.6)
 theme_override_styles/normal = SubResource("StyleBoxTexture_dehqv")
@@ -92,6 +91,7 @@ theme_override_styles/pressed = SubResource("StyleBoxTexture_j2cck")
 theme_override_styles/hover = SubResource("StyleBoxTexture_2on0c")
 
 [node name="Setting" type="Button" parent="ColorRect/Main" unique_id=1137472299]
+visible = false
 layout_mode = 0
 offset_left = 496.00003
 offset_top = 424.0
@@ -104,10 +104,10 @@ theme_override_styles/hover = SubResource("StyleBoxTexture_gy8ec")
 
 [node name="MainMenu" type="Button" parent="ColorRect/Main" unique_id=996099597]
 layout_mode = 0
-offset_left = 488.00003
-offset_top = 512.0
-offset_right = 832.0
-offset_bottom = 560.0
+offset_left = 493.0
+offset_top = 431.0
+offset_right = 837.0
+offset_bottom = 479.0
 scale = Vector2(0.6, 0.6)
 theme_override_styles/normal = SubResource("StyleBoxTexture_28aqb")
 theme_override_styles/pressed = SubResource("StyleBoxTexture_xcmcy")
@@ -135,7 +135,6 @@ offset_left = 225.0
 offset_top = 12.0
 offset_right = 922.0
 offset_bottom = 836.0
-texture = ExtResource("2_jnmi5")
 
 [node name="Sound" type="Label" parent="Settings" unique_id=1250841193]
 layout_mode = 1
