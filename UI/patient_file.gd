@@ -43,6 +43,7 @@ var _emotion_buttons: Dictionary = {}  # Emotion.Type -> Button
 var _schedule_buttons: Dictionary = {}  # GameConfig.Schedule -> Button
 var _selected_emotion: Emotion.Type = -1
 var _selected_schedule: GameConfig.Schedule = -1
+var _current_patient: PatientData = null
 
 # --- ANIMATION PLAYER (monitor terbuka/tertutup) ---
 @onready var anim_player: AnimationPlayer = $AnimationPlayer
@@ -99,6 +100,7 @@ func _ready() -> void:
 
 
 func show_patient(patient: PatientData) -> void:
+	_current_patient = patient
 	_populate_patient_data(patient)
 	_populate_schedule_content()
 
@@ -301,6 +303,9 @@ func _on_schedule_button_pressed() -> void:
 	for element in patient_details:
 		if element:
 			element.hide()
+	var is_diagnosed: bool = _current_patient != null and _current_patient.is_diagnosed
+	if submit_button:
+		submit_button.visible = not is_diagnosed
 
 
 func _on_patient_button_pressed() -> void:
@@ -309,6 +314,8 @@ func _on_patient_button_pressed() -> void:
 
 
 func _on_submit_button_pressed() -> void:
+	if _current_patient != null and _current_patient.is_diagnosed:
+		return
 	_play_click()
 	_reset_submit_selection()
 	schedule_content.hide()
@@ -398,9 +405,11 @@ func _set_ui_content_visible(is_show: bool) -> void:
 		if element:
 			element.visible = is_show
 
+	var is_diagnosed: bool = _current_patient != null and _current_patient.is_diagnosed
+
 	if patient_button: patient_button.visible = is_show
 	if schedule_button: schedule_button.visible = is_show
-	if submit_button: submit_button.visible = is_show
+	if submit_button: submit_button.visible = is_show and not is_diagnosed
 	if close_button: close_button.visible = is_show
 	if title_label: title_label.visible = is_show
 

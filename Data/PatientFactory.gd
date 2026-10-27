@@ -142,9 +142,9 @@ static func setup_rng() -> void:
 	init_npc_sprite_mapping()
 
 
-static func generate_new_patients(count: int, day: int, exclude_base_ids: Array = [], preferred_excludes: Array = []) -> Array[PatientData]:
+static func generate_new_patients(count: int, day: int, exclude_base_ids: Array = [], preferred_excludes: Array = [], existing_emotions: Array = []) -> Array[PatientData]:
 	var patients: Array[PatientData] = []
-	var used_emotions: Array = []
+	var used_emotions: Array = existing_emotions.duplicate()
 	var used_bases: Array = exclude_base_ids.duplicate()
 
 	for i in count:
@@ -177,8 +177,15 @@ static func _pick_available_pool(used_bases: Array, preferred_excludes: Array = 
 
 
 static func _pick_emotion(used: Array) -> Emotion.Type:
-	# PROTOTIPE: hanya pasien FEAR yang muncul karena baru ada sprite echo fase final untuk FEAR.
-	return Emotion.Type.FEAR
+	var available: Array = []
+	for emotion in ALL_EMOTIONS:
+		if not used.has(emotion):
+			available.append(emotion)
+
+	if available.is_empty():
+		return ALL_EMOTIONS[_rng.randi_range(0, ALL_EMOTIONS.size() - 1)]
+
+	return available[_rng.randi_range(0, available.size() - 1)]
 
 
 static func _build_patient(emotion: Emotion.Type, day: int, index: int, pool: Dictionary = {}) -> PatientData:

@@ -106,6 +106,7 @@ func _build_ui() -> void:
 	var pause_menu = $PauseMenu
 	pause_menu.game_paused.connect(_on_game_paused)
 	pause_menu.game_resumed.connect(_on_game_resumed)
+	pause_menu.game_exited.connect(_on_game_exited)
 
 func _on_game_paused() -> void:
 	AudioServer.set_bus_mute(AudioServer.get_bus_index("Music"), true)
@@ -114,6 +115,12 @@ func _on_game_paused() -> void:
 func _on_game_resumed() -> void:
 	AudioServer.set_bus_mute(AudioServer.get_bus_index("Music"), false)
 	AudioServer.set_bus_mute(AudioServer.get_bus_index("Music_Paused"), true)
+
+func _on_game_exited() -> void:
+	AudioServer.set_bus_mute(AudioServer.get_bus_index("Music"), false)
+	AudioServer.set_bus_mute(AudioServer.get_bus_index("Music_Paused"), true)
+	_bgm.stop()
+	_bgm_pause.stop()
 
 func _build_bgm() -> void:
 	_bgm = $GameBGM
@@ -196,7 +203,10 @@ func _spawn_patient(patient: PatientData) -> void:
 		patient.sprite_id = expected_sprite
 	
 	_spawn_count += 1
-	print("Pasien ke-%d | Base: %s | Sprite: %s" % [_spawn_count, patient.base_npc_id, patient.sprite_id])
+	print("Pasien ke-%d | Base: %s | Sprite: %s | Emotion: %s (%s)" % [
+		_spawn_count, patient.base_npc_id, patient.sprite_id,
+		Emotion.display_name(patient.true_emotion), Emotion.echo_name(patient.true_emotion)
+	])
 
 	patient_node = PatientScene.instantiate()
 	patient_node.position = Vector2(576, 224)
@@ -250,6 +260,8 @@ func _on_topic_selected(topic: Topic.Name) -> void:
 		patient_node.play_talking()
 	EchoManager.ask_topic(topic)
 	topic_panel.show_response(current_patient, topic)
+	if current_patient != null and current_patient.is_diagnosed:
+		office.set_next_enabled(true)
 
 
 func _on_topic_reacted(patient: PatientData, topic: Topic.Name, relevance: Topic.Relevance) -> void:
@@ -267,6 +279,8 @@ func _on_topic_reacted(patient: PatientData, topic: Topic.Name, relevance: Topic
 
 func _on_dialogue_finished() -> void:
 	_close_all_panels()
+	if current_patient != null and current_patient.is_diagnosed:
+		office.set_next_enabled(true)
 
 
 func _on_report_submitted(emotion: Emotion.Type, schedule: GameConfig.Schedule, notes: String) -> void:
