@@ -68,14 +68,11 @@ func check_for_proceed() -> void:
 
 func _on_done_button_pressed() -> void:
 	AudioFade.fade_out($BGM, 3.0)
-	$Langkah.play()
-	$Langkah/Timer.start()
 	FadeToBlack.fade_to_scene("res://Scenes/main.tscn", 5)
 	Cursor.reset_cursor()
 	$Area2D.input_pickable = false
 
 func _on_timer_timeout() -> void:
-	$Langkah.stop()
 	$PintuBuka.play()
 
 func _on_pintu_buka_finished() -> void:
