@@ -59,31 +59,56 @@ func _emotion_file_name(type: int) -> String:
 	return EMOTION_FILE_ALIASES.get(key, key)
 
 
+func _sprite_file_path(sprite_id: String, file_name: String) -> String:
+	if sprite_id == "":
+		return ""
+	var path := "%s/%s/%s" % [PATIENT_DIR, sprite_id, file_name]
+	return path if ResourceLoader.exists(path) else ""
+
+
 func _build_npc_animations(sprite_id: String) -> void:
-	var tex := load(_get_sheet_path(sprite_id)) as Texture2D
-	if tex == null:
+	var base_tex := load(_get_sheet_path(sprite_id)) as Texture2D
+	if base_tex == null:
 		return
 
 	var frames := SpriteFrames.new()
 	if frames.has_animation("default"):
 		frames.remove_animation("default")
 
+	# Idle: frame pertama lembar dasar (PasienX.png 128x128).
 	frames.add_animation("idle")
 	frames.set_animation_loop("idle", false)
 	frames.set_animation_speed("idle", 1.0)
-	frames.add_frame("idle", _make_atlas(tex, 0, 0))
+	frames.add_frame("idle", _make_atlas(base_tex, 0, 0))
 
+	# Talk: pakai talk.png khusus (satu baris frame 128x128). Sebelumnya
+	# memakai lembar dasar 128px sehingga frame ke-2..5 di luar gambar
+	# (kosong) -> pasien tampak "kedap-kedip" saat bicara.
+	var talk_tex := base_tex
+	var talk_path := _sprite_file_path(sprite_id, "talk.png")
+	if talk_path != "":
+		var loaded_talk := load(talk_path) as Texture2D
+		if loaded_talk:
+			talk_tex = loaded_talk
 	frames.add_animation("talk")
 	frames.set_animation_loop("talk", true)
 	frames.set_animation_speed("talk", TALK_FPS)
-	for i in range(5):
-		frames.add_frame("talk", _make_atlas(tex, i, 0))
+	var talk_count := maxi(1, int(talk_tex.get_width() / FRAME_SIZE))
+	for i in range(talk_count):
+		frames.add_frame("talk", _make_atlas(talk_tex, i, 0))
 
+	# Shocked: tidak ada aset khusus. Jika lembar dasar punya baris ke-2
+	# (NPC Base 640x256) pakai itu; jika tidak, tetap pakai frame idle agar
+	# tidak menampilkan frame kosong.
+	var shock_row := 1 if base_tex.get_height() >= FRAME_SIZE * 2 else 0
+	var shock_count := 1
+	if shock_row == 1:
+		shock_count = mini(2, maxi(1, int(base_tex.get_width() / FRAME_SIZE)))
 	frames.add_animation("shocked")
 	frames.set_animation_loop("shocked", false)
 	frames.set_animation_speed("shocked", SHOCK_FPS)
-	for i in range(2):
-		frames.add_frame("shocked", _make_atlas(tex, i, 1))
+	for i in range(shock_count):
+		frames.add_frame("shocked", _make_atlas(base_tex, i, shock_row))
 
 	_add_emotion_animations(frames, sprite_id)
 	npc_sprite.sprite_frames = frames

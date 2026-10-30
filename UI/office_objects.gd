@@ -46,7 +46,6 @@ func _on_notebook_button_pressed():
 func _on_patient_file_button_pressed():
 	$Click.play()
 
-
 func _on_guidebook_button_pressed():
 	$Click.play()
 	guide_book.show()

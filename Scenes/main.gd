@@ -14,12 +14,12 @@ const TutorialGuide := preload("res://UI/tutorial_guide.gd")
 
 # Tutorial highlight bertahap (pasien pertama Day 1). Tiap langkah maju saat
 # event-nya terjadi. Soft hint: tidak memblokir klik lain.
-const TUT_STEP_EVENTS := ["file_opened", "interview", "topics_done", "diagnosis", "next"]
+const TUT_STEP_EVENTS := ["file_opened", "guidebook_closed", "topics_done", "diagnosis", "next"]
 const TUT_STEP_TEXTS := [
-	"Mulai dengan membaca berkas pasien (klik berkas di kiri bawah).",
-	"Klik pasien di meja untuk memulai wawancara.",
-	"Pilih topik pertanyaan (maks 3). Perhatikan wujud Echo berubah.",
-	"Buka berkas lalu tab Submit: tentukan emosi dominan & jadwal kontrol.",
+	"Klik monitor di kiri bawah untuk melihat informasi pasien.",
+	"Klik buku panduan di kanan, baca, lalu tutup untuk lanjut.",
+	"Klik pasien di meja, ajukan pertanyaan, dan perhatikan wujud Echo.",
+	"Klik monitor lagi, buka tab Submit: tentukan emosi & jadwal kontrol.",
 	"Klik lonceng di kanan bawah untuk memanggil pasien berikutnya.",
 ]
 const SPRITE_POOL_CAT := PatientFactory.CAT_SPRITES
@@ -58,8 +58,8 @@ var _report_submitted := false
 var tutorial
 var _tut_active := false
 var _tut_step := -1
-var _tut_pending := false
 var _tut_done := false
+var _tut_start_pending := false
 
 var _bgm: AudioStreamPlayer
 var _bgm_pause: AudioStreamPlayer
@@ -93,6 +93,8 @@ func _build_ui() -> void:
 
 	office = OfficeScene.instantiate()
 	ui_layer.add_child(office)
+	# Samakan skala item di atas meja dengan skala pasien.
+	office.call_deferred("apply_world_scale", PATIENT_SCALE)
 
 	# Layer 2: panel interaktif (monitor, buku, transisi, dst) agar selalu
 	# tampil di atas objek kantor.
@@ -196,6 +198,7 @@ func _setup_signals() -> void:
 	topic_panel.dialogue_finished.connect(_on_dialogue_finished)
 
 	game_over_screen.restart_requested.connect(_on_restart_requested)
+	day_transition.connect("transition_finished", _on_day_transition_finished)
 
 
 # --- Session lifecycle ---
@@ -207,6 +210,12 @@ func _on_day_started(day: int) -> void:
 		_bgm_pause.play()
 
 
+func _on_day_transition_finished() -> void:
+	if _tut_start_pending:
+		_tut_start_pending = false
+		_tut_begin()
+
+
 func _on_session_started(patient: PatientData, session_index: int, total_sessions: int) -> void:
 	current_patient = patient
 	_report_submitted = false
@@ -215,7 +224,11 @@ func _on_session_started(patient: PatientData, session_index: int, total_session
 	office.show_office()
 	office.set_next_enabled(false)
 	if EchoManager.day == 1 and EchoManager.session_index == 1 and not _tut_done:
-		_tut_auto_open_guidebook()
+		# Mulai setelah transisi "DAY 1" selesai agar hint tidak menutupinya.
+		_tut_start_pending = true
+	elif _tut_active:
+		# Pasien pertama dilewati (lonceng) -> hentikan tutorial lama.
+		_tut_finish()
 
 func _spawn_patient(patient: PatientData) -> void:
 	if patient_node:
@@ -265,7 +278,6 @@ func _on_patient_clicked() -> void:
 		return
 	_close_all_panels()
 	topic_panel.open_dialogue(current_patient)
-	_tut_notify("interview")
 
 
 func _on_patient_file_pressed() -> void:
@@ -295,36 +307,22 @@ func _on_guidebook_pressed() -> void:
 
 func _on_guide_book_closed() -> void:
 	ui_dim.visible = false
+	_tut_notify("guidebook_closed")
 
 
 func _on_guide_book_visibility_changed() -> void:
-	# Bisa ditutup lewat tombol close ATAU lewat _close_all_panels; dua-duanya
-	# memicu visibility_changed. Mulai tutorial begitu Guidebook tersembunyi.
-	if not _tut_pending or office == null:
+	# Guidebook bisa tertutup lewat tombol close ATAU _close_all_panels; dua-duanya
+	# memicu visibility_changed, jadi dipakai agar langkah tutorial tetap maju.
+	if office == null:
 		return
 	var guide_book: Control = office.get("guide_book") as Control
 	if guide_book and not guide_book.visible:
-		ui_dim.visible = false
-		_tut_begin()
+		_tut_notify("guidebook_closed")
 
 
 # --- Tutorial (highlight bertahap, pasien pertama Day 1) ---
 
-func _tut_auto_open_guidebook() -> void:
-	_tut_pending = true
-	if office == null:
-		_tut_begin()
-		return
-	var guide_book: Control = office.get("guide_book") as Control
-	if guide_book:
-		ui_dim.visible = true
-		guide_book.show()
-	else:
-		_tut_begin()
-
-
 func _tut_begin() -> void:
-	_tut_pending = false
 	_tut_active = true
 	_tut_step = 0
 	_tut_show_step()
@@ -345,9 +343,9 @@ func _tut_notify(event: String) -> void:
 	var idx := TUT_STEP_EVENTS.find(event)
 	if idx < 0:
 		return
-	# Lonceng hanya menutup tutorial di langkah terakhirnya, supaya klik
-	# lonceng yang tidak sengaja di awal tidak langsung mengakhiri tutorial.
-	if event == "next" and _tut_step != TUT_STEP_EVENTS.size() - 1:
+	# Lonceng & tutup buku hanya memajukan saat berada di langkahnya sendiri,
+	# supaya aksi yang tidak sengaja tidak melompati langkah.
+	if (event == "next" or event == "guidebook_closed") and _tut_step != idx:
 		return
 	if idx < _tut_step:
 		return
@@ -357,7 +355,6 @@ func _tut_notify(event: String) -> void:
 
 func _tut_finish() -> void:
 	_tut_active = false
-	_tut_pending = false
 	_tut_done = true
 	if tutorial:
 		tutorial.hide_hint()
@@ -370,9 +367,9 @@ func _tut_target(step: int) -> Node:
 		0, 3:
 			return office.get_node_or_null("PatientFileButton")
 		1:
-			return patient_node
+			return office.get_node_or_null("GuidebookButton")
 		2:
-			return topic_panel
+			return patient_node
 		4:
 			return office.get_node_or_null("CallNextButton")
 	return null
