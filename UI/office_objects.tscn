@@ -1,6 +1,7 @@
 [gd_scene format=3 uid="uid://dj536rmd55yu1"]
 
 [ext_resource type="Script" uid="uid://bsvrtlh5slx0s" path="res://UI/office_objects.gd" id="1_office"]
+[ext_resource type="Texture2D" uid="uid://c7sy8551mxr11" path="res://Assets/RealAssets/Desk.png" id="2_bkrp2"]
 [ext_resource type="Texture2D" uid="uid://bmxe7jj07vn46" path="res://Assets/RealAssets/GuideBook/Guidebook.png" id="2_l2lbq"]
 [ext_resource type="Texture2D" uid="uid://cmr6ih5tjwx2h" path="res://Assets/RealAssets/Uninteractable Obj/Keyboard & Mouse/Keyboard & Mouse.png" id="2_yqv5m"]
 [ext_resource type="Texture2D" uid="uid://diomw70j6gk0a" path="res://Assets/RealAssets/Uninteractable Obj/Scattered Papers/Scattered Papers.png" id="3_b5ntf"]
@@ -33,27 +34,35 @@ texture = ExtResource("3_px13u")
 [node name="OfficeObjects" type="CanvasLayer" unique_id=1786024609]
 script = ExtResource("1_office")
 
+[node name="Front" type="Sprite2D" parent="." unique_id=883035806]
+visible = false
+z_index = -9
+texture_filter = 1
+position = Vector2(578.00006, 563)
+scale = Vector2(0.75130206, 0.74669605)
+texture = ExtResource("2_bkrp2")
+
 [node name="Keyboard" type="Sprite2D" parent="." unique_id=592251209]
-position = Vector2(248, 580)
-scale = Vector2(0.5852018, 0.7075472)
+position = Vector2(279.4375, 582.875)
+scale = Vector2(0.61491036, 0.8278301)
 texture = ExtResource("2_yqv5m")
 
 [node name="PenHolder" type="Sprite2D" parent="." unique_id=590561231]
-position = Vector2(327, 506)
-scale = Vector2(0.5852018, 0.7075472)
+position = Vector2(319.83685, 498.08728)
+scale = Vector2(0.6530578, 0.8511295)
 texture = ExtResource("3_x1tq2")
 
 [node name="TeaCup" type="Sprite2D" parent="." unique_id=709822680]
-position = Vector2(824, 581)
-scale = Vector2(0.5852018, 0.7075472)
+position = Vector2(823.71075, 582.6203)
+scale = Vector2(0.578315, 0.665462)
 texture = ExtResource("4_ngtvf")
 
 [node name="PatientFileButton" type="Button" parent="." unique_id=713099942]
 unique_name_in_owner = true
-offset_left = 121.0
-offset_top = 406.0
-offset_right = 288.0
-offset_bottom = 565.0
+offset_left = 93.0
+offset_top = 342.0
+offset_right = 315.0
+offset_bottom = 580.0
 theme_override_styles/normal = ExtResource("5_ngtvf")
 theme_override_styles/pressed = ExtResource("7_bkrp2")
 theme_override_styles/hover = ExtResource("7_bkrp2")
@@ -71,10 +80,10 @@ theme_override_styles/hover = SubResource("StyleBoxTexture_6vnta")
 
 [node name="GuidebookButton" type="Button" parent="." unique_id=2072366627]
 unique_name_in_owner = true
-offset_left = 798.0
+offset_left = 787.0
 offset_top = 480.0
 offset_right = 938.0
-offset_bottom = 540.0
+offset_bottom = 546.0
 theme_override_styles/normal = SubResource("StyleBoxTexture_62yky")
 theme_override_styles/pressed = SubResource("StyleBoxTexture_bkrp2")
 theme_override_styles/hover = SubResource("StyleBoxTexture_6vnta")
@@ -82,10 +91,10 @@ theme_override_styles/hover = SubResource("StyleBoxTexture_6vnta")
 [node name="MonitorButton" type="Button" parent="." unique_id=1289849380]
 unique_name_in_owner = true
 visible = false
-offset_left = 121.0
-offset_top = 406.0
-offset_right = 288.0
-offset_bottom = 565.0
+offset_left = 104.0
+offset_top = 376.0
+offset_right = 286.0
+offset_bottom = 564.0
 theme_override_styles/normal = ExtResource("5_ngtvf")
 theme_override_styles/pressed = ExtResource("6_iq73t")
 theme_override_styles/hover = ExtResource("7_bkrp2")
@@ -121,8 +130,8 @@ unique_name_in_owner = true
 visible = false
 
 [node name="Files" type="Sprite2D" parent="." unique_id=1690384955]
-position = Vector2(115, 589)
-scale = Vector2(0.5852018, 0.7075472)
+position = Vector2(113.84865, 585.0566)
+scale = Vector2(0.6040763, 0.76553833)
 texture = ExtResource("3_b5ntf")
 
 [connection signal="pressed" from="PatientFileButton" to="." method="_on_patient_file_button_pressed"]

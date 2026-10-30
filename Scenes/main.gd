@@ -12,8 +12,6 @@ const TransformFlashScene := preload("res://UI/transform_flash.tscn")
 const GameOverScene := preload("res://UI/game_over_screen.tscn")
 const TutorialGuide := preload("res://UI/tutorial_guide.gd")
 
-# Tutorial highlight bertahap (pasien pertama Day 1). Tiap langkah maju saat
-# event-nya terjadi. Soft hint: tidak memblokir klik lain.
 const TUT_STEP_EVENTS := ["file_opened", "guidebook_closed", "topics_done", "diagnosis", "next"]
 const TUT_STEP_TEXTS := [
 	"Klik monitor di kiri bawah untuk melihat informasi pasien.",
@@ -30,10 +28,7 @@ const SPRITE_POOL := [
 	"Pasien8", "Pasien9", "Pasien10", "Pasien11",
 ]
 
-# Ukuran keseluruhan pasien relatif terhadap nilai aslinya.
 const PATIENT_SCALE := 1.4
-# Posisi Y root pasien. Dasar sprite (local y=304) dipetakan ke y ≈ 528
-# (garis "duduk" di meja) setelah dikali PATIENT_SCALE.
 const PATIENT_BASE_Y := 528.0 - PATIENT_SCALE * 304.0
 
 var patient_node: Patient2D
@@ -197,6 +192,11 @@ func _setup_signals() -> void:
 	topic_panel.topic_selected.connect(_on_topic_selected)
 	topic_panel.dialogue_finished.connect(_on_dialogue_finished)
 
+	file_panel.visibility_changed.connect(_on_panel_visibility_changed)
+	notebook_panel.visibility_changed.connect(_on_panel_visibility_changed)
+	monitor_panel.visibility_changed.connect(_on_panel_visibility_changed)
+	topic_panel.visibility_changed.connect(_on_panel_visibility_changed)
+
 	game_over_screen.restart_requested.connect(_on_restart_requested)
 	day_transition.connect("transition_finished", _on_day_transition_finished)
 
@@ -224,10 +224,8 @@ func _on_session_started(patient: PatientData, session_index: int, total_session
 	office.show_office()
 	office.set_next_enabled(false)
 	if EchoManager.day == 1 and EchoManager.session_index == 1 and not _tut_done:
-		# Mulai setelah transisi "DAY 1" selesai agar hint tidak menutupinya.
 		_tut_start_pending = true
 	elif _tut_active:
-		# Pasien pertama dilewati (lonceng) -> hentikan tutorial lama.
 		_tut_finish()
 
 func _spawn_patient(patient: PatientData) -> void:
@@ -308,19 +306,39 @@ func _on_guidebook_pressed() -> void:
 func _on_guide_book_closed() -> void:
 	ui_dim.visible = false
 	_tut_notify("guidebook_closed")
+	_tut_refresh_visibility()
 
 
 func _on_guide_book_visibility_changed() -> void:
-	# Guidebook bisa tertutup lewat tombol close ATAU _close_all_panels; dua-duanya
-	# memicu visibility_changed, jadi dipakai agar langkah tutorial tetap maju.
 	if office == null:
 		return
 	var guide_book: Control = office.get("guide_book") as Control
 	if guide_book and not guide_book.visible:
 		_tut_notify("guidebook_closed")
+	_tut_refresh_visibility()
 
 
-# --- Tutorial (highlight bertahap, pasien pertama Day 1) ---
+func _on_panel_visibility_changed() -> void:
+	_tut_refresh_visibility()
+
+
+func _is_modal_open() -> bool:
+	if is_instance_valid(file_panel) and file_panel.visible:
+		return true
+	if is_instance_valid(notebook_panel) and notebook_panel.visible:
+		return true
+	if is_instance_valid(monitor_panel) and monitor_panel.visible:
+		return true
+	if is_instance_valid(topic_panel) and topic_panel.visible:
+		return true
+	if is_instance_valid(day_transition) and day_transition.visible:
+		return true
+	if office:
+		var guide_book: Control = office.get("guide_book") as Control
+		if guide_book and guide_book.visible:
+			return true
+	return false
+
 
 func _tut_begin() -> void:
 	_tut_active = true
@@ -334,6 +352,17 @@ func _tut_show_step() -> void:
 	if _tut_step < 0 or _tut_step >= TUT_STEP_TEXTS.size():
 		_tut_finish()
 		return
+	_tut_refresh_visibility()
+
+
+func _tut_refresh_visibility() -> void:
+	if tutorial == null:
+		return
+	if not _tut_active or _is_modal_open():
+		tutorial.hide_hint()
+		return
+	if _tut_step < 0 or _tut_step >= TUT_STEP_TEXTS.size():
+		return
 	tutorial.show_hint(TUT_STEP_TEXTS[_tut_step], _tut_target(_tut_step))
 
 
@@ -343,8 +372,6 @@ func _tut_notify(event: String) -> void:
 	var idx := TUT_STEP_EVENTS.find(event)
 	if idx < 0:
 		return
-	# Lonceng & tutup buku hanya memajukan saat berada di langkahnya sendiri,
-	# supaya aksi yang tidak sengaja tidak melompati langkah.
 	if (event == "next" or event == "guidebook_closed") and _tut_step != idx:
 		return
 	if idx < _tut_step:
