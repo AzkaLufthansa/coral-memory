@@ -22,17 +22,14 @@ const ENTRIES := [
 var pages: Array[Node] = []
 var current_page_index := 0
 var _font: Font = null
+var prev_button: Button = null
 
 
 func _ready() -> void:
 	if ResourceLoader.exists(FONT_PATH):
 		_font = load(FONT_PATH) as Font
 	_build_pages()
-	next_button.visible = pages.size() > 1
-	next_button.anchor_right = 0.0
-	next_button.anchor_bottom = 0.0
-	next_button.offset_right = next_button.offset_left + 44.0
-	next_button.offset_bottom = next_button.offset_top + 26.0
+	_setup_pager()
 	update_page_visibility()
 
 
@@ -51,6 +48,34 @@ func _build_pages() -> void:
 		if overlay:
 			panel_container.move_child(overlay, panel_container.get_child_count() - 1)
 		pages.append(page)
+
+
+func _setup_pager() -> void:
+	next_button.anchor_right = 0.0
+	next_button.anchor_bottom = 0.0
+	next_button.offset_right = next_button.offset_left + 44.0
+	next_button.offset_bottom = next_button.offset_top + 26.0
+
+	var overlay := panel_container.get_node_or_null("ButtonOverlay")
+	if overlay == null:
+		return
+
+	prev_button = Button.new()
+	prev_button.name = "PrevButton"
+	prev_button.anchor_right = 0.0
+	prev_button.anchor_bottom = 0.0
+	prev_button.offset_left = next_button.offset_left - 56.0
+	prev_button.offset_top = next_button.offset_top
+	prev_button.offset_right = prev_button.offset_left + 44.0
+	prev_button.offset_bottom = prev_button.offset_top + 26.0
+	for state in ["normal", "pressed", "hover"]:
+		var style := next_button.get_theme_stylebox(state)
+		if style:
+			prev_button.add_theme_stylebox_override(state, style)
+	prev_button.pivot_offset = Vector2(22, 13)
+	prev_button.scale = Vector2(-1, 1)
+	prev_button.pressed.connect(_on_prev_button_pressed)
+	overlay.add_child(prev_button)
 
 
 func _make_page(page_index: int) -> Control:
@@ -126,14 +151,38 @@ func update_page_visibility() -> void:
 	current_page_index = clampi(current_page_index, 0, pages.size() - 1)
 	for i in range(pages.size()):
 		pages[i].visible = (i == current_page_index)
+	_update_pager_buttons()
+
+
+func _update_pager_buttons() -> void:
+	if pages.size() <= 1:
+		next_button.visible = false
+		if prev_button:
+			prev_button.visible = false
+		return
+	next_button.visible = current_page_index < pages.size() - 1
+	if prev_button:
+		prev_button.visible = current_page_index > 0
+
+
+func _play_flip() -> void:
+	if paper_sound and paper_sound.stream:
+		paper_sound.play()
 
 
 func _on_next_button_pressed() -> void:
-	if pages.size() <= 1:
+	if current_page_index >= pages.size() - 1:
 		return
-	if paper_sound and paper_sound.stream:
-		paper_sound.play()
-	current_page_index = (current_page_index + 1) % pages.size()
+	_play_flip()
+	current_page_index += 1
+	update_page_visibility()
+
+
+func _on_prev_button_pressed() -> void:
+	if current_page_index <= 0:
+		return
+	_play_flip()
+	current_page_index -= 1
 	update_page_visibility()
 
 
